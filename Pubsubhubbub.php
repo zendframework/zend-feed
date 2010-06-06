@@ -16,29 +16,41 @@
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Pubsubhubbub.php 20785 2010-01-31 09:43:03Z mikaelkael $
  */
 
 /**
- * @namespace
+ * @see Zend_Http_Client
  */
-namespace Zend\Feed\PubSubHubbub;
-use Zend\Feed\Reader;
-use Zend\HTTP;
+require_once 'Zend/Http/Client.php';
 
 /**
- * @uses       \Zend\HTTP\Client
- * @uses       \Zend\Feed\AbstractFeed
- * @uses       \Zend\Feed\PubSubHubbub\Exception
- * @uses       \Zend\Feed\Reader\Reader
- * @uses       \Zend\Uri\Uri
- * @uses       \Zend\Version
+ * @see Zend_Uri
+ */
+require_once 'Zend/Uri.php';
+
+/**
+ * @see Zend_Version
+ */
+require_once 'Zend/Version.php';
+
+/**
+ * @see Zend_Feed_Reader
+ */
+require_once 'Zend/Feed/Reader.php';
+
+/**
+ * @see Zend_Feed_Abstract
+ */
+require_once 'Zend/Feed/Abstract.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Pubsubhubbub
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class PubSubHubbub
+class Zend_Feed_Pubsubhubbub
 {
     /**
      * Verification Modes
@@ -56,7 +68,7 @@ class PubSubHubbub
     /**
      * Singleton instance if required of the HTTP client
      *
-     * @var \Zend\HTTP\Client
+     * @var Zend_Http_Client
      */
     protected static $httpClient = null;
 
@@ -66,20 +78,20 @@ class PubSubHubbub
      * best if directly given an instance of Zend_Feed_Reader_Atom|Rss
      * to leverage off.
      *
-     * @param  Zend_Feed_Reader_FeedAbstract|\Zend\Feed\AbstractFeed|string $source
+     * @param  Zend_Feed_Reader_FeedAbstract|Zend_Feed_Abstract|string $source
      * @return array
      */
     public static function detectHubs($source)
     {
         if (is_string($source)) {
-            $feed = Reader\Reader::import($source);
-        } elseif (is_object($source) && $source instanceof Reader\FeedAbstract) {
+            $feed = Zend_Feed_Reader::import($source);
+        } elseif (is_object($source) && $source instanceof Zend_Feed_Reader_FeedAbstract) {
             $feed = $source;
-        } elseif (is_object($source) && $source instanceof \Zend\Feed\AbstractFeed) {
-            $feed = Reader\Reader::importFeed($source);
+        } elseif (is_object($source) && $source instanceof Zend_Feed_Abstract) {
+            $feed = Zend_Feed_Reader::importFeed($source);
         } else {
             require_once 'Zend/Feed/Pubsubhubbub/Exception.php';
-            throw new Exception('The source parameter was'
+            throw new Zend_Feed_Pubsubhubbub_Exception('The source parameter was'
             . ' invalid, i.e. not a URL string or an instance of type'
             . ' Zend_Feed_Reader_FeedAbstract or Zend_Feed_Abstract');
         }
@@ -90,10 +102,10 @@ class PubSubHubbub
      * Allows the external environment to make Zend_Oauth use a specific
      * Client instance.
      *
-     * @param  \Zend\HTTP\Client $httpClient
+     * @param  Zend_Http_Client $httpClient
      * @return void
      */
-    public static function setHttpClient(HTTP\Client $httpClient)
+    public static function setHttpClient(Zend_Http_Client $httpClient)
     {
         self::$httpClient = $httpClient;
     }
@@ -103,12 +115,12 @@ class PubSubHubbub
      * the instance is reset and cleared of previous parameters GET/POST.
      * Headers are NOT reset but handled by this component if applicable.
      *
-     * @return \Zend\HTTP\Client
+     * @return Zend_Http_Client
      */
     public static function getHttpClient()
     {
         if (!isset(self::$httpClient)):
-            self::$httpClient = new HTTP\Client;
+            self::$httpClient = new Zend_Http_Client;
         else:
             self::$httpClient->resetParameters();
         endif;

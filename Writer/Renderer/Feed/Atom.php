@@ -16,40 +16,46 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Atom.php 22097 2010-05-04 17:56:06Z padraic $
  */
 
-/**
- * @namespace
- */
-namespace Zend\Feed\Writer\Renderer\Feed\Atom;
+/** @see Zend_Feed_Writer_Feed */
+require_once 'Zend/Feed/Writer/Feed.php';
+
+/** @see Zend_Version */
+require_once 'Zend/Version.php';
+
+/** @see Zend_Feed_Writer_Renderer_RendererInterface */
+require_once 'Zend/Feed/Writer/Renderer/RendererInterface.php';
+
+/** @see Zend_Feed_Writer_Renderer_Entry_Atom */
+require_once 'Zend/Feed/Writer/Renderer/Entry/Atom.php';
+
+/** @see Zend_Feed_Writer_Renderer_Entry_Atom_Deleted */
+require_once 'Zend/Feed/Writer/Renderer/Entry/Atom/Deleted.php';
+
+/** @see Zend_Feed_Writer_Renderer_RendererAbstract */
+require_once 'Zend/Feed/Writer/Renderer/RendererAbstract.php';
+
+require_once 'Zend/Feed/Writer/Renderer/Feed/Atom/AtomAbstract.php';
 
 /**
- * @uses       DOMDocument
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\Feed\Feed
- * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Atom
- * @uses       \Zend\Feed\Writer\Renderer\Entry\Atom\Deleted
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\AtomAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererAbstract
- * @uses       \Zend\Feed\Writer\Renderer\RendererInterface
- * @uses       \Zend\Version
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Atom
-    extends AtomAbstract
-    implements \Zend\Feed\Writer\Renderer\RendererInterface
+class Zend_Feed_Writer_Renderer_Feed_Atom
+    extends Zend_Feed_Writer_Renderer_Feed_Atom_AtomAbstract
+    implements Zend_Feed_Writer_Renderer_RendererInterface
 {
     /**
      * Constructor
      * 
-     * @param  \Zend\Feed\Writer\Feed\Feed $container 
+     * @param  Zend_Feed_Writer_Feed $container 
      * @return void
      */
-    public function __construct (\Zend\Feed\Writer\Feed\Feed $container)
+    public function __construct (Zend_Feed_Writer_Feed $container)
     {
         parent::__construct($container);
     }
@@ -57,17 +63,17 @@ class Atom
     /**
      * Render Atom feed
      * 
-     * @return \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
+     * @return Zend_Feed_Writer_Renderer_Feed_Atom
      */
     public function render()
     {
         if (!$this->_container->getEncoding()) {
             $this->_container->setEncoding('UTF-8');
         }
-        $this->_dom = new \DOMDocument('1.0', $this->_container->getEncoding());
+        $this->_dom = new DOMDocument('1.0', $this->_container->getEncoding());
         $this->_dom->formatOutput = true;
         $root = $this->_dom->createElementNS(
-            \Zend\Feed\Writer\Writer::NAMESPACE_ATOM_10, 'feed'
+            Zend_Feed_Writer::NAMESPACE_ATOM_10, 'feed'
         );
         $this->setRootElement($root);
         $this->_dom->appendChild($root);
@@ -75,6 +81,7 @@ class Atom
         $this->_setBaseUrl($this->_dom, $root);
         $this->_setTitle($this->_dom, $root);
         $this->_setDescription($this->_dom, $root);
+        $this->_setImage($this->_dom, $root);
         $this->_setDateCreated($this->_dom, $root);
         $this->_setDateModified($this->_dom, $root);
         $this->_setGenerator($this->_dom, $root);
@@ -97,15 +104,15 @@ class Atom
             if ($this->getDataContainer()->getEncoding()) {
                 $entry->setEncoding($this->getDataContainer()->getEncoding());
             }
-            if ($entry instanceof \Zend\Feed\Writer\Entry) {
-                $renderer = new \Zend\Feed\Writer\Renderer\Entry\Atom\Atom($entry);
+            if ($entry instanceof Zend_Feed_Writer_Entry) {
+                $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom($entry);
             } else {
                 if (!$this->_dom->documentElement->hasAttribute('xmlns:at')) {
                     $this->_dom->documentElement->setAttribute(
                         'xmlns:at', 'http://purl.org/atompub/tombstones/1.0'
                     );
                 }
-                $renderer = new \Zend\Feed\Writer\Renderer\Entry\Atom\Deleted($entry);
+                $renderer = new Zend_Feed_Writer_Renderer_Entry_Atom_Deleted($entry);
             }
             if ($this->_ignoreExceptions === true) {
                 $renderer->ignoreExceptions();

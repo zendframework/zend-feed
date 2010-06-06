@@ -16,37 +16,54 @@
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id$
+ * @version    $Id: Feed.php 20518 2010-01-22 14:00:30Z padraic $
  */
 
 /**
- * @namespace
+ * @see Zend_Date
  */
-namespace Zend\Feed\Writer\Feed;
-use Zend\Feed\Writer;
-use Zend\Feed as ZendFeed;
-use Zend\Date;
+require_once 'Zend/Date.php';
 
 /**
- * @uses       Countable
- * @uses       Iterator
- * @uses       \Zend\Date\Date
- * @uses       \Zend\Feed\Exception
- * @uses       \Zend\Feed\Writer\Writer
- * @uses       \Zend\Feed\Writer\Deleted
- * @uses       \Zend\Feed\Writer\Entry
- * @uses       \Zend\Feed\Writer\Feed\FeedAbstract
- * @uses       \Zend\Feed\Writer\Renderer\Feed\Atom\Atom
- * @uses       \Zend\Feed\Writer\Renderer\Feed\RSS
- * @uses       \Zend\Uri\Uri
+ * @see Zend_Date
+ */
+require_once 'Zend/Uri.php';
+
+/**
+ * @see Zend_Feed_Writer
+ */
+require_once 'Zend/Feed/Writer.php';
+
+/**
+ * @see Zend_Feed_Writer_Entry
+ */
+require_once 'Zend/Feed/Writer/Entry.php';
+
+/**
+ * @see Zend_Feed_Writer_Deleted
+ */
+require_once 'Zend/Feed/Writer/Deleted.php';
+
+/**
+ * @see Zend_Feed_Writer_Renderer_Feed_Atom
+ */
+require_once 'Zend/Feed/Writer/Renderer/Feed/Atom.php';
+
+/**
+ * @see Zend_Feed_Writer_Renderer_Feed_Rss
+ */
+require_once 'Zend/Feed/Writer/Renderer/Feed/Rss.php';
+
+require_once 'Zend/Feed/Writer/Feed/FeedAbstract.php';
+
+/**
  * @category   Zend
  * @package    Zend_Feed_Writer
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
-class Feed 
-    extends FeedAbstract
-    implements \Iterator, \Countable
+class Zend_Feed_Writer_Feed extends Zend_Feed_Writer_Feed_FeedAbstract
+implements Iterator, Countable
 {
 
     /**
@@ -68,11 +85,11 @@ class Feed
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return \Zend\Feed\Writer\Entry
+     * @return Zend_Feed_Writer_Entry
      */
     public function createEntry()
     {
-        $entry = new Writer\Entry;
+        $entry = new Zend_Feed_Writer_Entry;
         if ($this->getEncoding()) {
             $entry->setEncoding($this->getEncoding());
         }
@@ -84,9 +101,9 @@ class Feed
      * Appends a Zend_Feed_Writer_Deleted object representing a new entry tombstone
      * to the feed data container's internal group of entries.
      *
-     * @param \Zend\Feed\Writer\Deleted $entry
+     * @param Zend_Feed_Writer_Deleted $entry
      */
-    public function addTombstone(Writer\Deleted $deleted)
+    public function addTombstone(Zend_Feed_Writer_Deleted $deleted)
     {
         $this->_entries[] = $deleted;
     }
@@ -96,11 +113,11 @@ class Feed
      * added to the current feed automatically, but is necessary to create a
      * container with some initial values preset based on the current feed data.
      *
-     * @return \Zend\Feed\Writer\Deleted
+     * @return Zend_Feed_Writer_Deleted
      */
     public function createTombstone()
     {
-        $deleted = new Writer\Deleted;
+        $deleted = new Zend_Feed_Writer_Deleted;
         if ($this->getEncoding()) {
             $deleted->setEncoding($this->getEncoding());
         }
@@ -112,9 +129,9 @@ class Feed
      * Appends a Zend_Feed_Writer_Entry object representing a new entry/item
      * the feed data container's internal group of entries.
      *
-     * @param \Zend\Feed\Writer\Entry $entry
+     * @param Zend_Feed_Writer_Entry $entry
      */
-    public function addEntry(Writer\Entry $entry)
+    public function addEntry(Zend_Feed_Writer_Entry $entry)
     {
         $this->_entries[] = $entry;
     }
@@ -130,7 +147,8 @@ class Feed
         if (isset($this->_entries[$index])) {
             unset($this->_entries[$index]);
         }
-        throw new ZendFeed\Exception('Undefined index: ' . $index . '. Entry does not exist.');
+        require_once 'Zend/Feed/Exception.php';
+        throw new Zend_Feed_Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
     /**
@@ -144,7 +162,8 @@ class Feed
         if (isset($this->_entries[$index])) {
             return $this->_entries[$index];
         }
-        throw new ZendFeed\Exception('Undefined index: ' . $index . '. Entry does not exist.');
+        require_once 'Zend/Feed/Exception.php';
+        throw new Zend_Feed_Exception('Undefined index: ' . $index . '. Entry does not exist.');
     }
 
     /**
@@ -165,9 +184,9 @@ class Feed
         $entries = array();
         foreach ($this->_entries as $entry) {
             if ($entry->getDateModified()) {
-                $timestamp = (int) $entry->getDateModified()->get(Date\Date::TIMESTAMP);
+                $timestamp = (int) $entry->getDateModified()->get(Zend_Date::TIMESTAMP);
             } elseif ($entry->getDateCreated()) {
-                $timestamp = (int) $entry->getDateCreated()->get(Date\Date::TIMESTAMP);
+                $timestamp = (int) $entry->getDateCreated()->get(Zend_Date::TIMESTAMP);
             }
             $entries[$timestamp] = $entry;
         }
@@ -247,7 +266,8 @@ class Feed
         $this->setType(strtolower($type));
         $type = ucfirst($this->getType());
         if ($type !== 'Rss' && $type !== 'Atom') {
-            throw new ZendFeed\Exception('Invalid feed type specified: ' . $type . '.'
+            require_once 'Zend/Feed/Exception.php';
+            throw new Zend_Feed_Exception('Invalid feed type specified: ' . $type . '.'
             . ' Should be one of "rss" or "atom".');
         }
         $renderClass = 'Zend_Feed_Writer_Renderer_Feed_' . $type;
