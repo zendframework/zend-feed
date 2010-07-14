@@ -13,8 +13,7 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  * @version    $Id$
@@ -23,41 +22,18 @@
 /**
  * @namespace
  */
-namespace ZendTest\Feed;
-use Zend\Feed;
+namespace Zend\Feed\Reader;
 
 /**
- * Test helper
- */
-
-/**
- * @see Zend_Feed
- */
-
-/**
+ * @uses       ArrayObject
  * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
+ * @package    Zend_Feed_Reader
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @group      Zend_Feed
  */
-class CountTest extends \PHPUnit_Framework_TestCase
+class Collection extends \ArrayObject
 {
 
-    public function testCount()
-    {
-        $f = Feed\Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
-        $this->assertEquals($f->count(), 2, 'Feed count should be 2');
-    }
-
-    /**
-    * ZF-3848
-    */
-    public function testCountableInterface()
-    {
-        $f = Feed\Feed::importFile(__DIR__ . '/_files/TestAtomFeed.xml');
-        $this->assertEquals(count($f), 2, 'Feed count should be 2');
-    }
+    
 
 }
