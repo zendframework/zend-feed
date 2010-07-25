@@ -17,25 +17,25 @@
  * @subpackage UnitTests
  * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
- * @version    $Id: AtomTest.php 20462 2010-01-21 15:23:52Z padraic $
+ * @version    $Id$
  */
 
 /**
-* @namespace
-*/
+ * @namespace
+ */
 namespace ZendTest\Feed\Reader\Entry;
 use Zend\Feed\Reader;
 use Zend\Date;
 
 /**
-* @category Zend
-* @package Zend_Feed
-* @subpackage UnitTests
-* @copyright Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
+ * @category   Zend
+ * @package    Zend_Feed
+ * @subpackage UnitTests
+ * @copyright  Copyright (c) 2005-2010 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @group      Zend_Feed
+ * @group      Zend_Feed_Reader
+ */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -52,7 +52,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             $registry = \Zend\Registry::getInstance();
             unset($registry['Zend_Locale']);
         }
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/Atom';
+        $this->_feedSamplePath = __DIR__ . '/_files/Atom';
         $this->_options = Date\Date::setOptions();
         foreach($this->_options as $k=>$v) {
             if (is_null($v)) {
