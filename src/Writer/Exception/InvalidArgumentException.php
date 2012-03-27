@@ -13,25 +13,28 @@
  * to license@zend.com so we can send you a copy immediately.
  *
  * @category   Zend
- * @package    Zend_Feed_Reader
+ * @package    Zend_Feed
+ * @subpackage Writer
  * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-/**
-* @namespace
-*/
-namespace Zend\Feed\Reader\Collection;
+namespace Zend\Feed\Writer\Exception;
+
+use Zend\Feed\Writer\Exception;
 
 /**
-* @category Zend
-* @package Zend_Feed_Reader
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
-*/
-class Collection extends \ArrayObject
-{
-
-    
-
-}
+ * Feed exceptions
+ *
+ * Class to represent exceptions that occur during Feed operations.
+ *
+ * @category   Zend
+ * @package    Zend_Feed
+ * @subpackage Writer
+ * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ */
+class InvalidArgumentException 
+    extends \InvalidArgumentException 
+    implements Exception
+{}
