@@ -18,7 +18,9 @@
  * @license    http://framework.zend.com/license/new-bsd     New BSD License
  */
 
-namespace Zend\Feed\Reader;
+namespace Zend\Feed\Reader\Entry;
+
+use Zend\Feed\Reader\Collection\Category;
 
 /**
 * @category Zend
@@ -26,7 +28,7 @@ namespace Zend\Feed\Reader;
 * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
 * @license http://framework.zend.com/license/new-bsd New BSD License
 */
-interface Entry
+interface EntryInterface
 {
     /**
      * Get the specified author
@@ -138,7 +140,7 @@ interface Entry
     /**
      * Get all categories
      *
-     * @return Zend_Feed_Reader_Collection_Category
+     * @return Category
      */
     public function getCategories();
 }
