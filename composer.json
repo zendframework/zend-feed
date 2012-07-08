@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-feed",
-    "description": "Zend\\Feed component",
+    "description": "provides functionality for consuming RSS and Atom feeds",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -9,11 +9,11 @@
     "homepage": "https://github.com/zendframework/zend-feed",
     "autoload": {
         "psr-4": {
-            "Zend\\Feed\\": "src/"
+            "Zend\\Feed": "src/"
         }
     },
     "require": {
-        "php": ">=5.3.23",
+        "php": ">=5.3.3",
         "zendframework/zend-escaper": "self.version",
         "zendframework/zend-stdlib": "self.version"
     },
@@ -32,7 +32,8 @@
         "zendframework/zend-db": "Zend\\Db component",
         "zendframework/zend-http": "Zend\\Http for PubSubHubbub, and optionally for use with Zend\\Feed\\Reader",
         "zendframework/zend-servicemanager": "Zend\\ServiceManager component, for default/recommended ExtensionManager implementations",
-        "zendframework/zend-validator": "Zend\\Validator component"
+        "zendframework/zend-validator": "Zend\\Validator component",
+        "zendframework/zend-uri": "Zend\\Uri component"
     },
     "extra": {
         "branch-alias": {
