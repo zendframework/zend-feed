@@ -37,6 +37,13 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         Reader\Reader::reset();
     }
 
+    public function testStringImportTrimsContentToAllowSlightlyInvalidXml()
+    {
+        $feed = Reader\Reader::importString(
+            '   ' . file_get_contents($this->_feedSamplePath.'/Reader/rss20.xml')
+        );
+    }
+
     public function testDetectsFeedIsRss20()
     {
         $feed = Reader\Reader::importString(
@@ -263,10 +270,11 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testXxePreventionOnFeedParsing()
     {
+        $this->setExpectedException('Zend\Feed\Reader\Exception\InvalidArgumentException');
         $string = file_get_contents($this->_feedSamplePath.'/Reader/xxe-atom10.xml');
         $string = str_replace('XXE_URI', $this->_feedSamplePath.'/Reader/xxe-info.txt', $string);
         $feed = Reader\Reader::importString($string);
-        $this->assertEquals('info:', $feed->getTitle());
+        //$this->assertEquals('info:', $feed->getTitle());
     }
 
     protected function _getTempDirectory()
