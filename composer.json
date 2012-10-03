@@ -9,7 +9,7 @@
     "homepage": "https://github.com/zendframework/zend-feed",
     "autoload": {
         "psr-4": {
-            "Zend\\Feed": "src/"
+            "Zend\\Feed\\": "src/"
         }
     },
     "require": {
