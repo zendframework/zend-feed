@@ -1,22 +1,11 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Reader\Integration;
@@ -27,26 +16,24 @@ use Zend\Feed\Reader;
 * @category Zend
 * @package Zend_Feed
 * @subpackage UnitTests
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
 class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
+    protected $feedSamplePath = null;
 
     public function setup()
     {
         Reader\Reader::reset();
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/h-online.com-atom10.xml';
+        $this->feedSamplePath = dirname(__FILE__) . '/_files/h-online.com-atom10.xml';
     }
 
     public function testGetsTitle()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('The H - news feed', $feed->getTitle());
     }
@@ -54,7 +41,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsAuthors()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(array(array('name'=>'The H')), (array) $feed->getAuthors());
     }
@@ -62,7 +49,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsSingleAuthor()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(array('name'=>'The H'), $feed->getAuthor());
     }
@@ -70,7 +57,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsCopyright()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(null, $feed->getCopyright());
     }
@@ -78,7 +65,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsDescription()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('Technology news', $feed->getDescription());
     }
@@ -86,7 +73,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsLanguage()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(null, $feed->getLanguage());
     }
@@ -94,7 +81,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsLink()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://www.h-online.com', $feed->getLink());
     }
@@ -102,7 +89,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
     }
@@ -110,7 +97,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryCount()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(60, $feed->count());
     }
@@ -122,7 +109,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryId()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss', $entry->getId());
@@ -131,7 +118,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryTitle()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('McAfee update brings systems down again', $entry->getTitle());
@@ -140,7 +127,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryAuthors()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals(array(array('name'=>'The H')), (array) $entry->getAuthors());
@@ -149,7 +136,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntrySingleAuthor()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals(array('name'=>'The H'), $entry->getAuthor());
@@ -158,7 +145,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryDescription()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         /**
@@ -170,7 +157,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryContent()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('A McAfee signature update is currently causing system failures and a lot of overtime for administrators', $entry->getContent());
@@ -179,7 +166,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryLinks()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals(array('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss'), $entry->getLinks());
@@ -188,7 +175,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryLink()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss', $entry->getLink());
@@ -197,7 +184,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryPermaLink()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss',
@@ -207,7 +194,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
     public function testGetsEntryEncoding()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath)
+            file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
         $this->assertEquals('UTF-8', $entry->getEncoding());
