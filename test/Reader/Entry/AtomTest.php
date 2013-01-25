@@ -1,62 +1,39 @@
 <?php
 /**
- * Zend Framework
+ * Zend Framework (http://framework.zend.com/)
  *
- * LICENSE
- *
- * This source file is subject to the new BSD license that is bundled
- * with this package in the file LICENSE.txt.
- * It is also available through the world-wide-web at this URL:
- * http://framework.zend.com/license/new-bsd
- * If you did not receive a copy of the license and are unable to
- * obtain it through the world-wide-web, please send an email
- * to license@zend.com so we can send you a copy immediately.
- *
- * @category   Zend
- * @package    Zend_Feed
- * @subpackage UnitTests
- * @copyright  Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
- * @license    http://framework.zend.com/license/new-bsd     New BSD License
+ * @link      http://github.com/zendframework/zf2 for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @package   Zend_Feed
  */
 
 namespace ZendTest\Feed\Reader\Entry;
+
+use DateTime;
 use Zend\Feed\Reader;
-use Zend\Date;
 
 /**
 * @category Zend
 * @package Zend_Feed
 * @subpackage UnitTests
-* @copyright Copyright (c) 2005-2012 Zend Technologies USA Inc. (http://www.zend.com)
-* @license http://framework.zend.com/license/new-bsd New BSD License
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
 class AtomTest extends \PHPUnit_Framework_TestCase
 {
 
-    protected $_feedSamplePath = null;
-    
-    protected $_expectedCats = array();
-    
-    protected $_expectedCatsDc = array();
+    protected $feedSamplePath = null;
+
+    protected $expectedCats = array();
+
+    protected $expectedCatsDc = array();
 
     public function setup()
     {
         Reader\Reader::reset();
-        if (\Zend\Registry::isRegistered('Zend_Locale')) {
-            $registry = \Zend\Registry::getInstance();
-            unset($registry['Zend_Locale']);
-        }
-        $this->_feedSamplePath = dirname(__FILE__) . '/_files/Atom';
-        $this->_options = Date\Date::setOptions();
-        foreach($this->_options as $k=>$v) {
-            if (is_null($v)) {
-                unset($this->_options[$k]);
-            }
-        }
-        Date\Date::setOptions(array('format_type'=>'iso'));
-        $this->_expectedCats = array(
+        $this->feedSamplePath = dirname(__FILE__) . '/_files/Atom';
+        $this->expectedCats = array(
             array(
                 'term' => 'topic1',
                 'scheme' => 'http://example.com/schema1',
@@ -73,7 +50,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                 'label' => 'Cat & Dog'
             )
         );
-        $this->_expectedCatsDc = array(
+        $this->expectedCatsDc = array(
             array(
                 'term' => 'topic1',
                 'scheme' => null,
@@ -86,11 +63,6 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             )
         );
     }
-    
-    public function teardown()
-    {
-        Date\Date::setOptions($this->_options);
-    }
 
     /**
      * Get Id (Unencoded Text)
@@ -99,7 +71,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsIdFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/id/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/id/plain/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('1', $entry->getId());
@@ -108,7 +80,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsIdFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/id/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/id/plain/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('1', $entry->getId());
@@ -120,23 +92,21 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDateCreatedFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/datecreated/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/datecreated/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateCreated()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateCreated());
     }
 
     public function testGetsDateCreatedFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/datecreated/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/datecreated/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateCreated()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateCreated());
     }
 
     /**
@@ -145,23 +115,21 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDateModifiedFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/datemodified/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/datemodified/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateModified());
     }
 
     public function testGetsDateModifiedFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/datemodified/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/datemodified/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $edate = new Date\Date;
-        $edate->set('2009-03-07T08:03:50Z', Date\Date::ISO_8601);
-        $this->assertTrue($edate->equals($entry->getDateModified()));
+        $edate = DateTime::createFromFormat(DateTime::ISO8601, '2009-03-07T08:03:50Z');
+        $this->assertEquals($edate, $entry->getDateModified());
     }
 
     /**
@@ -170,7 +138,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsTitleFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/title/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/title/plain/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('Entry Title', $entry->getTitle());
@@ -179,7 +147,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsTitleFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/title/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/title/plain/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('Entry Title', $entry->getTitle());
@@ -191,7 +159,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsAuthorsFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/author/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/author/plain/atom03.xml')
         );
 
         $authors = array(
@@ -210,7 +178,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsAuthorsFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/author/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/author/plain/atom10.xml')
         );
 
         $authors = array(
@@ -232,7 +200,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsAuthorFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/author/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/author/plain/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com','uri'=>'http://www.example.com'), $entry->getAuthor());
@@ -241,7 +209,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsAuthorFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/author/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/author/plain/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals(array('name'=>'Joe Bloggs','email'=>'joe@example.com','uri'=>'http://www.example.com'), $entry->getAuthor());
@@ -253,7 +221,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDescriptionFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/description/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/description/plain/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('Entry Description', $entry->getDescription());
@@ -262,7 +230,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsDescriptionFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/description/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/description/plain/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('Entry Description', $entry->getDescription());
@@ -274,7 +242,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsEnclosureFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/enclosure/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath.'/enclosure/plain/atom03.xml')
         );
         $entry = $feed->current();
 
@@ -289,7 +257,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsEnclosureFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/enclosure/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath.'/enclosure/plain/atom10.xml')
         );
         $entry = $feed->current();
 
@@ -307,7 +275,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsContentFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/content/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/content/plain/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('Entry Content', $entry->getContent());
@@ -320,12 +288,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsContentFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/content/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/content/plain/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('Entry Content &amp;', $entry->getContent());
     }
-    
+
     /**
      * HTML Escaped
      * @group ZFRATOMCONTENT
@@ -333,12 +301,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsContentFromAtom10Html()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/content/plain/atom10_Html.xml')
+            file_get_contents($this->feedSamplePath . '/content/plain/atom10_Html.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('<p>Entry Content &amp;</p>', $entry->getContent());
     }
-    
+
     /**
      * HTML CDATA Escaped
      * @group ZFRATOMCONTENT
@@ -346,12 +314,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsContentFromAtom10HtmlCdata()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/content/plain/atom10_HtmlCdata.xml')
+            file_get_contents($this->feedSamplePath . '/content/plain/atom10_HtmlCdata.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('<p>Entry Content &amp;</p>', $entry->getContent());
     }
-    
+
     /**
      * XHTML
      * @group ZFRATOMCONTENT
@@ -359,7 +327,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsContentFromAtom10XhtmlNamespaced()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/content/plain/atom10_Xhtml.xml')
+            file_get_contents($this->feedSamplePath . '/content/plain/atom10_Xhtml.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('<p class="x:"><em>Entry Content &amp;x:</em></p>', $entry->getContent());
@@ -371,7 +339,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsLinkFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/link/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/link/plain/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
@@ -380,7 +348,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsLinkFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/link/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/link/plain/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
@@ -389,7 +357,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsLinkFromAtom10_WithNoRelAttribute()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/link/plain/atom10-norel.xml')
+            file_get_contents($this->feedSamplePath . '/link/plain/atom10-norel.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
@@ -397,9 +365,8 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLinkFromAtom10_WithRelativeUrl()
     {
-        $this->markTestIncomplete('Pending fix to \Zend\URI\URL::validate()');
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/link/plain/atom10-relative.xml')
+            file_get_contents($this->feedSamplePath . '/link/plain/atom10-relative.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
@@ -411,7 +378,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsBaseUriFromAtom10_FromFeedElement()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/baseurl/plain/atom10-feedlevel.xml')
+            file_get_contents($this->feedSamplePath . '/baseurl/plain/atom10-feedlevel.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com', $entry->getBaseUrl());
@@ -420,7 +387,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsBaseUriFromAtom10_FromEntryElement()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/baseurl/plain/atom10-entrylevel.xml')
+            file_get_contents($this->feedSamplePath . '/baseurl/plain/atom10-entrylevel.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/', $entry->getBaseUrl());
@@ -432,7 +399,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsCommentLinkFromAtom03()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/commentlink/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath . '/commentlink/plain/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
@@ -441,7 +408,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testGetsCommentLinkFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/commentlink/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath . '/commentlink/plain/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
@@ -449,82 +416,81 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCommentLinkFromAtom10_RelativeLinks()
     {
-        $this->markTestIncomplete('Pending fix to \Zend\URI\URL::validate()');
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath . '/commentlink/plain/atom10-relative.xml')
+            file_get_contents($this->feedSamplePath . '/commentlink/plain/atom10-relative.xml')
         );
         $entry = $feed->current();
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
     }
-    
+
     /**
      * Get category data
      */
-    
+
     // Atom 1.0 (Atom 0.3 never supported categories except via Atom 1.0/Dublin Core extensions)
-    
+
     public function testGetsCategoriesFromAtom10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/category/plain/atom10.xml')
+            file_get_contents($this->feedSamplePath.'/category/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals($this->_expectedCats, (array) $entry->getCategories());
+        $this->assertEquals($this->expectedCats, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromAtom03_Atom10Extension()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/category/plain/atom03.xml')
+            file_get_contents($this->feedSamplePath.'/category/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals($this->_expectedCats, (array) $entry->getCategories());
+        $this->assertEquals($this->expectedCats, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','Cat & Dog'), array_values($entry->getCategories()->getValues()));
     }
-    
+
     // DC 1.0/1.1 for Atom 0.3
-    
+
     public function testGetsCategoriesFromAtom03_Dc10()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/category/plain/dc10/atom03.xml')
+            file_get_contents($this->feedSamplePath.'/category/plain/dc10/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals($this->_expectedCatsDc, (array) $entry->getCategories());
+        $this->assertEquals($this->expectedCatsDc, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromAtom03_Dc11()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/category/plain/dc11/atom03.xml')
+            file_get_contents($this->feedSamplePath.'/category/plain/dc11/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals($this->_expectedCatsDc, (array) $entry->getCategories());
+        $this->assertEquals($this->expectedCatsDc, (array) $entry->getCategories());
         $this->assertEquals(array('topic1','topic2'), array_values($entry->getCategories()->getValues()));
     }
-    
+
     // No Categories In Entry
-    
+
     public function testGetsCategoriesFromAtom10_None()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/category/plain/none/atom10.xml')
+            file_get_contents($this->feedSamplePath.'/category/plain/none/atom10.xml')
         );
         $entry = $feed->current();
         $this->assertEquals(array(), (array) $entry->getCategories());
         $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
     }
-    
+
     public function testGetsCategoriesFromAtom03_None()
     {
         $feed = Reader\Reader::importString(
-            file_get_contents($this->_feedSamplePath.'/category/plain/none/atom03.xml')
+            file_get_contents($this->feedSamplePath.'/category/plain/none/atom03.xml')
         );
         $entry = $feed->current();
         $this->assertEquals(array(), (array) $entry->getCategories());
         $this->assertEquals(array(), array_values($entry->getCategories()->getValues()));
     }
-    
+
 }
