@@ -1,6 +1,6 @@
 {
     "name": "zendframework/zend-feed",
-    "description": "provides functionality for consuming RSS and Atom feeds",
+    "description": "Zend\\Feed component",
     "license": "BSD-3-Clause",
     "keywords": [
         "zf2",
@@ -13,11 +13,9 @@
         }
     },
     "require": {
-        "php": ">=5.3.3",
+        "php": ">=5.3.23",
         "zendframework/zend-escaper": "self.version",
-        "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-servicemanager": "self.version",
-        "zendframework/zend-version": "self.version"
+        "zendframework/zend-stdlib": "self.version"
     },
     "require-dev": {
         "zendframework/zend-db": "self.version",
@@ -38,8 +36,8 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev",
-            "dev-develop": "2.3-dev"
+            "dev-master": "2.4-dev",
+            "dev-develop": "2.5-dev"
         }
     },
     "autoload-dev": {
