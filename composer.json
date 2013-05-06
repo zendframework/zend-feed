@@ -16,7 +16,6 @@
         "php": ">=5.3.3",
         "zendframework/zend-escaper": "self.version",
         "zendframework/zend-stdlib": "self.version",
-        "zendframework/zend-servicemanager": "self.version",
         "zendframework/zend-uri": "self.version"
     },
     "require-dev": {
