@@ -530,7 +530,7 @@ class Entry
     }
 
     /**
-     * Add an entry category
+     * Add a entry category
      *
      * @param array $category
      * @throws Exception\InvalidArgumentException
