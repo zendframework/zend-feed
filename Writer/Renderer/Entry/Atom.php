@@ -307,6 +307,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
                 $nvalid = $validator->isValid('info@' . $matches['name']);
             }
             return $dvalid && $nvalid;
+
         }
         return false;
     }
