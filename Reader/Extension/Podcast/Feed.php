@@ -63,7 +63,7 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the entry category
      *
-     * @return array|null
+     * @return string
      */
     public function getItunesCategories()
     {
@@ -92,6 +92,7 @@ class Feed extends Extension\AbstractFeed
                 $categories[$node->getAttribute('text')] = $children;
             }
         }
+
 
         if (!$categories) {
             $categories = null;
