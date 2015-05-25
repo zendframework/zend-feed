@@ -1,7 +1,7 @@
 # zend-feed
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-feed.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-feed)
-[![Coverage Status](https://coveralls.io/repos/zendframework/zend-feed/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-feed)
+[![Coverage Status](https://coveralls.io/repos/zendframework/zend-feed/badge.svg?branch=master)](https://coveralls.io/r/zendframework/zend-feed?branch=master)
 
 `Zend\Feed` provides functionality for consuming RSS and Atom feeds. It provides
 a natural syntax for accessing elements of feeds, feed attributes, and entry
