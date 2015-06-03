@@ -14,15 +14,15 @@
     },
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zend-escaper": "~2.4",
-        "zendframework/zend-stdlib": "~2.4"
+        "zendframework/zend-escaper": "~2.5.0",
+        "zendframework/zend-stdlib": "~2.5.0"
     },
     "require-dev": {
-        "zendframework/zend-db": "~2.4",
-        "zendframework/zend-cache": "~2.4",
-        "zendframework/zend-http": "~2.4",
-        "zendframework/zend-servicemanager": "~2.4",
-        "zendframework/zend-validator": "~2.4",
+        "zendframework/zend-db": "~2.5.0",
+        "zendframework/zend-cache": "~2.5.0",
+        "zendframework/zend-http": "~2.5.0",
+        "zendframework/zend-servicemanager": "~2.5.0",
+        "zendframework/zend-validator": "~2.5.0",
         "fabpot/php-cs-fixer": "1.7.*",
         "phpunit/PHPUnit": "~4.0"
     },
@@ -37,8 +37,8 @@
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "2.4-dev",
-            "dev-develop": "2.5-dev"
+            "dev-master": "2.5-dev",
+            "dev-develop": "2.6-dev"
         }
     },
     "autoload-dev": {
