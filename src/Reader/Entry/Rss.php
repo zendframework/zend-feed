@@ -169,9 +169,9 @@ class Rss extends AbstractEntry implements EntryInterface
      *
      * @return string
      */
-    public function getDateCreated()
+    public function getDateCreated($format = null)
     {
-        return $this->getDateModified();
+        return $this->getDateModified($format);
     }
 
     /**
@@ -180,7 +180,7 @@ class Rss extends AbstractEntry implements EntryInterface
      * @throws Exception\RuntimeException
      * @return string
      */
-    public function getDateModified()
+    public function getDateModified($format = null)
     {
         if (array_key_exists('datemodified', $this->data)) {
             return $this->data['datemodified'];
@@ -197,7 +197,7 @@ class Rss extends AbstractEntry implements EntryInterface
                 if ($dateModifiedParsed) {
                     $date = new DateTime('@' . $dateModifiedParsed);
                 } else {
-                    $dateStandards = [DateTime::RSS, DateTime::RFC822,
+                    $dateStandards = [$format, DateTime::RSS, DateTime::RFC822,
                                            DateTime::RFC2822, null];
                     foreach ($dateStandards as $standard) {
                         try {
