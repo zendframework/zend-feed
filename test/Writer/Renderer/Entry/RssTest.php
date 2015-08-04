@@ -261,6 +261,39 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $renderer->render();
     }
 
+    public function testEnclosureWorksWithZeroLength()
+    {
+        $renderer = new Renderer\Feed\Rss($this->validWriter);
+        $this->validEntry->setEnclosure([
+                                              'type'   => 'audio/mpeg',
+                                              'uri'    => 'http://example.com/audio.mp3',
+                                              'length' => 0
+                                         ]);
+        $renderer->render();
+    }
+
+    public function testEnclosureWorksWithPositiveLength()
+    {
+        $renderer = new Renderer\Feed\Rss($this->validWriter);
+        $this->validEntry->setEnclosure([
+                                              'type'   => 'audio/mpeg',
+                                              'uri'    => 'http://example.com/audio.mp3',
+                                              'length' => 23
+                                         ]);
+        $renderer->render();
+    }
+
+    public function testEnclosureWorksWithPositiveLengthString()
+    {
+        $renderer = new Renderer\Feed\Rss($this->validWriter);
+        $this->validEntry->setEnclosure([
+                                              'type'   => 'audio/mpeg',
+                                              'uri'    => 'http://example.com/audio.mp3',
+                                              'length' => '23'
+                                         ]);
+        $renderer->render();
+    }
+
     public function testEntryIdHasBeenSet()
     {
         $this->validEntry->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');
