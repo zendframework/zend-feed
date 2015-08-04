@@ -13,8 +13,6 @@ use ArrayObject;
 use DOMNodeList;
 use Zend\Feed\Uri;
 
-/**
-*/
 class FeedSet extends ArrayObject
 {
     public $rss = null;
@@ -75,8 +73,13 @@ class FeedSet extends ArrayObject
                     $link = $uri->getPath() . '/' . $link;
                 }
 
-                $scheme = ($uri->getScheme() === null) ? 'http' : $uri->getScheme();
-                $link   = $scheme . '://' . $uri->getHost() . '/' . $this->canonicalizePath($link);
+                $link   = sprintf(
+                    '%s://%s/%s',
+                    ($uri->getScheme() ?: 'http'),
+                    $uri->getHost(),
+                    $this->canonicalizePath($link)
+                );
+
                 if (!Uri::factory($link)->isValid()) {
                     $link = null;
                 }

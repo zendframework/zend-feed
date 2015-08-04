@@ -33,15 +33,15 @@ class FeedSetTest extends PHPUnit_Framework_TestCase
         $method = new ReflectionMethod('Zend\Feed\Reader\FeedSet', 'absolutiseUri');
         $method->setAccessible(true);
 
-        $this->assertEquals('http://example.com/feed', $method->invokeArgs($this->feedSet, array($link, $uri)));
+        $this->assertEquals('http://example.com/feed', $method->invoke($this->feedSet, $link, $uri));
     }
 
     public function linkAndUriProvider()
     {
-        return array(
-            array('feed', 'http://example.com'),
-            array('feed', '//example.com'),
-            array('//feed','//example.com'),
-        );
+        return [
+            'fully-qualified'   => ['feed', 'http://example.com'],
+            'scheme-relative'   => ['feed', '//example.com'],
+            'double-slash-path' => ['//feed','//example.com'],
+        ];
     }
 }
