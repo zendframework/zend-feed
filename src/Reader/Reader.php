@@ -15,6 +15,7 @@ use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\Http as ZendHttp;
 use Zend\Feed\Reader\Http\ClientInterface;
 use Zend\Stdlib\ErrorHandler;
+use Zend\Feed\Reader\Exception\InvalidHttpClientException;
 
 /**
 */
@@ -123,7 +124,10 @@ class Reader implements ReaderImportInterface
      */
     public static function setHttpClient($httpClient)
     {
-        static::$httpClient = $httpClient;
+        if (! $httpClient instanceof ZendHttp\Client || ! $httpClient instanceof ClientInterface) {
+            throw InvalidHttpClientException();
+        }
+        static::$httpClient = $httpClient;        
     }
 
     /**
