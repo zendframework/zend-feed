@@ -124,10 +124,12 @@ class Reader implements ReaderImportInterface
      */
     public static function setHttpClient($httpClient)
     {
-        if (! $httpClient instanceof ZendHttp\Client || ! $httpClient instanceof ClientInterface) {
-            throw InvalidHttpClientException();
+        // var_dump($httpClient instanceof ZendHttp\Client);
+        // exit;
+        if (! $httpClient instanceof ZendHttp\Client && ! $httpClient instanceof ClientInterface) {
+            throw new InvalidHttpClientException();
         }
-        static::$httpClient = $httpClient;        
+        static::$httpClient = $httpClient;
     }
 
     /**
@@ -137,7 +139,7 @@ class Reader implements ReaderImportInterface
      */
     public static function getHttpClient()
     {
-        if (!static::$httpClient instanceof ZendHttp\Client || !static::$httpClient instanceof ClientInterface) {
+        if (!static::$httpClient instanceof ZendHttp\Client && !static::$httpClient instanceof ClientInterface) {
             static::$httpClient = new ZendHttp\Client();
         }
 
