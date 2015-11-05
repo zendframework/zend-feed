@@ -24,7 +24,7 @@ data. `Zend\Feed` supports all optional properties of the core *RSS* and *Atom* 
 
 ## Reading RSS Feed Data
 
-``` sourceCode
+```php
 // Fetch the latest Slashdot headlines
 try {
     $slashdotRss =

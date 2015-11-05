@@ -40,7 +40,7 @@ multiple (all existing) versions of these broad feed types.
 In the following example, we import an *RDF*/*RSS* 1.0 feed and extract some basic information that
 can be saved to a database or elsewhere.
 
-``` sourceCode
+```php
 $feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 $data = array(
     'title'        => $feed->getTitle(),
@@ -74,7 +74,7 @@ the information could not be found in the feed. You should note that classes imp
 
 Feeds can also be imported from strings or files.
 
-``` sourceCode
+```php
 // from a URI
 $feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 
@@ -111,7 +111,7 @@ Here's an example where a feed might include an *RSS* Extension not supported by
 new namespaces on the DOMXPath object before use unless they are registered by `Zend\Feed\Reader` or
 an Extension beforehand.
 
-``` sourceCode
+```php
 $feed        = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 $xpathPrefix = $feed->getXpathPrefix();
 $xpath       = $feed->getXpath();
@@ -134,7 +134,7 @@ avoid unnecessary network requests. Adding a cache is as simple here as it is fo
 Framework components, create and configure your cache and then tell `Zend\Feed\Reader\Reader` to use
 it! The cache key used is "`Zend\Feed\Reader\`" followed by the *MD5* hash of the feed's *URI*.
 
-``` sourceCode
+```php
 $cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
 
 Zend\Feed\Reader\Reader::setCache($cache);
@@ -158,7 +158,7 @@ of, but can be attempted regardless. Most common feed sources like blogs should 
 supported. To enable conditional requests, you will need to provide a cache to
 `Zend\Feed\Reader\Reader`.
 
-``` sourceCode
+```php
 $cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
 
 Zend\Feed\Reader\Reader::setCache($cache);
@@ -175,7 +175,7 @@ only be updated on the cache if a non-304 response is received containing a vali
 If you intend on managing request headers from outside `Zend\Feed\Reader\Reader`, you can set the
 relevant If-None-Matches and If-Modified-Since request headers via the *URI* import method.
 
-``` sourceCode
+```php
 $lastEtagReceived = '5e6cefe7df5a7e95c8b1ba1a2ccaff3d';
 $lastModifiedDateReceived = 'Wed, 08 Jul 2009 13:37:22 GMT';
 $feed = Zend\Feed\Reader\Reader::import(
@@ -202,7 +202,7 @@ you can just grab the first *RSS*, *RDF* or Atom link using its public propertie
 below. Otherwise, each element of the `ArrayObject` is a simple array with the keys "type" and "uri"
 where the type is one of "rdf", "rss" or "atom".
 
-``` sourceCode
+```php
 $links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
 
 if (isset($links->rdf)) {
@@ -222,7 +222,7 @@ This quick method only gives you one link for each feed type, but websites may i
 of any type. Perhaps it's a news site with a *RSS* feed for each news category. You can iterate over
 all links using the ArrayObject's iterator.
 
-``` sourceCode
+```php
 $links = Zend\Feed\Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
@@ -255,7 +255,7 @@ to the same value as the term for convenience.
 
 To access category labels by themselves in a simple value array, you might commit to something like:
 
-``` sourceCode
+```php
 $feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
 $categories = $feed->getCategories();
 $labels = array();
@@ -272,7 +272,7 @@ categories it means the category labels (not the terms or schemes) while for aut
 authors' names (not their email addresses or *URI*s). The simple array is flat (just values) and
 passed through `array_unique()` to remove duplication.
 
-``` sourceCode
+```php
 $feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
 $categories = $feed->getCategories();
 $labels = $categories->getValues();
@@ -405,7 +405,7 @@ register the optional Syndication Extension, and discover that it can be directl
 Entry level *API* without any effort. Note that Extension names are case sensitive and use camel
 casing for multiple terms.
 
-``` sourceCode
+```php
 Zend\Feed\Reader\Reader::registerExtension('Syndication');
 $feed = Zend\Feed\Reader\Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
 $updatePeriod = $feed->getUpdatePeriod();
@@ -419,7 +419,7 @@ As you can also notice, the new methods from Extensions are accessible from the 
 *PHP*'s magic methods. As an alternative, you can also directly access any Extension object for a
 similar result as seen below.
 
-``` sourceCode
+```php
 Zend\Feed\Reader\Reader::registerExtension('Syndication');
 $feed = Zend\Feed\Reader\Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
 $syndication = $feed->getExtension('Syndication');
@@ -442,14 +442,14 @@ include a new element per entry supplying the *ISBN*-10 or *ISBN*-13 number of t
 entry concerns. They define the new `<isbn>` element quite simply with a standard name and namespace
 *URI*:
 
-``` sourceCode
+```php
 JungleBooks 1.0:
 http://example.com/junglebooks/rss/module/1.0/
 ```
 
 A snippet of *RSS* containing this extension in practice could be something similar to:
 
-``` sourceCode
+```php
 <?xml version="1.0" encoding="utf-8" ?>
 <rss version="2.0"
    xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -479,7 +479,7 @@ A snippet of *RSS* containing this extension in practice could be something simi
 Implementing this new *ISBN* element as a simple entry level extension would require the following
 class (using your own class namespace outside of Zend).
 
-``` sourceCode
+```php
 class My\FeedReader\Extension\JungleBooks\Entry
     extends Zend\Feed\Reader\Extension\AbstractEntry
 {
@@ -520,7 +520,7 @@ Since this Extension is stored outside of Zend Framework, you'll need to registe
 for your Extensions so `Zend\Loader\PluginLoader` can find them. After that, it's merely a matter of
 registering the Extension, if it's not already loaded, and using it in practice.
 
-``` sourceCode
+```php
 if (!Zend\Feed\Reader\Reader::isRegistered('JungleBooks')) {
      $extensions = Zend\Feed\Reader\Reader::getExtensionManager();
      $extensions->setInvokableClass('JungleBooksEntry',
@@ -538,7 +538,7 @@ unmentioned `<jungle:dayPopular>` element which Jungle Books have added to their
 a link to the day's most popular book (in terms of visitor traffic). Here's an Extension which adds
 a `getDaysPopularBookLink()` method to the feel level *API*.
 
-``` sourceCode
+```php
 class My\FeedReader\Extension\JungleBooks\Feed
     extends Zend\Feed\Reader\Extension\AbstractFeed
 {
@@ -568,7 +568,7 @@ class My\FeedReader\Extension\JungleBooks\Feed
 
 Let's repeat the last example using a custom Extension to show the method being used.
 
-``` sourceCode
+```php
 if (!Zend\Feed\Reader\Reader::isRegistered('JungleBooks')) {
      $extensions = Zend\Feed\Reader\Reader::getExtensionManager();
      $extensions->setInvokableClass('JungleBooksFeed', 'My\FeedReader\Extension\JungleBooks\Feed');

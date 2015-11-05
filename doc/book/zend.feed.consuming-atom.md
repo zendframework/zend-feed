@@ -11,7 +11,7 @@ content inside the feed, splitting *RSS*' `description` tag into two elements, `
 
 Read an Atom feed and print the `title` and `summary` of each entry:
 
-``` sourceCode
+```php
 $feed = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/');
 echo 'The feed contains ' . $feed->count() . ' entries.' . "\n\n";
 foreach ($feed as $entry) {

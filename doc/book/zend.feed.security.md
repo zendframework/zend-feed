@@ -25,7 +25,7 @@ standards-compliant output.
 The following examples will show a basic usage of HTMLPurifier, but developers are urged to go
 through and read [HTMLPurifier's documentation](http://www.htmlpurifier.org/docs).
 
-``` sourceCode
+```php
 // Setting HTMLPurifier's options
 $options = array(
     // Allow only paragraph tags
@@ -106,7 +106,7 @@ the current [OWASP recommendations](https://www.owasp.org/index.php/XSS_Preventi
 as such, is the recommended tool for escaping HTML tags and attributes, Javascript, CSS and URLs
 before outputing any potentially insecure data to the users.
 
-``` sourceCode
+```php
 try {
     $rss = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rss/');
 } catch (Zend\Feed\Exception\Reader\RuntimeException $e) {

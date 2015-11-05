@@ -3,14 +3,14 @@
 `Zend\Feed` enables developers to retrieve feeds very easily, by using `Zend\Feader\Reader`. If you
 know the *URI* of a feed, simply use the `Zend\Feed\Reader\Reader::import()` method:
 
-``` sourceCode
+```php
 $feed = Zend\Feed\Reader\Reader::import('http://feeds.example.com/feedName');
 ```
 
 You can also use `Zend\Feed\Reader\Reader` to fetch the contents of a feed from a file or the
 contents of a *PHP* string variable:
 
-``` sourceCode
+```php
 // importing a feed from a text file
 $feedFromFile = Zend\Feed\Reader\Reader::importFile('feed.xml');
 
@@ -31,7 +31,7 @@ malformed feed.
 To dump the contents of a `Zend\Feed\Reader\Feed\AbstractFeed` instance, you may use the `saveXml()`
 method.
 
-``` sourceCode
+```php
 assert($feed instanceof Zend\Feed\Reader\Feed\AbstractFeed);
 
 // dump the feed to standard output

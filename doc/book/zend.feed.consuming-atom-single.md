@@ -9,7 +9,7 @@ If you read a single entry, you will have a `Zend\Feed\Reader\Entry\Atom` object
 
 ## Reading a Single-Entry Atom Feed
 
-``` sourceCode
+```php
 $entry = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/1');
 echo 'Entry title: ' . $entry->getTitle();
 ```

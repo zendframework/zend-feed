@@ -65,7 +65,7 @@ Using `Zend\Feed\Writer\Writer` is as simple as setting data and triggering the 
 example to generate a minimal Atom 1.0 feed. As this demonstrates, each feed or entry uses a
 separate data container.
 
-``` sourceCode
+```php
 /**
  * Create the parent feed
  */
@@ -110,7 +110,7 @@ $out = $feed->export('atom');
 
 The output rendered should be as follows:
 
-``` sourceCode
+```php
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title type="text">Paddy's Blog</title>

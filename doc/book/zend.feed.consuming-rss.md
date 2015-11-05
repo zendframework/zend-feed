@@ -5,7 +5,7 @@
 Reading an *RSS* feed is as simple as passing the *URL* of the feed to `Zend\Feed\Reader\Reader`'s
 `import` method.
 
-``` sourceCode
+```php
 $channel = Zend\Feed\Reader\Reader::import('http://rss.example.com/channelName');
 ```
 
@@ -17,7 +17,7 @@ thrown.
 Once you have a feed object, you can access any of the standard *RSS* "channel" properties directly
 on the object:
 
-``` sourceCode
+```php
 echo $channel->getTitle();
 ```
 
@@ -26,7 +26,7 @@ Properties of the channel can be accessed via getter methods, such as `getTitle`
 If channel properties have attributes, the getter method will return a key/value pair, where the key
 is the attribute name, and the value is the attribute value.
 
-``` sourceCode
+```php
 $author = $channel->getAuthor();
 echo $author['name'];
 ```
@@ -38,7 +38,7 @@ properties, similarly to channel properties, can be accessed via getter methods,
 
 An example of printing all titles of articles in a channel is:
 
-``` sourceCode
+```php
 foreach ($channel as $item) {
     echo $item->getTitle() . "\n";
 }
@@ -74,7 +74,7 @@ Common item elements:
 
 In your code you can always test to see if an element is non-empty with:
 
-``` sourceCode
+```php
 if ($item->getPropname()) {
     // ... proceed.
 }

@@ -6,7 +6,7 @@ Web pages often contain **&lt;link&gt;** tags that refer to feeds with content r
 particular page. `Zend\Feed\Reader\Reader` enables you to retrieve all feeds referenced by a web
 page with one simple method call:
 
-``` sourceCode
+```php
 $feedLinks = Zend\Feed\Reader\Reader::findFeedLinks('http://www.example.com/news.html');
 ```
 
@@ -18,7 +18,7 @@ malformed feed.
 
 You can examine all feed links located by iterating across the collection:
 
-``` sourceCode
+```php
 $rssFeed = null;
 $feedLinks = Zend\Feed\Reader\Reader::findFeedLinks('http://www.example.com/news.html');
 foreach ($feedLinks as $link) {
@@ -32,7 +32,7 @@ Each `Zend\Feed\Reader\FeedSet` object will expose the rel, href, type and title
 detected links for all *RSS*, *Atom* or *RDF* feeds. You can always select the first encountered
 link of each type by using a shortcut:
 
-``` sourceCode
+```php
 $rssFeed = null;
 $feedLinks = Zend\Feed\Reader\Reader::findFeedLinks('http://www.example.com/news.html');
 $firstAtomFeed = $feedLinks->atom;

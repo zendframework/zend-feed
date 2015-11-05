@@ -87,7 +87,7 @@ object. In the event of any errors, it is strongly recommended to attempt the op
 Hub Endpoints at least once more at a future time. This may require the use of either a scheduled
 task for this purpose or a job queue though such extra steps are optional.
 
-``` sourceCode
+```php
 $publisher = new Zend\Feed\PubSubHubbub\Publisher;
 $publisher->addHubUrls(array(
     'http://pubsubhubbub.appspot.com/',
@@ -177,7 +177,7 @@ support automatic subscription refreshing and rules out Hub errors for additiona
 
 With the relevant information to hand, a subscription can be attempted as demonstrated below:
 
-``` sourceCode
+```php
 $storage = new Zend\Feed\PubSubHubbub\Model\Subscription;
 
 $subscriber = new Zend\Feed\PubSubHubbub\Subscriber;
@@ -203,7 +203,7 @@ interface `Zend\Feed\PubSubHubbub\Model\SubscriptionInterface`.
 An example schema (MySQL) for a subscription table accessible by the provided model may look similar
 to:
 
-``` sourceCode
+```php
 CREATE TABLE IF NOT EXISTS `subscription` (
   `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -262,7 +262,7 @@ an instance of `Zend\Feed\PubSubHubbub\Subscriber\Callback` to handle the reques
 The Callback class should be configured to use the same storage medium as the Subscriber class.
 Using it is quite simple since most of its work is performed internally.
 
-``` sourceCode
+```php
 $storage = new Zend\Feed\PubSubHubbub\Model\Subscription;
 $callback = new Zend\Feed\PubSubHubbub\Subscriber\Callback;
 $callback->setStorage($storage);
@@ -326,7 +326,7 @@ defining a route for this purpose. This is achieved simply by called the method
 value available from the Router. The example below demonstrates this using a Zend Framework
 controller.
 
-``` sourceCode
+```php
 use Zend\Mvc\Controller\AbstractActionController;
 
 class CallbackController extends AbstractActionController
@@ -366,7 +366,7 @@ class CallbackController extends AbstractActionController
 Actually adding the route which would map the path-appended key to a parameter for retrieval from a
 controller can be accomplished using a Route like in the example below.
 
-``` sourceCode
+```php
 // Callback Route to enable appending a PuSH Subscription's lookup key
 $route = Zend\Mvc\Router\Http\Segment::factory(array(
    'route' => '/callback/:subkey',
