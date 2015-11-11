@@ -1,0 +1,16 @@
+{
+    "title": "Zend\\Feed",
+    "target": "html/",
+    "content": [
+        "book/zend.feed.introduction.md",
+        "book/zend.feed.importing.md",
+        "book/zend.feed.find-feeds.md",
+        "book/zend.feed.consuming-rss.md",
+        "book/zend.feed.consuming-atom.md",
+        "book/zend.feed.consuming-atom-single.md",
+        "book/zend.feed.security.md",
+        "book/zend.feed.reader.md",
+        "book/zend.feed.writer.md",
+        "book/zend.feed.pubsubhubbub.md"
+    ]
+}
