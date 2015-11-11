@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#12](https://github.com/zendframework/zend-feed/pull/12) adds the documentation
+  sources to the repository.
 
 ### Deprecated
 
