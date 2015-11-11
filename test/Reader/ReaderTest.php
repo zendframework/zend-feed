@@ -309,6 +309,28 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString($string);
     }
 
+    public function testSetHttpFeedClient()
+    {
+        $client = $this->getMock('Zend\Feed\Reader\Http\ClientInterface');
+        Reader\Reader::setHttpClient($client);
+        $this->assertEquals($client, Reader\Reader::getHttpClient());
+    }
+
+    public function testSetHttpClient()
+    {
+        $client = new HttpClient();
+        Reader\Reader::setHttpClient($client);
+        $this->assertEquals($client, Reader\Reader::getHttpClient());
+    }
+
+    /**
+     * @expectedException Zend\Feed\Reader\Exception\InvalidHttpClientException
+     */
+    public function testSetHttpClientThrowsException()
+    {
+        Reader\Reader::setHttpClient(new \stdClass);
+    }
+
     protected function _getTempDirectory()
     {
         $tmpdir = [];
