@@ -13,7 +13,9 @@ use DOMDocument;
 use DOMXPath;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
 use Zend\Http as ZendHttp;
+use Zend\Feed\Reader\Http\ClientInterface;
 use Zend\Stdlib\ErrorHandler;
+use Zend\Feed\Reader\Exception\InvalidHttpClientException;
 
 /**
 */
@@ -57,7 +59,7 @@ class Reader implements ReaderImportInterface
     /**
      * HTTP client object to use for retrieving feeds
      *
-     * @var ZendHttp\Client
+     * @var ZendHttp\Client | ClientInterface
      */
     protected static $httpClient = null;
 
@@ -117,22 +119,27 @@ class Reader implements ReaderImportInterface
      *
      * Sets the HTTP client object to use for retrieving the feeds.
      *
-     * @param  ZendHttp\Client $httpClient
+     * @param  ZendHttp\Client | ClientInterface $httpClient
      * @return void
      */
-    public static function setHttpClient(ZendHttp\Client $httpClient)
+    public static function setHttpClient($httpClient)
     {
+        // var_dump($httpClient instanceof ZendHttp\Client);
+        // exit;
+        if (! $httpClient instanceof ZendHttp\Client && ! $httpClient instanceof ClientInterface) {
+            throw new InvalidHttpClientException();
+        }
         static::$httpClient = $httpClient;
     }
 
     /**
      * Gets the HTTP client object. If none is set, a new ZendHttp\Client will be used.
      *
-     * @return ZendHttp\Client
+     * @return ZendHttp\Client | ClientInterface
      */
     public static function getHttpClient()
     {
-        if (!static::$httpClient instanceof ZendHttp\Client) {
+        if (!static::$httpClient instanceof ZendHttp\Client && !static::$httpClient instanceof ClientInterface) {
             static::$httpClient = new ZendHttp\Client();
         }
 
