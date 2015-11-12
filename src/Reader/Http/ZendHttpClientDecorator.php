@@ -13,9 +13,7 @@ use Zend\Http\Client as ZendHttpClient;
 use Zend\Http\Headers;
 use Zend\Feed\Reader\Exception;
 
-class ZendHttpClientDecorator implements
-    ClientInterface,
-    HeaderAwareClientInterface
+class ZendHttpClientDecorator implements HeaderAwareClientInterface
 {
     /**
      * @var ZendHttpClient

@@ -9,7 +9,7 @@
 
 namespace Zend\Feed\Reader\Http;
 
-interface HeaderAwareClientInterface
+interface HeaderAwareClientInterface extends ClientInterface
 {
     /**
      * Allow specifying headers to use when fetching a feed.
