@@ -64,7 +64,7 @@ class Response implements HeaderAwareResponseInterface
     /**
      * {@inheritDoc}
      */
-    public function getHeader($name, $default = null)
+    public function getHeaderLine($name, $default = null)
     {
         $normalizedName = strtolower($name);
         return isset($this->headers[$normalizedName])

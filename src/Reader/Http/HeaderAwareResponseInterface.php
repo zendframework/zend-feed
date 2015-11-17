@@ -12,7 +12,7 @@ namespace Zend\Feed\Reader\Http;
 interface HeaderAwareResponseInterface extends ResponseInterface
 {
     /**
-     * Retrieve a header from the response.
+     * Retrieve a header (as a single line) from the response.
      *
      * Header name lookups MUST be case insensitive.
      *
@@ -24,5 +24,5 @@ interface HeaderAwareResponseInterface extends ResponseInterface
      * @param mixed $default Default value to use if header is not present.
      * @return string
      */
-    public function getHeader($name, $default = null);
+    public function getHeaderLine($name, $default = null);
 }

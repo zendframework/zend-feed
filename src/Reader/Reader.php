@@ -228,11 +228,11 @@ class Reader implements ReaderImportInterface
                 $hasHeaders  = $response instanceof Http\HeaderAwareResponseInterface;
                 $responseXml = $response->getBody();
                 $cache->setItem($cacheId, $responseXml);
-                if ($hasHeaders && $response->getHeader('ETag', false)) {
-                    $cache->setItem($cacheId . '_etag', $response->getHeader('ETag'));
+                if ($hasHeaders && $response->getHeaderLine('ETag', false)) {
+                    $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
                 }
-                if ($hasHeaders && $response->getHeader('Last-Modified', false)) {
-                    $cache->setItem($cacheId . '_lastmodified', $response->getHeader('Last-Modified'));
+                if ($hasHeaders && $response->getHeaderLine('Last-Modified', false)) {
+                    $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
                 }
             }
             return static::importString($responseXml);
