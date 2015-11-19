@@ -16,6 +16,9 @@ use Zend\Feed\Reader\Http\HeaderAwareResponseInterface;
 use Zend\Feed\Reader\Http\ResponseInterface;
 use ZendTest\Feed\Reader\TestAsset\Psr7Stream;
 
+/**
+ * @covers \Zend\Feed\Reader\Http\Psr7ResponseDecorator
+ */
 class Psr7ResponseDecoratorTest extends TestCase
 {
     public function testDecoratorIsAFeedResponse()
