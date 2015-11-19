@@ -140,7 +140,7 @@ class Reader implements ReaderImportInterface
      */
     public static function getHttpClient()
     {
-        if (! static::$httpClient instanceof Http\ClientInterface) {
+        if (! static::$httpClient) {
             static::$httpClient = new Http\ZendHttpClientDecorator(new ZendHttp\Client());
         }
 
