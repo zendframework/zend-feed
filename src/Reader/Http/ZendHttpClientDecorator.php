@@ -29,6 +29,14 @@ class ZendHttpClientDecorator implements HeaderAwareClientInterface
     }
 
     /**
+     * @return ZendHttpClient
+     */
+    public function getDecoratedClient()
+    {
+        return $this->client;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function get($uri, array $headers = [])

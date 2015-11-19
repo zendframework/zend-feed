@@ -57,6 +57,13 @@ class ZendHttpClientDecoratorTest extends TestCase
         return $mock;
     }
 
+    public function testProvidesAccessToDecoratedClient()
+    {
+        $client = $this->prophesize(Client::class)->reveal();
+        $decorator = new ZendHttpClientDecorator($client);
+        $this->assertSame($client, $decorator->getDecoratedClient());
+    }
+
     public function testDecoratorReturnsFeedResponse()
     {
         $headers = $this->createMockHttpHeaders(['Content-Type' => 'application/rss+xml']);
