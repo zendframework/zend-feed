@@ -205,6 +205,8 @@ class Reader implements ReaderImportInterface
             $headers = [];
             $data    = $cache->getItem($cacheId);
             if ($data && $client instanceof Http\HeaderAwareClientInterface) {
+                // Only check for ETag and last modified values in the cache
+                // if we have a client capable of emitting headers in the first place.
                 if ($etag === null) {
                     $etag = $cache->getItem($cacheId . '_etag');
                 }
@@ -225,14 +227,16 @@ class Reader implements ReaderImportInterface
             if ($response->getStatusCode() == 304) {
                 $responseXml = $data;
             } else {
-                $hasHeaders  = $response instanceof Http\HeaderAwareResponseInterface;
                 $responseXml = $response->getBody();
                 $cache->setItem($cacheId, $responseXml);
-                if ($hasHeaders && $response->getHeaderLine('ETag', false)) {
-                    $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
-                }
-                if ($hasHeaders && $response->getHeaderLine('Last-Modified', false)) {
-                    $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
+
+                if ($response instanceof Http\HeaderAwareResponseInterface) {
+                    if ($response->getHeaderLine('ETag', false)) {
+                        $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
+                    }
+                    if ($response->getHeaderLine('Last-Modified', false)) {
+                        $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
+                    }
                 }
             }
             return static::importString($responseXml);
