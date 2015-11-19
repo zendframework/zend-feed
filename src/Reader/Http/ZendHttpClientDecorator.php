@@ -56,8 +56,8 @@ class ZendHttpClientDecorator implements HeaderAwareClientInterface
      */
     private function injectHeaders(array $headerValues)
     {
-        $headers = $this->client->getHeaders();
-        foreach ($headerValue as $name => $values) {
+        $headers = $this->client->getRequest()->getHeaders();
+        foreach ($headerValues as $name => $values) {
             if (! is_string($name) || is_numeric($name) || empty($name)) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     'Header names provided to %s::get must be non-empty, non-numeric strings; received %s',
@@ -75,9 +75,10 @@ class ZendHttpClientDecorator implements HeaderAwareClientInterface
             }
 
             foreach ($values as $value) {
-                if (! is_string($value)) {
+                if (! is_string($value) && ! is_numeric($value)) {
                     throw new Exception\InvalidArgumentException(sprintf(
-                        'Individual header values provided to %s::get must be strings; received %s for header %s',
+                        'Individual header values provided to %s::get must be strings or numbers; '
+                        . 'received %s for header %s',
                         __CLASS__,
                         (is_object($value) ? get_class($value) : gettype($value)),
                         $name
