@@ -166,4 +166,10 @@ class ResponseTest extends TestCase
         $this->setExpectedException(InvalidArgumentException::class, $contains);
         new Response(200, '', $headers);
     }
+
+    public function testRetrievingHeaderLineWithDefaultValueReturnsDefaultValueWhenHeaderIsNotFound()
+    {
+        $response = new Response(200);
+        $this->assertSame('DEFAULT', $response->getHeaderLine('X-Not-Found', 'DEFAULT'));
+    }
 }
