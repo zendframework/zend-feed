@@ -14,6 +14,9 @@ use Zend\Feed\Reader\Exception\InvalidArgumentException;
 use Zend\Feed\Reader\Http\Response;
 use ZendTest\Feed\Reader\TestAsset\Psr7Stream;
 
+/**
+ * @covers \Zend\Feed\Reader\Http\Response
+ */
 class ResponseTest extends TestCase
 {
     public function testConstructorOnlyRequiresStatusCode()
