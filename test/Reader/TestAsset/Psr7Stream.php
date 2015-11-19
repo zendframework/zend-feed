@@ -9,9 +9,13 @@
 
 namespace ZendTest\Feed\Reader\TestAsset;
 
-use Psr\Http\Message\StreamInterface;
-
-class Psr7Stream implements StreamInterface
+/**
+ * This class may be used as a dummy for testing the return value from a
+ * PSR-7 message's getBody() method. It does not implement the StreamInterface,
+ * as PHP prior to version 7 does not do any return typehinting, making strict
+ * adherence unnecessary.
+ */
+class Psr7Stream
 {
     private $streamValue;
 
@@ -23,61 +27,5 @@ class Psr7Stream implements StreamInterface
     public function __toString()
     {
         return (string) $this->streamValue;
-    }
-
-    public function close()
-    {
-    }
-
-    public function detach()
-    {
-    }
-
-    public function getSize()
-    {
-    }
-
-    public function tell()
-    {
-    }
-
-    public function eof()
-    {
-    }
-
-    public function isSeekable()
-    {
-    }
-
-    public function seek($offset, $whence = SEEK_SET)
-    {
-    }
-
-    public function rewind()
-    {
-    }
-
-    public function isWritable()
-    {
-    }
-
-    public function write($string)
-    {
-    }
-
-    public function isReadable()
-    {
-    }
-
-    public function read($length)
-    {
-    }
-
-    public function getContents()
-    {
-    }
-
-    public function getMetadata($key = null)
-    {
     }
 }
