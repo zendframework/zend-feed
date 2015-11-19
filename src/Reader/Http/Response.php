@@ -126,7 +126,7 @@ class Response implements HeaderAwareResponseInterface
         throw new Exception\InvalidArgumentException(sprintf(
             '%s expects a string body, or an object that can cast to string; received %s',
             __CLASS__,
-            (is_object($statusCode) ? get_class($statusCode) : gettype($statusCode))
+            (is_object($body) ? get_class($body) : gettype($body))
         ));
     }
 
@@ -147,9 +147,9 @@ class Response implements HeaderAwareResponseInterface
                 ));
             }
 
-            if (! is_string($value)) {
+            if (! is_string($value) && ! is_numeric($value)) {
                 throw new Exception\InvalidArgumentException(sprintf(
-                    'Individual header values provided to %s must be strings; received %s for header %s',
+                    'Individual header values provided to %s must be a string or numeric; received %s for header %s',
                     __CLASS__,
                     (is_object($value) ? get_class($value) : gettype($value)),
                     $name
