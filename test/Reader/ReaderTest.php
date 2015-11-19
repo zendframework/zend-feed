@@ -9,6 +9,7 @@
 
 namespace ZendTest\Feed\Reader;
 
+use stdClass;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Client\Adapter\Test as TestAdapter;
 use Zend\Http\Response as HttpResponse;
@@ -326,13 +327,6 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($client, Reader\Reader::getHttpClient());
     }
 
-    public function testSetHttpClient()
-    {
-        $client = $this->prophesize(ClientInterface::class)->reveal();
-        Reader\Reader::setHttpClient($client);
-        $this->assertSame($client, Reader\Reader::getHttpClient());
-    }
-
     public function testSetHttpClientWillDecorateAZendHttpClientInstance()
     {
         $client = new HttpClient();
@@ -342,12 +336,10 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeSame($client, 'client', $cached);
     }
 
-    /**
-     * @expectedException Zend\Feed\Reader\Exception\InvalidHttpClientException
-     */
     public function testSetHttpClientThrowsException()
     {
-        Reader\Reader::setHttpClient(new \stdClass);
+        $this->setExpectedException(Reader\Exception\InvalidHttpClientException::class);
+        Reader\Reader::setHttpClient(new stdClass);
     }
 
     protected function _getTempDirectory()
