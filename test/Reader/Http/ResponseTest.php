@@ -58,11 +58,11 @@ class ResponseTest extends TestCase
 
     public function invalidStatusCodes()
     {
-        foreach (range(-100, 99) as $statusCode) {
+        foreach ([-100, 0, 1, 99] as $statusCode) {
             yield $statusCode => [$statusCode, 'between 100 and 599'];
         }
 
-        foreach (range(600, 1000, 10) as $statusCode) {
+        foreach ([600, 700, 1000] as $statusCode) {
             yield $statusCode => [$statusCode, 'between 100 and 599'];
         }
 
@@ -135,23 +135,23 @@ class ResponseTest extends TestCase
                 [ '1.1' => 'value' ],
                 'non-empty, non-numeric',
             ],
-            'null-value'       => [
+            'null-value' => [
                 [ 'X-Test' => null ],
                 'must be a string or numeric',
             ],
-            'true-value'       => [
+            'true-value' => [
                 [ 'X-Test' => true ],
                 'must be a string or numeric',
             ],
-            'false-value'      => [
+            'false-value' => [
                 [ 'X-Test' => false ],
                 'must be a string or numeric',
             ],
-            'array-value'      => [
+            'array-value' => [
                 [ 'X-Test' => ['BODY'] ],
                 'must be a string or numeric',
             ],
-            'object-value'     => [
+            'object-value' => [
                 [ 'X-Test' => (object) ['body' => 'BODY'] ],
                 'must be a string or numeric',
             ],
