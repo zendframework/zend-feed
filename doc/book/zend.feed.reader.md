@@ -64,6 +64,14 @@ foreach ($feed as $entry) {
 }
 ```
 
+> ## Importing requires an HTTP client
+>
+> To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
+> available. 
+>
+> If you are not using zend-http, you will need to inject `Reader` with the HTTP
+> client. See the [section on providing a client to Reader](zend.feed.http-clients#providing-a-client-to-reader).
+
 The example above demonstrates `Zend\Feed\Reader\Reader`'s *API*, and it also demonstrates some of
 its internal operation. In reality, the *RDF* feed selected does not have any native date or author
 elements, however it does utilise the Dublin Core 1.1 module which offers namespaced creator and
@@ -153,6 +161,11 @@ status code of 200, this means the feed has changed and `Zend\Feed\Reader\Reader
 version and save it to the cache. It will also cache the new ETag and Last-Modified header values
 for future use.
 
+> #### Conditional GET requires a HeaderAwareClientInterface
+>
+> Conditional GET support only works for `Zend\Feed\Reader\Http\HeaderAwareClientInterface`
+> client implementations, as it requires the ability to send HTTP headers.
+
 These "conditional" requests are not guaranteed to be supported by the server you request a *URI*
 of, but can be attempted regardless. Most common feed sources like blogs should however have this
 supported. To enable conditional requests, you will need to provide a cache to
@@ -217,6 +230,14 @@ if (isset($links->atom)) {
 ```
 
 Based on these links, you can then import from whichever source you wish in the usual manner.
+
+> ### Finding feed links requires an HTTP client
+>
+> To find feed links, you will need to have an [HTTP client](zend.feed.http-clients)
+> available. 
+>
+> If you are not using zend-http, you will need to inject `Reader` with the HTTP
+> client. See the [section on providing a client to Reader](zend.feed.http-clients#providing-a-client-to-reader).
 
 This quick method only gives you one link for each feed type, but websites may indicate many links
 of any type. Perhaps it's a news site with a *RSS* feed for each news category. You can iterate over

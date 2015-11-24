@@ -9,6 +9,14 @@ Reading an *RSS* feed is as simple as passing the *URL* of the feed to `Zend\Fee
 $channel = Zend\Feed\Reader\Reader::import('http://rss.example.com/channelName');
 ```
 
+> ## Importing requires an HTTP client
+>
+> To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
+> available. 
+>
+> If you are not using zend-http, you will need to inject `Reader` with the HTTP
+> client. See the [section on providing a client to Reader](zend.feed.http-clients#providing-a-client-to-reader).
+
 If any errors occur fetching the feed, a `Zend\Feed\Reader\Exception\RuntimeException` will be
 thrown.
 

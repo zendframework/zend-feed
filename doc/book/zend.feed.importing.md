@@ -7,6 +7,14 @@ know the *URI* of a feed, simply use the `Zend\Feed\Reader\Reader::import()` met
 $feed = Zend\Feed\Reader\Reader::import('http://feeds.example.com/feedName');
 ```
 
+> ## Importing requires an HTTP client
+>
+> To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
+> available. 
+>
+> If you are not using zend-http, you will need to inject `Reader` with the HTTP
+> client. See the [section on providing a client to Reader](zend.feed.http-clients#providing-a-client-to-reader).
+
 You can also use `Zend\Feed\Reader\Reader` to fetch the contents of a feed from a file or the
 contents of a *PHP* string variable:
 
