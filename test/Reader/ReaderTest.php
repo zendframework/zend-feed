@@ -169,7 +169,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('testImportsUri() requires a network connection');
         }
 
-        Reader\Reader::import('http://twitter.com/alganet');
+        Reader\Reader::import('http://example.com');
     }
 
     public function testGetsFeedLinksAsValueObject()
@@ -224,7 +224,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
 
         $links = Reader\Reader::findFeedLinks('http://www.infopod.com.br');
-        $this->assertEquals('http://feeds.feedburner.com/jonnyken/infoblog', $links->rss);
+        $this->assertEquals('http://www.infopod.com.br/feed/', $links->rss);
     }
 
     /**
@@ -237,7 +237,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
 
         $links = Reader\Reader::findFeedLinks('http://meiobit.com');
-        $this->assertEquals('http://mbit.disqus.com/latest.rss', $links->rss);
+        $this->assertEquals('http://meiobit.com/feed/', $links->rss);
     }
 
     /**
