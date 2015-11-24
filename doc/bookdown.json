@@ -3,6 +3,7 @@
     "target": "html/",
     "content": [
         "book/zend.feed.introduction.md",
+        "book/zend.feed.http-clients.md",
         "book/zend.feed.importing.md",
         "book/zend.feed.find-feeds.md",
         "book/zend.feed.consuming-rss.md",

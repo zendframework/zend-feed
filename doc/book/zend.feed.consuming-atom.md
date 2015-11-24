@@ -21,6 +21,14 @@ foreach ($feed as $entry) {
 }
 ```
 
+> ## Importing requires an HTTP client
+>
+> To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
+> available. 
+>
+> If you are not using zend-http, you will need to inject `Reader` with the HTTP
+> client. See the [section on providing a client to Reader](zend.feed.http-clients#providing-a-client-to-reader).
+
 In an Atom feed you can expect to find the following feed properties:
 
 - `title`- The feed's title, same as *RSS*'s channel title

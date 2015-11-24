@@ -10,6 +10,14 @@ page with one simple method call:
 $feedLinks = Zend\Feed\Reader\Reader::findFeedLinks('http://www.example.com/news.html');
 ```
 
+> ## Finding feed links requires an HTTP client
+>
+> To find feed links, you will need to have an [HTTP client](zend.feed.http-clients)
+> available. 
+>
+> If you are not using zend-http, you will need to inject `Reader` with the HTTP
+> client. See the [section on providing a client to Reader](zend.feed.http-clients#providing-a-client-to-reader).
+
 Here the `findFeedLinks()` method returns a `Zend\Feed\Reader\FeedSet` object, that is in turn, a
 collection of other `Zend\Feed\Reader\FeedSet` objects, that are referenced by **&lt;link&gt;** tags
 on the `news.html` web page. `Zend\Feed\Reader\Reader` will throw a

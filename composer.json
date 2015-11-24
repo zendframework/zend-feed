@@ -27,18 +27,19 @@
         "psr/http-message": "^1.0"
     },
     "suggest": {
-        "zendframework/zend-cache": "Zend\\Cache component",
-        "zendframework/zend-db": "Zend\\Db component",
+        "psr/http-message": "PSR-7 ^1.0, if you wish to use Zend\\Feed\\Reader\\Http\\Psr7ResponseDecorator",
+        "zendframework/zend-cache": "Zend\\Cache component, for optionally caching feeds between requests",
+        "zendframework/zend-db": "Zend\\Db component, for use with PubSubHubbub",
         "zendframework/zend-http": "Zend\\Http for PubSubHubbub, and optionally for use with Zend\\Feed\\Reader",
         "zendframework/zend-servicemanager": "Zend\\ServiceManager component, for easily extending ExtensionManager implementations",
-        "zendframework/zend-validator": "Zend\\Validator component"
+        "zendframework/zend-validator": "Zend\\Validator component, for validating feeds and Atom entries in the Writer subcomponent"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
         "branch-alias": {
-            "dev-master": "2.5-dev",
-            "dev-develop": "2.6-dev"
+            "dev-master": "2.6-dev",
+            "dev-develop": "2.7-dev"
         }
     },
     "autoload-dev": {
