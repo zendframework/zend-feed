@@ -15,11 +15,11 @@
     "require": {
         "php": ">=5.5",
         "zendframework/zend-escaper": "~2.5",
-        "zendframework/zend-stdlib": "~2.5"
+        "zendframework/zend-stdlib": "dev-develop as 2.8.0"
     },
     "require-dev": {
         "zendframework/zend-db": "~2.5",
-        "zendframework/zend-cache": "~2.5",
+        "zendframework/zend-cache": "dev-develop as 2.6.0",
         "zendframework/zend-http": "~2.5",
         "zendframework/zend-validator": "~2.5",
         "fabpot/php-cs-fixer": "1.7.*",
