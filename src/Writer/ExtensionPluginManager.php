@@ -23,7 +23,7 @@ class ExtensionPluginManager extends AbstractPluginManager
      *
      * @var array
      */
-    protected $invokableClasses = [
+    protected $invokables = [
         'atomrendererfeed'           => 'Zend\Feed\Writer\Extension\Atom\Renderer\Feed',
         'contentrendererentry'       => 'Zend\Feed\Writer\Extension\Content\Renderer\Entry',
         'dublincorerendererentry'    => 'Zend\Feed\Writer\Extension\DublinCore\Renderer\Entry',
@@ -42,30 +42,30 @@ class ExtensionPluginManager extends AbstractPluginManager
      *
      * @var bool
      */
-    protected $shareByDefault = false;
+    protected $sharedByDefault = false;
 
     /**
      * Validate the plugin
      *
      * Checks that the extension loaded is of a valid type.
      *
-     * @param  mixed $plugin
+     * @param  mixed $instance
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */
-    public function validatePlugin($plugin)
+    public function validate($instance)
     {
-        if ($plugin instanceof Extension\AbstractRenderer) {
+        if ($instance instanceof Extension\AbstractRenderer) {
             // we're okay
             return;
         }
 
-        if ('Feed' == substr(get_class($plugin), -4)) {
+        if ('Feed' == substr(get_class($instance), -4)) {
             // we're okay
             return;
         }
 
-        if ('Entry' == substr(get_class($plugin), -5)) {
+        if ('Entry' == substr(get_class($instance), -5)) {
             // we're okay
             return;
         }
@@ -73,7 +73,7 @@ class ExtensionPluginManager extends AbstractPluginManager
         throw new Exception\InvalidArgumentException(sprintf(
             'Plugin of type %s is invalid; must implement %s\Extension\RendererInterface '
             . 'or the classname must end in "Feed" or "Entry"',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+            (is_object($instance) ? get_class($instance) : gettype($instance)),
             __NAMESPACE__
         ));
     }
