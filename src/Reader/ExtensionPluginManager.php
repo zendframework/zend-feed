@@ -25,7 +25,7 @@ class ExtensionPluginManager extends AbstractPluginManager
      *
      * @var array
      */
-    protected $invokableClasses = [
+    protected $invokables = [
         'atomentry'            => 'Zend\Feed\Reader\Extension\Atom\Entry',
         'atomfeed'             => 'Zend\Feed\Reader\Extension\Atom\Feed',
         'contententry'         => 'Zend\Feed\Reader\Extension\Content\Entry',
@@ -46,21 +46,21 @@ class ExtensionPluginManager extends AbstractPluginManager
      *
      * @var bool
      */
-    protected $shareByDefault = false;
+    protected $sharedByDefault = false;
 
     /**
      * Validate the plugin
      *
      * Checks that the extension loaded is of a valid type.
      *
-     * @param  mixed $plugin
+     * @param  mixed $instance
      * @return void
      * @throws Exception\InvalidArgumentException if invalid
      */
-    public function validatePlugin($plugin)
+    public function validate($instance)
     {
-        if ($plugin instanceof Extension\AbstractEntry
-            || $plugin instanceof Extension\AbstractFeed
+        if ($instance instanceof Extension\AbstractEntry
+            || $instance instanceof Extension\AbstractFeed
         ) {
             // we're okay
             return;
@@ -69,7 +69,7 @@ class ExtensionPluginManager extends AbstractPluginManager
         throw new Exception\InvalidArgumentException(sprintf(
             'Plugin of type %s is invalid; must implement %s\Extension\AbstractFeed '
             . 'or %s\Extension\AbstractEntry',
-            (is_object($plugin) ? get_class($plugin) : gettype($plugin)),
+            (is_object($instance) ? get_class($instance) : gettype($instance)),
             __NAMESPACE__,
             __NAMESPACE__
         ));
