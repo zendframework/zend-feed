@@ -18,7 +18,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#20](https://github.com/zendframework/zend-feed/pull/20) makes the two
+  zend-servicemanager extension manager implementations forwards compatible
+  with version 3, and the overall code base forwards compatible with zend-stdlib
+  v3.
 
 ## 2.6.1 - TBD
 
