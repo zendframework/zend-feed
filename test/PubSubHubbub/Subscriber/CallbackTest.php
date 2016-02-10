@@ -37,6 +37,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        if (! class_exists('Zend\Db\Adapter\Adapter')) {
+            $this->markTestSkipped(
+                'Skipping tests against zend-db functionality until that '
+                . 'component is forwards-compatible with zend-servicemanager v3'
+            );
+        }
+
         $this->_callback = new CallbackSubscriber;
 
         $this->_adapter      = $this->_getCleanMock(
@@ -140,9 +147,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue([
-                                           'verify_token' => hash('sha256',
-                                                                  'cba')
-                                      ]));
+                'verify_token' => hash('sha256', 'cba')
+            ]));
 
         $this->_tableGateway->expects($this->any())
             ->method('select')
@@ -194,9 +200,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue([
-                                           'verify_token' => hash('sha256',
-                                                                  'cba')
-                                      ]));
+                'verify_token' => hash('sha256', 'cba')
+            ]));
 
         $this->_get['hub_mode'] = 'unsubscribe';
         $this->_tableGateway->expects($this->any())
@@ -312,15 +317,16 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_tableGateway->expects($this->once())
             ->method('update')
             ->with(
-            $this->equalTo(['id'                => 'verifytokenkey',
-                                 'verify_token'      => hash('sha256', 'cba'),
-                                 'created_time'      => $t->getTimestamp(),
-                                 'lease_seconds'     => 1234567,
-                                 'subscription_state'=> 'verified',
-                                 'expiration_time'   => $t->add(new DateInterval('PT1234567S'))
-                                     ->format('Y-m-d H:i:s')]),
-            $this->equalTo(['id' => 'verifytokenkey'])
-        );
+                $this->equalTo([
+                    'id'                => 'verifytokenkey',
+                    'verify_token'      => hash('sha256', 'cba'),
+                    'created_time'      => $t->getTimestamp(),
+                    'lease_seconds'     => 1234567,
+                    'subscription_state'=> 'verified',
+                    'expiration_time'   => $t->add(new DateInterval('PT1234567S'))->format('Y-m-d H:i:s')
+                ]),
+                $this->equalTo(['id' => 'verifytokenkey'])
+            );
 
         $this->_callback->handle($this->_get);
         $this->assertEquals('abc', $this->_callback->getHttpResponse()->getContent());
@@ -360,7 +366,8 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testRespondsToInvalidFeedUpdateNotPostWith404Response()
-    { // yes, this example makes no sense for GET - I know!!!
+    {
+        // yes, this example makes no sense for GET - I know!!!
         $_SERVER['REQUEST_METHOD']     = 'GET';
         $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
         $_SERVER['CONTENT_TYPE']       = 'application/atom+xml';
