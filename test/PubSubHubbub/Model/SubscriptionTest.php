@@ -26,6 +26,13 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllOperations()
     {
+        if (! class_exists(DbAdapter::class)) {
+            $this->markTestSkipped(
+                'Skipping tests against zend-db functionality until that '
+                . 'component is forwards-compatible with zend-servicemanager v3'
+            );
+        }
+
         $adapter = $this->initDb();
         $table = new TableGateway('subscription', $adapter);
 
@@ -40,10 +47,17 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($subscription->hasSubscription($id));
         $dataSubscription = $subscription->getSubscription($id);
         $this->assertInternalType('array', $dataSubscription);
-        $keys = ['id', 'topic_url', 'hub_url',
-                      'created_time', 'lease_seconds',
-                      'verify_token', 'secret',
-                      'expiration_time', 'subscription_state'];
+        $keys = [
+            'id',
+            'topic_url',
+            'hub_url',
+            'created_time',
+            'lease_seconds',
+            'verify_token',
+            'secret',
+            'expiration_time',
+            'subscription_state'
+        ];
 
         $this->assertSame($keys, array_keys($dataSubscription));
         $this->assertFalse($subscription->setSubscription(['id' => $id]));
@@ -59,6 +73,13 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
 
     public function testCurrentTimeSetterAndGetter()
     {
+        if (! class_exists(DbAdapter::class)) {
+            $this->markTestSkipped(
+                'Skipping tests against zend-db functionality until that '
+                . 'component is forwards-compatible with zend-servicemanager v3'
+            );
+        }
+
         $now = new DateTime();
         $subscription = new Subscription(new TableGateway('subscription', $this->initDb()));
         $subscription->setNow($now);
@@ -81,16 +102,16 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
     protected function createTable(DbAdapter $db)
     {
         $sql = "CREATE TABLE subscription ("
-             .      "id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "
-             .      "topic_url varchar(255) DEFAULT NULL, "
-             .      "hub_url varchar(255) DEFAULT NULL, "
-             .      "created_time datetime DEFAULT NULL, "
-             .      "lease_seconds bigint(20) DEFAULT NULL, "
-             .      "verify_token varchar(255) DEFAULT NULL, "
-             .      "secret varchar(255) DEFAULT NULL, "
-             .      "expiration_time datetime DEFAULT NULL, "
-             .      "subscription_state varchar(12) DEFAULT NULL"
-             . ");";
+            . "id varchar(32) PRIMARY KEY NOT NULL DEFAULT '', "
+            . "topic_url varchar(255) DEFAULT NULL, "
+            . "hub_url varchar(255) DEFAULT NULL, "
+            . "created_time datetime DEFAULT NULL, "
+            . "lease_seconds bigint(20) DEFAULT NULL, "
+            . "verify_token varchar(255) DEFAULT NULL, "
+            . "secret varchar(255) DEFAULT NULL, "
+            . "expiration_time datetime DEFAULT NULL, "
+            . "subscription_state varchar(12) DEFAULT NULL"
+            . ");";
 
         $db->query($sql)->execute();
     }
