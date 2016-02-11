@@ -24,24 +24,6 @@ All notable changes to this project will be documented in this file, in reverse 
   with version 3, and the overall code base forwards compatible with zend-stdlib
   v3.
 
-## 2.6.1 - TBD
-
-### Added
-
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
 ## 2.6.0 - 2015-11-24
 
 ### Added
