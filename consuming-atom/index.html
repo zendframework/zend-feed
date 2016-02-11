@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Consuming Atom Feeds - zend-feed</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a href="http://framework.zend.com"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-feed</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reader <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../reader/">Zend\Feed\Reader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../http-clients/">HTTP Clients</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../importing/">Importing Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../find-feeds/">Feed Discovery</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-rss/">Consuming RSS Feeds</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">Consuming Atom Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-atom-entry/">Consuming Atom Entries</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../security/">Security</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../writer/">Writer</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../pubsubhubbub/">Pubsubhubbub</a>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="prev" href="../consuming-rss/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../consuming-atom-entry/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-feed">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#consuming-atom-feeds">Consuming Atom Feeds</a></li>
+        
+            <li><a href="#basic-use-of-an-atom-feed">Basic Use of an Atom Feed</a></li>
+        
+            <li><a href="#importing-requires-an-http-client">Importing requires an HTTP client</a></li>
+        
+    
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reader &raquo;</li>
+      
+    
+  
+  <li class="active">Consuming Atom Feeds</li>
+</ol>
+
+<nav class="hidden-lg">
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../consuming-rss/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../consuming-atom-entry/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+
+<h1 id="consuming-atom-feeds">Consuming Atom Feeds</h1>
+<p><code>Zend\Feed\Reader\Feed\Atom</code> is used in much the same way as
+<code>Zend\Feed\Reader\Feed\Rss</code>. It provides the same access to feed-level
+properties and iteration over entries in the feed. The main difference is in the
+structure of the Atom protocol itself. Atom is a successor to RSS; it is a
+more generalized protocol and it is designed to deal more easily with feeds that
+provide their full content inside the feed, splitting RSS' <code>description</code> tag
+into two elements, <code>summary</code> and <code>content</code>, for that purpose.</p>
+<h2 id="basic-use-of-an-atom-feed">Basic Use of an Atom Feed</h2>
+<p>Read an Atom feed and print the <code>title</code> and <code>summary</code> of each entry:</p>
+<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/');
+echo 'The feed contains ' . $feed-&gt;count() . ' entries.' . &quot;\n\n&quot;;
+foreach ($feed as $entry) {
+    echo 'Title: ' . $entry-&gt;getTitle() . &quot;\n&quot;;
+    echo 'Description: ' . $entry-&gt;getDescription() . &quot;\n&quot;;
+    echo 'URL: ' . $entry-&gt;getLink() . &quot;\n\n&quot;;
+}</code></pre>
+
+
+<blockquote>
+<h2 id="importing-requires-an-http-client">Importing requires an HTTP client</h2>
+<p>To import a feed, you will need to have an <a href="../zend.feed.http-clients">HTTP client</a>
+available. </p>
+<p>If you are not using zend-http, you will need to inject <code>Reader</code> with the HTTP
+client. See the <a href="../http-clients/#providing-a-client-to-reader">section on providing a client to Reader</a>.</p>
+</blockquote>
+<p>In an Atom feed, you can expect to find the following feed properties:</p>
+<ul>
+<li><code>title</code>: The feed's title, same as RSS' channel title.</li>
+<li><code>id</code>: Every feed and entry in Atom has a unique identifier.</li>
+<li><code>link</code>: Feeds can have multiple links, which are distinguished by a <code>type</code>
+  attribute. The equivalent to RSS's channel link would be <code>type="text/html"</code>.
+  If the link is to an alternate version of the same content that's in the feed,
+  it would have a <code>rel="alternate"</code> attribute.</li>
+<li><code>subtitle</code>: The feed's description, equivalent to RSS' channel description.</li>
+<li><code>author</code>: The feed's author, with <code>name</code> and <code>email</code> sub-tags.</li>
+</ul>
+<p>Atom entries commonly have the following properties:</p>
+<ul>
+<li><code>id</code>: The entry's unique identifier.</li>
+<li><code>title</code>: The entry's title, same as RSS item titles.</li>
+<li><code>link</code>: A link to another format or an alternate view of this entry.
+   The link property of an atom entry typically has an <code>href</code> attribute.</li>
+<li><code>summary</code>: A summary of this entry's content.</li>
+<li><code>content</code>: The full content of the entry; can be skipped if the feed just
+   contains summaries.</li>
+<li><code>author</code>: with <code>name</code> and <code>email</code> sub-tags like feeds have.</li>
+<li><code>published</code>: the date the entry was published, in RFC 3339 format.</li>
+<li><code>updated</code>: the date the entry was last updated, in RFC 3339 format.</li>
+</ul>
+<p>Where relevant, <code>Zend\Feed</code> supports a number of common RSS extensions including
+Dublin Core; Content, Slash, Syndication, and Syndication/Thread; and several
+others in common use on blogs.</p>
+<p>For more information on Atom and plenty of resources, see
+<a href="http://www.atomenabled.org/">http://www.atomenabled.org/</a>.</p>
+
+<hr />
+
+<nav>
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../consuming-rss/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../consuming-atom-entry/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav></div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>

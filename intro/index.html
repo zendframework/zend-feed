@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>Introduction - zend-feed</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a href="http://framework.zend.com"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-feed</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reader <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../reader/">Zend\Feed\Reader</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../http-clients/">HTTP Clients</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../importing/">Importing Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../find-feeds/">Feed Discovery</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-rss/">Consuming RSS Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-atom/">Consuming Atom Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-atom-entry/">Consuming Atom Entries</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../security/">Security</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../writer/">Writer</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../pubsubhubbub/">Pubsubhubbub</a>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="prev" href="..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../reader/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-feed">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#introduction">Introduction</a></li>
+        
+            <li><a href="#rss-optional-properties">RSS optional properties</a></li>
+        
+            <li><a href="#reading-rss-feed-data">Reading RSS Feed Data</a></li>
+        
+    
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+  
+  <li class="active">Introduction</li>
+</ol>
+
+<nav class="hidden-lg">
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href=".."><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../reader/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+
+<h1 id="introduction">Introduction</h1>
+<p><code>Zend\Feed</code> provides functionality for consuming RSS and Atom feeds. It provides
+a natural syntax for accessing elements of feeds, feed attributes, and entry
+attributes. <code>Zend\Feed</code> also has extensive support for modifying feed and entry
+structure with the same natural syntax, and turning the result back into XML.
+In the future, this modification support could provide support for the Atom
+Publishing Protocol.</p>
+<p><code>Zend\Feed</code> consists of <code>Zend\Feed\Reader</code> for reading RSS and Atom feeds,
+<code>Zend\Feed\Writer</code> for writing RSS and Atom feeds, and <code>Zend\Feed\PubSubHubbub</code>
+for working with Hub servers. Furthermore, both <code>Zend\Feed\Reader</code> and
+<code>Zend\Feed\Writer</code> support extensions which allows for working with additional
+data in feeds, not covered in the core API but used in conjunction with RSS and
+Atom feeds.</p>
+<p>In the example below, we demonstrate a simple use case of retrieving an RSS feed
+and saving relevant portions of the feed data to a simple PHP array, which could
+then be used for printing the data, storing to a database, etc.</p>
+<blockquote>
+<h2 id="rss-optional-properties">RSS optional properties</h2>
+<p>Many <em>RSS</em> feeds have different channel and item properties available. The
+<em>RSS</em> specification provides for many optional properties, so be aware of this
+when writing code to work with <em>RSS</em> data. <code>Zend\Feed</code> supports all optional
+properties of the core <em>RSS</em> and <em>Atom</em> specifications.</p>
+</blockquote>
+<h2 id="reading-rss-feed-data">Reading RSS Feed Data</h2>
+<pre class="codehilite"><code class="language-php">// Fetch the latest Slashdot headlines
+try {
+    $slashdotRss =
+        Zend\Feed\Reader\Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
+} catch (Zend\Feed\Reader\Exception\RuntimeException $e) {
+    // feed import failed
+    echo &quot;Exception caught importing feed: {$e-&gt;getMessage()}\n&quot;;
+    exit;
+}
+
+// Initialize the channel/feed data array
+$channel = [
+    'title'       =&gt; $slashdotRss-&gt;getTitle(),
+    'link'        =&gt; $slashdotRss-&gt;getLink(),
+    'description' =&gt; $slashdotRss-&gt;getDescription(),
+    'items'       =&gt; [],
+];
+
+// Loop over each channel item/entry and store relevant data for each
+foreach ($slashdotRss as $item) {
+    $channel['items'][] = [
+        'title'       =&gt; $item-&gt;getTitle(),
+        'link'        =&gt; $item-&gt;getLink(),
+        'description' =&gt; $item-&gt;getDescription(),
+    ];
+}</code></pre>
+
+
+<p>Your <code>$channel</code> array now contains the basic meta-information for the RSS
+channel and all items that it contained. The process is identical for Atom
+feeds since <code>Zend\Feed</code> provides a common feed API; i.e. all getters and
+setters are the same regardless of feed format.</p>
+
+<hr />
+
+<nav>
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href=".."><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../reader/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav></div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>

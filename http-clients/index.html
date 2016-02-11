@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>HTTP Clients - zend-feed</title>
+
+    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
+    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="../css/base.css" rel="stylesheet">
+    <link href="../css/zf.css" rel="stylesheet">
+    <link href="../css/prism-zf.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
+    <script>
+    WebFont.load({
+        google: {
+            families: ['Open Sans', 'PT Sans']
+        }
+    });
+    </script>
+
+    
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <span class="navbar-brand">
+              <a href="http://framework.zend.com"><img src="../img/zf-logo-mark.png" height="28" alt="Zend Framework" /></a>
+              <a href="..">zend-feed</a>
+            </span>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../intro/">Introduction</a>
+                    </li>
+                
+                
+                
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reader <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                        
+                            
+<li >
+    <a href="../reader/">Zend\Feed\Reader</a>
+</li>
+
+                        
+                            
+<li class="active">
+    <a href="./">HTTP Clients</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../importing/">Importing Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../find-feeds/">Feed Discovery</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-rss/">Consuming RSS Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-atom/">Consuming Atom Feeds</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../consuming-atom-entry/">Consuming Atom Entries</a>
+</li>
+
+                        
+                            
+<li >
+    <a href="../security/">Security</a>
+</li>
+
+                        
+                        </ul>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../writer/">Writer</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../pubsubhubbub/">Pubsubhubbub</a>
+                    </li>
+                
+                
+                </ul>
+            
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                
+                    <li >
+                        <a rel="prev" href="../reader/">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="next" href="../importing/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a href="https://github.com/zendframework/zend-feed">
+                            
+                                <i class="fa fa-github"></i>
+                            
+                            GitHub
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <!-- content:begin -->
+    <div class="container">
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#http-clients-and-zend-feed">HTTP Clients and zend-feed</a></li>
+        
+            <li><a href="#clientinterface-and-headerawareclientinterface">ClientInterface and HeaderAwareClientInterface</a></li>
+        
+            <li><a href="#responseinterface-and-headerawareresponseinterface">ResponseInterface and HeaderAwareResponseInterface</a></li>
+        
+            <li><a href="#response">Response</a></li>
+        
+            <li><a href="#psr-7-response">PSR-7 Response</a></li>
+        
+            <li><a href="#zend-http">zend-http</a></li>
+        
+            <li><a href="#providing-a-client-to-reader">Providing a client to Reader</a></li>
+        
+    
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+  <li><a href="..">Docs</a> &raquo;</li>
+  
+    
+      
+        <li>Reader &raquo;</li>
+      
+    
+  
+  <li class="active">HTTP Clients</li>
+</ol>
+
+<nav class="hidden-lg">
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../reader/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../importing/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav>
+
+<h1 id="http-clients-and-zend-feed">HTTP Clients and zend-feed</h1>
+<p>Several operations in zend-feed's Reader subcomponent require an HTTP client:</p>
+<ul>
+<li>importing a feed</li>
+<li>finding links in a feed</li>
+</ul>
+<p>In order to allow developers a choice in HTTP clients, the subcomponent defines
+several interfaces and classes. Elsewhere in the documentation, we reference
+where an HTTP client may be used; this document details what constitutes an HTTP
+client and its behavior, and some of the concrete classes available within the
+component for implementing this behavior.</p>
+<h2 id="clientinterface-and-headerawareclientinterface">ClientInterface and HeaderAwareClientInterface</h2>
+<p>First, we define two interfaces for clients,
+<code>Zend\Feed\Reader\Http\ClientInterface</code> and <code>HeaderAwareClientInterface</code>:</p>
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
+
+interface ClientInterface
+{
+    /**
+     * Make a GET request to a given URL.
+     *
+     * @param string $url
+     * @return ResponseInterface
+     */
+    public function get($url);
+}
+
+interface HeaderAwareClientInterface extends ClientInterface
+{
+    /**
+     * Make a GET request to a given URL.
+     *
+     * @param string $url
+     * @param array $headers
+     * @return ResponseInterface
+     */
+    public function get($url, array $headers = []);
+}</code></pre>
+
+
+<p>The first is header-agnostic, and assumes that the client will simply perform an
+HTTP GET request. The second allows providing headers to the client; typically,
+these are used for HTTP caching headers. <code>$headers</code> must be in the following
+structure:</p>
+<pre class="codehilite"><code class="language-php">$headers = [
+    'X-Header-Name' =&gt; [
+        'header',
+        'values',
+    ],
+];</code></pre>
+
+
+<p>i.e., each key is a header name, and each value is an array of values for that
+header. If the header represents only a single value, it should be an array with
+that value:</p>
+<pre class="codehilite"><code class="language-php">$headers = [
+    'Accept' =&gt; [ 'application/rss+xml' ],
+];</code></pre>
+
+
+<p>A call to <code>get()</code> should yield a <em>response</em>.</p>
+<h2 id="responseinterface-and-headerawareresponseinterface">ResponseInterface and HeaderAwareResponseInterface</h2>
+<p>Responses are modeled using <code>Zend\Feed\Reader\Http\ResponseInterface</code> and
+<code>HeaderAwareResponseInterface</code>:</p>
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
+
+class ResponseInterface
+{
+    /**
+     * Retrieve the status code.
+     *
+     * @return int
+     */
+    public function getStatusCode();
+
+    /**
+     * Retrieve the response body contents.
+     *
+     * @return string
+     */
+    public function getBody();
+}
+
+class HeaderAwareResponseInterface extends ResponseInterface
+{
+    /**
+     * Retrieve a named header line.
+     *
+     * Retrieve a header by name; all values MUST be concatenated to a single
+     * line. If no matching header is found, return the $default value.
+     *
+     * @param string $name
+     * @param null|string $default
+     * @return string
+    public function getHeaderLine($name, $default = null);
+}</code></pre>
+
+
+<p>Internally, <code>Reader</code> will typehint against <code>ClientInterface</code> for the bulk of
+operations. In some cases, however, certain capabilities are only possible if
+the response can provide headers (e.g., for caching); in such cases, it will
+check the instance against <code>HeaderAwareResponseInterface</code>, and only call
+<code>getHeaderLine()</code> if it matches.</p>
+<h2 id="response">Response</h2>
+<p>zend-feed ships with a generic <code>ResponseInterface</code> implementation,
+<code>Zend\Feed\Http\Response</code>. It implements <code>HeaderAwareResponseInterface</code>, and
+defines the following constructor:</p>
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
+
+class Response implements HeaderAwareResponseInterface
+{
+    /**
+     * Constructor
+     *
+     * @param int $statusCode Response status code
+     * @param string $body Response body
+     * @param array $headers Response headers, if available
+     */
+    public function __construct($statusCode, $body, array $headers = []);
+}</code></pre>
+
+
+<h2 id="psr-7-response">PSR-7 Response</h2>
+<p><a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a> defines a set of HTTP message
+interfaces, but not a client interface. To facilitate wrapping an HTTP client
+that uses PSR-7 messages, we provide <code>Zend\Feed\Reader\Psr7ResponseDecorator</code>:</p>
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
+
+use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
+
+class Psr7ResponseDecorator implements HeaderAwareResponseInterface
+{
+    /**
+     * @param PsrResponseInterface $response
+     */
+    public function __construct(PsrResponseInterface $response);
+
+    /**
+     * @return PsrResponseInterface
+     */
+    public function getDecoratedResponse();
+}</code></pre>
+
+
+<p>Clients can then take the PSR-7 response they receive, pass it to the decorator,
+and return the decorator.</p>
+<p>To use the PSR-7 response, you will need to add the PSR-7 interfaces to your
+application, if they are not already installed by the client of your choice:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require psr/http-message</code></pre>
+
+
+<h2 id="zend-http">zend-http</h2>
+<p>We also provide a zend-http client decorator,
+<code>Zend\Feed\Reader\Http\ZendHttpClientDecorator</code>:</p>
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
+
+use Zend\Http\Client as HttpClient;
+
+class ZendHttpClientDecorator implements HeaderAwareClientInterface
+{
+    /**
+     * @param HttpClient $client
+     */
+    public function __construct(HttpClient $client);
+
+    /**
+     * @return HttpClient
+     */
+    public function getDecoratedClient();
+}</code></pre>
+
+
+<p>Its <code>get()</code> implementation returns a <code>Response</code> instance seeded from the
+zend-http response returned, including status, body, and headers.</p>
+<p>zend-http is the default implementation assumed by <code>Zend\Feed\Reader\Reader</code>,
+but <em>is not installed by default</em>. You may install it using composer:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-http</code></pre>
+
+
+<h2 id="providing-a-client-to-reader">Providing a client to Reader</h2>
+<p>By default, <code>Zend\Feed\Reader\Reader</code> will lazy load a zend-http client. If you
+have not installed zend-http, however, PHP will raise an error indicating the
+class is not found!</p>
+<p>As such, you have two options:</p>
+<ol>
+<li>Install zend-http: <code>composer require zendframework/zend-http</code>.</li>
+<li>Inject the <code>Reader</code> with your own HTTP client.</li>
+</ol>
+<p>To accomplish the second, you will need an implementation of
+<code>Zend\Feed\Reader\Http\ClientInterface</code> or <code>HeaderAwareClientInterface</code>, and an
+instance of that implementation. Once you do, you can use the static method
+<code>setHttpClient()</code> to inject it.</p>
+<p>As an example, let's say you've created a PSR-7-based implementation named
+<code>My\Http\Psr7FeedClient</code>. You could then do the following:</p>
+<pre class="codehilite"><code class="language-php">use My\Http\Psr7FeedClient;
+use Zend\Feed\Reader\Reader;
+
+Reader::setHttpClient(new Psr7FeedClient());</code></pre>
+
+
+<p>Your client will then be used for all <code>import()</code> and <code>findFeedLinks()</code>
+operations.</p>
+
+<hr />
+
+<nav>
+  <ul class="pager">
+    <li class="previous">
+      <a rel="prev" href="../reader/"><i class="fa fa-arrow-left"></i> Previous</a>
+    </li>
+    <li class="next">
+      <a rel="next" href="../importing/">Next <i class="fa fa-arrow-right"></i></a>
+    </li>
+  </ul>
+</nav></div>
+        
+    </div>
+    <!-- content:end -->
+
+    <footer class="col-md-12 text-center">
+        <hr>
+        <p>
+        <small>Copyright (c) 2016 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a><br></small>
+        </p>
+        <p><small><a href="http://framework.zend.com">Learn more about Zend Framework</a></small></p>
+    </footer>
+
+    <script src="../js/jquery-1.10.2.min.js"></script>
+    <script src="../js/bootstrap-3.0.3.min.js"></script>
+    <script src="../js/prism-zf.js"></script>
+
+    <script>var base_url = '..';</script>
+    <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+    <script src="../js/base.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </body>
+
+</html>

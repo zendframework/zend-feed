@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>None/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/intro/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+        
+    <url>
+     <loc>None/reader/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/http-clients/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/importing/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/find-feeds/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/consuming-rss/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/consuming-atom/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/consuming-atom-entry/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/security/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+    <url>
+     <loc>None/writer/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>None/pubsubhubbub/</loc>
+     <lastmod>2016-02-11</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>
