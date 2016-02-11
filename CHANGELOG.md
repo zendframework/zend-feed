@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.7.0 - 2016-02-11
+
+### Added
+
+- [#21](https://github.com/zendframework/zend-feed/pull/21) edits, revises, and
+  prepares the documentation for publication at https://zendframework.github.io/zend-feed/
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- [#20](https://github.com/zendframework/zend-feed/pull/20) makes the two
+  zend-servicemanager extension manager implementations forwards compatible
+  with version 3, and the overall code base forwards compatible with zend-stdlib
+  v3.
+
 ## 2.6.1 - TBD
 
 ### Added

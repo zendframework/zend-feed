@@ -223,7 +223,7 @@ instance of that implementation. Once you do, you can use the static method
 `setHttpClient()` to inject it.
 
 As an example, let's say you've created a PSR-7-based implementation named
-'My\Http\Psr7FeedClient'. You could then do the following:
+`My\Http\Psr7FeedClient`. You could then do the following:
 
 ```php
 use My\Http\Psr7FeedClient;
