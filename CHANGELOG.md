@@ -2,11 +2,12 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.7.0 - TBD
+## 2.7.0 - 2016-02-11
 
 ### Added
 
-- Nothing.
+- [#21](https://github.com/zendframework/zend-feed/pull/21) edits, revises, and
+  prepares the documentation for publication at https://zendframework.github.io/zend-feed/
 
 ### Deprecated
 
