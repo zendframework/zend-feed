@@ -271,8 +271,8 @@ abstract class AbstractFeed implements Feed\FeedInterface
 
     protected function loadExtensions()
     {
-        $all     = Reader::getExtensions();
-        $manager = Reader::getExtensionManager();
+        $all     = (new Reader())->getExtensions();
+        $manager = (new Reader())->getExtensionManager();
         $feed    = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {

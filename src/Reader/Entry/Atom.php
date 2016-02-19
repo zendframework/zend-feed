@@ -36,7 +36,7 @@ class Atom extends AbstractEntry implements EntryInterface
         // Everyone by now should know XPath indices start from 1 not 0
         $this->xpathQuery = '//atom:entry[' . ($this->entryKey + 1) . ']';
 
-        $manager    = Reader\Reader::getExtensionManager();
+        $manager    = (new Reader\Reader())->getExtensionManager();
         $extensions = ['Atom\Entry', 'Thread\Entry', 'DublinCore\Entry'];
 
         foreach ($extensions as $name) {

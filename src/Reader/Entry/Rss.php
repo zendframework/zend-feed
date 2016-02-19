@@ -44,7 +44,7 @@ class Rss extends AbstractEntry implements EntryInterface
         $this->xpathQueryRss = '//item[' . ($this->entryKey+1) . ']';
         $this->xpathQueryRdf = '//rss:item[' . ($this->entryKey+1) . ']';
 
-        $manager    = Reader\Reader::getExtensionManager();
+        $manager    = (new Reader\Reader())->getExtensionManager();
         $extensions = [
             'DublinCore\Entry',
             'Content\Entry',

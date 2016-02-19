@@ -209,7 +209,7 @@ abstract class AbstractEntry
      */
     protected function _loadExtensions()
     {
-        $all = Reader::getExtensions();
+        $all = (new Reader())->getExtensions();
         $feed = $all['entry'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {

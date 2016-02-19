@@ -25,7 +25,7 @@ class Atom extends AbstractFeed
     public function __construct(DOMDocument $dom, $type = null)
     {
         parent::__construct($dom, $type);
-        $manager = Reader\Reader::getExtensionManager();
+        $manager = (new Reader\Reader())->getExtensionManager();
 
         $atomFeed = $manager->get('Atom\Feed');
         $atomFeed->setDomDocument($dom);

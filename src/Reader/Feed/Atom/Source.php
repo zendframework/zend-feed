@@ -35,7 +35,7 @@ class Source extends Feed\Atom
         $this->registerNamespaces();
         $this->loadExtensions();
 
-        $manager = Reader\Reader::getExtensionManager();
+        $manager = (new Reader\Reader())->getExtensionManager();
         $extensions = ['Atom\Feed', 'DublinCore\Feed'];
 
         foreach ($extensions as $name) {
