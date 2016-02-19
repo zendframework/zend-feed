@@ -21,7 +21,7 @@ interface ReaderImportInterface
      * @return Feed\FeedInterface
      * @throws Exception\RuntimeException
      */
-    public static function import($uri, $etag = null, $lastModified = null);
+    public function import($uri, $etag = null, $lastModified = null);
 
     /**
      * Import a feed from a remote URI
@@ -37,7 +37,7 @@ interface ReaderImportInterface
      * @return self
      * @throws Exception\RuntimeException if response is not an Http\ResponseInterface
      */
-    public static function importRemoteFeed($uri, Http\ClientInterface $client);
+    public function importRemoteFeed($uri, Http\ClientInterface $client);
 
 
     /**
@@ -48,7 +48,7 @@ interface ReaderImportInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public static function importString($string);
+    public function importString($string);
 
 
     /**
@@ -58,5 +58,5 @@ interface ReaderImportInterface
      * @throws Exception\RuntimeException
      * @return Feed\FeedInterface
      */
-    public static function importFile($filename);
+    public function importFile($filename);
 }

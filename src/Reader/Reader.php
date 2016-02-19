@@ -53,27 +53,27 @@ class Reader implements ReaderImportInterface
      *
      * @var CacheStorage
      */
-    protected static $cache = null;
+    protected $cache = null;
 
     /**
      * HTTP client object to use for retrieving feeds
      *
      * @var Http\ClientInterface
      */
-    protected static $httpClient = null;
+    protected $httpClient = null;
 
     /**
      * Override HTTP PUT and DELETE request methods?
      *
      * @var bool
      */
-    protected static $httpMethodOverride = false;
+    protected $httpMethodOverride = false;
 
-    protected static $httpConditionalGet = false;
+    protected $httpConditionalGet = false;
 
-    protected static $extensionManager = null;
+    protected $extensionManager = null;
 
-    protected static $extensions = [
+    protected $extensions = [
         'feed' => [
             'DublinCore\Feed',
             'Atom\Feed'
@@ -92,14 +92,34 @@ class Reader implements ReaderImportInterface
         ]
     ];
 
+
+    /**
+     * Construct a new reader object
+     *
+     * @param  Http\ClientInterface $httpClient
+     * @param  CacheStorage $cache
+     * @return Zend\Feed\Reader\Reader
+     */
+    public function __construct(Http\ClientInterface $httpClient = null, CacheStorage $cache = null)
+    {
+        if (is_null($httpClient)) {
+            $this->setHttpClient(new Http\ZendHttpClientDecorator(new ZendHttp\Client()));
+        } else {
+            $this->setHttpClient($httpClient);
+        }
+        if (!is_null($cache)) {
+            $this->setCache($cache);
+        }
+    }
+
     /**
      * Get the Feed cache
      *
      * @return CacheStorage
      */
-    public static function getCache()
+    public function getCache()
     {
-        return static::$cache;
+        return $this->cache;
     }
 
     /**
@@ -108,9 +128,9 @@ class Reader implements ReaderImportInterface
      * @param  CacheStorage $cache
      * @return void
      */
-    public static function setCache(CacheStorage $cache)
+    public function setCache(CacheStorage $cache)
     {
-        static::$cache = $cache;
+        $this->cache = $cache;
     }
 
     /**
@@ -121,7 +141,7 @@ class Reader implements ReaderImportInterface
      * @param  ZendHttp\Client | Http\ClientInterface $httpClient
      * @return void
      */
-    public static function setHttpClient($httpClient)
+    public function setHttpClient($httpClient)
     {
         if ($httpClient instanceof ZendHttp\Client) {
             $httpClient = new Http\ZendHttpClientDecorator($httpClient);
@@ -130,7 +150,7 @@ class Reader implements ReaderImportInterface
         if (! $httpClient instanceof Http\ClientInterface) {
             throw new InvalidHttpClientException();
         }
-        static::$httpClient = $httpClient;
+        $this->httpClient = $httpClient;
     }
 
     /**
@@ -138,13 +158,9 @@ class Reader implements ReaderImportInterface
      *
      * @return Http\ClientInterface
      */
-    public static function getHttpClient()
+    public function getHttpClient()
     {
-        if (! static::$httpClient) {
-            static::$httpClient = new Http\ZendHttpClientDecorator(new ZendHttp\Client());
-        }
-
-        return static::$httpClient;
+        return $this->httpClient;
     }
 
     /**
@@ -160,7 +176,7 @@ class Reader implements ReaderImportInterface
      * @param  bool $override Whether to override PUT and DELETE.
      * @return void
      */
-    public static function setHttpMethodOverride($override = true)
+    public function setHttpMethodOverride($override = true)
     {
         static::$httpMethodOverride = $override;
     }
@@ -170,7 +186,7 @@ class Reader implements ReaderImportInterface
      *
      * @return bool
      */
-    public static function getHttpMethodOverride()
+    public function getHttpMethodOverride()
     {
         return static::$httpMethodOverride;
     }
@@ -181,7 +197,7 @@ class Reader implements ReaderImportInterface
      * @param  bool $bool
      * @return void
      */
-    public static function useHttpConditionalGet($bool = true)
+    public function useHttpConditionalGet($bool = true)
     {
         static::$httpConditionalGet = $bool;
     }
@@ -195,10 +211,10 @@ class Reader implements ReaderImportInterface
      * @return Feed\FeedInterface
      * @throws Exception\RuntimeException
      */
-    public static function import($uri, $etag = null, $lastModified = null)
+    public function import($uri, $etag = null, $lastModified = null)
     {
-        $cache   = self::getCache();
-        $client  = self::getHttpClient();
+        $cache   = $this->getCache();
+        $client  = $this->getHttpClient();
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);
 
         if (static::$httpConditionalGet && $cache) {
@@ -277,7 +293,7 @@ class Reader implements ReaderImportInterface
      * @return self
      * @throws Exception\RuntimeException if response is not an Http\ResponseInterface
      */
-    public static function importRemoteFeed($uri, Http\ClientInterface $client)
+    public function importRemoteFeed($uri, Http\ClientInterface $client)
     {
         $response = $client->get($uri);
         if (! $response instanceof Http\ResponseInterface) {
@@ -304,7 +320,7 @@ class Reader implements ReaderImportInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public static function importString($string)
+    public function importString($string)
     {
         $trimmed = trim($string);
         if (!is_string($string) || empty($trimmed)) {
@@ -361,7 +377,7 @@ class Reader implements ReaderImportInterface
      * @throws Exception\RuntimeException
      * @return Feed\FeedInterface
      */
-    public static function importFile($filename)
+    public function importFile($filename)
     {
         ErrorHandler::start();
         $feed = file_get_contents($filename);
@@ -379,7 +395,7 @@ class Reader implements ReaderImportInterface
      * @return FeedSet
      * @throws Exception\RuntimeException
      */
-    public static function findFeedLinks($uri)
+    public function findFeedLinks($uri)
     {
         $client   = static::getHttpClient();
         $response = $client->get($uri);
@@ -419,7 +435,7 @@ class Reader implements ReaderImportInterface
      * @throws Exception\InvalidArgumentException
      * @throws Exception\RuntimeException
      */
-    public static function detectType($feed, $specOnly = false)
+    public function detectType($feed, $specOnly = false)
     {
         if ($feed instanceof Feed\AbstractFeed) {
             $dom = $feed->getDomDocument();
@@ -540,9 +556,9 @@ class Reader implements ReaderImportInterface
      *
      * @param ExtensionManagerInterface $extensionManager
      */
-    public static function setExtensionManager(ExtensionManagerInterface $extensionManager)
+    public function setExtensionManager(ExtensionManagerInterface $extensionManager)
     {
-        static::$extensionManager = $extensionManager;
+        $this->extensionManager = $extensionManager;
     }
 
     /**
@@ -550,12 +566,12 @@ class Reader implements ReaderImportInterface
      *
      * @return ExtensionManagerInterface
      */
-    public static function getExtensionManager()
+    public function getExtensionManager()
     {
-        if (!isset(static::$extensionManager)) {
-            static::setExtensionManager(new StandaloneExtensionManager());
+        if (!isset($this->extensionManager)) {
+            $this->setExtensionManager(new StandaloneExtensionManager());
         }
-        return static::$extensionManager;
+        return $this->extensionManager;
     }
 
     /**
@@ -565,7 +581,7 @@ class Reader implements ReaderImportInterface
      * @return void
      * @throws Exception\RuntimeException if unable to resolve Extension class
      */
-    public static function registerExtension($name)
+    public function registerExtension($name)
     {
         $feedName  = $name . '\Feed';
         $entryName = $name . '\Entry';
@@ -581,10 +597,10 @@ class Reader implements ReaderImportInterface
                 . ' using Plugin Loader. Check prefix paths are configured and extension exists.');
         }
         if ($manager->has($feedName)) {
-            static::$extensions['feed'][] = $feedName;
+            $this->extensions['feed'][] = $feedName;
         }
         if ($manager->has($entryName)) {
-            static::$extensions['entry'][] = $entryName;
+            $this->extensions['entry'][] = $entryName;
         }
     }
 
@@ -594,12 +610,12 @@ class Reader implements ReaderImportInterface
      * @param  string $extensionName
      * @return bool
      */
-    public static function isRegistered($extensionName)
+    public function isRegistered($extensionName)
     {
         $feedName  = $extensionName . '\Feed';
         $entryName = $extensionName . '\Entry';
-        if (in_array($feedName, static::$extensions['feed'])
-            || in_array($entryName, static::$extensions['entry'])
+        if (in_array($feedName, $this->extensions['feed'])
+            || in_array($entryName, $this->extensions['entry'])
         ) {
             return true;
         }
@@ -611,41 +627,9 @@ class Reader implements ReaderImportInterface
      *
      * @return array
      */
-    public static function getExtensions()
+    public function getExtensions()
     {
-        return static::$extensions;
-    }
-
-    /**
-     * Reset class state to defaults
-     *
-     * @return void
-     */
-    public static function reset()
-    {
-        static::$cache              = null;
-        static::$httpClient         = null;
-        static::$httpMethodOverride = false;
-        static::$httpConditionalGet = false;
-        static::$extensionManager   = null;
-        static::$extensions         = [
-            'feed' => [
-                'DublinCore\Feed',
-                'Atom\Feed'
-            ],
-            'entry' => [
-                'Content\Entry',
-                'DublinCore\Entry',
-                'Atom\Entry'
-            ],
-            'core' => [
-                'DublinCore\Feed',
-                'Atom\Feed',
-                'Content\Entry',
-                'DublinCore\Entry',
-                'Atom\Entry'
-            ]
-        ];
+        return $this->extensions;
     }
 
     /**
@@ -653,15 +637,15 @@ class Reader implements ReaderImportInterface
      *
      * @return void
      */
-    protected static function registerCoreExtensions()
+    protected function registerCoreExtensions()
     {
-        static::registerExtension('DublinCore');
-        static::registerExtension('Content');
-        static::registerExtension('Atom');
-        static::registerExtension('Slash');
-        static::registerExtension('WellFormedWeb');
-        static::registerExtension('Thread');
-        static::registerExtension('Podcast');
+        $this->registerExtension('DublinCore');
+        $this->registerExtension('Content');
+        $this->registerExtension('Atom');
+        $this->registerExtension('Slash');
+        $this->registerExtension('WellFormedWeb');
+        $this->registerExtension('Thread');
+        $this->registerExtension('Podcast');
     }
 
     /**
@@ -671,7 +655,7 @@ class Reader implements ReaderImportInterface
      * @param array
      * @return array
      */
-    public static function arrayUnique(array $array)
+    public function arrayUnique(array $array)
     {
         foreach ($array as &$value) {
             $value = serialize($value);

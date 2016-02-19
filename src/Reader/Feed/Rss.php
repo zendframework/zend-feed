@@ -29,7 +29,7 @@ class Rss extends AbstractFeed
     {
         parent::__construct($dom, $type);
 
-        $manager = Reader\Reader::getExtensionManager();
+        $manager = (new Reader\Reader())->getExtensionManager();
 
         $feed = $manager->get('DublinCore\Feed');
         $feed->setDomDocument($dom);
