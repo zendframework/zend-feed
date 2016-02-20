@@ -80,7 +80,7 @@ abstract class AbstractEntry
         if ($type !== null) {
             $this->data['type'] = $type;
         } else {
-            $this->data['type'] = Reader::detectType($entry);
+            $this->data['type'] = $this->getReader()->detectType($entry);
         }
         $this->_loadExtensions();
     }
@@ -227,13 +227,13 @@ abstract class AbstractEntry
      */
     protected function _loadExtensions()
     {
-        $all = (new Reader())->getExtensions();
+        $all = $this->Reader()->getExtensions();
         $feed = $all['entry'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
-            $className = Reader::getPluginLoader()->getClassName($extension);
+            $className = $this->getReader()->getPluginLoader()->getClassName($extension);
             $this->extensions[$extension] = new $className(
                 $this->getElement(), $this->entryKey, $this->data['type']
             );

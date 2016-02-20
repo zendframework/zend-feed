@@ -121,7 +121,7 @@ class FeedSet extends ArrayObject
             if (!$this->offsetExists('href')) {
                 return;
             }
-            $feed = Reader::import($this->offsetGet('href'));
+            $feed = $this->getReader()->import($this->offsetGet('href'));
             $this->offsetSet('feed', $feed);
             return $feed;
         }
