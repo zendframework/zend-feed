@@ -23,6 +23,13 @@ abstract class AbstractFeed implements Feed\FeedInterface
     protected $data = [];
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader\Reader
+     */
+    protected $reader = null;
+
+    /**
      * Parsed feed data in the shape of a DOMDocument
      *
      * @var DOMDocument
@@ -70,19 +77,30 @@ abstract class AbstractFeed implements Feed\FeedInterface
      * @param DomDocument $domDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
-    public function __construct(DOMDocument $domDocument, $type = null)
+    public function __construct(Reader\Reader $reader, DOMDocument $domDocument, $type = null)
     {
+        $this->reader      = $reader;
         $this->domDocument = $domDocument;
         $this->xpath = new DOMXPath($this->domDocument);
 
         if ($type !== null) {
             $this->data['type'] = $type;
         } else {
-            $this->data['type'] = Reader::detectType($this->domDocument);
+            $this->data['type'] = $this->getReader()->detectType($this->domDocument);
         }
         $this->registerNamespaces();
         $this->indexEntries();
         $this->loadExtensions();
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
     }
 
     /**
@@ -271,8 +289,8 @@ abstract class AbstractFeed implements Feed\FeedInterface
 
     protected function loadExtensions()
     {
-        $all     = (new Reader())->getExtensions();
-        $manager = (new Reader())->getExtensionManager();
+        $all     = $this->getReader()->getExtensions();
+        $manager = $this->getReader()->getExtensionManager();
         $feed    = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
