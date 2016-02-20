@@ -405,6 +405,7 @@ class Reader implements ReaderImportInterface
         }
         $feedSet = new FeedSet;
         $links = $dom->getElementsByTagName('link');
+        $feedSet->setReader($this);
         $feedSet->addLinks($links, $uri);
         return $feedSet;
     }

@@ -22,6 +22,33 @@ class FeedSet extends ArrayObject
     public $atom = null;
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader
+     */
+    protected $reader = null;
+
+    /**
+     * Set the entry Feed Reader
+     *
+     * @param  Reader $reader
+     */
+    public function setReader(Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
      * Import a DOMNodeList from any document containing a set of links
      * for alternate versions of a document, which will normally refer to
      * RSS/RDF/Atom feeds for the current document.
