@@ -239,7 +239,8 @@ class Reader implements ReaderImportInterface
                 }
             }
             return $this->importString($responseXml);
-        } elseif ($cache) {
+        }
+        if ($cache) {
             $data = $cache->getItem($cacheId);
             if ($data) {
                 return $this->importString($data);
@@ -251,15 +252,15 @@ class Reader implements ReaderImportInterface
             $responseXml = $response->getBody();
             $cache->setItem($cacheId, $responseXml);
             return $this->importString($responseXml);
-        } else {
-            $response = $client->get($uri);
-            if ((int) $response->getStatusCode() !== 200) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
-            }
-            $reader = $this->importString($response->getBody());
-            $reader->setOriginalSourceUri($uri);
-            return $reader;
         }
+
+        $response = $client->get($uri);
+        if ((int) $response->getStatusCode() !== 200) {
+            throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+        }
+        $reader = $this->importString($response->getBody());
+        $reader->setOriginalSourceUri($uri);
+        return $reader;
     }
 
     /**

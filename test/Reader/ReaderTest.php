@@ -205,7 +205,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
-        $links = (new Reader\Reader())->findFeedLinks('http://www.example.com');
+        $links = (new Reader\Reader())->findFeedLinks('http://www.google.com');
         $this->assertEquals(0, count($links));
     }
 
