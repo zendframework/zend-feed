@@ -10,7 +10,6 @@
 namespace Zend\Feed\Reader\Extension\DublinCore;
 
 use DateTime;
-use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
 

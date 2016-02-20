@@ -83,7 +83,6 @@ abstract class AbstractFeed implements FeedInterface
      */
     public function __construct(Reader\Reader $reader, DOMDocument $domDocument, $type = null)
     {
-
         $this->reader      = $reader;
         $this->domDocument = $domDocument;
         $this->xpath       = new DOMXPath($this->domDocument);
