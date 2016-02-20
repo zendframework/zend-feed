@@ -279,6 +279,7 @@ abstract class AbstractFeed implements Feed\FeedInterface
                 continue;
             }
             $plugin = $manager->get($extension);
+            $plugin->setReader($this->getReader());
             $plugin->setDomDocument($this->getDomDocument());
             $plugin->setType($this->data['type']);
             $plugin->setXpath($this->xpath);

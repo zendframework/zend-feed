@@ -36,11 +36,12 @@ class Source extends Feed\Atom
         $this->registerNamespaces();
         $this->loadExtensions();
 
-        $manager = (new Reader\Reader())->getExtensionManager();
+        $manager = $this->getReader()->getExtensionManager();
         $extensions = ['Atom\Feed', 'DublinCore\Feed'];
 
         foreach ($extensions as $name) {
             $extension = $manager->get($name);
+            $extension->setReader($this->getReader());
             $extension->setDomDocument($this->domDocument);
             $extension->setType($this->data['type']);
             $extension->setXpath($this->xpath);

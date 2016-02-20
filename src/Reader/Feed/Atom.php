@@ -28,12 +28,14 @@ class Atom extends AbstractFeed
         $manager = $this->getReader()->getExtensionManager();
 
         $atomFeed = $manager->get('Atom\Feed');
+        $atomFeed->setReader($this->getReader());
         $atomFeed->setDomDocument($dom);
         $atomFeed->setType($this->data['type']);
         $atomFeed->setXpath($this->xpath);
         $this->extensions['Atom\\Feed'] = $atomFeed;
 
         $atomFeed = $manager->get('DublinCore\Feed');
+        $atomFeed->setReader($this->getReader());
         $atomFeed->setDomDocument($dom);
         $atomFeed->setType($this->data['type']);
         $atomFeed->setXpath($this->xpath);

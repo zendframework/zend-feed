@@ -63,7 +63,7 @@ class Feed extends Extension\AbstractFeed
             $authors = new Collection\Author();
         } else {
             $authors = new Collection\Author(
-                (new Reader\Reader())->arrayUnique($authors)
+                $this->getReader()->arrayUnique($authors)
             );
         }
 

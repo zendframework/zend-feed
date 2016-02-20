@@ -82,7 +82,7 @@ abstract class AbstractEntry
         if ($type !== null) {
             $this->data['type'] = $type;
         } elseif ($this->domDocument !== null) {
-            $this->data['type'] = (new Reader\Reader())->detectType($this->domDocument);
+            $this->data['type'] = $this->getReader()->detectType($this->domDocument);
         } else {
             $this->data['type'] = Reader\Reader::TYPE_ANY;
         }
@@ -243,6 +243,7 @@ abstract class AbstractEntry
                 continue;
             }
             $plugin = $manager->get($extension);
+            $plugin->setReader($this->getReader());
             $plugin->setEntryElement($this->getElement());
             $plugin->setEntryKey($this->entryKey);
             $plugin->setType($this->data['type']);

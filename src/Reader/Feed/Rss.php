@@ -32,12 +32,14 @@ class Rss extends AbstractFeed
         $manager = $this->getReader()->getExtensionManager();
 
         $feed = $manager->get('DublinCore\Feed');
+        $feed->setReader($this->getReader());
         $feed->setDomDocument($dom);
         $feed->setType($this->data['type']);
         $feed->setXpath($this->xpath);
         $this->extensions['DublinCore\Feed'] = $feed;
 
         $feed = $manager->get('Atom\Feed');
+        $feed->setReader($this->getReader());
         $feed->setDomDocument($dom);
         $feed->setType($this->data['type']);
         $feed->setXpath($this->xpath);
@@ -122,7 +124,7 @@ class Rss extends AbstractFeed
             $authors = $this->getExtension('Atom')->getAuthors();
         } else {
             $authors = new Reader\Collection\Author(
-                (new Reader\Reader())->arrayUnique($authors)
+                $this->getReader()->arrayUnique($authors)
             );
         }
 

@@ -71,7 +71,7 @@ class Entry extends Extension\AbstractEntry
             $authors = new Collection\Author();
         } else {
             $authors = new Collection\Author(
-                (new Reader\Reader())->arrayUnique($authors)
+                $this->getReader()->arrayUnique($authors)
             );
         }
 
@@ -530,9 +530,6 @@ class Entry extends Extension\AbstractEntry
         if (array_key_exists('source', $this->data)) {
             return $this->data['source'];
         }
-
-        throw new \InvalidArgumentException('xxx');
-        die();
 
         $source = null;
         // TODO: Investigate why _getAtomType() fails here. Is it even needed?
