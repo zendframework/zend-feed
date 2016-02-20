@@ -240,18 +240,15 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsFeedLinksAndNormalisesRelativeUrlsOnUriWithPath()
     {
-        $currClient = (new Reader\Reader())->getHttpClient();
-
         $testAdapter = new TestAdapter();
         $response = new HttpResponse();
         $response->setStatusCode(200);
         $response->setContent('<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>');
         $testAdapter->setResponse($response);
-        (new Reader\Reader())->setHttpClient(new HttpClient(null, ['adapter' => $testAdapter]));
 
-        $links = (new Reader\Reader())->findFeedLinks('http://foo/bar');
-
-        (new Reader\Reader())->setHttpClient($currClient);
+        $reader = new Reader\Reader();
+        $reader->setHttpClient(new HttpClient(null, ['adapter' => $testAdapter]));
+        $links = $reader->findFeedLinks('http://foo/bar');
 
         $this->assertEquals('http://foo/test.rss', $links->rss);
         $this->assertEquals('http://foo/test.atom', $links->atom);
@@ -266,10 +263,12 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         ));
         $manager->setInvokableClass('JungleBooks\Entry', 'My\Extension\JungleBooks\Entry');
         $manager->setInvokableClass('JungleBooks\Feed', 'My\Extension\JungleBooks\Feed');
-        (new Reader\Reader())->setExtensionManager($manager);
-        (new Reader\Reader())->registerExtension('JungleBooks');
 
-        $this->assertTrue((new Reader\Reader())->isRegistered('JungleBooks'));
+        $reader = new Reader\Reader();
+        $reader->setExtensionManager($manager);
+        $reader->registerExtension('JungleBooks');
+
+        $this->assertTrue($reader->isRegistered('JungleBooks'));
     }
 
     /**
@@ -283,7 +282,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $string = file_get_contents($this->feedSamplePath.'/Reader/xxe-atom10.xml');
         $string = str_replace('XXE_URI', $this->feedSamplePath.'/Reader/xxe-info.txt', $string);
         $feed = (new Reader\Reader())->importString($string);
-        //$this->assertEquals('info:', $feed->getTitle());
+        // $this->assertEquals('info:', $feed->getTitle());
     }
 
     public function testImportRemoteFeedMethodPerformsAsExpected()
@@ -320,15 +319,17 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     public function testSetHttpFeedClient()
     {
         $client = $this->getMock('Zend\Feed\Reader\Http\ClientInterface');
-        (new Reader\Reader())->setHttpClient($client);
-        $this->assertEquals($client, (new Reader\Reader())->getHttpClient());
+        $reader = new Reader\Reader();
+        $reader->setHttpClient($client);
+        $this->assertEquals($client, $reader->getHttpClient());
     }
 
     public function testSetHttpClientWillDecorateAZendHttpClientInstance()
     {
         $client = new HttpClient();
-        (new Reader\Reader())->setHttpClient($client);
-        $cached = (new Reader\Reader())->getHttpClient();
+        $reader = new Reader\Reader();
+        $reader->setHttpClient($client);
+        $cached = $reader->getHttpClient();
         $this->assertInstanceOf(ClientInterface::class, $cached);
         $this->assertAttributeSame($client, 'client', $cached);
     }

@@ -102,9 +102,7 @@ class Reader implements ReaderImportInterface
      */
     public function __construct(Http\ClientInterface $httpClient = null, CacheStorage $cache = null)
     {
-        if (is_null($httpClient)) {
-            $this->setHttpClient(new Http\ZendHttpClientDecorator(new ZendHttp\Client()));
-        } else {
+        if (!is_null($httpClient)) {
             $this->setHttpClient($httpClient);
         }
         if (!is_null($cache)) {
@@ -160,6 +158,9 @@ class Reader implements ReaderImportInterface
      */
     public function getHttpClient()
     {
+        if (is_null($this->httpClient)) {
+            return $this->httpClient = new Http\ZendHttpClientDecorator(new ZendHttp\Client());
+        }
         return $this->httpClient;
     }
 
@@ -178,7 +179,7 @@ class Reader implements ReaderImportInterface
      */
     public function setHttpMethodOverride($override = true)
     {
-        static::$httpMethodOverride = $override;
+        $this->httpMethodOverride = $override;
     }
 
     /**
@@ -188,7 +189,7 @@ class Reader implements ReaderImportInterface
      */
     public function getHttpMethodOverride()
     {
-        return static::$httpMethodOverride;
+        return $this->httpMethodOverride;
     }
 
     /**
@@ -199,7 +200,7 @@ class Reader implements ReaderImportInterface
      */
     public function useHttpConditionalGet($bool = true)
     {
-        static::$httpConditionalGet = $bool;
+        $this->httpConditionalGet = $bool;
     }
 
     /**
@@ -397,7 +398,7 @@ class Reader implements ReaderImportInterface
      */
     public function findFeedLinks($uri)
     {
-        $client   = static::getHttpClient();
+        $client   = $this->getHttpClient();
         $response = $client->get($uri);
         if ($response->getStatusCode() !== 200) {
             throw new Exception\RuntimeException("Failed to access $uri, got response code " . $response->getStatusCode());
