@@ -66,11 +66,11 @@ abstract class AbstractEntry
     protected $reader = null;
 
     /**
-     * Constructor
+     * Set the entry Feed Reader
      *
      * @param  Reader\Reader $reader
      */
-    public function __construct(Reader\Reader $reader)
+    public function setReader(Reader\Reader $reader)
     {
         $this->reader = $reader;
     }

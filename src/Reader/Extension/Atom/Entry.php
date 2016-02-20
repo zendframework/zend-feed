@@ -531,6 +531,9 @@ class Entry extends Extension\AbstractEntry
             return $this->data['source'];
         }
 
+        throw new \InvalidArgumentException('xxx');
+        die();
+
         $source = null;
         // TODO: Investigate why _getAtomType() fails here. Is it even needed?
         if ($this->getType() == Reader\Reader::TYPE_ATOM_10) {

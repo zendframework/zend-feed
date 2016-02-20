@@ -28,33 +28,6 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
     ];
 
     /**
-     * Feed Reader instance
-     *
-     * @var Reader
-     */
-    protected $reader = null;
-
-    /**
-     * Constructor
-     *
-     * @param  Reader\Reader $reader
-     */
-    public function __construct(Reader $reader)
-    {
-        $this->reader = $reader;
-    }
-
-    /**
-     * Get Feed Reader
-     *
-     * @return Reader
-     */
-    public function getReader()
-    {
-        return $this->reader;
-    }
-
-    /**
      * Do we have the extension?
      *
      * @param  string $extension
@@ -74,6 +47,6 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
     public function get($extension)
     {
         $class = $this->extensions[$extension];
-        return new $class($this->getReader());
+        return new $class();
     }
 }
