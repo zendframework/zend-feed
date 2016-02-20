@@ -92,23 +92,6 @@ class Reader implements ReaderImportInterface
         ]
     ];
 
-
-    /**
-     * Constructor
-     *
-     * @param  Http\ClientInterface $httpClient
-     * @param  CacheStorage $cache
-     */
-    public function __construct(Http\ClientInterface $httpClient = null, CacheStorage $cache = null)
-    {
-        if (!is_null($httpClient)) {
-            $this->setHttpClient($httpClient);
-        }
-        if (!is_null($cache)) {
-            $this->setCache($cache);
-        }
-    }
-
     /**
      * Get the Feed cache
      *
@@ -217,58 +200,58 @@ class Reader implements ReaderImportInterface
         $client  = $this->getHttpClient();
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);
 
-        // if ($this->httpConditionalGet && $cache) {
-        //     $headers = [];
-        //     $data    = $cache->getItem($cacheId);
-        //     if ($data && $client instanceof Http\HeaderAwareClientInterface) {
-        //         // Only check for ETag and last modified values in the cache
-        //         // if we have a client capable of emitting headers in the first place.
-        //         if ($etag === null) {
-        //             $etag = $cache->getItem($cacheId . '_etag');
-        //         }
-        //         if ($lastModified === null) {
-        //             $lastModified = $cache->getItem($cacheId . '_lastmodified');
-        //         }
-        //         if ($etag) {
-        //             $headers['If-None-Match'] = [$etag];
-        //         }
-        //         if ($lastModified) {
-        //             $headers['If-Modified-Since'] = [$lastModified];
-        //         }
-        //     }
-        //     $response = $client->get($uri, $headers);
-        //     if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
-        //         throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
-        //     }
-        //     if ($response->getStatusCode() == 304) {
-        //         $responseXml = $data;
-        //     } else {
-        //         $responseXml = $response->getBody();
-        //         $cache->setItem($cacheId, $responseXml);
+        if ($this->httpConditionalGet && $cache) {
+            $headers = [];
+            $data    = $cache->getItem($cacheId);
+            if ($data && $client instanceof Http\HeaderAwareClientInterface) {
+                // Only check for ETag and last modified values in the cache
+                // if we have a client capable of emitting headers in the first place.
+                if ($etag === null) {
+                    $etag = $cache->getItem($cacheId . '_etag');
+                }
+                if ($lastModified === null) {
+                    $lastModified = $cache->getItem($cacheId . '_lastmodified');
+                }
+                if ($etag) {
+                    $headers['If-None-Match'] = [$etag];
+                }
+                if ($lastModified) {
+                    $headers['If-Modified-Since'] = [$lastModified];
+                }
+            }
+            $response = $client->get($uri, $headers);
+            if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
+                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+            }
+            if ($response->getStatusCode() == 304) {
+                $responseXml = $data;
+            } else {
+                $responseXml = $response->getBody();
+                $cache->setItem($cacheId, $responseXml);
 
-        //         if ($response instanceof Http\HeaderAwareResponseInterface) {
-        //             if ($response->getHeaderLine('ETag', false)) {
-        //                 $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
-        //             }
-        //             if ($response->getHeaderLine('Last-Modified', false)) {
-        //                 $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
-        //             }
-        //         }
-        //     }
-        //     return $this->importString($responseXml);
-        // } elseif ($cache) {
-        //     $data = $cache->getItem($cacheId);
-        //     if ($data) {
-        //         return $this->importString($data);
-        //     }
-        //     $response = $client->get($uri);
-        //     if ((int) $response->getStatusCode() !== 200) {
-        //         throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
-        //     }
-        //     $responseXml = $response->getBody();
-        //     $cache->setItem($cacheId, $responseXml);
-        //     return $this->importString($responseXml);
-        // } else {
+                if ($response instanceof Http\HeaderAwareResponseInterface) {
+                    if ($response->getHeaderLine('ETag', false)) {
+                        $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
+                    }
+                    if ($response->getHeaderLine('Last-Modified', false)) {
+                        $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
+                    }
+                }
+            }
+            return $this->importString($responseXml);
+        } elseif ($cache) {
+            $data = $cache->getItem($cacheId);
+            if ($data) {
+                return $this->importString($data);
+            }
+            $response = $client->get($uri);
+            if ((int) $response->getStatusCode() !== 200) {
+                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+            }
+            $responseXml = $response->getBody();
+            $cache->setItem($cacheId, $responseXml);
+            return $this->importString($responseXml);
+        } else {
             $response = $client->get($uri);
             if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
@@ -276,7 +259,7 @@ class Reader implements ReaderImportInterface
             $reader = $this->importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
             return $reader;
-        // }
+        }
     }
 
     /**
