@@ -71,7 +71,7 @@ class Entry extends Extension\AbstractEntry
             $authors = new Collection\Author();
         } else {
             $authors = new Collection\Author(
-                Reader\Reader::arrayUnique($authors)
+                (new Reader\Reader())->arrayUnique($authors)
             );
         }
 

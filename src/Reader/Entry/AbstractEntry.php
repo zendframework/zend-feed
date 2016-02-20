@@ -74,7 +74,7 @@ abstract class AbstractEntry
         if ($type !== null) {
             $this->data['type'] = $type;
         } elseif ($this->domDocument !== null) {
-            $this->data['type'] = Reader\Reader::detectType($this->domDocument);
+            $this->data['type'] = (new Reader\Reader())->detectType($this->domDocument);
         } else {
             $this->data['type'] = Reader\Reader::TYPE_ANY;
         }

@@ -354,7 +354,7 @@ class Reader implements ReaderImportInterface
             throw new Exception\RuntimeException($errormsg);
         }
 
-        $type = static::detectType($dom);
+        $type = $this->detectType($dom);
 
         static::registerCoreExtensions();
 
@@ -655,6 +655,7 @@ class Reader implements ReaderImportInterface
      *
      * @param array
      * @return array
+     * @todo migrate somehwre because that's remove trans-classses functionality
      */
     public function arrayUnique(array $array)
     {

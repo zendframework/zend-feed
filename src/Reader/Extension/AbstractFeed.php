@@ -99,7 +99,7 @@ abstract class AbstractFeed
     {
         $type = $this->data['type'];
         if (null === $type) {
-            $type = Reader\Reader::detectType($this->getDomDocument());
+            $type = (new Reader\Reader())->detectType($this->getDomDocument());
             $this->setType($type);
         }
         return $type;

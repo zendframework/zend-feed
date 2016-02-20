@@ -30,7 +30,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('laut.de - news', $feed->getTitle());
@@ -38,7 +38,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals([['name'=>'laut.de']], (array) $feed->getAuthors());
@@ -46,7 +46,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsSingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(['name'=>'laut.de'], $feed->getAuthor());
@@ -54,7 +54,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCopyright()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('Copyright © 2004 laut.de', $feed->getCopyright());
@@ -62,7 +62,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('laut.de: aktuelle News', $feed->getDescription());
@@ -70,7 +70,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLanguage()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(null, $feed->getLanguage());
@@ -78,7 +78,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://www.laut.de', $feed->getLink());
@@ -86,7 +86,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('ISO-8859-1', $feed->getEncoding());
@@ -100,7 +100,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryId()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -109,7 +109,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -118,7 +118,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -127,7 +127,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -141,7 +141,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -150,7 +150,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryContent()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -159,7 +159,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLinks()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -168,7 +168,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -177,7 +177,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -187,7 +187,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();

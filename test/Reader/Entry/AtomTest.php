@@ -64,7 +64,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsIdFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/id/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -73,7 +73,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsIdFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/id/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -85,7 +85,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsDateCreatedFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/datecreated/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -95,7 +95,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDateCreatedFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/datecreated/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -105,7 +105,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDateCreatedWithFractional()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/datecreated/plain/fractional.xml')
         );
         $entry = $feed->current();
@@ -118,7 +118,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsDateModifiedFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/datemodified/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -128,7 +128,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDateModifiedFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/datemodified/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -138,7 +138,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDateModifiedWithFractional()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/datemodified/plain/fractional.xml')
         );
         $entry = $feed->current();
@@ -151,7 +151,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsTitleFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/title/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -160,7 +160,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsTitleFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/title/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -172,7 +172,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAuthorsFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/author/plain/atom03.xml')
         );
 
@@ -191,7 +191,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthorsFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/author/plain/atom10.xml')
         );
 
@@ -213,7 +213,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsAuthorFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/author/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -222,7 +222,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthorFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/author/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -234,7 +234,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsDescriptionFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/description/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -243,7 +243,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDescriptionFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/description/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -255,7 +255,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsEnclosureFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/enclosure/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -270,7 +270,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsEnclosureFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/enclosure/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -288,7 +288,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsContentFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/content/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -301,7 +301,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsContentFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/content/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -314,7 +314,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsContentFromAtom10Html()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/content/plain/atom10_Html.xml')
         );
         $entry = $feed->current();
@@ -327,7 +327,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsContentFromAtom10HtmlCdata()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/content/plain/atom10_HtmlCdata.xml')
         );
         $entry = $feed->current();
@@ -340,7 +340,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsContentFromAtom10XhtmlNamespaced()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/content/plain/atom10_Xhtml.xml')
         );
         $entry = $feed->current();
@@ -352,7 +352,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsLinkFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/link/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -361,7 +361,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLinkFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/link/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -370,7 +370,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLinkFromAtom10_WithNoRelAttribute()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/link/plain/atom10-norel.xml')
         );
         $entry = $feed->current();
@@ -379,7 +379,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsLinkFromAtom10_WithRelativeUrl()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/link/plain/atom10-relative.xml')
         );
         $entry = $feed->current();
@@ -391,7 +391,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsBaseUriFromAtom10_FromFeedElement()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/baseurl/plain/atom10-feedlevel.xml')
         );
         $entry = $feed->current();
@@ -400,7 +400,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsBaseUriFromAtom10_FromEntryElement()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/baseurl/plain/atom10-entrylevel.xml')
         );
         $entry = $feed->current();
@@ -412,7 +412,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsCommentLinkFromAtom03()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/commentlink/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -421,7 +421,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCommentLinkFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/commentlink/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -430,7 +430,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCommentLinkFromAtom10_RelativeLinks()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath . '/commentlink/plain/atom10-relative.xml')
         );
         $entry = $feed->current();
@@ -445,7 +445,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCategoriesFromAtom10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom10.xml')
         );
         $entry = $feed->current();
@@ -455,7 +455,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCategoriesFromAtom03_Atom10Extension()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom03.xml')
         );
         $entry = $feed->current();
@@ -467,7 +467,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCategoriesFromAtom03_Dc10()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/atom03.xml')
         );
         $entry = $feed->current();
@@ -477,7 +477,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCategoriesFromAtom03_Dc11()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/atom03.xml')
         );
         $entry = $feed->current();
@@ -489,7 +489,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCategoriesFromAtom10_None()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/atom10.xml')
         );
         $entry = $feed->current();
@@ -499,7 +499,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsCategoriesFromAtom03_None()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/atom03.xml')
         );
         $entry = $feed->current();

@@ -29,7 +29,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsDomDocumentObject()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -38,7 +38,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDomXpathObject()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -47,7 +47,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsXpathPrefixString()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -56,7 +56,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsDomElementObject()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -65,7 +65,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
 
     public function testSaveXmlOutputsXmlStringForEntry()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -76,7 +76,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsNamedExtension()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -85,7 +85,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnsNullIfExtensionDoesNotExist()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -97,7 +97,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnsEncodingOfFeed()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -109,7 +109,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
      */
     public function testReturnsEncodingOfFeedAsUtf8IfUndefined()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom_noencodingdefined.xml')
         );
         $entry = $feed->current();
@@ -121,7 +121,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     */
     public function testFeedEntryCanDetectFeedType()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
@@ -137,7 +137,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
     */
     public function testFeedEntryCanSetAnyType()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();

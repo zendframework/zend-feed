@@ -125,7 +125,7 @@ class Rss extends AbstractEntry implements EntryInterface
             $authors = $this->getExtension('Atom')->getAuthors();
         } else {
             $authors = new Reader\Collection\Author(
-                Reader\Reader::arrayUnique($authors)
+                (new Reader\Reader())->arrayUnique($authors)
             );
         }
 

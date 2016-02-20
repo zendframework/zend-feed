@@ -82,7 +82,7 @@ abstract class AbstractFeed implements FeedInterface
         if ($type !== null) {
             $this->data['type'] = $type;
         } else {
-            $this->data['type'] = Reader\Reader::detectType($this->domDocument);
+            $this->data['type'] = (new Reader\Reader())->detectType($this->domDocument);
         }
         $this->registerNamespaces();
         $this->indexEntries();
