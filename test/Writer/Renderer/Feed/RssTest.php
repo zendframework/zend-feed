@@ -56,7 +56,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setEncoding('iso-8859-1');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('iso-8859-1', $feed->getEncoding());
     }
 
@@ -64,7 +64,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('UTF-8', $feed->getEncoding());
     }
 
@@ -72,7 +72,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('This is a test feed.', $feed->getTitle());
     }
 
@@ -94,7 +94,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validWriter->setTitle('<>&\'"áéíóú');
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getTitle());
     }
 
@@ -102,7 +102,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('This is a test description.', $feed->getDescription());
     }
 
@@ -124,7 +124,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validWriter->setDescription('<>&\'"áéíóú');
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getDescription());
     }
 
@@ -133,7 +133,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setDateModified(1234567890);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals(1234567890, $feed->getDateModified()->getTimestamp());
     }
 
@@ -149,7 +149,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setLastBuildDate(1234567890);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals(1234567890, $feed->getLastBuildDate()->getTimestamp());
     }
 
@@ -158,7 +158,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setGenerator('FooFeedBuilder', '1.00', 'http://www.example.com');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('FooFeedBuilder 1.00 (http://www.example.com)', $feed->getGenerator());
     }
 
@@ -173,7 +173,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals(
             'Zend_Feed_Writer ' . Version::VERSION . ' (http://framework.zend.com)', $feed->getGenerator());
     }
@@ -183,7 +183,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setLanguage('fr');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('fr', $feed->getLanguage());
     }
 
@@ -198,7 +198,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals(null, $feed->getLanguage());
     }
 
@@ -206,7 +206,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     {
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('http://www.example.com', $feed->getLink());
     }
 
@@ -229,7 +229,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('http://www.example.com/rss', $feed->getFeedLink());
         $xpath = new \DOMXPath($feed->getDomDocument());
         $this->assertEquals(1, $xpath->evaluate('/rss/channel/atom:link[@rel="self"]')->length);
@@ -240,7 +240,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setFeedLink('http://www.example.com/rss', 'rss');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('http://www.example.com/rss', $feed->getFeedLink());
     }
 
@@ -256,7 +256,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setBaseUrl('http://www.example.com/base');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('http://www.example.com/base', $feed->getBaseUrl());
     }
 
@@ -270,7 +270,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                              'uri'  => 'http://www.example.com/joe']);
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $atomFeed->render();
-        $feed   = Reader\Reader::importString($atomFeed->saveXml());
+        $feed   = (new Reader\Reader())->importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals(['name'=> 'Joe'], $feed->getAuthor());
     }
@@ -285,7 +285,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                             'uri'  => 'http://www.example.com/joe']);
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $atomFeed->render();
-        $feed   = Reader\Reader::importString($atomFeed->saveXml());
+        $feed   = (new Reader\Reader())->importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals(['name'=> '<>&\'"áéíóú'], $feed->getAuthor());
     }
@@ -295,7 +295,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setCopyright('Copyright © 2009 Paddy');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('Copyright © 2009 Paddy', $feed->getCopyright());
     }
 
@@ -307,7 +307,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setCopyright('<>&\'"áéíóú');
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getCopyright());
     }
 
@@ -321,7 +321,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            ]);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed     = Reader\Reader::importString($rssFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($rssFeed->saveXml());
         $expected = [
             ['term'   => 'cat_dog',
                   'label'  => 'cat_dog',
@@ -346,7 +346,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                            ]);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed     = Reader\Reader::importString($rssFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($rssFeed->saveXml());
         $expected = [
             ['term'   => '<>&\'"áéíóú',
                   'label'  => '<>&\'"áéíóú',
@@ -365,7 +365,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         );
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed     = Reader\Reader::importString($rssFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($rssFeed->saveXml());
         $expected = [
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         ];
@@ -384,7 +384,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                       ]);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed     = Reader\Reader::importString($rssFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($rssFeed->saveXml());
         $expected = [
             'uri'         => 'http://www.example.com/logo.gif',
             'link'        => 'http://www.example.com',
@@ -405,7 +405,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                       ]);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed     = Reader\Reader::importString($rssFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($rssFeed->saveXml());
         $expected = [
             'uri'   => 'http://www.example.com/logo.gif',
             'link'  => 'http://www.example.com',
@@ -584,7 +584,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setDateCreated(1234567890);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
-        $feed = Reader\Reader::importString($rssFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($rssFeed->saveXml());
         $myDate = new DateTime('@' . 1234567890);
         $this->assertEquals($myDate, $feed->getDateCreated());
     }
