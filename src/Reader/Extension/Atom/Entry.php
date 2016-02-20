@@ -537,7 +537,7 @@ class Entry extends Extension\AbstractEntry
             $list = $this->getXpath()->query($this->getXpathPrefix() . '/atom:source[1]');
             if ($list->length) {
                 $element = $list->item(0);
-                $source = new Reader\Feed\Atom\Source($element, $this->getXpathPrefix());
+                $source = new Reader\Feed\Atom\Source($this->getReader(), $element, $this->getXpathPrefix());
             }
         }
 

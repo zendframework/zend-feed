@@ -27,10 +27,11 @@ class Source extends Feed\Atom
      * @param string $xpathPrefix Passed from parent Entry object
      * @param string $type Nearly always Atom 1.0
      */
-    public function __construct(DOMElement $source, $xpathPrefix, $type = Reader\Reader::TYPE_ATOM_10)
+    public function __construct(Reader\Reader $reader, DOMElement $source, $xpathPrefix, $type = Reader\Reader::TYPE_ATOM_10)
     {
-        $this->domDocument = $source->ownerDocument;
-        $this->xpath = new DOMXPath($this->domDocument);
+        $this->reader       = $reader;
+        $this->domDocument  = $source->ownerDocument;
+        $this->xpath        = new DOMXPath($this->domDocument);
         $this->data['type'] = $type;
         $this->registerNamespaces();
         $this->loadExtensions();

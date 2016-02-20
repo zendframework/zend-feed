@@ -27,6 +27,13 @@ abstract class AbstractFeed implements FeedInterface
     protected $data = [];
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader\Reader
+     */
+    protected $reader = null;
+
+    /**
      * Parsed feed data in the shape of a DOMDocument
      *
      * @var DOMDocument
@@ -74,15 +81,17 @@ abstract class AbstractFeed implements FeedInterface
      * @param DOMDocument $domDocument The DOM object for the feed's XML
      * @param string $type Feed type
      */
-    public function __construct(DOMDocument $domDocument, $type = null)
+    public function __construct(Reader\Reader $reader, DOMDocument $domDocument, $type = null)
     {
+
+        $this->reader      = $reader;
         $this->domDocument = $domDocument;
-        $this->xpath = new DOMXPath($this->domDocument);
+        $this->xpath       = new DOMXPath($this->domDocument);
 
         if ($type !== null) {
             $this->data['type'] = $type;
         } else {
-            $this->data['type'] = (new Reader\Reader())->detectType($this->domDocument);
+            $this->data['type'] = $this->getReader()->detectType($this->domDocument);
         }
         $this->registerNamespaces();
         $this->indexEntries();
@@ -131,14 +140,24 @@ abstract class AbstractFeed implements FeedInterface
     public function current()
     {
         if (substr($this->getType(), 0, 3) == 'rss') {
-            $reader = new Reader\Entry\Rss($this->entries[$this->key()], $this->key(), $this->getType());
+            $reader = new Reader\Entry\Rss($this->getReader(), $this->entries[$this->key()], $this->key(), $this->getType());
         } else {
-            $reader = new Reader\Entry\Atom($this->entries[$this->key()], $this->key(), $this->getType());
+            $reader = new Reader\Entry\Atom($this->getReader(), $this->entries[$this->key()], $this->key(), $this->getType());
         }
 
         $reader->setXpath($this->xpath);
 
         return $reader;
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
     }
 
     /**
@@ -275,8 +294,8 @@ abstract class AbstractFeed implements FeedInterface
 
     protected function loadExtensions()
     {
-        $all     = (new Reader\Reader())->getExtensions();
-        $manager = (new Reader\Reader())->getExtensionManager();
+        $all     = $this->getReader()->getExtensions();
+        $manager = $this->getReader()->getExtensionManager();
         $feed    = $all['feed'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {

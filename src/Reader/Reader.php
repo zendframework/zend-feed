@@ -94,11 +94,10 @@ class Reader implements ReaderImportInterface
 
 
     /**
-     * Construct a new reader object
+     * Constructor
      *
      * @param  Http\ClientInterface $httpClient
      * @param  CacheStorage $cache
-     * @return Zend\Feed\Reader\Reader
      */
     public function __construct(Http\ClientInterface $httpClient = null, CacheStorage $cache = null)
     {
@@ -218,66 +217,66 @@ class Reader implements ReaderImportInterface
         $client  = $this->getHttpClient();
         $cacheId = 'Zend_Feed_Reader_' . md5($uri);
 
-        if (static::$httpConditionalGet && $cache) {
-            $headers = [];
-            $data    = $cache->getItem($cacheId);
-            if ($data && $client instanceof Http\HeaderAwareClientInterface) {
-                // Only check for ETag and last modified values in the cache
-                // if we have a client capable of emitting headers in the first place.
-                if ($etag === null) {
-                    $etag = $cache->getItem($cacheId . '_etag');
-                }
-                if ($lastModified === null) {
-                    $lastModified = $cache->getItem($cacheId . '_lastmodified');
-                }
-                if ($etag) {
-                    $headers['If-None-Match'] = [$etag];
-                }
-                if ($lastModified) {
-                    $headers['If-Modified-Since'] = [$lastModified];
-                }
-            }
-            $response = $client->get($uri, $headers);
-            if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
-            }
-            if ($response->getStatusCode() == 304) {
-                $responseXml = $data;
-            } else {
-                $responseXml = $response->getBody();
-                $cache->setItem($cacheId, $responseXml);
+        // if ($this->httpConditionalGet && $cache) {
+        //     $headers = [];
+        //     $data    = $cache->getItem($cacheId);
+        //     if ($data && $client instanceof Http\HeaderAwareClientInterface) {
+        //         // Only check for ETag and last modified values in the cache
+        //         // if we have a client capable of emitting headers in the first place.
+        //         if ($etag === null) {
+        //             $etag = $cache->getItem($cacheId . '_etag');
+        //         }
+        //         if ($lastModified === null) {
+        //             $lastModified = $cache->getItem($cacheId . '_lastmodified');
+        //         }
+        //         if ($etag) {
+        //             $headers['If-None-Match'] = [$etag];
+        //         }
+        //         if ($lastModified) {
+        //             $headers['If-Modified-Since'] = [$lastModified];
+        //         }
+        //     }
+        //     $response = $client->get($uri, $headers);
+        //     if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
+        //         throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+        //     }
+        //     if ($response->getStatusCode() == 304) {
+        //         $responseXml = $data;
+        //     } else {
+        //         $responseXml = $response->getBody();
+        //         $cache->setItem($cacheId, $responseXml);
 
-                if ($response instanceof Http\HeaderAwareResponseInterface) {
-                    if ($response->getHeaderLine('ETag', false)) {
-                        $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
-                    }
-                    if ($response->getHeaderLine('Last-Modified', false)) {
-                        $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
-                    }
-                }
-            }
-            return static::importString($responseXml);
-        } elseif ($cache) {
-            $data = $cache->getItem($cacheId);
-            if ($data) {
-                return static::importString($data);
-            }
+        //         if ($response instanceof Http\HeaderAwareResponseInterface) {
+        //             if ($response->getHeaderLine('ETag', false)) {
+        //                 $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
+        //             }
+        //             if ($response->getHeaderLine('Last-Modified', false)) {
+        //                 $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
+        //             }
+        //         }
+        //     }
+        //     return $this->importString($responseXml);
+        // } elseif ($cache) {
+        //     $data = $cache->getItem($cacheId);
+        //     if ($data) {
+        //         return $this->importString($data);
+        //     }
+        //     $response = $client->get($uri);
+        //     if ((int) $response->getStatusCode() !== 200) {
+        //         throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+        //     }
+        //     $responseXml = $response->getBody();
+        //     $cache->setItem($cacheId, $responseXml);
+        //     return $this->importString($responseXml);
+        // } else {
             $response = $client->get($uri);
             if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
-            $responseXml = $response->getBody();
-            $cache->setItem($cacheId, $responseXml);
-            return static::importString($responseXml);
-        } else {
-            $response = $client->get($uri);
-            if ((int) $response->getStatusCode() !== 200) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
-            }
-            $reader = static::importString($response->getBody());
+            $reader = $this->importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
             return $reader;
-        }
+        // }
     }
 
     /**
@@ -308,7 +307,7 @@ class Reader implements ReaderImportInterface
         if ((int) $response->getStatusCode() !== 200) {
             throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
         }
-        $reader = static::importString($response->getBody());
+        $reader = $this->importString($response->getBody());
         $reader->setOriginalSourceUri($uri);
         return $reader;
     }
@@ -356,19 +355,19 @@ class Reader implements ReaderImportInterface
 
         $type = $this->detectType($dom);
 
-        static::registerCoreExtensions();
+        $this->registerCoreExtensions();
 
         if (substr($type, 0, 3) == 'rss') {
-            $reader = new Feed\Rss($dom, $type);
-        } elseif (substr($type, 8, 5) == 'entry') {
-            $reader = new Entry\Atom($dom->documentElement, 0, self::TYPE_ATOM_10);
-        } elseif (substr($type, 0, 4) == 'atom') {
-            $reader = new Feed\Atom($dom, $type);
-        } else {
-            throw new Exception\RuntimeException('The URI used does not point to a '
-            . 'valid Atom, RSS or RDF feed that Zend\Feed\Reader can parse.');
+            return new Feed\Rss($this, $dom, $type);
         }
-        return $reader;
+        if (substr($type, 8, 5) == 'entry') {
+            return new Entry\Atom($this, $dom->documentElement, 0, self::TYPE_ATOM_10);
+        }
+        if (substr($type, 0, 4) == 'atom') {
+            return new Feed\Atom($this, $dom, $type);
+        }
+        throw new Exception\RuntimeException('The URI used does not point to a '
+        . 'valid Atom, RSS or RDF feed that Zend\Feed\Reader can parse.');
     }
 
     /**
@@ -386,7 +385,7 @@ class Reader implements ReaderImportInterface
         if ($feed === false) {
             throw new Exception\RuntimeException("File '{$filename}' could not be loaded", 0, $err);
         }
-        return static::importString($feed);
+        return $this->importString($feed);
     }
 
     /**
@@ -570,7 +569,7 @@ class Reader implements ReaderImportInterface
     public function getExtensionManager()
     {
         if (!isset($this->extensionManager)) {
-            $this->setExtensionManager(new StandaloneExtensionManager());
+            $this->setExtensionManager(new StandaloneExtensionManager($this));
         }
         return $this->extensionManager;
     }
@@ -586,8 +585,9 @@ class Reader implements ReaderImportInterface
     {
         $feedName  = $name . '\Feed';
         $entryName = $name . '\Entry';
-        $manager   = $this->getExtensionManager();
-        if (static::isRegistered($name)) {
+        $manager   = $this->getExtensionManager($this);
+
+        if ($this->isRegistered($name)) {
             if ($manager->has($feedName) || $manager->has($entryName)) {
                 return;
             }

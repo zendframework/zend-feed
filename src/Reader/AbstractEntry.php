@@ -23,6 +23,13 @@ abstract class AbstractEntry
     protected $data = [];
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader\Reader
+     */
+    protected $reader = null;
+
+    /**
      * DOM document object
      *
      * @var DOMDocument
@@ -64,8 +71,9 @@ abstract class AbstractEntry
      * @param  int $entryKey
      * @param  null|string $type
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(Reader\Reader $reader, DOMElement $entry, $entryKey, $type = null)
     {
+        $this->reader      = $reader;
         $this->entry       = $entry;
         $this->entryKey    = $entryKey;
         $this->domDocument = $entry->ownerDocument;
@@ -75,6 +83,16 @@ abstract class AbstractEntry
             $this->data['type'] = Reader::detectType($entry);
         }
         $this->_loadExtensions();
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
     }
 
     /**

@@ -38,9 +38,9 @@ class Rss extends AbstractEntry implements EntryInterface
      * @param  string $entryKey
      * @param  string $type
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(Reader\Reader $reader, DOMElement $entry, $entryKey, $type = null)
     {
-        parent::__construct($entry, $entryKey, $type);
+        parent::__construct($reader, $entry, $entryKey, $type);
         $this->xpathQueryRss = '//item[' . ($this->entryKey+1) . ']';
         $this->xpathQueryRdf = '//rss:item[' . ($this->entryKey+1) . ']';
 

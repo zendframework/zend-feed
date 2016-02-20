@@ -25,11 +25,11 @@ class Rss extends AbstractFeed
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(DOMDocument $dom, $type = null)
+    public function __construct(Reader\Reader $reader, DOMDocument $dom, $type = null)
     {
-        parent::__construct($dom, $type);
+        parent::__construct($reader, $dom, $type);
 
-        $manager = (new Reader\Reader())->getExtensionManager();
+        $manager = $this->getReader()->getExtensionManager();
 
         $feed = $manager->get('DublinCore\Feed');
         $feed->setDomDocument($dom);

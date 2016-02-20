@@ -59,6 +59,33 @@ abstract class AbstractEntry
     protected $xpathPrefix = '';
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader
+     */
+    protected $reader = null;
+
+    /**
+     * Constructor
+     *
+     * @param  Reader\Reader $reader
+     */
+    public function __construct(Reader\Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
      * Set the entry DOMElement
      *
      * Has side effect of setting the DOMDocument for the entry.
