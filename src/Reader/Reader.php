@@ -11,7 +11,7 @@ namespace Zend\Feed\Reader;
 
 use DOMDocument;
 use DOMXPath;
-use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Psr\Cache\CacheItemPoolInterface as CacheStorage;
 use Zend\Http as ZendHttp;
 use Zend\Stdlib\ErrorHandler;
 use Zend\Feed\Reader\Exception\InvalidHttpClientException;
@@ -203,14 +203,14 @@ class Reader implements ReaderImportInterface
         if ($this->httpConditionalGet && $cache) {
             $headers = [];
             $data    = $cache->getItem($cacheId);
-            if ($data && $client instanceof Http\HeaderAwareClientInterface) {
+            if ($data->isHit() && $client instanceof Http\HeaderAwareClientInterface) {
                 // Only check for ETag and last modified values in the cache
                 // if we have a client capable of emitting headers in the first place.
                 if ($etag === null) {
-                    $etag = $cache->getItem($cacheId . '_etag');
+                    $etag = $cache->getItem($cacheId . '_etag')->get();
                 }
                 if ($lastModified === null) {
-                    $lastModified = $cache->getItem($cacheId . '_lastmodified');
+                    $lastModified = $cache->getItem($cacheId . '_lastmodified')->get();
                 }
                 if ($etag) {
                     $headers['If-None-Match'] = [$etag];
@@ -224,17 +224,23 @@ class Reader implements ReaderImportInterface
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             if ($response->getStatusCode() == 304) {
-                $responseXml = $data;
+                $responseXml = $data->get();
             } else {
                 $responseXml = $response->getBody();
-                $cache->setItem($cacheId, $responseXml);
+                $item = $cache->getItem($cacheId);
+                $item->set($responseXml);
+                $cache->save($item);
 
                 if ($response instanceof Http\HeaderAwareResponseInterface) {
                     if ($response->getHeaderLine('ETag', false)) {
-                        $cache->setItem($cacheId . '_etag', $response->getHeaderLine('ETag'));
+                        $item = $cache->get($cacheId . '_etag');
+                        $item->set($response->getHeaderLine('ETag'));
+                        $cache->save($item);
                     }
                     if ($response->getHeaderLine('Last-Modified', false)) {
-                        $cache->setItem($cacheId . '_lastmodified', $response->getHeaderLine('Last-Modified'));
+                        $item = $cache->get($cacheId . '_lastmodified');
+                        $item->set($response->getHeaderLine('Last-Modified'));
+                        $cache->save($item);
                     }
                 }
             }
@@ -242,15 +248,19 @@ class Reader implements ReaderImportInterface
         }
         if ($cache) {
             $data = $cache->getItem($cacheId);
-            if ($data) {
-                return $this->importString($data);
+            if ($data->isHit()) {
+                return $this->importString($data->get());
             }
             $response = $client->get($uri);
             if ((int) $response->getStatusCode() !== 200) {
                 throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
             }
             $responseXml = $response->getBody();
-            $cache->setItem($cacheId, $responseXml);
+
+            $item = $cache->get($cacheId);
+            $item->set($responseXml);
+            $cache->save($item);
+
             return $this->importString($responseXml);
         }
 
