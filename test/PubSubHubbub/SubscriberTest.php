@@ -29,13 +29,6 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        if (! class_exists('Zend\Db\Adapter\Adapter')) {
-            $this->markTestSkipped(
-                'Skipping tests against zend-db functionality until that '
-                . 'component is forwards-compatible with zend-servicemanager v3'
-            );
-        }
-
         $client = new HttpClient;
         PubSubHubbub::setHttpClient($client);
         $this->subscriber = new Subscriber;

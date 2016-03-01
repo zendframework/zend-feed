@@ -26,13 +26,6 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testAllOperations()
     {
-        if (! class_exists(DbAdapter::class)) {
-            $this->markTestSkipped(
-                'Skipping tests against zend-db functionality until that '
-                . 'component is forwards-compatible with zend-servicemanager v3'
-            );
-        }
-
         $adapter = $this->initDb();
         $table = new TableGateway('subscription', $adapter);
 
@@ -73,13 +66,6 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
 
     public function testCurrentTimeSetterAndGetter()
     {
-        if (! class_exists(DbAdapter::class)) {
-            $this->markTestSkipped(
-                'Skipping tests against zend-db functionality until that '
-                . 'component is forwards-compatible with zend-servicemanager v3'
-            );
-        }
-
         $now = new DateTime();
         $subscription = new Subscription(new TableGateway('subscription', $this->initDb()));
         $subscription->setNow($now);
