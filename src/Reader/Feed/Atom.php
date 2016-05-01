@@ -104,7 +104,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed creation date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getDateCreated()
     {
@@ -126,7 +126,7 @@ class Atom extends AbstractFeed
     /**
      * Get the feed modification date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getDateModified()
     {

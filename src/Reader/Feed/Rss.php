@@ -173,7 +173,7 @@ class Rss extends AbstractFeed
     /**
      * Get the feed creation date
      *
-     * @return string|null
+     * @return DateTime|null
      */
     public function getDateCreated()
     {
