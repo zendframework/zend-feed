@@ -24,7 +24,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#27](https://github.com/zendframework/zend-feed/pull/27) adds a documentation
+  chapter demonstrating wrapping a PSR-7 client to use with `Zend\Feed\Reader`.
 
 ### Deprecated
 
