@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">  
     <link rel="shortcut icon" href="../img/favicon.ico">
 
-    <title>Security - zend-feed</title>
+    <title>Using PSR-7 Clients - zend-feed</title>
 
     <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
@@ -97,8 +97,8 @@
 
                         
                             
-<li >
-    <a href="../psr7-clients/">Using PSR-7 Clients</a>
+<li class="active">
+    <a href="./">Using PSR-7 Clients</a>
 </li>
 
                         
@@ -133,8 +133,8 @@
 
                         
                             
-<li class="active">
-    <a href="./">Security</a>
+<li >
+    <a href="../security/">Security</a>
 </li>
 
                         
@@ -190,11 +190,17 @@
         <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
     
-        <li class="main active"><a href="#zend92feed92reader-and-security">Zend\Feed\Reader and Security</a></li>
+        <li class="main active"><a href="#using-psr-7-clients">Using PSR-7 Clients</a></li>
         
-            <li><a href="#filtering-data-using-htmlpurifier">Filtering data using HTMLPurifier</a></li>
+            <li><a href="#responses">Responses</a></li>
         
-            <li><a href="#escaping-data-using-zend-escaper">Escaping data using zend-escaper</a></li>
+            <li><a href="#guzzle">Guzzle</a></li>
+        
+            <li><a href="#creating-a-client">Creating a client</a></li>
+        
+            <li><a href="#using-the-client">Using the client</a></li>
+        
+            <li><a href="#references">References</a></li>
         
     
     </ul>
@@ -202,10 +208,10 @@
     
     <ul class="pager hidden-print">
       <li class="previous">
-        <a rel="prev" href="../consuming-atom-entry/"><i class="fa fa-arrow-left"></i> Previous</a>
+        <a rel="prev" href="../http-clients/"><i class="fa fa-arrow-left"></i> Previous</a>
       </li>
       <li class="next">
-        <a rel="next" href="../writer/">Next <i class="fa fa-arrow-right"></i></a>
+        <a rel="next" href="../importing/">Next <i class="fa fa-arrow-right"></i></a>
       </li>
     </ul>
     
@@ -221,157 +227,81 @@
       
     
   
-  <li class="active">Security</li>
+  <li class="active">Using PSR-7 Clients</li>
 </ol>
 
-<h1 id="zend92feed92reader-and-security">Zend\Feed\Reader and Security</h1>
-<p>As with any data coming from a source that is beyond the developer's control,
-special attention needs to be given to securing, validating and filtering that
-data. Similar to data input to our application by users, data coming from RSS
-and Atom feeds should also be considered unsafe and potentially dangerous, as it
-allows the delivery of HTML and <a href="http://tools.ietf.org/html/rfc4287#section-8.1">xHTML</a>.
-Because data validation and filtration is out of <code>Zend\Feed</code>'s scope, this task
-is left for implementation by the developer, by using libraries such as
-zend-escaper for escaping and <a href="http://www.htmlpurifier.org/">HTMLPurifier</a> for
-validating and filtering feed data.</p>
-<p>Escaping and filtering of potentially insecure data is highly recommended before
-outputting it anywhere in our application or before storing that data in some
-storage engine (be it a simple file or a database.).</p>
-<h2 id="filtering-data-using-htmlpurifier">Filtering data using HTMLPurifier</h2>
-<p>Currently, the best available library for filtering and validating (x)HTML data
-in PHP is <a href="http://www.htmlpurifier.org/">HTMLPurifier</a>, and, as such, is the
-recommended tool for this task.  HTMLPurifier works by filtering out all (x)HTML
-from the data, except for the tags and attributes specifically allowed in a
-whitelist, and by checking and fixing nesting of tags, ensuring
-standards-compliant output.</p>
-<p>The following examples will show a basic usage of HTMLPurifier, but developers
-are urged to go through and read <a href="http://www.htmlpurifier.org/docs">HTMLPurifier's documentation</a>.</p>
-<pre class="codehilite"><code class="language-php">// Setting HTMLPurifier's options
-$options = [
-    // Allow only paragraph tags
-    // and anchor tags wit the href attribute
-    [
-        'HTML.Allowed',
-        'p,a[href]'
-    ],
-    // Format end output with Tidy
-    [
-        'Output.TidyFormat',
-        true
-    ],
-    // Assume XHTML 1.0 Strict Doctype
-    [
-        'HTML.Doctype',
-        'XHTML 1.0 Strict'
-    ],
-    // Disable cache, but see note after the example
-    [
-        'Cache.DefinitionImpl',
-        null
-    ]
-];
-
-// Configuring HTMLPurifier
-$config = HTMLPurifier_Config::createDefault();
-foreach ($options as $option) {
-    $config-&gt;set($option[0], $option[1]);
-}
-
-// Creating a HTMLPurifier with it's config
-$purifier = new HTMLPurifier($config);
-
-// Fetch the RSS
-try {
-   $rss = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rss/');
-} catch (Zend\Feed\Exception\Reader\RuntimeException $e) {
-   // feed import failed
-   echo &quot;Exception caught importing feed: {$e-&gt;getMessage()}\n&quot;;
-   exit;
-}
-
-// Initialize the channel data array
-// See that we're cleaning the description with HTMLPurifier
-$channel = [
-   'title'       =&gt; $rss-&gt;getTitle(),
-   'link'        =&gt; $rss-&gt;getLink(),
-   'description' =&gt; $purifier-&gt;purify($rss-&gt;getDescription()),
-   'items'       =&gt; [],
-];
-
-// Loop over each channel item and store relevant data
-// See that we're cleaning the descriptions with HTMLPurifier
-foreach ($rss as $item) {
-   $channel['items'][] = [
-       'title'       =&gt; $item-&gt;getTitle(),
-       'link'        =&gt; $item-&gt;getLink(),
-       'description' =&gt; $purifier-&gt;purify($item-&gt;getDescription()),
-   ];
-}</code></pre>
+<h1 id="using-psr-7-clients">Using PSR-7 Clients</h1>
+<p>As noted in the previous section, you can <a href="../http-clients/#clientinterface-and-headerawareclientinterface">substitute your own HTTP client by implementing the ClientInterface</a>.
+In this section, we'll demonstrate doing so in order to use a client that is
+<a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a>-capable.</p>
+<h2 id="responses">Responses</h2>
+<p>zend-feed provides a facility to assist with generating a
+<code>Zend\Feed\Reader\Response</code> from a PSR-7 <code>ResponseInterface</code> via
+<code>Zend\Feed\Reader\Http\Psr7ResponseDecorator</code>. As such, if you have a
+PSR-7-capable client, you can pass the response to this decorator, and
+immediately return it from your custom client:</p>
+<pre class="codehilite"><code class="language-php">return new Psr7ResponseDecorator($psr7Response);</code></pre>
 
 
-<blockquote>
-<h3 id="tidy-is-required">Tidy is required</h3>
-<p>HTMLPurifier is using the PHP <a href="http://php.net/tidy">Tidy extension</a> to clean
-and repair the final output. If this extension is not available, it will
-silently fail, but its availability has no impact on the library's security.</p>
-<h3 id="caching">Caching</h3>
-<p>For the sake of this example, the HTMLPurifier's cache is disabled, but it is
-recommended to configure caching and use its standalone include file as it can
-improve the performance of HTMLPurifier substantially.</p>
-</blockquote>
-<h2 id="escaping-data-using-zend-escaper">Escaping data using zend-escaper</h2>
-<p>To help prevent XSS attacks, Zend Framework provides the <a href="https://github.com/zendframework/zend-escaper">zend-escaper component</a>,
-which complies to the current <a href="https://www.owasp.org/index.php/XSS_Prevention_Cheat_Sheet">OWASP recommendations</a>,
-and as such, is the recommended tool for escaping HTML tags and attributes,
-Javascript, CSS and URLs before outputing any potentially insecure data to the
-users.</p>
-<pre class="codehilite"><code class="language-php">try {
-    $rss = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rss/');
-} catch (Zend\Feed\Exception\Reader\RuntimeException $e) {
-    // feed import failed
-    echo &quot;Exception caught importing feed: {$e-&gt;getMessage()}\n&quot;;
-    exit;
-}
+<p>We'll do this with our PSR-7 client.</p>
+<h2 id="guzzle">Guzzle</h2>
+<p><a href="http://docs.guzzlephp.org/en/latest/">Guzzle</a> is arguably the most popular HTTP
+client library for PHP, and fully supports PSR-7 since version 5. Let's install
+it:</p>
+<pre class="codehilite"><code class="language-bash">$ composer require guzzlehttp/guzzle</code></pre>
 
-// Validate all URIs
-$linkValidator = new Zend\Validator\Uri;
-$link = null;
-if ($linkValidator-&gt;isValid($rss-&gt;getLink())) {
-    $link = $rss-&gt;getLink();
-}
 
-// Escaper used for escaping data
-$escaper = new Zend\Escaper\Escaper('utf-8');
+<p>We'll use the <code>GuzzleHttp\Client</code> to make our requests to feeds.</p>
+<h2 id="creating-a-client">Creating a client</h2>
+<p>From here, we'll create our client. To do this, we'll create a class that:</p>
+<ul>
+<li>implements <code>Zend\Feed\Reader\Http\ClientInterface</code></li>
+<li>accepts a <code>GuzzleHttp\ClientInterface</code> to its constructor</li>
+<li>uses the Guzzle client to make the request</li>
+<li>returns a zend-feed response decorating the actual PSR-7 response</li>
+</ul>
+<p>The code looks like this:</p>
+<pre class="codehilite"><code class="language-php">use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface as GuzzleClientInterface;
+use Zend\Feed\Reader\Http\ClientInterface as FeedReaderHttpClientInterface;
+use Zend\Feed\Reader\Http\Psr7ResponseDecorator;
 
-// Initialize the channel data array
-$channel = [
-    'title'       =&gt; $escaper-&gt;escapeHtml($rss-&gt;getTitle()),
-    'link'        =&gt; $escaper-&gt;escapeUrl($link),
-    'description' =&gt; $escaper-&gt;escapeHtml($rss-&gt;getDescription()),
-    'items'       =&gt; [],
-];
+class GuzzleClient implements FeedReaderHttpClientInterface
+{
+    /**
+     * @var GuzzleClientInterface
+     */
+    private $client;
 
-// Loop over each channel item and store relevant data
-foreach ($rss as $item) {
-    $link = null;
-    if ($linkValidator-&gt;isValid($rss-&gt;getLink())) {
-        $link = $item-&gt;getLink();
+    /**
+     * @param GuzzleClientInterface|null $client
+     */
+    public function __construct(GuzzleClientInterface $client = null)
+    {
+        $this-&gt;client = $client ?: new Client();
     }
-    $channel['items'][] = [
-        'title'       =&gt; $escaper-&gt;escapeHtml($item-&gt;getTitle()),
-        'link'        =&gt; $escaper-&gt;escapeUrl($link),
-        'description' =&gt; $escaper-&gt;escapeHtml($item-&gt;getDescription()),
-    ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function get($uri)
+    {
+        return new Psr7ResponseDecorator(
+            $this-&gt;client-&gt;request('GET', $uri)
+        );
+    }
 }</code></pre>
 
 
-<p>The feed data is now safe for output to HTML templates. You can, of course, skip
-escaping when simply storing the data persistently, but remember to escape it on
-output later!</p>
-<p>Of course, these are just basic examples, and cannot cover all possible
-scenarios that you, as a developer, can, and most likely will, encounter. Your
-responsibility is to learn what libraries and tools are at your disposal, and
-when and how to use them to secure your web applications.</p>
+<h2 id="using-the-client">Using the client</h2>
+<p>In order to use our new client, we need to tell <code>Zend\Feed\Reader\Reader</code> about
+it:</p>
+<pre class="codehilite"><code class="language-php">Zend\Feed\Reader\Reader::setHttpClient(new GuzzleClient());</code></pre>
+
+
+<p>From this point forward, this custom client will be used to retrieve feeds.</p>
+<h2 id="references">References</h2>
+<p>This chapter is based on <a href="https://www.teqneers.de/2016/05/zendfeedreader-guzzle-and-psr-7/">a blog post by Stefan Gehrig</a>.</p>
 
 <hr />
 
@@ -379,10 +309,10 @@ when and how to use them to secure your web applications.</p>
 <nav>
   <ul class="pager hidden-print">
     <li class="previous">
-      <a rel="prev" href="../consuming-atom-entry/"><i class="fa fa-arrow-left"></i> Previous</a>
+      <a rel="prev" href="../http-clients/"><i class="fa fa-arrow-left"></i> Previous</a>
     </li>
     <li class="next">
-      <a rel="next" href="../writer/">Next <i class="fa fa-arrow-right"></i></a>
+      <a rel="next" href="../importing/">Next <i class="fa fa-arrow-right"></i></a>
     </li>
   </ul>
 </nav>

@@ -4,7 +4,7 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>None/intro/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,49 +21,55 @@
         
     <url>
      <loc>None/reader/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/http-clients/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None/psr7-clients/</loc>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/importing/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/find-feeds/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/consuming-rss/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/consuming-atom/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/consuming-atom-entry/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>None/security/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -72,7 +78,7 @@
     
     <url>
      <loc>None/writer/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -80,7 +86,7 @@
     
     <url>
      <loc>None/pubsubhubbub/</loc>
-     <lastmod>2016-04-12</lastmod>
+     <lastmod>2016-05-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
