@@ -75,7 +75,7 @@ class FeedSet extends ArrayObject
 
                 $link   = sprintf(
                     '%s://%s/%s',
-                    ($uri->getScheme() ?: 'http'),
+                    ($uri->getScheme() ? $uri->getScheme() : 'http'),
                     $uri->getHost(),
                     $this->canonicalizePath($link)
                 );
