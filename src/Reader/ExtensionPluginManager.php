@@ -20,7 +20,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
  * Validation checks that we have an Extension\AbstractEntry or
  * Extension\AbstractFeed.
  */
-class ExtensionPluginManager extends AbstractPluginManager
+class ExtensionPluginManager extends AbstractPluginManager implements ExtensionManagerInterface
 {
     /**
      * Aliases for default set of extension classes
