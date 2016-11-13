@@ -73,11 +73,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getTitle()) {
+        if (! $this->getDataContainer()->getTitle()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
             . ' atom:title element but a title has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
@@ -100,7 +100,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getDescription()) {
+        if (! $this->getDataContainer()->getDescription()) {
             return; // unless src content or base64
         }
         $subtitle = $dom->createElement('summary');
@@ -122,11 +122,11 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getDateModified()) {
+        if (! $this->getDataContainer()->getDateModified()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one'
             . ' atom:updated element but a modification date has not been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
@@ -151,7 +151,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getDateCreated()) {
+        if (! $this->getDataContainer()->getDateCreated()) {
             return;
         }
         $el = $dom->createElement('published');
@@ -172,7 +172,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->container->getAuthors();
-        if ((!$authors || empty($authors))) {
+        if ((! $authors || empty($authors))) {
             /**
              * This will actually trigger an Exception at the feed level if
              * a feed level author is not set.
@@ -211,7 +211,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {
         $data = $this->container->getEnclosure();
-        if ((!$data || empty($data))) {
+        if ((! $data || empty($data))) {
             return;
         }
         $enclosure = $this->dom->createElement('link');
@@ -228,7 +228,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
 
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getLink()) {
+        if (! $this->getDataContainer()->getLink()) {
             return;
         }
         $link = $dom->createElement('link');
@@ -248,14 +248,14 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getId()
-        && !$this->getDataContainer()->getLink()) {
+        if (! $this->getDataContainer()->getId()
+        && ! $this->getDataContainer()->getLink()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one '
             . 'atom:id element, or as an alternative, we can use the same '
             . 'value as atom:link however neither a suitable link nor an '
             . 'id have been set';
             $exception = new Writer\Exception\InvalidArgumentException($message);
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
@@ -263,17 +263,17 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
             }
         }
 
-        if (!$this->getDataContainer()->getId()) {
+        if (! $this->getDataContainer()->getId()) {
             $this->getDataContainer()->setId(
                 $this->getDataContainer()->getLink()
             );
         }
-        if (!Uri::factory($this->getDataContainer()->getId())->isValid()
-            && !preg_match(
+        if (! Uri::factory($this->getDataContainer()->getId())->isValid()
+            && ! preg_match(
                 "#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#",
                 $this->getDataContainer()->getId()
             )
-            && !$this->_validateTagUri($this->getDataContainer()->getId())
+            && ! $this->_validateTagUri($this->getDataContainer()->getId())
         ) {
             throw new Writer\Exception\InvalidArgumentException('Atom 1.0 IDs must be a valid URI/IRI');
         }
@@ -328,20 +328,20 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     protected function _setContent(DOMDocument $dom, DOMElement $root)
     {
         $content = $this->getDataContainer()->getContent();
-        if (!$content && !$this->getDataContainer()->getLink()) {
+        if (! $content && ! $this->getDataContainer()->getLink()) {
             $message = 'Atom 1.0 entry elements MUST contain exactly one '
             . 'atom:content element, or as an alternative, at least one link '
             . 'with a rel attribute of "alternate" to indicate an alternate '
             . 'method to consume the content.';
             $exception = new Writer\Exception\InvalidArgumentException($message);
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
                 return;
             }
         }
-        if (!$content) {
+        if (! $content) {
             return;
         }
         $element = $dom->createElement('content');
@@ -394,7 +394,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
         $categories = $this->getDataContainer()->getCategories();
-        if (!$categories) {
+        if (! $categories) {
             return;
         }
         foreach ($categories as $cat) {
@@ -422,7 +422,7 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
     protected function _setSource(DOMDocument $dom, DOMElement $root)
     {
         $source = $this->getDataContainer()->getSource();
-        if (!$source) {
+        if (! $source) {
             return;
         }
         $renderer = new Renderer\Feed\AtomSource($source);

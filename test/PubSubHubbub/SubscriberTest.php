@@ -112,7 +112,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
     public function testAddsParameter()
     {
         $this->subscriber->setParameter('foo', 'bar');
-        $this->assertEquals(['foo'=>'bar'], $this->subscriber->getParameters());
+        $this->assertEquals(['foo' => 'bar'], $this->subscriber->getParameters());
     }
 
     public function testAddsParametersFromArray()

@@ -39,7 +39,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals([
-            ['name'=>'norm2782', 'uri'=>'http://www.norm2782.com']
+            ['name' => 'norm2782', 'uri' => 'http://www.norm2782.com']
         ], (array) $feed->getAuthors());
     }
 
@@ -48,7 +48,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(['name'=>'norm2782', 'uri'=>'http://www.norm2782.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'norm2782', 'uri' => 'http://www.norm2782.com'], $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -131,7 +131,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals([['name'=>'norm2782', 'uri'=>'http://www.norm2782.com']], (array) $entry->getAuthors());
+        $this->assertEquals([['name' => 'norm2782', 'uri' => 'http://www.norm2782.com']], (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -140,7 +140,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['name'=>'norm2782', 'uri'=>'http://www.norm2782.com'], $entry->getAuthor());
+        $this->assertEquals(['name' => 'norm2782', 'uri' => 'http://www.norm2782.com'], $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()
@@ -188,8 +188,10 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('http://www.norm2782.com/2009/03/wth-reading-books/',
-            $entry->getPermaLink());
+        $this->assertEquals(
+            'http://www.norm2782.com/2009/03/wth-reading-books/',
+            $entry->getPermaLink()
+        );
     }
 
     public function testGetsEntryEncoding()

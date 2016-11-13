@@ -67,7 +67,7 @@ abstract class AbstractCallback implements CallbackInterface
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (!is_array($options)) {
+        if (! is_array($options)) {
             throw new Exception\InvalidArgumentException('Array or Traversable object'
             . 'expected, got ' . gettype($options));
         }
@@ -137,7 +137,7 @@ abstract class AbstractCallback implements CallbackInterface
      */
     public function setHttpResponse($httpResponse)
     {
-        if (!$httpResponse instanceof HttpResponse && !$httpResponse instanceof PhpResponse) {
+        if (! $httpResponse instanceof HttpResponse && ! $httpResponse instanceof PhpResponse) {
             throw new Exception\InvalidArgumentException('HTTP Response object must'
                 . ' implement one of Zend\Feed\Pubsubhubbub\HttpResponse or'
                 . ' Zend\Http\PhpEnvironment\Response');
@@ -214,8 +214,8 @@ abstract class AbstractCallback implements CallbackInterface
                 $callbackUrl = substr($callbackUrl, strlen($schemeAndHttpHost));
             }
         } elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
-            $callbackUrl= $_SERVER['ORIG_PATH_INFO'];
-            if (!empty($_SERVER['QUERY_STRING'])) {
+            $callbackUrl = $_SERVER['ORIG_PATH_INFO'];
+            if (! empty($_SERVER['QUERY_STRING'])) {
                 $callbackUrl .= '?' . $_SERVER['QUERY_STRING'];
             }
         }
@@ -229,7 +229,7 @@ abstract class AbstractCallback implements CallbackInterface
      */
     protected function _getHttpHost()
     {
-        if (!empty($_SERVER['HTTP_HOST'])) {
+        if (! empty($_SERVER['HTTP_HOST'])) {
             return $_SERVER['HTTP_HOST'];
         }
         $scheme = 'http';
@@ -256,16 +256,16 @@ abstract class AbstractCallback implements CallbackInterface
     protected function _getHeader($header)
     {
         $temp = strtoupper(str_replace('-', '_', $header));
-        if (!empty($_SERVER[$temp])) {
+        if (! empty($_SERVER[$temp])) {
             return $_SERVER[$temp];
         }
         $temp = 'HTTP_' . strtoupper(str_replace('-', '_', $header));
-        if (!empty($_SERVER[$temp])) {
+        if (! empty($_SERVER[$temp])) {
             return $_SERVER[$temp];
         }
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
-            if (!empty($headers[$header])) {
+            if (! empty($headers[$header])) {
                 return $headers[$header];
             }
         }

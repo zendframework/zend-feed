@@ -253,15 +253,15 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     public function testAddOwner()
     {
         $feed = new Writer\Feed;
-        $feed->addItunesOwner(['name'=>'joe', 'email'=>'joe@example.com']);
-        $this->assertEquals([['name'=>'joe', 'email'=>'joe@example.com']], $feed->getItunesOwners());
+        $feed->addItunesOwner(['name' => 'joe', 'email' => 'joe@example.com']);
+        $this->assertEquals([['name' => 'joe', 'email' => 'joe@example.com']], $feed->getItunesOwners());
     }
 
     public function testAddOwners()
     {
         $feed = new Writer\Feed;
-        $feed->addItunesOwners([['name'=>'joe', 'email'=>'joe@example.com']]);
-        $this->assertEquals([['name'=>'joe', 'email'=>'joe@example.com']], $feed->getItunesOwners());
+        $feed->addItunesOwners([['name' => 'joe', 'email' => 'joe@example.com']]);
+        $this->assertEquals([['name' => 'joe', 'email' => 'joe@example.com']], $feed->getItunesOwners());
     }
 
     public function testSetSubtitle()

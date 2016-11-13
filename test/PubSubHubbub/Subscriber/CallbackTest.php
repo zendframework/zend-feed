@@ -315,7 +315,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
                     'verify_token'      => hash('sha256', 'cba'),
                     'created_time'      => $t->getTimestamp(),
                     'lease_seconds'     => 1234567,
-                    'subscription_state'=> 'verified',
+                    'subscription_state' => 'verified',
                     'expiration_time'   => $t->add(new DateInterval('PT1234567S'))->format('Y-m-d H:i:s')
                 ]),
                 $this->equalTo(['id' => 'verifytokenkey'])

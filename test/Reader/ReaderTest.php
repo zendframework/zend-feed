@@ -152,7 +152,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testImportsUri()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testImportsUri() requires a network connection');
         }
 
@@ -165,7 +165,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testImportsUriAndThrowsExceptionIfNotAFeed()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testImportsUri() requires a network connection');
         }
 
@@ -174,7 +174,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsFeedLinksAsValueObject()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
 
@@ -185,7 +185,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testCompilesLinksAsArrayObject()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
@@ -197,7 +197,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testFeedSetLoadsFeedObjectWhenFeedArrayKeyAccessed()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
@@ -207,7 +207,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testZeroCountFeedSetReturnedFromEmptyList()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.example.com');
@@ -219,7 +219,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsFeedLinksAndTrimsNewlines()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
 
@@ -232,7 +232,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsFeedLinksAndNormalisesRelativeUrls()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
 

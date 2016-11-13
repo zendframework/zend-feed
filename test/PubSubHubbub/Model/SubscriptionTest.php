@@ -74,8 +74,8 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
 
     protected function initDb()
     {
-        if (!extension_loaded('pdo')
-            || !in_array('sqlite', PDO::getAvailableDrivers())
+        if (! extension_loaded('pdo')
+            || ! in_array('sqlite', PDO::getAvailableDrivers())
         ) {
             $this->markTestSkipped('Test only with pdo_sqlite');
         }

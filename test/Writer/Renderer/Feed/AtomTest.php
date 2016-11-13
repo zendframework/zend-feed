@@ -30,7 +30,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setLink('http://www.example.com');
         $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');
         $this->validWriter->addAuthor(['name' => 'Joe',
-                                             'email'=> 'joe@example.com',
+                                             'email' => 'joe@example.com',
                                              'uri'  => 'http://www.example.com/joe']);
 
         $this->validWriter->setType('atom');
@@ -272,7 +272,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals([
-                                 'email'=> 'joe@example.com',
+                                 'email' => 'joe@example.com',
                                  'name' => 'Joe',
                                  'uri'  => 'http://www.example.com/joe'], $feed->getAuthor());
     }
@@ -285,14 +285,14 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('authors');
         $this->validWriter->addAuthor([
-                                            'email'=> '<>&\'"áéíóú',
+                                            'email' => '<>&\'"áéíóú',
                                             'name' => '<>&\'"áéíóú',
                                             'uri'  => 'http://www.example.com/joe']);
         $atomFeed->render();
         $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals([
-                                 'email'=> '<>&\'"áéíóú',
+                                 'email' => '<>&\'"áéíóú',
                                  'name' => '<>&\'"áéíóú',
                                  'uri'  => 'http://www.example.com/joe'], $feed->getAuthor());
     }
@@ -357,7 +357,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                                                 ['term'   => 'cat_dog',
                                                       'label'  => 'Cats & Dogs',
                                                       'scheme' => 'http://example.com/schema1'],
-                                                ['term'=> 'cat_dog2']
+                                                ['term' => 'cat_dog2']
                                            ]);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
@@ -379,7 +379,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                                                 ['term'   => 'cat_dog',
                                                       'label'  => '<>&\'"áéíóú',
                                                       'scheme' => 'http://example.com/schema1'],
-                                                ['term'=> 'cat_dog2']
+                                                ['term' => 'cat_dog2']
                                            ]);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
@@ -412,7 +412,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     public function testImageCanBeSet()
     {
         $this->validWriter->setImage(
-            ['uri'=> 'http://www.example.com/logo.gif']
+            ['uri' => 'http://www.example.com/logo.gif']
         );
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();

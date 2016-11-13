@@ -23,7 +23,7 @@ class Category extends AbstractCollection
     {
         $categories = [];
         foreach ($this->getIterator() as $element) {
-            if (isset($element['label']) && !empty($element['label'])) {
+            if (isset($element['label']) && ! empty($element['label'])) {
                 $categories[] = $element['label'];
             } else {
                 $categories[] = $element['term'];

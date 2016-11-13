@@ -20,7 +20,7 @@ class Feed extends Extension\AbstractFeed
             return $this->data['dayPopular'];
         }
         $dayPopular = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:dayPopular)');
-        if (!$dayPopular) {
+        if (! $dayPopular) {
             $dayPopular = null;
         }
         $this->data['dayPopular'] = $dayPopular;

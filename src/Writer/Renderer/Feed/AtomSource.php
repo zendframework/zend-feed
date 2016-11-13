@@ -35,7 +35,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
      */
     public function render()
     {
-        if (!$this->container->getEncoding()) {
+        if (! $this->container->getEncoding()) {
             $this->container->setEncoding('UTF-8');
         }
         $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
@@ -75,7 +75,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
      */
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getGenerator()) {
+        if (! $this->getDataContainer()->getGenerator()) {
             return;
         }
 

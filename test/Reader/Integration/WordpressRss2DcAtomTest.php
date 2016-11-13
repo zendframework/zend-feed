@@ -43,7 +43,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals([
-            ['name'=>'norm2782']
+            ['name' => 'norm2782']
         ], (array) $feed->getAuthors());
     }
 
@@ -52,7 +52,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(['name'=>'norm2782'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'norm2782'], $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -135,7 +135,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals([['name'=>'norm2782']], (array) $entry->getAuthors());
+        $this->assertEquals([['name' => 'norm2782']], (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -144,7 +144,7 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['name'=>'norm2782'], $entry->getAuthor());
+        $this->assertEquals(['name' => 'norm2782'], $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()
@@ -192,8 +192,10 @@ class WordpressRss2DcAtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('http://www.norm2782.com/2009/03/wth-reading-books/',
-            $entry->getPermaLink());
+        $this->assertEquals(
+            'http://www.norm2782.com/2009/03/wth-reading-books/',
+            $entry->getPermaLink()
+        );
     }
 
     public function testGetsEntryEncoding()

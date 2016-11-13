@@ -73,13 +73,13 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getDescription()
-        && !$this->getDataContainer()->getTitle()) {
+        if (! $this->getDataContainer()->getDescription()
+        && ! $this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
             . ' title element but a title has not been set. In addition, there'
             . ' is no description as required in the absence of a title.';
             $exception = new Writer\Exception\InvalidArgumentException($message);
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
@@ -102,21 +102,21 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getDescription()
-        && !$this->getDataContainer()->getTitle()) {
+        if (! $this->getDataContainer()->getDescription()
+        && ! $this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
             . ' description element but a description has not been set. In'
             . ' addition, there is no title element as required in the absence'
             . ' of a description.';
             $exception = new Writer\Exception\InvalidArgumentException($message);
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
                 return;
             }
         }
-        if (!$this->getDataContainer()->getDescription()) {
+        if (! $this->getDataContainer()->getDescription()) {
             return;
         }
         $subtitle = $dom->createElement('description');
@@ -134,7 +134,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getDateModified()) {
+        if (! $this->getDataContainer()->getDateModified()) {
             return;
         }
 
@@ -155,10 +155,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getDateCreated()) {
+        if (! $this->getDataContainer()->getDateCreated()) {
             return;
         }
-        if (!$this->getDataContainer()->getDateModified()) {
+        if (! $this->getDataContainer()->getDateModified()) {
             $this->getDataContainer()->setDateModified(
                 $this->getDataContainer()->getDateCreated()
             );
@@ -175,7 +175,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->container->getAuthors();
-        if ((!$authors || empty($authors))) {
+        if ((! $authors || empty($authors))) {
             return;
         }
         foreach ($authors as $data) {
@@ -201,31 +201,31 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {
         $data = $this->container->getEnclosure();
-        if ((!$data || empty($data))) {
+        if ((! $data || empty($data))) {
             return;
         }
-        if (!isset($data['type'])) {
+        if (! isset($data['type'])) {
             $exception = new Writer\Exception\InvalidArgumentException('Enclosure "type" is not set');
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
                 return;
             }
         }
-        if (!isset($data['length'])) {
+        if (! isset($data['length'])) {
             $exception = new Writer\Exception\InvalidArgumentException('Enclosure "length" is not set');
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
                 return;
             }
         }
-        if ((int) $data['length'] < 0 || !ctype_digit((string) $data['length'])) {
+        if ((int) $data['length'] < 0 || ! ctype_digit((string) $data['length'])) {
             $exception = new Writer\Exception\InvalidArgumentException('Enclosure "length" must be an integer'
             . ' indicating the content\'s length in bytes');
-            if (!$this->ignoreExceptions) {
+            if (! $this->ignoreExceptions) {
                 throw $exception;
             } else {
                 $this->exceptions[] = $exception;
@@ -248,7 +248,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getLink()) {
+        if (! $this->getDataContainer()->getLink()) {
             return;
         }
         $link = $dom->createElement('link');
@@ -266,20 +266,21 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      */
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getId()
-        && !$this->getDataContainer()->getLink()) {
+        if (! $this->getDataContainer()->getId()
+        && ! $this->getDataContainer()->getLink()) {
             return;
         }
 
         $id = $dom->createElement('guid');
         $root->appendChild($id);
-        if (!$this->getDataContainer()->getId()) {
+        if (! $this->getDataContainer()->getId()) {
             $this->getDataContainer()->setId(
-                $this->getDataContainer()->getLink());
+                $this->getDataContainer()->getLink()
+            );
         }
         $text = $dom->createTextNode($this->getDataContainer()->getId());
         $id->appendChild($text);
-        if (!Uri::factory($this->getDataContainer()->getId())->isValid()) {
+        if (! Uri::factory($this->getDataContainer()->getId())->isValid()) {
             $id->setAttribute('isPermaLink', 'false');
         }
     }
@@ -294,7 +295,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
     {
         $link = $this->getDataContainer()->getCommentLink();
-        if (!$link) {
+        if (! $link) {
             return;
         }
         $clink = $this->dom->createElement('comments');
@@ -313,7 +314,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
         $categories = $this->getDataContainer()->getCategories();
-        if (!$categories) {
+        if (! $categories) {
             return;
         }
         foreach ($categories as $cat) {

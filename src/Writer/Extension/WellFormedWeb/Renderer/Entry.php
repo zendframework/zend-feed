@@ -49,8 +49,10 @@ class Entry extends Extension\AbstractRenderer
      */
     protected function _appendNamespaces()
     {
-        $this->getRootElement()->setAttribute('xmlns:wfw',
-            'http://wellformedweb.org/CommentAPI/');
+        $this->getRootElement()->setAttribute(
+            'xmlns:wfw',
+            'http://wellformedweb.org/CommentAPI/'
+        );
     }
 
     /**
@@ -63,7 +65,7 @@ class Entry extends Extension\AbstractRenderer
     protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $links = $this->getDataContainer()->getCommentFeedLinks();
-        if (!$links || empty($links)) {
+        if (! $links || empty($links)) {
             return;
         }
         foreach ($links as $link) {

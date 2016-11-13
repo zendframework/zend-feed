@@ -54,8 +54,10 @@ class Feed extends Extension\AbstractRenderer
      */
     protected function _appendNamespaces()
     {
-        $this->getRootElement()->setAttribute('xmlns:atom',
-            'http://www.w3.org/2005/Atom');
+        $this->getRootElement()->setAttribute(
+            'xmlns:atom',
+            'http://www.w3.org/2005/Atom'
+        );
     }
 
     /**
@@ -68,7 +70,7 @@ class Feed extends Extension\AbstractRenderer
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $flinks = $this->getDataContainer()->getFeedLinks();
-        if (!$flinks || empty($flinks)) {
+        if (! $flinks || empty($flinks)) {
             return;
         }
         foreach ($flinks as $type => $href) {
@@ -94,7 +96,7 @@ class Feed extends Extension\AbstractRenderer
     protected function _setHubs(DOMDocument $dom, DOMElement $root)
     {
         $hubs = $this->getDataContainer()->getHubs();
-        if (!$hubs || empty($hubs)) {
+        if (! $hubs || empty($hubs)) {
             return;
         }
         foreach ($hubs as $hubUrl) {

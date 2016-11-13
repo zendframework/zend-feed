@@ -22,7 +22,7 @@ abstract class FeedFactory
      */
     public static function factory($data)
     {
-        if (!is_array($data) && !$data instanceof Traversable) {
+        if (! is_array($data) && ! $data instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Traversable argument; received "%s"',
                 __METHOD__,
@@ -39,11 +39,11 @@ abstract class FeedFactory
             if (method_exists($feed, $method)) {
                 switch ($method) {
                     case 'setfeedlink':
-                        if (!is_array($value)) {
+                        if (! is_array($value)) {
                             // Need an array
                             break;
                         }
-                        if (!array_key_exists('link', $value) || !array_key_exists('type', $value)) {
+                        if (! array_key_exists('link', $value) || ! array_key_exists('type', $value)) {
                             // Need both keys to set this correctly
                             break;
                         }
@@ -88,7 +88,7 @@ abstract class FeedFactory
      */
     protected static function createEntries($entries, Feed $feed)
     {
-        if (!is_array($entries) && !$entries instanceof Traversable) {
+        if (! is_array($entries) && ! $entries instanceof Traversable) {
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s::factory expects the "entries" value to be an array or Traversable; received "%s"',
                 get_called_class(),
@@ -97,7 +97,7 @@ abstract class FeedFactory
         }
 
         foreach ($entries as $data) {
-            if (!is_array($data) && !$data instanceof Traversable && !$data instanceof Entry) {
+            if (! is_array($data) && ! $data instanceof Traversable && ! $data instanceof Entry) {
                 throw new Exception\InvalidArgumentException(sprintf(
                     '%s expects an array, Traversable, or Zend\Feed\Writer\Entry argument; received "%s"',
                     __METHOD__,
@@ -116,7 +116,7 @@ abstract class FeedFactory
             foreach ($data as $key => $value) {
                 $key    = static::convertKey($key);
                 $method = 'set' . $key;
-                if (!method_exists($entry, $method)) {
+                if (! method_exists($entry, $method)) {
                     continue;
                 }
                 $entry->$method($value);

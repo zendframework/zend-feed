@@ -85,7 +85,7 @@ class PubSubHubbub
      */
     public static function getHttpClient()
     {
-        if (!isset(static::$httpClient)) {
+        if (! isset(static::$httpClient)) {
             static::$httpClient = new Http\Client;
         } else {
             static::$httpClient->resetParameters();

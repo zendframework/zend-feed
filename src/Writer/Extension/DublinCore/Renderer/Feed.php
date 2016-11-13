@@ -49,8 +49,10 @@ class Feed extends Extension\AbstractRenderer
      */
     protected function _appendNamespaces()
     {
-        $this->getRootElement()->setAttribute('xmlns:dc',
-            'http://purl.org/dc/elements/1.1/');
+        $this->getRootElement()->setAttribute(
+            'xmlns:dc',
+            'http://purl.org/dc/elements/1.1/'
+        );
     }
 
     /**
@@ -63,7 +65,7 @@ class Feed extends Extension\AbstractRenderer
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
         $authors = $this->getDataContainer()->getAuthors();
-        if (!$authors || empty($authors)) {
+        if (! $authors || empty($authors)) {
             return;
         }
         foreach ($authors as $data) {

@@ -41,14 +41,14 @@ class FeedSet extends ArrayObject
     {
         foreach ($links as $link) {
             if (strtolower($link->getAttribute('rel')) !== 'alternate'
-                || !$link->getAttribute('type') || !$link->getAttribute('href')) {
+                || ! $link->getAttribute('type') || ! $link->getAttribute('href')) {
                 continue;
             }
-            if (!isset($this->rss) && $link->getAttribute('type') == 'application/rss+xml') {
+            if (! isset($this->rss) && $link->getAttribute('type') == 'application/rss+xml') {
                 $this->rss = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
-            } elseif (!isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
+            } elseif (! isset($this->atom) && $link->getAttribute('type') == 'application/atom+xml') {
                 $this->atom = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
-            } elseif (!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
+            } elseif (! isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
                 $this->rdf = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
             }
             $this[] = new static([
@@ -65,7 +65,7 @@ class FeedSet extends ArrayObject
     protected function absolutiseUri($link, $uri = null)
     {
         $linkUri = Uri::factory($link);
-        if (!$linkUri->isAbsolute() or !$linkUri->isValid()) {
+        if (! $linkUri->isAbsolute() or ! $linkUri->isValid()) {
             if ($uri !== null) {
                 $uri = Uri::factory($uri);
 
@@ -80,7 +80,7 @@ class FeedSet extends ArrayObject
                     $this->canonicalizePath($link)
                 );
 
-                if (!Uri::factory($link)->isValid()) {
+                if (! Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }
@@ -117,8 +117,8 @@ class FeedSet extends ArrayObject
      */
     public function offsetGet($offset)
     {
-        if ($offset == 'feed' && !$this->offsetExists('feed')) {
-            if (!$this->offsetExists('href')) {
+        if ($offset == 'feed' && ! $this->offsetExists('feed')) {
+            if (! $this->offsetExists('href')) {
                 return;
             }
             $feed = Reader::import($this->offsetGet('href'));

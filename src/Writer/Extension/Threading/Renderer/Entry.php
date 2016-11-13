@@ -51,8 +51,10 @@ class Entry extends Extension\AbstractRenderer
      */
     protected function _appendNamespaces()
     {
-        $this->getRootElement()->setAttribute('xmlns:thr',
-            'http://purl.org/syndication/thread/1.0');
+        $this->getRootElement()->setAttribute(
+            'xmlns:thr',
+            'http://purl.org/syndication/thread/1.0'
+        );
     }
 
     /**
@@ -65,7 +67,7 @@ class Entry extends Extension\AbstractRenderer
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
     {
         $link = $this->getDataContainer()->getCommentLink();
-        if (!$link) {
+        if (! $link) {
             return;
         }
         $clink = $this->dom->createElement('link');
@@ -90,7 +92,7 @@ class Entry extends Extension\AbstractRenderer
     protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
     {
         $links = $this->getDataContainer()->getCommentFeedLinks();
-        if (!$links || empty($links)) {
+        if (! $links || empty($links)) {
             return;
         }
         foreach ($links as $link) {

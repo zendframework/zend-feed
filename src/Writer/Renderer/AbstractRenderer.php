@@ -146,7 +146,7 @@ class AbstractRenderer
      */
     public function ignoreExceptions($bool = true)
     {
-        if (!is_bool($bool)) {
+        if (! is_bool($bool)) {
             throw new Writer\Exception\InvalidArgumentException('Invalid parameter: $bool. Should be TRUE or FALSE (defaults to TRUE if null)');
         }
         $this->ignoreExceptions = $bool;

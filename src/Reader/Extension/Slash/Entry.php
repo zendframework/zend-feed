@@ -51,7 +51,7 @@ class Entry extends Extension\AbstractEntry
         $stringParade = $this->getData($name);
         $hitParade    = [];
 
-        if (!empty($stringParade)) {
+        if (! empty($stringParade)) {
             $stringParade = explode(',', $stringParade);
 
             foreach ($stringParade as $hit) {
@@ -78,7 +78,7 @@ class Entry extends Extension\AbstractEntry
 
         $comments = $this->getData($name, 'string');
 
-        if (!$comments) {
+        if (! $comments) {
             $this->data[$name] = null;
             return $this->data[$name];
         }
@@ -101,7 +101,7 @@ class Entry extends Extension\AbstractEntry
 
         $data = $this->xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/slash10:' . $name . ')');
 
-        if (!$data) {
+        if (! $data) {
             $data = null;
         }
 

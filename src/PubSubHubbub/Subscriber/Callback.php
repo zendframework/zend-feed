@@ -147,7 +147,7 @@ class Callback extends PubSubHubbub\AbstractCallback
             'hub_verify_token',
         ];
         foreach ($required as $key) {
-            if (!array_key_exists($key, $httpGetData)) {
+            if (! array_key_exists($key, $httpGetData)) {
                 return false;
             }
         }
@@ -157,11 +157,11 @@ class Callback extends PubSubHubbub\AbstractCallback
             return false;
         }
         if ($httpGetData['hub_mode'] == 'subscribe'
-            && !array_key_exists('hub_lease_seconds', $httpGetData)
+            && ! array_key_exists('hub_lease_seconds', $httpGetData)
         ) {
             return false;
         }
-        if (!Uri::factory($httpGetData['hub_topic'])->isValid()) {
+        if (! Uri::factory($httpGetData['hub_topic'])->isValid()) {
             return false;
         }
 
@@ -169,7 +169,7 @@ class Callback extends PubSubHubbub\AbstractCallback
          * Attempt to retrieve any Verification Token Key attached to Callback
          * URL's path by our Subscriber implementation
          */
-        if (!$this->_hasValidVerifyToken($httpGetData)) {
+        if (! $this->_hasValidVerifyToken($httpGetData)) {
             return false;
         }
         return true;
@@ -227,7 +227,7 @@ class Callback extends PubSubHubbub\AbstractCallback
             return false;
         }
         $verifyTokenExists = $this->getStorage()->hasSubscription($verifyTokenKey);
-        if (!$verifyTokenExists) {
+        if (! $verifyTokenExists) {
             return false;
         }
         if ($checkValue) {

@@ -91,12 +91,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = [
-            ['email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs'],
-            ['email'=>'joe@example.com','uri'=>'http://www.example.com'],
-            ['uri'=>'http://www.example.com'],
-            ['email'=>'joe@example.com']
+            ['email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs'],
+            ['email' => 'joe@example.com','uri' => 'http://www.example.com'],
+            ['uri' => 'http://www.example.com'],
+            ['email' => 'joe@example.com']
         ];
 
         $this->assertEquals($authors, (array) $feed->getAuthors());
@@ -109,12 +109,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = [
-            ['email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs'],
-            ['email'=>'joe@example.com','uri'=>'http://www.example.com'],
-            ['uri'=>'http://www.example.com'],
-            ['email'=>'joe@example.com']
+            ['email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs'],
+            ['email' => 'joe@example.com','uri' => 'http://www.example.com'],
+            ['uri' => 'http://www.example.com'],
+            ['email' => 'joe@example.com']
         ];
 
         $this->assertEquals($authors, (array) $feed->getAuthors());
@@ -129,7 +129,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/atom03.xml')
         );
 
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'], $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromAtom10()
@@ -138,7 +138,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/atom10.xml')
         );
 
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'], $feed->getAuthor());
     }
 
     /**
@@ -424,7 +424,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromAtom03_Atom10Extension()
+    public function testGetsCategoriesFromAtom03Atom10Extension()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom03.xml')
@@ -435,7 +435,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.0/1.1 for Atom 0.3
 
-    public function testGetsCategoriesFromAtom03_Dc10()
+    public function testGetsCategoriesFromAtom03Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/atom03.xml')
@@ -444,7 +444,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromAtom03_Dc11()
+    public function testGetsCategoriesFromAtom03Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/atom03.xml')
@@ -455,7 +455,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     // No Categories In Entry
 
-    public function testGetsCategoriesFromAtom10_None()
+    public function testGetsCategoriesFromAtom10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/atom10.xml')
@@ -464,7 +464,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromAtom03_None()
+    public function testGetsCategoriesFromAtom03None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/atom03.xml')
@@ -481,7 +481,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/atom03.xml')
         );
-        $this->assertEquals(['uri'=>'http://www.example.com/logo.gif'], $feed->getImage());
+        $this->assertEquals(['uri' => 'http://www.example.com/logo.gif'], $feed->getImage());
     }
 
     public function testGetsImageFromAtom10()
@@ -489,13 +489,13 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/atom10.xml')
         );
-        $this->assertEquals(['uri'=>'http://www.example.com/logo.gif'], $feed->getImage());
+        $this->assertEquals(['uri' => 'http://www.example.com/logo.gif'], $feed->getImage());
     }
 
     /**
      * Get Image (Unencoded Text) When Missing
      */
-    public function testGetsImageFromAtom03_None()
+    public function testGetsImageFromAtom03None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/atom03.xml')
@@ -503,7 +503,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromAtom10_None()
+    public function testGetsImageFromAtom10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/atom10.xml')

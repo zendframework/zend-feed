@@ -41,7 +41,7 @@ class Deleted
      */
     public function setEncoding($encoding)
     {
-        if (empty($encoding) || !is_string($encoding)) {
+        if (empty($encoding) || ! is_string($encoding)) {
             throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string');
         }
         $this->data['encoding'] = $encoding;
@@ -56,7 +56,7 @@ class Deleted
      */
     public function getEncoding()
     {
-        if (!array_key_exists('encoding', $this->data)) {
+        if (! array_key_exists('encoding', $this->data)) {
             return 'UTF-8';
         }
         return $this->data['encoding'];
@@ -110,7 +110,7 @@ class Deleted
      */
     public function setReference($reference)
     {
-        if (empty($reference) || !is_string($reference)) {
+        if (empty($reference) || ! is_string($reference)) {
             throw new Exception\InvalidArgumentException('Invalid parameter: reference must be a non-empty string');
         }
         $this->data['reference'] = $reference;
@@ -123,7 +123,7 @@ class Deleted
      */
     public function getReference()
     {
-        if (!array_key_exists('reference', $this->data)) {
+        if (! array_key_exists('reference', $this->data)) {
             return;
         }
         return $this->data['reference'];
@@ -142,7 +142,7 @@ class Deleted
             $date = new DateTime();
         } elseif (is_int($date)) {
             $date = new DateTime('@' . $date);
-        } elseif (!$date instanceof DateTime) {
+        } elseif (! $date instanceof DateTime) {
             throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp'
             . ' passed as parameter');
         }
@@ -156,7 +156,7 @@ class Deleted
      */
     public function getWhen()
     {
-        if (!array_key_exists('when', $this->data)) {
+        if (! array_key_exists('when', $this->data)) {
             return;
         }
         return $this->data['when'];
@@ -172,16 +172,16 @@ class Deleted
     public function setBy(array $by)
     {
         $author = [];
-        if (!array_key_exists('name', $by)
+        if (! array_key_exists('name', $by)
             || empty($by['name'])
-            || !is_string($by['name'])
+            || ! is_string($by['name'])
         ) {
             throw new Exception\InvalidArgumentException('Invalid parameter: author array must include a'
             . ' "name" key with a non-empty string value');
         }
         $author['name'] = $by['name'];
         if (isset($by['email'])) {
-            if (empty($by['email']) || !is_string($by['email'])) {
+            if (empty($by['email']) || ! is_string($by['email'])) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "email" array'
                 . ' value must be a non-empty string');
             }
@@ -189,8 +189,8 @@ class Deleted
         }
         if (isset($by['uri'])) {
             if (empty($by['uri'])
-                || !is_string($by['uri'])
-                || !Uri::factory($by['uri'])->isValid()
+                || ! is_string($by['uri'])
+                || ! Uri::factory($by['uri'])->isValid()
             ) {
                 throw new Exception\InvalidArgumentException('Invalid parameter: "uri" array value must'
                  . ' be a non-empty string and valid URI/IRI');
@@ -207,7 +207,7 @@ class Deleted
      */
     public function getBy()
     {
-        if (!array_key_exists('by', $this->data)) {
+        if (! array_key_exists('by', $this->data)) {
             return;
         }
         return $this->data['by'];
@@ -228,7 +228,7 @@ class Deleted
      */
     public function getComment()
     {
-        if (!array_key_exists('comment', $this->data)) {
+        if (! array_key_exists('comment', $this->data)) {
             return;
         }
         return $this->data['comment'];

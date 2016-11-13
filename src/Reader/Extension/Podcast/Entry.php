@@ -28,7 +28,7 @@ class Entry extends Extension\AbstractEntry
 
         $author = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:author)');
 
-        if (!$author) {
+        if (! $author) {
             $author = null;
         }
 
@@ -50,7 +50,7 @@ class Entry extends Extension\AbstractEntry
 
         $block = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:block)');
 
-        if (!$block) {
+        if (! $block) {
             $block = null;
         }
 
@@ -72,7 +72,7 @@ class Entry extends Extension\AbstractEntry
 
         $duration = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:duration)');
 
-        if (!$duration) {
+        if (! $duration) {
             $duration = null;
         }
 
@@ -94,7 +94,7 @@ class Entry extends Extension\AbstractEntry
 
         $explicit = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:explicit)');
 
-        if (!$explicit) {
+        if (! $explicit) {
             $explicit = null;
         }
 
@@ -116,7 +116,7 @@ class Entry extends Extension\AbstractEntry
 
         $keywords = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:keywords)');
 
-        if (!$keywords) {
+        if (! $keywords) {
             $keywords = null;
         }
 
@@ -138,7 +138,7 @@ class Entry extends Extension\AbstractEntry
 
         $subtitle = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:subtitle)');
 
-        if (!$subtitle) {
+        if (! $subtitle) {
             $subtitle = null;
         }
 
@@ -160,7 +160,7 @@ class Entry extends Extension\AbstractEntry
 
         $summary = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:summary)');
 
-        if (!$summary) {
+        if (! $summary) {
             $summary = null;
         }
 
