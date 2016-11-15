@@ -189,7 +189,9 @@ class Entry
         } elseif (is_int($date)) {
             $date = new DateTime('@' . $date);
         } elseif (! $date instanceof DateTime) {
-            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp passed as parameter');
+            throw new Exception\InvalidArgumentException(
+                'Invalid DateTime object or UNIX Timestamp passed as parameter'
+            );
         }
         $this->data['dateCreated'] = $date;
 
@@ -210,7 +212,9 @@ class Entry
         } elseif (is_int($date)) {
             $date = new DateTime('@' . $date);
         } elseif (! $date instanceof DateTime) {
-            throw new Exception\InvalidArgumentException('Invalid DateTime object or UNIX Timestamp passed as parameter');
+            throw new Exception\InvalidArgumentException(
+                'Invalid DateTime object or UNIX Timestamp passed as parameter'
+            );
         }
         $this->data['dateModified'] = $date;
 
@@ -261,7 +265,9 @@ class Entry
     public function setLink($link)
     {
         if (empty($link) || ! is_string($link) || ! Uri::factory($link)->isValid()) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: parameter must be a non-empty string and valid URI/IRI'
+            );
         }
         $this->data['link'] = $link;
 
@@ -278,7 +284,9 @@ class Entry
     public function setCommentCount($count)
     {
         if (! is_numeric($count) || (int) $count != $count || (int) $count < 0) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: "count" must be a positive integer number or zero');
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: "count" must be a positive integer number or zero'
+            );
         }
         $this->data['commentCount'] = (int) $count;
 
@@ -295,7 +303,9 @@ class Entry
     public function setCommentLink($link)
     {
         if (empty($link) || ! is_string($link) || ! Uri::factory($link)->isValid()) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: "link" must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: "link" must be a non-empty string and valid URI/IRI'
+            );
         }
         $this->data['commentLink'] = $link;
 
@@ -312,7 +322,9 @@ class Entry
     public function setCommentFeedLink(array $link)
     {
         if (! isset($link['uri']) || ! is_string($link['uri']) || ! Uri::factory($link['uri'])->isValid()) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: "link" must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: "link" must be a non-empty string and valid URI/IRI'
+            );
         }
         if (! isset($link['type']) || ! in_array($link['type'], ['atom', 'rss', 'rdf'])) {
             throw new Exception\InvalidArgumentException('Invalid parameter: "type" must be one'
@@ -755,8 +767,10 @@ class Entry
      *
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _loadExtensions()
     {
+        // @codingStandardsIgnoreEnd
         $all     = Writer::getExtensions();
         $manager = Writer::getExtensionManager();
         $exts    = $all['entry'];

@@ -222,7 +222,9 @@ class Reader implements ReaderImportInterface
             }
             $response = $client->get($uri, $headers);
             if ($response->getStatusCode() !== 200 && $response->getStatusCode() !== 304) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException(
+                    'Feed failed to load, got response code ' . $response->getStatusCode()
+                );
             }
             if ($response->getStatusCode() == 304) {
                 $responseXml = $data;
@@ -247,7 +249,9 @@ class Reader implements ReaderImportInterface
             }
             $response = $client->get($uri);
             if ((int) $response->getStatusCode() !== 200) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException(
+                    'Feed failed to load, got response code ' . $response->getStatusCode()
+                );
             }
             $responseXml = $response->getBody();
             $cache->setItem($cacheId, $responseXml);
@@ -255,7 +259,9 @@ class Reader implements ReaderImportInterface
         } else {
             $response = $client->get($uri);
             if ((int) $response->getStatusCode() !== 200) {
-                throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+                throw new Exception\RuntimeException(
+                    'Feed failed to load, got response code ' . $response->getStatusCode()
+                );
             }
             $reader = static::importString($response->getBody());
             $reader->setOriginalSourceUri($uri);
@@ -289,7 +295,9 @@ class Reader implements ReaderImportInterface
         }
 
         if ((int) $response->getStatusCode() !== 200) {
-            throw new Exception\RuntimeException('Feed failed to load, got response code ' . $response->getStatusCode());
+            throw new Exception\RuntimeException(
+                'Feed failed to load, got response code ' . $response->getStatusCode()
+            );
         }
         $reader = static::importString($response->getBody());
         $reader->setOriginalSourceUri($uri);
@@ -384,7 +392,9 @@ class Reader implements ReaderImportInterface
         $client   = static::getHttpClient();
         $response = $client->get($uri);
         if ($response->getStatusCode() !== 200) {
-            throw new Exception\RuntimeException("Failed to access $uri, got response code " . $response->getStatusCode());
+            throw new Exception\RuntimeException(
+                "Failed to access $uri, got response code " . $response->getStatusCode()
+            );
         }
         $responseHtml = $response->getBody();
         $libxmlErrflag = libxml_use_internal_errors(true);

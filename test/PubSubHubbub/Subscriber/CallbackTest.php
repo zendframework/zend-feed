@@ -22,6 +22,7 @@ use ArrayObject;
  */
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
+    // @codingStandardsIgnoreStart
     /** @var CallbackSubscriber */
     public $_callback;
     /** @var \Zend\Db\Adapter\Adapter|\PHPUnit_Framework_MockObject_MockObject */
@@ -32,6 +33,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public $_rowset;
     /** @var array */
     public $_get;
+    // @codingStandardsIgnoreEnd
     /** @var DateTime */
     public $now;
 
@@ -458,8 +460,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_callback->getHttpResponse()->getHeader('X-Hub-On-Behalf-Of'));
     }
 
+    // @codingStandardsIgnoreStart
     protected function _getCleanMock($className)
     {
+        // @codingStandardsIgnoreEnd
         $class       = new \ReflectionClass($className);
         $methods     = $class->getMethods();
         $stubMethods = [];

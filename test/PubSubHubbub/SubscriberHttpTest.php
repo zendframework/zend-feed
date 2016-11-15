@@ -98,8 +98,10 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($subscriptionRecord['subscription_state'], PubSubHubbub::SUBSCRIPTION_TODELETE);
     }
 
+    // @codingStandardsIgnoreStart
     protected function _getCleanMock($className)
     {
+        // @codingStandardsIgnoreEnd
         $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = [];

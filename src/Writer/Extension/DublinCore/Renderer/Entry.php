@@ -47,8 +47,10 @@ class Entry extends Extension\AbstractRenderer
      *
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _appendNamespaces()
     {
+        // @codingStandardsIgnoreEnd
         $this->getRootElement()->setAttribute(
             'xmlns:dc',
             'http://purl.org/dc/elements/1.1/'
@@ -62,8 +64,10 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $authors = $this->getDataContainer()->getAuthors();
         if (! $authors || empty($authors)) {
             return;

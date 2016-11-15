@@ -218,7 +218,10 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/author/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'], $entry->getAuthor());
+        $this->assertEquals(
+            ['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'],
+            $entry->getAuthor()
+        );
     }
 
     public function testGetsAuthorFromAtom10()
@@ -227,7 +230,10 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/author/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'], $entry->getAuthor());
+        $this->assertEquals(
+            ['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'],
+            $entry->getAuthor()
+        );
     }
 
     /**

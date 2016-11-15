@@ -149,7 +149,10 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $entry = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/author/atom10.xml')
         );
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'], $entry->getAuthor());
+        $this->assertEquals(
+            ['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'],
+            $entry->getAuthor()
+        );
     }
 
     /**

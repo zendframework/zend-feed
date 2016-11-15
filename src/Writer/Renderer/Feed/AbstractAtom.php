@@ -37,8 +37,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setLanguage(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if ($this->getDataContainer()->getLanguage()) {
             $root->setAttribute('xml:lang', $this->getDataContainer()
                 ->getLanguage());
@@ -53,8 +55,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getTitle()) {
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
             . ' atom:title element but a title has not been set';
@@ -81,8 +85,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDescription()) {
             return;
         }
@@ -101,8 +107,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDateModified()) {
             $message = 'Atom 1.0 feed elements MUST contain exactly one'
             . ' atom:updated element but a modification date has not been set';
@@ -130,8 +138,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getGenerator()) {
             $this->getDataContainer()->setGenerator(
                 'Zend_Feed_Writer',
@@ -160,8 +170,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getLink()) {
             return;
         }
@@ -180,8 +192,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setFeedLinks(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $flinks = $this->getDataContainer()->getFeedLinks();
         if (! $flinks || ! array_key_exists('atom', $flinks)) {
             $message = 'Atom 1.0 feed elements SHOULD contain one atom:link '
@@ -214,8 +228,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $authors = $this->container->getAuthors();
         if (! $authors || empty($authors)) {
             /**
@@ -255,8 +271,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getId()
         && ! $this->getDataContainer()->getLink()) {
             $message = 'Atom 1.0 feed elements MUST contain exactly one '
@@ -290,8 +308,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCopyright(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $copyright = $this->getDataContainer()->getCopyright();
         if (! $copyright) {
             return;
@@ -309,8 +329,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setImage(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $image = $this->getDataContainer()->getImage();
         if (! $image) {
             return;
@@ -328,8 +350,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDateCreated()) {
             return;
         }
@@ -347,8 +371,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $baseUrl = $this->getDataContainer()->getBaseUrl();
         if (! $baseUrl) {
             return;
@@ -363,8 +389,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setHubs(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $hubs = $this->getDataContainer()->getHubs();
         if (! $hubs) {
             return;
@@ -384,8 +412,10 @@ class AbstractAtom extends Renderer\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $categories = $this->getDataContainer()->getCategories();
         if (! $categories) {
             return;

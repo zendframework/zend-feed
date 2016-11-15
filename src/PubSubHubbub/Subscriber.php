@@ -602,8 +602,10 @@ class Subscriber
      * @return void
      * @throws Exception\RuntimeException
      */
+    // @codingStandardsIgnoreStart
     protected function _doRequest($mode)
     {
+        // @codingStandardsIgnoreEnd
         $client = $this->_getHttpClient();
         $hubs   = $this->getHubUrls();
         if (empty($hubs)) {
@@ -648,8 +650,10 @@ class Subscriber
      *
      * @return \Zend\Http\Client
      */
+    // @codingStandardsIgnoreStart
     protected function _getHttpClient()
     {
+        // @codingStandardsIgnoreEnd
         $client = PubSubHubbub::getHttpClient();
         $client->setMethod(HttpRequest::METHOD_POST);
         $client->setOptions(['useragent' => 'Zend_Feed_Pubsubhubbub_Subscriber/'
@@ -666,8 +670,10 @@ class Subscriber
      * @return string
      * @throws Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _getRequestParameters($hubUrl, $mode)
     {
+        // @codingStandardsIgnoreEnd
         if (! in_array($mode, ['subscribe', 'unsubscribe'])) {
             throw new Exception\InvalidArgumentException('Invalid mode specified: "'
                 . $mode . '" which should have been "subscribe" or "unsubscribe"');
@@ -738,7 +744,9 @@ class Subscriber
             'verify_token'       => hash('sha256', $params['hub.verify_token']),
             'secret'             => null,
             'expiration_time'    => $expires,
+            // @codingStandardsIgnoreStart
             'subscription_state' => ($mode == 'unsubscribe') ? PubSubHubbub::SUBSCRIPTION_TODELETE : PubSubHubbub::SUBSCRIPTION_NOTVERIFIED,
+            // @codingStandardsIgnoreEnd
         ];
         $this->getStorage()->setSubscription($data);
 
@@ -754,8 +762,10 @@ class Subscriber
      *
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _generateVerifyToken()
     {
+        // @codingStandardsIgnoreEnd
         if (! empty($this->testStaticToken)) {
             return $this->testStaticToken;
         }
@@ -770,8 +780,10 @@ class Subscriber
      * @param string $hubUrl The Hub Server URL for which this token will apply
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _generateSubscriptionKey(array $params, $hubUrl)
     {
+        // @codingStandardsIgnoreEnd
         $keyBase = $params['hub.topic'] . $hubUrl;
         $key     = md5($keyBase);
 
@@ -784,8 +796,10 @@ class Subscriber
      * @param  array $params
      * @return array
      */
+    // @codingStandardsIgnoreStart
     protected function _urlEncode(array $params)
     {
+        // @codingStandardsIgnoreEnd
         $encoded = [];
         foreach ($params as $key => $value) {
             if (is_array($value)) {
@@ -809,8 +823,10 @@ class Subscriber
      * @param  array $params
      * @return array
      */
+    // @codingStandardsIgnoreStart
     protected function _toByteValueOrderedString(array $params)
     {
+        // @codingStandardsIgnoreEnd
         $return = [];
         uksort($params, 'strnatcmp');
         foreach ($params as $key => $value) {

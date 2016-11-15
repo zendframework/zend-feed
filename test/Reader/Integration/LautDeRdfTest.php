@@ -146,7 +146,11 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.', $entry->getDescription());
+        $this->assertEquals(
+            'Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". '
+            . 'Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.',
+            $entry->getDescription()
+        );
     }
 
     public function testGetsEntryContent()
@@ -155,7 +159,11 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.', $entry->getContent());
+        $this->assertEquals(
+            'Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". '
+            . 'Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.',
+            $entry->getContent()
+        );
     }
 
     public function testGetsEntryLinks()

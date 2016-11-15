@@ -140,7 +140,9 @@ class HttpResponse
     {
         $ok = headers_sent($file, $line);
         if ($ok && $throw) {
-            throw new Exception\RuntimeException('Cannot send headers; headers already sent in ' . $file . ', line ' . $line);
+            throw new Exception\RuntimeException(
+                'Cannot send headers; headers already sent in ' . $file . ', line ' . $line
+            );
         }
         return ! $ok;
     }
@@ -201,8 +203,10 @@ class HttpResponse
      * @param  string $name
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _normalizeHeader($name)
     {
+        // @codingStandardsIgnoreEnd
         $filtered = str_replace(['-', '_'], ' ', (string) $name);
         $filtered = ucwords(strtolower($filtered));
         $filtered = str_replace(' ', '-', $filtered);

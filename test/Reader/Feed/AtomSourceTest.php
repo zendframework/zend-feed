@@ -117,7 +117,10 @@ class AtomSourceTest extends \PHPUnit_Framework_TestCase
         );
         $source = $feed->current()->getSource();
 
-        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'], $feed->getAuthor());
+        $this->assertEquals(
+            ['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'],
+            $feed->getAuthor()
+        );
     }
 
     /**

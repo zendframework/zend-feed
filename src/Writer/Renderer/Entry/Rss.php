@@ -71,8 +71,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDescription()
         && ! $this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
@@ -100,8 +102,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDescription()
         && ! $this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 entry elements SHOULD contain exactly one'
@@ -132,8 +136,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDateModified()) {
             return;
         }
@@ -153,8 +159,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDateCreated()) {
             return;
         }
@@ -172,8 +180,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $authors = $this->container->getAuthors();
         if ((! $authors || empty($authors))) {
             return;
@@ -198,8 +208,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setEnclosure(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $data = $this->container->getEnclosure();
         if ((! $data || empty($data))) {
             return;
@@ -246,8 +258,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getLink()) {
             return;
         }
@@ -264,8 +278,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setId(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getId()
         && ! $this->getDataContainer()->getLink()) {
             return;
@@ -292,8 +308,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $link = $this->getDataContainer()->getCommentLink();
         if (! $link) {
             return;
@@ -311,8 +329,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $categories = $this->getDataContainer()->getCategories();
         if (! $categories) {
             return;

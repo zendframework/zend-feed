@@ -99,8 +99,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setLanguage(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $lang = $this->getDataContainer()->getLanguage();
         if (! $lang) {
             return;
@@ -118,8 +120,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setTitle(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getTitle()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' title element but a title has not been set';
@@ -146,8 +150,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setDescription(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDescription()) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
             . ' description element but one has not been set';
@@ -172,8 +178,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setDateModified(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDateModified()) {
             return;
         }
@@ -193,8 +201,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getGenerator()) {
             $this->getDataContainer()->setGenerator(
                 'Zend_Feed_Writer',
@@ -225,8 +235,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setLink(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $value = $this->getDataContainer()->getLink();
         if (! $value) {
             $message = 'RSS 2.0 feed elements MUST contain exactly one'
@@ -255,8 +267,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setAuthors(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $authors = $this->getDataContainer()->getAuthors();
         if (! $authors || empty($authors)) {
             return;
@@ -280,8 +294,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCopyright(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $copyright = $this->getDataContainer()->getCopyright();
         if (! $copyright) {
             return;
@@ -300,8 +316,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @return void
      * @throws Writer\Exception\InvalidArgumentException
      */
+    // @codingStandardsIgnoreStart
     protected function _setImage(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $image = $this->getDataContainer()->getImage();
         if (! $image) {
             return;
@@ -413,8 +431,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setDateCreated(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getDateCreated()) {
             return;
         }
@@ -432,8 +452,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setLastBuildDate(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getLastBuildDate()) {
             return;
         }
@@ -453,8 +475,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setBaseUrl(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $baseUrl = $this->getDataContainer()->getBaseUrl();
         if (! $baseUrl) {
             return;
@@ -469,8 +493,10 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCategories(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $categories = $this->getDataContainer()->getCategories();
         if (! $categories) {
             return;

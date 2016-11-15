@@ -220,8 +220,10 @@ class Callback extends PubSubHubbub\AbstractCallback
      * @param  bool $checkValue
      * @return bool
      */
+    // @codingStandardsIgnoreStart
     protected function _hasValidVerifyToken(array $httpGetData = null, $checkValue = true)
     {
+        // @codingStandardsIgnoreEnd
         $verifyTokenKey = $this->_detectVerifyTokenKey($httpGetData);
         if (empty($verifyTokenKey)) {
             return false;
@@ -250,8 +252,10 @@ class Callback extends PubSubHubbub\AbstractCallback
      * @param  null|array $httpGetData
      * @return false|string
      */
+    // @codingStandardsIgnoreStart
     protected function _detectVerifyTokenKey(array $httpGetData = null)
     {
+        // @codingStandardsIgnoreEnd
         /**
          * Available when sub keys encoding in Callback URL path
          */
@@ -286,8 +290,10 @@ class Callback extends PubSubHubbub\AbstractCallback
      *
      * @return array|void
      */
+    // @codingStandardsIgnoreStart
     protected function _parseQueryString()
     {
+        // @codingStandardsIgnoreEnd
         $params      = [];
         $queryString = '';
         if (isset($_SERVER['QUERY_STRING'])) {

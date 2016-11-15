@@ -286,8 +286,10 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         $this->subscriber->getStorage();
     }
 
+    // @codingStandardsIgnoreStart
     protected function _getCleanMock($className)
     {
+        // @codingStandardsIgnoreEnd
         $class = new \ReflectionClass($className);
         $methods = $class->getMethods();
         $stubMethods = [];

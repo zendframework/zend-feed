@@ -47,8 +47,10 @@ class Entry extends Extension\AbstractRenderer
      *
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _appendNamespaces()
     {
+        // @codingStandardsIgnoreEnd
         $this->getRootElement()->setAttribute(
             'xmlns:slash',
             'http://purl.org/rss/1.0/modules/slash/'
@@ -62,8 +64,10 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $count = $this->getDataContainer()->getCommentCount();
         if (! $count) {
             $count = 0;

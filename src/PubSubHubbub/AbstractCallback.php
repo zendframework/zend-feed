@@ -196,8 +196,10 @@ abstract class AbstractCallback implements CallbackInterface
      * Attempt to detect the callback URL (specifically the path forward)
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _detectCallbackUrl()
     {
+        // @codingStandardsIgnoreEnd
         $callbackUrl = '';
         if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) {
             $callbackUrl = $_SERVER['HTTP_X_ORIGINAL_URL'];
@@ -227,8 +229,10 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _getHttpHost()
     {
+        // @codingStandardsIgnoreEnd
         if (! empty($_SERVER['HTTP_HOST'])) {
             return $_SERVER['HTTP_HOST'];
         }
@@ -253,8 +257,10 @@ abstract class AbstractCallback implements CallbackInterface
      * @param string $header
      * @return bool|string
      */
+    // @codingStandardsIgnoreStart
     protected function _getHeader($header)
     {
+        // @codingStandardsIgnoreEnd
         $temp = strtoupper(str_replace('-', '_', $header));
         if (! empty($_SERVER[$temp])) {
             return $_SERVER[$temp];
@@ -277,8 +283,10 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @return string|false Raw body, or false if not present
      */
+    // @codingStandardsIgnoreStart
     protected function _getRawBody()
     {
+        // @codingStandardsIgnoreEnd
         $body = file_get_contents('php://input');
         if (strlen(trim($body)) == 0 && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             $body = $GLOBALS['HTTP_RAW_POST_DATA'];

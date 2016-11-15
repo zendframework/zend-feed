@@ -71,8 +71,10 @@ class Source extends AbstractAtom implements Renderer\RendererInterface
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setGenerator(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         if (! $this->getDataContainer()->getGenerator()) {
             return;
         }

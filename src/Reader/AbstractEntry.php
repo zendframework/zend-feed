@@ -207,8 +207,10 @@ abstract class AbstractEntry
      *
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _loadExtensions()
     {
+        // @codingStandardsIgnoreEnd
         $all = Reader::getExtensions();
         $feed = $all['entry'];
         foreach ($feed as $extension) {

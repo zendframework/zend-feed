@@ -269,7 +269,8 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
         $this->publisher->addUpdatedTopicUrl('http://www.example.com/topic2');
         $this->publisher->notifyAll();
         $this->assertEquals(
-            'hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic2',
+            'hub.mode=publish&hub.url=http%3A%2F%2Fwww.example.com%2Ftopic&'
+            . 'hub.url=http%3A%2F%2Fwww.example.com%2Ftopic2',
             $client->getRequest()->getContent()
         );
     }

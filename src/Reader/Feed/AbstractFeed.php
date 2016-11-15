@@ -283,7 +283,9 @@ abstract class AbstractFeed implements FeedInterface
                 continue;
             }
             if (! $manager->has($extension)) {
-                throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; cannot find class', $extension));
+                throw new Exception\RuntimeException(
+                    sprintf('Unable to load extension "%s"; cannot find class', $extension)
+                );
             }
             $plugin = $manager->get($extension);
             $plugin->setDomDocument($this->getDomDocument());

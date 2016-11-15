@@ -369,8 +369,10 @@ class Publisher
      * @return \Zend\Http\Client
      * @throws Exception\RuntimeException
      */
+    // @codingStandardsIgnoreStart
     protected function _getHttpClient()
     {
+        // @codingStandardsIgnoreEnd
         $client = PubSubHubbub::getHttpClient();
         $client->setMethod(HttpRequest::METHOD_POST);
         $client->setOptions([

@@ -227,13 +227,17 @@ class AbstractFeed
             $generator = ['name' => $data['name']];
             if (isset($data['version'])) {
                 if (empty($data['version']) || ! is_string($data['version'])) {
-                    throw new Exception\InvalidArgumentException('Invalid parameter: "version" must be a non-empty string');
+                    throw new Exception\InvalidArgumentException(
+                        'Invalid parameter: "version" must be a non-empty string'
+                    );
                 }
                 $generator['version'] = $data['version'];
             }
             if (isset($data['uri'])) {
                 if (empty($data['uri']) || ! is_string($data['uri']) || ! Uri::factory($data['uri'])->isValid()) {
-                    throw new Exception\InvalidArgumentException('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                    throw new Exception\InvalidArgumentException(
+                        'Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI'
+                    );
                 }
                 $generator['uri'] = $data['uri'];
             }
@@ -244,13 +248,17 @@ class AbstractFeed
             $generator = ['name' => $name];
             if (isset($version)) {
                 if (empty($version) || ! is_string($version)) {
-                    throw new Exception\InvalidArgumentException('Invalid parameter: "version" must be a non-empty string');
+                    throw new Exception\InvalidArgumentException(
+                        'Invalid parameter: "version" must be a non-empty string'
+                    );
                 }
                 $generator['version'] = $version;
             }
             if (isset($uri)) {
                 if (empty($uri) || ! is_string($uri) || ! Uri::factory($uri)->isValid()) {
-                    throw new Exception\InvalidArgumentException('Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI');
+                    throw new Exception\InvalidArgumentException(
+                        'Invalid parameter: "uri" must be a non-empty string and a valid URI/IRI'
+                    );
                 }
                 $generator['uri'] = $uri;
             }
@@ -269,11 +277,15 @@ class AbstractFeed
      */
     public function setId($id)
     {
+        // @codingStandardsIgnoreStart
         if ((empty($id) || ! is_string($id) || ! Uri::factory($id)->isValid())
             && ! preg_match("#^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{1,31}:([a-zA-Z0-9\(\)\+\,\.\:\=\@\;\$\_\!\*\-]|%[0-9a-fA-F]{2})*#", $id)
             && ! $this->_validateTagUri($id)
         ) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
+            // @codingStandardsIgnoreEnd
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: parameter must be a non-empty string and valid URI/IRI'
+            );
         }
         $this->data['id'] = $id;
 
@@ -286,9 +298,15 @@ class AbstractFeed
      * @param string $id
      * @return bool
      */
+    // @codingStandardsIgnoreStart
     protected function _validateTagUri($id)
     {
-        if (preg_match('/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/', $id, $matches)) {
+        // @codingStandardsIgnoreEnd
+        if (preg_match(
+            '/^tag:(?P<name>.*),(?P<date>\d{4}-?\d{0,2}-?\d{0,2}):(?P<specific>.*)(.*:)*$/',
+            $id,
+            $matches
+        )) {
             $dvalid = false;
             $date = $matches['date'];
             $d6 = strtotime($date);
@@ -360,7 +378,9 @@ class AbstractFeed
     public function setLink($link)
     {
         if (empty($link) || ! is_string($link) || ! Uri::factory($link)->isValid()) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: parameter must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: parameter must be a non-empty string and valid URI/IRI'
+            );
         }
         $this->data['link'] = $link;
 
@@ -378,10 +398,14 @@ class AbstractFeed
     public function setFeedLink($link, $type)
     {
         if (empty($link) || ! is_string($link) || ! Uri::factory($link)->isValid()) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: "link"" must be a non-empty string and valid URI/IRI');
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: "link"" must be a non-empty string and valid URI/IRI'
+            );
         }
         if (! in_array(strtolower($type), ['rss', 'rdf', 'atom'])) {
-            throw new Exception\InvalidArgumentException('Invalid parameter: "type"; You must declare the type of feed the link points to, i.e. RSS, RDF or Atom');
+            throw new Exception\InvalidArgumentException(
+                'Invalid parameter: "type"; You must declare the type of feed the link points to, i.e. RSS, RDF or Atom'
+            );
         }
         $this->data['feedLinks'][strtolower($type)] = $link;
 
@@ -833,14 +857,18 @@ class AbstractFeed
      * @throws Exception\RuntimeException
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _loadExtensions()
     {
+        // @codingStandardsIgnoreEnd
         $all     = Writer::getExtensions();
         $manager = Writer::getExtensionManager();
         $exts    = $all['feed'];
         foreach ($exts as $ext) {
             if (! $manager->has($ext)) {
-                throw new Exception\RuntimeException(sprintf('Unable to load extension "%s"; could not resolve to class', $ext));
+                throw new Exception\RuntimeException(
+                    sprintf('Unable to load extension "%s"; could not resolve to class', $ext)
+                );
             }
             $this->extensions[$ext] = $manager->get($ext);
             $this->extensions[$ext]->setEncoding($this->getEncoding());

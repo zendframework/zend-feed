@@ -60,7 +60,9 @@ class SubscriptionTest extends \PHPUnit_Framework_TestCase
     public function testImpemetsSubscriptionInterface()
     {
         $reflection = new \ReflectionClass('Zend\Feed\PubSubHubbub\Model\Subscription');
-        $this->assertTrue($reflection->implementsInterface('Zend\Feed\PubSubHubbub\Model\SubscriptionPersistenceInterface'));
+        $this->assertTrue(
+            $reflection->implementsInterface('Zend\Feed\PubSubHubbub\Model\SubscriptionPersistenceInterface')
+        );
         unset($reflection);
     }
 
