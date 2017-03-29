@@ -9,11 +9,11 @@
 
 namespace ZendTest\Feed\Reader;
 
-use PHPUnit_Framework_TestCase;
+use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use Zend\Feed\Reader\FeedSet;
 
-class FeedSetTest extends PHPUnit_Framework_TestCase
+class FeedSetTest extends TestCase
 {
     /**
      * @var FeedSet

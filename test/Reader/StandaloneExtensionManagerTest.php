@@ -8,7 +8,7 @@
  */
 namespace ZendTest\Feed\Reader;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader\StandaloneExtensionManager;
 
 class StandaloneExtensionManagerTest extends TestCase
