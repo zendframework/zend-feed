@@ -26,6 +26,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#27](https://github.com/zendframework/zend-feed/pull/27) adds a documentation
   chapter demonstrating wrapping a PSR-7 client to use with `Zend\Feed\Reader`.
+- [#22](https://github.com/zendframework/zend-feed/pull/22) adds missing
+  ExtensionManagerInterface on ExtensionPluginManager.
 
 ### Deprecated
 
