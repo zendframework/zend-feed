@@ -17,6 +17,13 @@ use Zend\Http\Response as HttpResponse;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Http\ClientInterface;
 use Zend\Feed\Reader\Exception\InvalidArgumentException;
+use Zend\Feed\Reader\Feed\FeedInterface;
+use Zend\Feed\Reader\Http\ResponseInterface;
+use My\Extension\JungleBooks\Feed;
+use My\Extension\JungleBooks\Entry;
+use Interop\Container\ContainerInterface;
+use Zend\Feed\Reader\Feed\Rss;
+use Zend\Feed\Reader\FeedSet;
 
 /**
 * @group Zend_Feed
@@ -151,7 +158,7 @@ class ReaderTest extends TestCase
         $feed = Reader\Reader::importFile(
             dirname(__FILE__) . '/Entry/_files/Atom/title/plain/atom10.xml'
         );
-        $this->assertInstanceOf('Zend\Feed\Reader\Feed\FeedInterface', $feed);
+        $this->assertInstanceOf(FeedInterface::class, $feed);
     }
 
     public function testImportsUri()
@@ -193,7 +200,7 @@ class ReaderTest extends TestCase
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
-        $this->assertInstanceOf('Zend\Feed\Reader\FeedSet', $links);
+        $this->assertInstanceOf(FeedSet::class, $links);
         $this->assertEquals([
             'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/'
         ], (array) $links->getIterator()->current());
@@ -206,7 +213,7 @@ class ReaderTest extends TestCase
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
         $link = $links->getIterator()->current();
-        $this->assertInstanceOf('Zend\Feed\Reader\Feed\Rss', $link['feed']);
+        $this->assertInstanceOf(Rss::class, $link['feed']);
     }
 
     public function testZeroCountFeedSetReturnedFromEmptyList()
@@ -273,10 +280,10 @@ class ReaderTest extends TestCase
         require_once __DIR__ . '/_files/My/Extension/JungleBooks/Entry.php';
         require_once __DIR__ . '/_files/My/Extension/JungleBooks/Feed.php';
         $manager = new Reader\ExtensionManager(new Reader\ExtensionPluginManager(
-            $this->getMockBuilder('Interop\Container\ContainerInterface')->getMock()
+            $this->getMockBuilder(ContainerInterface::class)->getMock()
         ));
-        $manager->setInvokableClass('JungleBooks\Entry', 'My\Extension\JungleBooks\Entry');
-        $manager->setInvokableClass('JungleBooks\Feed', 'My\Extension\JungleBooks\Feed');
+        $manager->setInvokableClass('JungleBooks\Entry', Entry::class);
+        $manager->setInvokableClass('JungleBooks\Feed', Feed::class);
         Reader\Reader::setExtensionManager($manager);
         Reader\Reader::registerExtension('JungleBooks');
 
@@ -303,7 +310,7 @@ class ReaderTest extends TestCase
     {
         $uri = 'http://example.com/feeds/reader.xml';
         $feedContents = file_get_contents($this->feedSamplePath . '/Reader/rss20.xml');
-        $response = $this->getMockBuilder('Zend\Feed\Reader\Http\ResponseInterface')
+        $response = $this->getMockBuilder(ResponseInterface::class)
             ->setMethods(['getStatusCode', 'getBody'])
             ->getMock();
         $response->expects($this->once())
@@ -313,7 +320,7 @@ class ReaderTest extends TestCase
             ->method('getBody')
             ->will($this->returnValue($feedContents));
 
-        $client = $this->getMockBuilder('Zend\Feed\Reader\Http\ClientInterface')
+        $client = $this->getMockBuilder(ClientInterface::class)
             ->setMethods(['get'])
             ->getMock();
         $client->expects($this->once())
@@ -322,7 +329,7 @@ class ReaderTest extends TestCase
             ->will($this->returnValue($response));
 
         $feed = Reader\Reader::importRemoteFeed($uri, $client);
-        $this->assertInstanceOf('Zend\Feed\Reader\Feed\FeedInterface', $feed);
+        $this->assertInstanceOf(FeedInterface::class, $feed);
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_20, $type);
     }
@@ -336,7 +343,7 @@ class ReaderTest extends TestCase
 
     public function testSetHttpFeedClient()
     {
-        $client = $this->createMock('Zend\Feed\Reader\Http\ClientInterface');
+        $client = $this->createMock(ClientInterface::class);
         Reader\Reader::setHttpClient($client);
         $this->assertEquals($client, Reader\Reader::getHttpClient());
     }

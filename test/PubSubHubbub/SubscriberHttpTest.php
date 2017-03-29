@@ -13,6 +13,8 @@ use PHPUnit\Framework\TestCase;
 use Zend\Feed\PubSubHubbub\PubSubHubbub;
 use Zend\Feed\PubSubHubbub\Subscriber;
 use Zend\Http\Client as HttpClient;
+use Zend\Feed\PubSubHubbub\Model\Subscription;
+use Zend\Http\Client\Adapter\Socket;
 
 /**
  * Note that $this->_baseuri must point to a directory on a web server
@@ -52,11 +54,11 @@ class SubscriberHttpTest extends TestCase
             }
             $uri = $this->baseuri . $name . '.php';
             $this->client = new HttpClient($uri);
-            $this->client->setAdapter('\Zend\Http\Client\Adapter\Socket');
+            $this->client->setAdapter(Socket::class);
             PubSubHubbub::setHttpClient($this->client);
             $this->subscriber = new Subscriber;
 
-            $this->storage = $this->_getCleanMock('\Zend\Feed\PubSubHubbub\Model\Subscription');
+            $this->storage = $this->_getCleanMock(Subscription::class);
             $this->subscriber->setStorage($this->storage);
         } else {
             // Skip tests

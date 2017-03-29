@@ -14,6 +14,8 @@ use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Version;
+use Zend\Feed\Writer\Deleted;
+use Zend\Feed\Writer\Entry;
 
 /**
  * @group      Zend_Feed
@@ -726,7 +728,7 @@ class FeedTest extends TestCase
     {
         $writer = new Writer\Feed;
         $entry  = $writer->createEntry();
-        $this->assertInstanceOf('Zend\Feed\Writer\Entry', $entry);
+        $this->assertInstanceOf(Entry::class, $entry);
     }
 
     public function testAddsCategory()
@@ -974,7 +976,7 @@ class FeedTest extends TestCase
         $writer = new Writer\Feed;
         $tombstone = $writer->createTombstone();
 
-        $this->assertInstanceOf('Zend\Feed\Writer\Deleted', $tombstone);
+        $this->assertInstanceOf(Deleted::class, $tombstone);
 
         return $tombstone;
     }
@@ -988,7 +990,7 @@ class FeedTest extends TestCase
         $tombstone = $writer->createTombstone();
         $writer->addTombstone($tombstone);
 
-        $this->assertInstanceOf('Zend\Feed\Writer\Deleted', $writer->getEntry(0));
+        $this->assertInstanceOf(Deleted::class, $writer->getEntry(0));
     }
 
     /**

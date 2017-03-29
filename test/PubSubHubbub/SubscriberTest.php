@@ -15,6 +15,8 @@ use Zend\Feed\PubSubHubbub\PubSubHubbub;
 use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Http\Client as HttpClient;
 use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @group      Zend_Feed
@@ -35,10 +37,10 @@ class SubscriberTest extends TestCase
         PubSubHubbub::setHttpClient($client);
         $this->subscriber = new Subscriber;
         $this->adapter = $this->_getCleanMock(
-            '\Zend\Db\Adapter\Adapter'
+            Adapter::class
         );
         $this->tableGateway = $this->_getCleanMock(
-            '\Zend\Db\TableGateway\TableGateway'
+            TableGateway::class
         );
         $this->tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->adapter));

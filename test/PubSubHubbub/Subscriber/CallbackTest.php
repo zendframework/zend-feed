@@ -17,6 +17,9 @@ use Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback as CallbackSubscriber;
 use ArrayObject;
 use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @group      Zend_Feed
@@ -44,13 +47,13 @@ class CallbackTest extends TestCase
         $this->_callback = new CallbackSubscriber;
 
         $this->_adapter      = $this->_getCleanMock(
-            '\Zend\Db\Adapter\Adapter'
+            Adapter::class
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\Db\TableGateway\TableGateway'
+            TableGateway::class
         );
         $this->_rowset       = $this->_getCleanMock(
-            '\Zend\Db\ResultSet\ResultSet'
+            ResultSet::class
         );
 
         $this->_tableGateway->expects($this->any())
@@ -78,12 +81,12 @@ class CallbackTest extends TestCase
     public function testCanSetHttpResponseObject()
     {
         $this->_callback->setHttpResponse(new HttpResponse);
-        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
+        $this->assertInstanceOf(HttpResponse::class, $this->_callback->getHttpResponse());
     }
 
     public function testCanUsesDefaultHttpResponseObject()
     {
-        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
+        $this->assertInstanceOf(HttpResponse::class, $this->_callback->getHttpResponse());
     }
 
     public function testThrowsExceptionOnInvalidHttpResponseObjectSet()

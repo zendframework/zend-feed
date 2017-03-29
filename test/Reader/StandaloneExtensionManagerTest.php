@@ -10,6 +10,9 @@ namespace ZendTest\Feed\Reader;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader\StandaloneExtensionManager;
+use Zend\Feed\Reader\Extension\WellFormedWeb\Entry;
+use Zend\Feed\Reader\Extension\Syndication\Feed;
+use Zend\Feed\Reader\ExtensionManagerInterface;
 
 class StandaloneExtensionManagerTest extends TestCase
 {
@@ -20,28 +23,31 @@ class StandaloneExtensionManagerTest extends TestCase
 
     public function testIsAnExtensionManagerImplementation()
     {
-        $this->assertInstanceOf('Zend\Feed\Reader\ExtensionManagerInterface', $this->extensions);
+        $this->assertInstanceOf(ExtensionManagerInterface::class, $this->extensions);
     }
 
     public function defaultPlugins()
     {
         return [
-            'Atom\Entry'            => ['Atom\Entry', 'Zend\Feed\Reader\Extension\Atom\Entry'],
-            'Atom\Feed'             => ['Atom\Feed', 'Zend\Feed\Reader\Extension\Atom\Feed'],
-            'Content\Entry'         => ['Content\Entry', 'Zend\Feed\Reader\Extension\Content\Entry'],
+            'Atom\Entry'            => ['Atom\Entry', \Zend\Feed\Reader\Extension\Atom\Entry::class],
+            'Atom\Feed'             => ['Atom\Feed', \Zend\Feed\Reader\Extension\Atom\Feed::class],
+            'Content\Entry'         => ['Content\Entry', \Zend\Feed\Reader\Extension\Content\Entry::class],
             'CreativeCommons\Entry' => [
                 'CreativeCommons\Entry',
-                'Zend\Feed\Reader\Extension\CreativeCommons\Entry'
+                \Zend\Feed\Reader\Extension\CreativeCommons\Entry::class
             ],
-            'CreativeCommons\Feed'  => ['CreativeCommons\Feed', 'Zend\Feed\Reader\Extension\CreativeCommons\Feed'],
-            'DublinCore\Entry'      => ['DublinCore\Entry', 'Zend\Feed\Reader\Extension\DublinCore\Entry'],
-            'DublinCore\Feed'       => ['DublinCore\Feed', 'Zend\Feed\Reader\Extension\DublinCore\Feed'],
-            'Podcast\Entry'         => ['Podcast\Entry', 'Zend\Feed\Reader\Extension\Podcast\Entry'],
-            'Podcast\Feed'          => ['Podcast\Feed', 'Zend\Feed\Reader\Extension\Podcast\Feed'],
-            'Slash\Entry'           => ['Slash\Entry', 'Zend\Feed\Reader\Extension\Slash\Entry'],
-            'Syndication\Feed'      => ['Syndication\Feed', 'Zend\Feed\Reader\Extension\Syndication\Feed'],
-            'Thread\Entry'          => ['Thread\Entry', 'Zend\Feed\Reader\Extension\Thread\Entry'],
-            'WellFormedWeb\Entry'   => ['WellFormedWeb\Entry', 'Zend\Feed\Reader\Extension\WellFormedWeb\Entry'],
+            'CreativeCommons\Feed'  => [
+                'CreativeCommons\Feed',
+                \Zend\Feed\Reader\Extension\CreativeCommons\Feed::class
+            ],
+            'DublinCore\Entry'      => ['DublinCore\Entry', \Zend\Feed\Reader\Extension\DublinCore\Entry::class],
+            'DublinCore\Feed'       => ['DublinCore\Feed', \Zend\Feed\Reader\Extension\DublinCore\Feed::class],
+            'Podcast\Entry'         => ['Podcast\Entry', \Zend\Feed\Reader\Extension\Podcast\Entry::class],
+            'Podcast\Feed'          => ['Podcast\Feed', \Zend\Feed\Reader\Extension\Podcast\Feed::class],
+            'Slash\Entry'           => ['Slash\Entry', \Zend\Feed\Reader\Extension\Slash\Entry::class],
+            'Syndication\Feed'      => ['Syndication\Feed', Feed::class],
+            'Thread\Entry'          => ['Thread\Entry', \Zend\Feed\Reader\Extension\Thread\Entry::class],
+            'WellFormedWeb\Entry'   => ['WellFormedWeb\Entry', Entry::class],
         ];
     }
 

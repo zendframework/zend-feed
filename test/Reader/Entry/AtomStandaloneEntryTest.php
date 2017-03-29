@@ -12,6 +12,7 @@ namespace ZendTest\Feed\Reader\Entry;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Entry\Atom;
 
 /**
 * @group Zend_Feed
@@ -66,7 +67,7 @@ class AtomStandaloneEntryTest extends TestCase
         $object = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/id/atom10.xml')
         );
-        $this->assertInstanceOf('Zend\Feed\Reader\Entry\Atom', $object);
+        $this->assertInstanceOf(Atom::class, $object);
     }
 
     /**

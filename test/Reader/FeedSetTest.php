@@ -30,7 +30,7 @@ class FeedSetTest extends TestCase
      */
     public function testAbsolutiseUri($link, $uri)
     {
-        $method = new ReflectionMethod('Zend\Feed\Reader\FeedSet', 'absolutiseUri');
+        $method = new ReflectionMethod(FeedSet::class, 'absolutiseUri');
         $method->setAccessible(true);
 
         $this->assertEquals('http://example.com/feed', $method->invoke($this->feedSet, $link, $uri));

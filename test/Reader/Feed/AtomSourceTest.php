@@ -12,6 +12,7 @@ namespace ZendTest\Feed\Reader\Feed;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Feed\Atom\Source;
 
 /**
 * @group Zend_Feed
@@ -68,7 +69,7 @@ class AtomSourceTest extends TestCase
             file_get_contents($this->feedSamplePath.'/title/atom10.xml')
         );
         $source = $feed->current()->getSource();
-        $this->assertInstanceOf('Zend\Feed\Reader\Feed\Atom\Source', $source);
+        $this->assertInstanceOf(Source::class, $source);
     }
 
     /**

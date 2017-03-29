@@ -14,6 +14,7 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Reader;
+use Zend\Feed\Writer\Feed;
 
 /**
  * @group      Zend_Feed
@@ -47,7 +48,7 @@ class AtomTest extends TestCase
     {
         $writer = new Writer\Feed;
         $feed   = new Renderer\Feed\Atom($writer);
-        $this->assertInstanceOf('Zend\Feed\Writer\Feed', $feed->getDataContainer());
+        $this->assertInstanceOf(Feed::class, $feed->getDataContainer());
     }
 
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()

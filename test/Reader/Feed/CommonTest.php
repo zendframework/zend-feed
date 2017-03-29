@@ -11,6 +11,7 @@ namespace ZendTest\Feed\Reader\Feed;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Extension\Atom\Feed;
 
 /**
 * @group Zend_Feed
@@ -34,7 +35,7 @@ class CommonTest extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertInstanceOf('DOMDocument', $feed->getDomDocument());
+        $this->assertInstanceOf(\DOMDocument::class, $feed->getDomDocument());
     }
 
     public function testGetsDomXpathObject()
@@ -42,7 +43,7 @@ class CommonTest extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertInstanceOf('DOMXPath', $feed->getXpath());
+        $this->assertInstanceOf(\DOMXPath::class, $feed->getXpath());
     }
 
     public function testGetsXpathPrefixString()
@@ -58,7 +59,7 @@ class CommonTest extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertInstanceOf('DOMElement', $feed->getElement());
+        $this->assertInstanceOf(\DOMElement::class, $feed->getElement());
     }
 
     public function testSaveXmlOutputsXmlStringForFeed()
@@ -76,7 +77,7 @@ class CommonTest extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
-        $this->assertInstanceOf('Zend\Feed\Reader\Extension\Atom\Feed', $feed->getExtension('Atom'));
+        $this->assertInstanceOf(Feed::class, $feed->getExtension('Atom'));
     }
 
     public function testReturnsNullIfExtensionDoesNotExist()

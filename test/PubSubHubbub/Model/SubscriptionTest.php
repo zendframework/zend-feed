@@ -15,6 +15,7 @@ use PHPUnit\Framework\TestCase;
 use Zend\Db\Adapter\Adapter as DbAdapter;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Feed\PubSubHubbub\Model\Subscription;
+use Zend\Feed\PubSubHubbub\Model\SubscriptionPersistenceInterface;
 
 /**
  * @group      Zend_Feed
@@ -60,9 +61,9 @@ class SubscriptionTest extends TestCase
 
     public function testImpemetsSubscriptionInterface()
     {
-        $reflection = new \ReflectionClass('Zend\Feed\PubSubHubbub\Model\Subscription');
+        $reflection = new \ReflectionClass(Subscription::class);
         $this->assertTrue(
-            $reflection->implementsInterface('Zend\Feed\PubSubHubbub\Model\SubscriptionPersistenceInterface')
+            $reflection->implementsInterface(SubscriptionPersistenceInterface::class)
         );
         unset($reflection);
     }

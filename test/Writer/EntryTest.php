@@ -13,6 +13,8 @@ use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
+use Zend\Feed\Writer\Source;
+use Zend\Feed\Writer\Extension\ITunes\Entry;
 
 /**
  * @group      Zend_Feed
@@ -672,7 +674,7 @@ class EntryTest extends TestCase
         $foo = $entry->getExtension('foo');
         $this->assertNull($foo);
 
-        $this->assertInstanceOf('Zend\Feed\Writer\Extension\ITunes\Entry', $entry->getExtension('ITunes'));
+        $this->assertInstanceOf(Entry::class, $entry->getExtension('ITunes'));
     }
 
     /**
@@ -683,7 +685,7 @@ class EntryTest extends TestCase
         $entry = new Writer\Entry;
 
         $extensions = $entry->getExtensions();
-        $this->assertInstanceOf('Zend\Feed\Writer\Extension\ITunes\Entry', $extensions['ITunes\Entry']);
+        $this->assertInstanceOf(Entry::class, $extensions['ITunes\Entry']);
     }
 
     /**
@@ -698,7 +700,7 @@ class EntryTest extends TestCase
         $this->assertNull($source);
 
         $entry->setSource($entry->createSource());
-        $this->assertInstanceOf('Zend\Feed\Writer\Source', $entry->getSource());
+        $this->assertInstanceOf(Source::class, $entry->getSource());
     }
 
     public function testFluentInterface()
