@@ -51,7 +51,7 @@ class Entry extends Extension\AbstractEntry
 
         $data = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/thread10:' . $name . ')');
 
-        if (!$data) {
+        if (! $data) {
             $data = null;
         }
 

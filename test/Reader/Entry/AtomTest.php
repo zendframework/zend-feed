@@ -178,12 +178,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = [
-            ['email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs'],
-            ['email'=>'joe@example.com','uri'=>'http://www.example.com'],
-            ['uri'=>'http://www.example.com'],
-            ['email'=>'joe@example.com']
+            ['email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs'],
+            ['email' => 'joe@example.com','uri' => 'http://www.example.com'],
+            ['uri' => 'http://www.example.com'],
+            ['email' => 'joe@example.com']
         ];
 
         $entry = $feed->current();
@@ -197,12 +197,12 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = [
-            ['email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs'],
-            ['email'=>'joe@example.com','uri'=>'http://www.example.com'],
-            ['uri'=>'http://www.example.com'],
-            ['email'=>'joe@example.com']
+            ['email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs'],
+            ['email' => 'joe@example.com','uri' => 'http://www.example.com'],
+            ['uri' => 'http://www.example.com'],
+            ['email' => 'joe@example.com']
         ];
 
         $entry = $feed->current();
@@ -218,7 +218,10 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/author/plain/atom03.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'], $entry->getAuthor());
+        $this->assertEquals(
+            ['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'],
+            $entry->getAuthor()
+        );
     }
 
     public function testGetsAuthorFromAtom10()
@@ -227,7 +230,10 @@ class AtomTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath . '/author/plain/atom10.xml')
         );
         $entry = $feed->current();
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'], $entry->getAuthor());
+        $this->assertEquals(
+            ['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'],
+            $entry->getAuthor()
+        );
     }
 
     /**
@@ -369,7 +375,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
     }
 
-    public function testGetsLinkFromAtom10_WithNoRelAttribute()
+    public function testGetsLinkFromAtom10WithNoRelAttribute()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/link/plain/atom10-norel.xml')
@@ -378,7 +384,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/entry', $entry->getLink());
     }
 
-    public function testGetsLinkFromAtom10_WithRelativeUrl()
+    public function testGetsLinkFromAtom10WithRelativeUrl()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/link/plain/atom10-relative.xml')
@@ -390,7 +396,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Base Uri
      */
-    public function testGetsBaseUriFromAtom10_FromFeedElement()
+    public function testGetsBaseUriFromAtom10FromFeedElement()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/baseurl/plain/atom10-feedlevel.xml')
@@ -399,7 +405,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com', $entry->getBaseUrl());
     }
 
-    public function testGetsBaseUriFromAtom10_FromEntryElement()
+    public function testGetsBaseUriFromAtom10FromEntryElement()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/baseurl/plain/atom10-entrylevel.xml')
@@ -429,7 +435,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/entry/comments', $entry->getCommentLink());
     }
 
-    public function testGetsCommentLinkFromAtom10_RelativeLinks()
+    public function testGetsCommentLinkFromAtom10RelativeLinks()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/commentlink/plain/atom10-relative.xml')
@@ -454,7 +460,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'Cat & Dog'], array_values($entry->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromAtom03_Atom10Extension()
+    public function testGetsCategoriesFromAtom03Atom10Extension()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom03.xml')
@@ -466,7 +472,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.0/1.1 for Atom 0.3
 
-    public function testGetsCategoriesFromAtom03_Dc10()
+    public function testGetsCategoriesFromAtom03Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/atom03.xml')
@@ -476,7 +482,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($entry->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromAtom03_Dc11()
+    public function testGetsCategoriesFromAtom03Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/atom03.xml')
@@ -488,7 +494,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
 
     // No Categories In Entry
 
-    public function testGetsCategoriesFromAtom10_None()
+    public function testGetsCategoriesFromAtom10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/atom10.xml')
@@ -498,7 +504,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($entry->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromAtom03_None()
+    public function testGetsCategoriesFromAtom03None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/atom03.xml')

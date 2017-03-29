@@ -67,7 +67,7 @@ abstract class AbstractCallback implements CallbackInterface
             $options = ArrayUtils::iteratorToArray($options);
         }
 
-        if (!is_array($options)) {
+        if (! is_array($options)) {
             throw new Exception\InvalidArgumentException('Array or Traversable object'
             . 'expected, got ' . gettype($options));
         }
@@ -137,7 +137,7 @@ abstract class AbstractCallback implements CallbackInterface
      */
     public function setHttpResponse($httpResponse)
     {
-        if (!$httpResponse instanceof HttpResponse && !$httpResponse instanceof PhpResponse) {
+        if (! $httpResponse instanceof HttpResponse && ! $httpResponse instanceof PhpResponse) {
             throw new Exception\InvalidArgumentException('HTTP Response object must'
                 . ' implement one of Zend\Feed\Pubsubhubbub\HttpResponse or'
                 . ' Zend\Http\PhpEnvironment\Response');
@@ -196,8 +196,10 @@ abstract class AbstractCallback implements CallbackInterface
      * Attempt to detect the callback URL (specifically the path forward)
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _detectCallbackUrl()
     {
+        // @codingStandardsIgnoreEnd
         $callbackUrl = '';
         if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) {
             $callbackUrl = $_SERVER['HTTP_X_ORIGINAL_URL'];
@@ -214,8 +216,8 @@ abstract class AbstractCallback implements CallbackInterface
                 $callbackUrl = substr($callbackUrl, strlen($schemeAndHttpHost));
             }
         } elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
-            $callbackUrl= $_SERVER['ORIG_PATH_INFO'];
-            if (!empty($_SERVER['QUERY_STRING'])) {
+            $callbackUrl = $_SERVER['ORIG_PATH_INFO'];
+            if (! empty($_SERVER['QUERY_STRING'])) {
                 $callbackUrl .= '?' . $_SERVER['QUERY_STRING'];
             }
         }
@@ -227,9 +229,11 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @return string
      */
+    // @codingStandardsIgnoreStart
     protected function _getHttpHost()
     {
-        if (!empty($_SERVER['HTTP_HOST'])) {
+        // @codingStandardsIgnoreEnd
+        if (! empty($_SERVER['HTTP_HOST'])) {
             return $_SERVER['HTTP_HOST'];
         }
         $scheme = 'http';
@@ -253,19 +257,21 @@ abstract class AbstractCallback implements CallbackInterface
      * @param string $header
      * @return bool|string
      */
+    // @codingStandardsIgnoreStart
     protected function _getHeader($header)
     {
+        // @codingStandardsIgnoreEnd
         $temp = strtoupper(str_replace('-', '_', $header));
-        if (!empty($_SERVER[$temp])) {
+        if (! empty($_SERVER[$temp])) {
             return $_SERVER[$temp];
         }
         $temp = 'HTTP_' . strtoupper(str_replace('-', '_', $header));
-        if (!empty($_SERVER[$temp])) {
+        if (! empty($_SERVER[$temp])) {
             return $_SERVER[$temp];
         }
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
-            if (!empty($headers[$header])) {
+            if (! empty($headers[$header])) {
                 return $headers[$header];
             }
         }
@@ -277,8 +283,10 @@ abstract class AbstractCallback implements CallbackInterface
      *
      * @return string|false Raw body, or false if not present
      */
+    // @codingStandardsIgnoreStart
     protected function _getRawBody()
     {
+        // @codingStandardsIgnoreEnd
         $body = file_get_contents('php://input');
         if (strlen(trim($body)) == 0 && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
             $body = $GLOBALS['HTTP_RAW_POST_DATA'];

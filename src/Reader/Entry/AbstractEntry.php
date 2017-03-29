@@ -146,7 +146,7 @@ abstract class AbstractEntry
      */
     public function getXpath()
     {
-        if (!$this->xpath) {
+        if (! $this->xpath) {
             $this->setXpath(new DOMXPath($this->getDomDocument()));
         }
         return $this->xpath;

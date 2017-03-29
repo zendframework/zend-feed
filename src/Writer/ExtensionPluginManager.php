@@ -18,8 +18,7 @@ use Zend\ServiceManager\Factory\InvokableFactory;
  *
  * Validation checks that we have an Entry, Feed, or Extension\AbstractRenderer.
  */
-class ExtensionPluginManager extends AbstractPluginManager
-    implements ExtensionManagerInterface
+class ExtensionPluginManager extends AbstractPluginManager implements ExtensionManagerInterface
 {
     /**
      * Aliases for default set of extension classes

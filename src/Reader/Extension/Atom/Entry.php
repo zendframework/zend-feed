@@ -51,7 +51,7 @@ class Entry extends Extension\AbstractEntry
         $authors = [];
         $list = $this->getXpath()->query($this->getXpathPrefix() . '//atom:author');
 
-        if (!$list->length) {
+        if (! $list->length) {
             /**
              * TODO: Limit query to feed level els only!
              */
@@ -61,7 +61,7 @@ class Entry extends Extension\AbstractEntry
         if ($list->length) {
             foreach ($list as $author) {
                 $author = $this->getAuthorFromElement($author);
-                if (!empty($author)) {
+                if (! empty($author)) {
                     $authors[] = $author;
                 }
             }
@@ -121,7 +121,7 @@ class Entry extends Extension\AbstractEntry
             }
         }
 
-        if (!$content) {
+        if (! $content) {
             $content = $this->getDescription();
         }
 
@@ -139,7 +139,7 @@ class Entry extends Extension\AbstractEntry
      */
     protected function collectXhtml($xhtml, $prefix)
     {
-        if (!empty($prefix)) {
+        if (! empty($prefix)) {
             $prefix = $prefix . ':';
         }
         $matches = [
@@ -147,7 +147,7 @@ class Entry extends Extension\AbstractEntry
             "/<\/" . $prefix . "div>\s*$/"
         ];
         $xhtml = preg_replace($matches, '', $xhtml);
-        if (!empty($prefix)) {
+        if (! empty($prefix)) {
             $xhtml = preg_replace("/(<[\/]?)" . $prefix . "([a-zA-Z]+)/", '$1$2', $xhtml);
         }
         return $xhtml;
@@ -222,7 +222,7 @@ class Entry extends Extension\AbstractEntry
 
         $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:summary)');
 
-        if (!$description) {
+        if (! $description) {
             $description = null;
         }
 
@@ -271,7 +271,7 @@ class Entry extends Extension\AbstractEntry
 
         $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
 
-        if (!$id) {
+        if (! $id) {
             if ($this->getPermalink()) {
                 $id = $this->getPermalink();
             } elseif ($this->getTitle()) {
@@ -304,11 +304,11 @@ class Entry extends Extension\AbstractEntry
             . ')'
         );
 
-        if (!$baseUrl) {
+        if (! $baseUrl) {
             $baseUrl = $this->getXpath()->evaluate('string(//@xml:base[1])');
         }
 
-        if (!$baseUrl) {
+        if (! $baseUrl) {
             $baseUrl = null;
         }
 
@@ -325,7 +325,7 @@ class Entry extends Extension\AbstractEntry
      */
     public function getLink($index = 0)
     {
-        if (!array_key_exists('links', $this->data)) {
+        if (! array_key_exists('links', $this->data)) {
             $this->getLinks();
         }
 
@@ -388,7 +388,7 @@ class Entry extends Extension\AbstractEntry
 
         $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
 
-        if (!$title) {
+        if (! $title) {
             $title = null;
         }
 
@@ -554,10 +554,10 @@ class Entry extends Extension\AbstractEntry
      */
     protected function absolutiseUri($link)
     {
-        if (!Uri::factory($link)->isAbsolute()) {
+        if (! Uri::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
-                if (!Uri::factory($link)->isValid()) {
+                if (! Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }
@@ -623,11 +623,11 @@ class Entry extends Extension\AbstractEntry
         $prefixAtom03 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_03);
         $prefixAtom10 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_10);
         if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_03)
-        || !empty($prefixAtom03)) {
+        || ! empty($prefixAtom03)) {
             return Reader\Reader::TYPE_ATOM_03;
         }
         if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_10)
-        || !empty($prefixAtom10)) {
+        || ! empty($prefixAtom10)) {
             return Reader\Reader::TYPE_ATOM_10;
         }
     }

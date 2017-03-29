@@ -20,7 +20,7 @@ class Entry extends Extension\AbstractEntry
             return $this->data['isbn'];
         }
         $isbn = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/jungle:isbn)');
-        if (!$isbn) {
+        if (! $isbn) {
             $isbn = null;
         }
         $this->data['isbn'] = $title;

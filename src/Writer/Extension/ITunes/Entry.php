@@ -76,7 +76,7 @@ class Entry
      */
     public function setItunesBlock($value)
     {
-        if (!ctype_alpha($value) && strlen($value) > 0) {
+        if (! ctype_alpha($value) && strlen($value) > 0) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain alphabetic characters');
         }
@@ -115,7 +115,7 @@ class Entry
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
-        if (!isset($this->data['authors'])) {
+        if (! isset($this->data['authors'])) {
             $this->data['authors'] = [];
         }
         $this->data['authors'][] = $value;
@@ -132,9 +132,9 @@ class Entry
     public function setItunesDuration($value)
     {
         $value = (string) $value;
-        if (!ctype_digit($value)
-            && !preg_match("/^\d+:[0-5]{1}[0-9]{1}$/", $value)
-            && !preg_match("/^\d+:[0-5]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$/", $value)
+        if (! ctype_digit($value)
+            && ! preg_match("/^\d+:[0-5]{1}[0-9]{1}$/", $value)
+            && ! preg_match("/^\d+:[0-5]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$/", $value)
         ) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "duration" may only'
             . ' be of a specified [[HH:]MM:]SS format');
@@ -152,7 +152,7 @@ class Entry
      */
     public function setItunesExplicit($value)
     {
-        if (!in_array($value, ['yes', 'no', 'clean'])) {
+        if (! in_array($value, ['yes', 'no', 'clean'])) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }
@@ -229,14 +229,14 @@ class Entry
     public function __call($method, array $params)
     {
         $point = lcfirst(substr($method, 9));
-        if (!method_exists($this, 'setItunes' . ucfirst($point))
-            && !method_exists($this, 'addItunes' . ucfirst($point))
+        if (! method_exists($this, 'setItunes' . ucfirst($point))
+            && ! method_exists($this, 'addItunes' . ucfirst($point))
         ) {
             throw new Writer\Exception\BadMethodCallException(
                 'invalid method: ' . $method
             );
         }
-        if (!array_key_exists($point, $this->data)
+        if (! array_key_exists($point, $this->data)
             || empty($this->data[$point])
         ) {
             return;

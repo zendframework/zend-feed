@@ -175,7 +175,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $rssFeed->render();
         $feed = Reader\Reader::importString($rssFeed->saveXml());
         $this->assertEquals(
-            'Zend_Feed_Writer ' . Version::VERSION . ' (http://framework.zend.com)', $feed->getGenerator());
+            'Zend_Feed_Writer ' . Version::VERSION . ' (http://framework.zend.com)',
+            $feed->getGenerator()
+        );
     }
 
     public function testFeedLanguageHasBeenSet()
@@ -266,13 +268,13 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testFeedHoldsAnyAuthorAdded()
     {
         $this->validWriter->addAuthor(['name' => 'Joe',
-                                             'email'=> 'joe@example.com',
+                                             'email' => 'joe@example.com',
                                              'uri'  => 'http://www.example.com/joe']);
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $atomFeed->render();
         $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
-        $this->assertEquals(['name'=> 'Joe'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe'], $feed->getAuthor());
     }
 
     /**
@@ -281,13 +283,13 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testFeedAuthorCharDataEncoding()
     {
         $this->validWriter->addAuthor(['name' => '<>&\'"áéíóú',
-                                            'email'=> 'joe@example.com',
+                                            'email' => 'joe@example.com',
                                             'uri'  => 'http://www.example.com/joe']);
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $atomFeed->render();
         $feed   = Reader\Reader::importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
-        $this->assertEquals(['name'=> '<>&\'"áéíóú'], $feed->getAuthor());
+        $this->assertEquals(['name' => '<>&\'"áéíóú'], $feed->getAuthor());
     }
 
     public function testCopyrightCanBeSet()
@@ -317,7 +319,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                                 ['term'   => 'cat_dog',
                                                       'label'  => 'Cats & Dogs',
                                                       'scheme' => 'http://example.com/schema1'],
-                                                ['term'=> 'cat_dog2']
+                                                ['term' => 'cat_dog2']
                                            ]);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();
@@ -342,7 +344,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                                 ['term'   => '<>&\'"áéíóú',
                                                       'label'  => 'Cats & Dogs',
                                                       'scheme' => 'http://example.com/schema1'],
-                                                ['term'=> 'cat_dog2']
+                                                ['term' => 'cat_dog2']
                                            ]);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $rssFeed->render();

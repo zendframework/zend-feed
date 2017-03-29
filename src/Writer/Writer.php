@@ -76,7 +76,7 @@ class Writer
      */
     public static function getExtensionManager()
     {
-        if (!isset(static::$extensionManager)) {
+        if (! isset(static::$extensionManager)) {
             static::setExtensionManager(new ExtensionManager());
         }
         return static::$extensionManager;

@@ -47,13 +47,13 @@ class Feed extends Extension\AbstractFeed
         $authors = [];
         $list    = $this->getXpath()->query('//dc11:creator');
 
-        if (!$list->length) {
+        if (! $list->length) {
             $list = $this->getXpath()->query('//dc10:creator');
         }
-        if (!$list->length) {
+        if (! $list->length) {
             $list = $this->getXpath()->query('//dc11:publisher');
 
-            if (!$list->length) {
+            if (! $list->length) {
                 $list = $this->getXpath()->query('//dc10:publisher');
             }
         }
@@ -89,11 +89,11 @@ class Feed extends Extension\AbstractFeed
 
         $copyright = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:rights)');
 
-        if (!$copyright) {
+        if (! $copyright) {
             $copyright = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:rights)');
         }
 
-        if (!$copyright) {
+        if (! $copyright) {
             $copyright = null;
         }
 
@@ -115,11 +115,11 @@ class Feed extends Extension\AbstractFeed
 
         $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:description)');
 
-        if (!$description) {
+        if (! $description) {
             $description = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:description)');
         }
 
-        if (!$description) {
+        if (! $description) {
             $description = null;
         }
 
@@ -141,7 +141,7 @@ class Feed extends Extension\AbstractFeed
 
         $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:identifier)');
 
-        if (!$id) {
+        if (! $id) {
             $id = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:identifier)');
         }
 
@@ -163,11 +163,11 @@ class Feed extends Extension\AbstractFeed
 
         $language = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:language)');
 
-        if (!$language) {
+        if (! $language) {
             $language = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:language)');
         }
 
-        if (!$language) {
+        if (! $language) {
             $language = null;
         }
 
@@ -189,11 +189,11 @@ class Feed extends Extension\AbstractFeed
 
         $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:title)');
 
-        if (!$title) {
+        if (! $title) {
             $title = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:title)');
         }
 
-        if (!$title) {
+        if (! $title) {
             $title = null;
         }
 
@@ -216,7 +216,7 @@ class Feed extends Extension\AbstractFeed
         $d = null;
         $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc11:date)');
 
-        if (!$date) {
+        if (! $date) {
             $date = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/dc10:date)');
         }
 
@@ -242,7 +242,7 @@ class Feed extends Extension\AbstractFeed
 
         $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc11:subject');
 
-        if (!$list->length) {
+        if (! $list->length) {
             $list = $this->getXpath()->evaluate($this->getXpathPrefix() . '//dc10:subject');
         }
 

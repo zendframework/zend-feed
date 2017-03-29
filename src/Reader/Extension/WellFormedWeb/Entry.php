@@ -29,7 +29,7 @@ class Entry extends Extension\AbstractEntry
 
         $data = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/wfw:' . $name . ')');
 
-        if (!$data) {
+        if (! $data) {
             $data = null;
         }
 

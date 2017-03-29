@@ -129,12 +129,12 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         );
 
         $authors = [
-            ['email'=>'joe@example.com','name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs','uri'=>'http://www.example.com'],
-            ['name'=>'Joe Bloggs'],
-            ['email'=>'joe@example.com','uri'=>'http://www.example.com'],
-            ['uri'=>'http://www.example.com'],
-            ['email'=>'joe@example.com']
+            ['email' => 'joe@example.com','name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs','uri' => 'http://www.example.com'],
+            ['name' => 'Joe Bloggs'],
+            ['email' => 'joe@example.com','uri' => 'http://www.example.com'],
+            ['uri' => 'http://www.example.com'],
+            ['email' => 'joe@example.com']
         ];
 
         $this->assertEquals($authors, (array) $entry->getAuthors());
@@ -149,7 +149,10 @@ class AtomStandaloneEntryTest extends \PHPUnit_Framework_TestCase
         $entry = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath . '/author/atom10.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com', 'uri'=>'http://www.example.com'], $entry->getAuthor());
+        $this->assertEquals(
+            ['name' => 'Joe Bloggs', 'email' => 'joe@example.com', 'uri' => 'http://www.example.com'],
+            $entry->getAuthor()
+        );
     }
 
     /**

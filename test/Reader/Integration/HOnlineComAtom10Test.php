@@ -38,7 +38,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals([['name'=>'The H']], (array) $feed->getAuthors());
+        $this->assertEquals([['name' => 'The H']], (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -46,7 +46,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(['name'=>'The H'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'The H'], $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -107,7 +107,10 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss', $entry->getId());
+        $this->assertEquals(
+            'http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss',
+            $entry->getId()
+        );
     }
 
     public function testGetsEntryTitle()
@@ -125,7 +128,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals([['name'=>'The H']], (array) $entry->getAuthors());
+        $this->assertEquals([['name' => 'The H']], (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -134,7 +137,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['name'=>'The H'], $entry->getAuthor());
+        $this->assertEquals(['name' => 'The H'], $entry->getAuthor());
     }
 
     public function testGetsEntryDescription()
@@ -146,7 +149,10 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
         /**
          * Note: "’" is not the same as "'" - don't replace in error
          */
-        $this->assertEquals('A McAfee signature update is currently causing system failures and a lot of overtime for administrators', $entry->getDescription());
+        $this->assertEquals(
+            'A McAfee signature update is currently causing system failures and a lot of overtime for administrators',
+            $entry->getDescription()
+        );
     }
 
     public function testGetsEntryContent()
@@ -155,7 +161,10 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('A McAfee signature update is currently causing system failures and a lot of overtime for administrators', $entry->getContent());
+        $this->assertEquals(
+            'A McAfee signature update is currently causing system failures and a lot of overtime for administrators',
+            $entry->getContent()
+        );
     }
 
     public function testGetsEntryLinks()
@@ -164,7 +173,10 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss'], $entry->getLinks());
+        $this->assertEquals(
+            ['http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss'],
+            $entry->getLinks()
+        );
     }
 
     public function testGetsEntryLink()
@@ -173,7 +185,10 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss', $entry->getLink());
+        $this->assertEquals(
+            'http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss',
+            $entry->getLink()
+        );
     }
 
     public function testGetsEntryPermaLink()
@@ -182,8 +197,10 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss',
-            $entry->getPermaLink());
+        $this->assertEquals(
+            'http://www.h-online.com/security/McAfee-update-brings-systems-down-again--/news/113689/from/rss',
+            $entry->getPermaLink()
+        );
     }
 
     public function testGetsEntryEncoding()

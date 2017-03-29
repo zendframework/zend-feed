@@ -140,7 +140,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsTitleFromRss20_Dc10()
+    public function testGetsTitleFromRss20Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc10/rss20.xml')
@@ -148,7 +148,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094_Dc10()
+    public function testGetsTitleFromRss094Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc10/rss094.xml')
@@ -156,7 +156,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093_Dc10()
+    public function testGetsTitleFromRss093Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc10/rss093.xml')
@@ -164,7 +164,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092_Dc10()
+    public function testGetsTitleFromRss092Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc10/rss092.xml')
@@ -172,7 +172,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091_Dc10()
+    public function testGetsTitleFromRss091Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc10/rss091.xml')
@@ -180,7 +180,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10_Dc10()
+    public function testGetsTitleFromRss10Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc10/rss10.xml')
@@ -188,7 +188,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090_Dc10()
+    public function testGetsTitleFromRss090Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc10/rss090.xml')
@@ -198,7 +198,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsTitleFromRss20_Dc11()
+    public function testGetsTitleFromRss20Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc11/rss20.xml')
@@ -206,7 +206,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094_Dc11()
+    public function testGetsTitleFromRss094Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc11/rss094.xml')
@@ -214,7 +214,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093_Dc11()
+    public function testGetsTitleFromRss093Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc11/rss093.xml')
@@ -222,7 +222,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092_Dc11()
+    public function testGetsTitleFromRss092Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc11/rss092.xml')
@@ -230,7 +230,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091_Dc11()
+    public function testGetsTitleFromRss091Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc11/rss091.xml')
@@ -238,7 +238,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10_Dc11()
+    public function testGetsTitleFromRss10Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc11/rss10.xml')
@@ -246,7 +246,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090_Dc11()
+    public function testGetsTitleFromRss090Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/dc11/rss090.xml')
@@ -256,7 +256,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Atom 1.0
 
-    public function testGetsTitleFromRss20_atom10()
+    public function testGetsTitleFromRss20Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/atom10/rss20.xml')
@@ -264,7 +264,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094_atom10()
+    public function testGetsTitleFromRss094Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/atom10/rss094.xml')
@@ -272,7 +272,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093_atom10()
+    public function testGetsTitleFromRss093Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/atom10/rss093.xml')
@@ -280,7 +280,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092_atom10()
+    public function testGetsTitleFromRss092Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/atom10/rss092.xml')
@@ -288,7 +288,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091_atom10()
+    public function testGetsTitleFromRss091Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/atom10/rss091.xml')
@@ -296,7 +296,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10_atom10()
+    public function testGetsTitleFromRss10Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/atom10/rss10.xml')
@@ -304,7 +304,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090_atom10()
+    public function testGetsTitleFromRss090Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/atom10/rss090.xml')
@@ -314,7 +314,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Title
 
-    public function testGetsTitleFromRss20_None()
+    public function testGetsTitleFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/none/rss20.xml')
@@ -322,7 +322,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss094_None()
+    public function testGetsTitleFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/none/rss094.xml')
@@ -330,7 +330,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss093_None()
+    public function testGetsTitleFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/none/rss093.xml')
@@ -338,7 +338,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss092_None()
+    public function testGetsTitleFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/none/rss092.xml')
@@ -346,7 +346,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss091_None()
+    public function testGetsTitleFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/none/rss091.xml')
@@ -354,7 +354,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss10_None()
+    public function testGetsTitleFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/none/rss10.xml')
@@ -362,7 +362,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getTitle());
     }
 
-    public function testGetsTitleFromRss090_None()
+    public function testGetsTitleFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/title/plain/none/rss090.xml')
@@ -379,8 +379,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/rss20.xml')
         );
         $this->assertEquals([
-            ['email'=>'joe@example.com', 'name'=>'Joe Bloggs'],
-            ['email'=>'jane@example.com', 'name'=>'Jane Bloggs']
+            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
+            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
@@ -391,8 +391,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/rss094.xml')
         );
         $this->assertEquals([
-            ['email'=>'joe@example.com', 'name'=>'Joe Bloggs'],
-            ['email'=>'jane@example.com', 'name'=>'Jane Bloggs']
+            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
+            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
@@ -403,8 +403,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/rss093.xml')
         );
         $this->assertEquals([
-            ['email'=>'joe@example.com', 'name'=>'Joe Bloggs'],
-            ['email'=>'jane@example.com', 'name'=>'Jane Bloggs']
+            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
+            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
@@ -415,8 +415,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/rss092.xml')
         );
         $this->assertEquals([
-            ['email'=>'joe@example.com', 'name'=>'Joe Bloggs'],
-            ['email'=>'jane@example.com', 'name'=>'Jane Bloggs']
+            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
+            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
@@ -427,8 +427,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/rss091.xml')
         );
         $this->assertEquals([
-            ['email'=>'joe@example.com', 'name'=>'Joe Bloggs'],
-            ['email'=>'jane@example.com', 'name'=>'Jane Bloggs']
+            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
+            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
@@ -439,8 +439,8 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/rss10.xml')
         );
         $this->assertEquals([
-            ['email'=>'joe@example.com', 'name'=>'Joe Bloggs'],
-            ['email'=>'jane@example.com', 'name'=>'Jane Bloggs']
+            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
+            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
@@ -451,252 +451,252 @@ class RssTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/author/plain/rss090.xml')
         );
         $this->assertEquals([
-            ['email'=>'joe@example.com', 'name'=>'Joe Bloggs'],
-            ['email'=>'jane@example.com', 'name'=>'Jane Bloggs']
+            ['email' => 'joe@example.com', 'name' => 'Joe Bloggs'],
+            ['email' => 'jane@example.com', 'name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
     // DC 1.0
 
-    public function testGetsAuthorArrayFromRss20_Dc10()
+    public function testGetsAuthorArrayFromRss20Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss20.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss094_Dc10()
+    public function testGetsAuthorArrayFromRss094Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss094.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss093_Dc10()
+    public function testGetsAuthorArrayFromRss093Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss093.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss092_Dc10()
+    public function testGetsAuthorArrayFromRss092Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss092.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss091_Dc10()
+    public function testGetsAuthorArrayFromRss091Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss091.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss10_Dc10()
+    public function testGetsAuthorArrayFromRss10Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss10.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss090_Dc10()
+    public function testGetsAuthorArrayFromRss090Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss090.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
     // DC 1.1
 
-    public function testGetsAuthorArrayFromRss20_Dc11()
+    public function testGetsAuthorArrayFromRss20Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss20.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss094_Dc11()
+    public function testGetsAuthorArrayFromRss094Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss094.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss093_Dc11()
+    public function testGetsAuthorArrayFromRss093Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss093.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss092_Dc11()
+    public function testGetsAuthorArrayFromRss092Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss092.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss091_Dc11()
+    public function testGetsAuthorArrayFromRss091Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss091.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss10_Dc11()
+    public function testGetsAuthorArrayFromRss10Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss10.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss090_Dc11()
+    public function testGetsAuthorArrayFromRss090Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss090.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
     // Atom 1.0
 
-    public function testGetsAuthorArrayFromRss20_Atom10()
+    public function testGetsAuthorArrayFromRss20Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/atom10/rss20.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss094_Atom10()
+    public function testGetsAuthorArrayFromRss094Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/atom10/rss094.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss093_Atom10()
+    public function testGetsAuthorArrayFromRss093Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/atom10/rss093.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss092_Atom10()
+    public function testGetsAuthorArrayFromRss092Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/atom10/rss092.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss091_Atom10()
+    public function testGetsAuthorArrayFromRss091Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/atom10/rss091.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss10_Atom10()
+    public function testGetsAuthorArrayFromRss10Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/atom10/rss10.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
-    public function testGetsAuthorArrayFromRss090_Atom10()
+    public function testGetsAuthorArrayFromRss090Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/atom10/rss090.xml')
         );
         $this->assertEquals([
-            ['name'=>'Joe Bloggs'], ['name'=>'Jane Bloggs']
+            ['name' => 'Joe Bloggs'], ['name' => 'Jane Bloggs']
         ], (array) $feed->getAuthors());
         $this->assertEquals(['Joe Bloggs', 'Jane Bloggs'], $feed->getAuthors()->getValues());
     }
 
     // Missing Authors
 
-    public function testGetsAuthorArrayFromRss20_None()
+    public function testGetsAuthorArrayFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss20.xml')
@@ -704,7 +704,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss094_None()
+    public function testGetsAuthorArrayFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss094.xml')
@@ -712,7 +712,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss093_None()
+    public function testGetsAuthorArrayFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss093.xml')
@@ -720,7 +720,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss092_None()
+    public function testGetsAuthorArrayFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss092.xml')
@@ -728,7 +728,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss091_None()
+    public function testGetsAuthorArrayFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss091.xml')
@@ -736,7 +736,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss10_None()
+    public function testGetsAuthorArrayFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss10.xml')
@@ -744,7 +744,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthors());
     }
 
-    public function testGetsAuthorArrayFromRss090_None()
+    public function testGetsAuthorArrayFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss090.xml')
@@ -760,7 +760,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/rss20.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss094()
@@ -768,7 +768,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/rss094.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss093()
@@ -776,7 +776,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/rss093.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss092()
@@ -784,7 +784,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/rss092.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss091()
@@ -792,7 +792,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/rss091.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss10()
@@ -800,7 +800,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/rss10.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
     }
 
     public function testGetsSingleAuthorFromRss090()
@@ -808,128 +808,128 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/rss090.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs', 'email'=>'joe@example.com'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs', 'email' => 'joe@example.com'], $feed->getAuthor());
     }
 
     // DC 1.0
 
-    public function testGetsSingleAuthorFromRss20_Dc10()
+    public function testGetsSingleAuthorFromRss20Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss20.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss094_Dc10()
+    public function testGetsSingleAuthorFromRss094Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss094.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss093_Dc10()
+    public function testGetsSingleAuthorFromRss093Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss093.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss092_Dc10()
+    public function testGetsSingleAuthorFromRss092Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss092.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss091_Dc10()
+    public function testGetsSingleAuthorFromRss091Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss091.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss10_Dc10()
+    public function testGetsSingleAuthorFromRss10Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss10.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss090_Dc10()
+    public function testGetsSingleAuthorFromRss090Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc10/rss090.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
     // DC 1.1
 
-    public function testGetsSingleAuthorFromRss20_Dc11()
+    public function testGetsSingleAuthorFromRss20Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss20.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss094_Dc11()
+    public function testGetsSingleAuthorFromRss094Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss094.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss093_Dc11()
+    public function testGetsSingleAuthorFromRss093Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss093.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss092_Dc11()
+    public function testGetsSingleAuthorFromRss092Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss092.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss091_Dc11()
+    public function testGetsSingleAuthorFromRss091Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss091.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss10_Dc11()
+    public function testGetsSingleAuthorFromRss10Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss10.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss090_Dc11()
+    public function testGetsSingleAuthorFromRss090Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/dc11/rss090.xml')
         );
-        $this->assertEquals(['name'=>'Joe Bloggs'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'Joe Bloggs'], $feed->getAuthor());
     }
 
     // Missing Author
 
-    public function testGetsSingleAuthorFromRss20_None()
+    public function testGetsSingleAuthorFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss20.xml')
@@ -937,7 +937,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss094_None()
+    public function testGetsSingleAuthorFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss094.xml')
@@ -945,7 +945,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss093_None()
+    public function testGetsSingleAuthorFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss093.xml')
@@ -953,7 +953,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss092_None()
+    public function testGetsSingleAuthorFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss092.xml')
@@ -961,7 +961,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss091_None()
+    public function testGetsSingleAuthorFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss091.xml')
@@ -969,7 +969,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss10_None()
+    public function testGetsSingleAuthorFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss10.xml')
@@ -977,7 +977,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getAuthor());
     }
 
-    public function testGetsSingleAuthorFromRss090_None()
+    public function testGetsSingleAuthorFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/author/plain/none/rss090.xml')
@@ -1046,7 +1046,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsCopyrightFromRss20_Dc10()
+    public function testGetsCopyrightFromRss20Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc10/rss20.xml')
@@ -1054,7 +1054,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss094_Dc10()
+    public function testGetsCopyrightFromRss094Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc10/rss094.xml')
@@ -1062,7 +1062,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss093_Dc10()
+    public function testGetsCopyrightFromRss093Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc10/rss093.xml')
@@ -1070,7 +1070,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss092_Dc10()
+    public function testGetsCopyrightFromRss092Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc10/rss092.xml')
@@ -1078,7 +1078,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss091_Dc10()
+    public function testGetsCopyrightFromRss091Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc10/rss091.xml')
@@ -1086,7 +1086,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss10_Dc10()
+    public function testGetsCopyrightFromRss10Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc10/rss10.xml')
@@ -1094,7 +1094,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss090_Dc10()
+    public function testGetsCopyrightFromRss090Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc10/rss090.xml')
@@ -1104,7 +1104,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsCopyrightFromRss20_Dc11()
+    public function testGetsCopyrightFromRss20Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc11/rss20.xml')
@@ -1112,7 +1112,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss094_Dc11()
+    public function testGetsCopyrightFromRss094Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc11/rss094.xml')
@@ -1120,7 +1120,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss093_Dc11()
+    public function testGetsCopyrightFromRss093Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc11/rss093.xml')
@@ -1128,7 +1128,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss092_Dc11()
+    public function testGetsCopyrightFromRss092Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc11/rss092.xml')
@@ -1136,7 +1136,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss091_Dc11()
+    public function testGetsCopyrightFromRss091Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc11/rss091.xml')
@@ -1144,7 +1144,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss10_Dc11()
+    public function testGetsCopyrightFromRss10Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc11/rss10.xml')
@@ -1152,7 +1152,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss090_Dc11()
+    public function testGetsCopyrightFromRss090Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/dc11/rss090.xml')
@@ -1162,7 +1162,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Copyright
 
-    public function testGetsCopyrightFromRss20_None()
+    public function testGetsCopyrightFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/none/rss20.xml')
@@ -1170,7 +1170,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss094_None()
+    public function testGetsCopyrightFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/none/rss094.xml')
@@ -1178,7 +1178,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss093_None()
+    public function testGetsCopyrightFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/none/rss093.xml')
@@ -1186,7 +1186,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss092_None()
+    public function testGetsCopyrightFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/none/rss092.xml')
@@ -1194,7 +1194,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss091_None()
+    public function testGetsCopyrightFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/none/rss091.xml')
@@ -1202,7 +1202,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss10_None()
+    public function testGetsCopyrightFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/none/rss10.xml')
@@ -1210,7 +1210,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getCopyright());
     }
 
-    public function testGetsCopyrightFromRss090_None()
+    public function testGetsCopyrightFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/copyright/plain/none/rss090.xml')
@@ -1279,7 +1279,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsDescriptionFromRss20_Dc10()
+    public function testGetsDescriptionFromRss20Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc10/rss20.xml')
@@ -1287,7 +1287,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss094_Dc10()
+    public function testGetsDescriptionFromRss094Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc10/rss094.xml')
@@ -1295,7 +1295,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss093_Dc10()
+    public function testGetsDescriptionFromRss093Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc10/rss093.xml')
@@ -1303,7 +1303,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss092_Dc10()
+    public function testGetsDescriptionFromRss092Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc10/rss092.xml')
@@ -1311,7 +1311,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss091_Dc10()
+    public function testGetsDescriptionFromRss091Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc10/rss091.xml')
@@ -1319,7 +1319,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss10_Dc10()
+    public function testGetsDescriptionFromRss10Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc10/rss10.xml')
@@ -1327,7 +1327,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss090_Dc10()
+    public function testGetsDescriptionFromRss090Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc10/rss090.xml')
@@ -1337,7 +1337,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsDescriptionFromRss20_Dc11()
+    public function testGetsDescriptionFromRss20Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc11/rss20.xml')
@@ -1345,7 +1345,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss094_Dc11()
+    public function testGetsDescriptionFromRss094Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc11/rss094.xml')
@@ -1353,7 +1353,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss093_Dc11()
+    public function testGetsDescriptionFromRss093Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc11/rss093.xml')
@@ -1361,7 +1361,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss092_Dc11()
+    public function testGetsDescriptionFromRss092Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc11/rss092.xml')
@@ -1369,7 +1369,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss091_Dc11()
+    public function testGetsDescriptionFromRss091Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc11/rss091.xml')
@@ -1377,7 +1377,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss10_Dc11()
+    public function testGetsDescriptionFromRss10Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc11/rss10.xml')
@@ -1385,7 +1385,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss090_Dc11()
+    public function testGetsDescriptionFromRss090Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/dc11/rss090.xml')
@@ -1395,7 +1395,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Description
 
-    public function testGetsDescriptionFromRss20_None()
+    public function testGetsDescriptionFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/none/rss20.xml')
@@ -1403,7 +1403,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss094_None()
+    public function testGetsDescriptionFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/none/rss094.xml')
@@ -1411,7 +1411,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss093_None()
+    public function testGetsDescriptionFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/none/rss093.xml')
@@ -1419,7 +1419,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss092_None()
+    public function testGetsDescriptionFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/none/rss092.xml')
@@ -1427,7 +1427,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss091_None()
+    public function testGetsDescriptionFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/none/rss091.xml')
@@ -1435,7 +1435,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss10_None()
+    public function testGetsDescriptionFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/none/rss10.xml')
@@ -1443,7 +1443,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getDescription());
     }
 
-    public function testGetsDescriptionFromRss090_None()
+    public function testGetsDescriptionFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/description/plain/none/rss090.xml')
@@ -1512,7 +1512,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsLanguageFromRss20_Dc10()
+    public function testGetsLanguageFromRss20Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc10/rss20.xml')
@@ -1520,7 +1520,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss094_Dc10()
+    public function testGetsLanguageFromRss094Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc10/rss094.xml')
@@ -1528,7 +1528,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss093_Dc10()
+    public function testGetsLanguageFromRss093Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc10/rss093.xml')
@@ -1536,7 +1536,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss092_Dc10()
+    public function testGetsLanguageFromRss092Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc10/rss092.xml')
@@ -1544,7 +1544,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss091_Dc10()
+    public function testGetsLanguageFromRss091Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc10/rss091.xml')
@@ -1552,7 +1552,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss10_Dc10()
+    public function testGetsLanguageFromRss10Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc10/rss10.xml')
@@ -1560,7 +1560,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss090_Dc10()
+    public function testGetsLanguageFromRss090Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc10/rss090.xml')
@@ -1570,7 +1570,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsLanguageFromRss20_Dc11()
+    public function testGetsLanguageFromRss20Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc11/rss20.xml')
@@ -1578,7 +1578,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss094_Dc11()
+    public function testGetsLanguageFromRss094Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc11/rss094.xml')
@@ -1586,7 +1586,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss093_Dc11()
+    public function testGetsLanguageFromRss093Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc11/rss093.xml')
@@ -1594,7 +1594,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss092_Dc11()
+    public function testGetsLanguageFromRss092Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc11/rss092.xml')
@@ -1602,7 +1602,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss091_Dc11()
+    public function testGetsLanguageFromRss091Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc11/rss091.xml')
@@ -1610,7 +1610,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss10_Dc11()
+    public function testGetsLanguageFromRss10Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc11/rss10.xml')
@@ -1618,7 +1618,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('en-GB', $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss090_Dc11()
+    public function testGetsLanguageFromRss090Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/dc11/rss090.xml')
@@ -1628,7 +1628,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Other
 
-    public function testGetsLanguageFromRss10_XmlLang()
+    public function testGetsLanguageFromRss10XmlLang()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/rdf/rss10.xml')
@@ -1638,7 +1638,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Language
 
-    public function testGetsLanguageFromRss20_None()
+    public function testGetsLanguageFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/none/rss20.xml')
@@ -1646,7 +1646,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss094_None()
+    public function testGetsLanguageFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/none/rss094.xml')
@@ -1654,7 +1654,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss093_None()
+    public function testGetsLanguageFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/none/rss093.xml')
@@ -1662,7 +1662,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss092_None()
+    public function testGetsLanguageFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/none/rss092.xml')
@@ -1670,7 +1670,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss091_None()
+    public function testGetsLanguageFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/none/rss091.xml')
@@ -1678,7 +1678,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss10_None()
+    public function testGetsLanguageFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/none/rss10.xml')
@@ -1686,7 +1686,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLanguage());
     }
 
-    public function testGetsLanguageFromRss090_None()
+    public function testGetsLanguageFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/language/plain/none/rss090.xml')
@@ -1755,7 +1755,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Link
 
-    public function testGetsLinkFromRss20_None()
+    public function testGetsLinkFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss20.xml')
@@ -1763,7 +1763,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss094_None()
+    public function testGetsLinkFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss094.xml')
@@ -1771,7 +1771,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss093_None()
+    public function testGetsLinkFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss093.xml')
@@ -1779,7 +1779,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss092_None()
+    public function testGetsLinkFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss092.xml')
@@ -1787,7 +1787,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss091_None()
+    public function testGetsLinkFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss091.xml')
@@ -1795,7 +1795,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss10_None()
+    public function testGetsLinkFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss10.xml')
@@ -1803,7 +1803,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getLink());
     }
 
-    public function testGetsLinkFromRss090_None()
+    public function testGetsLinkFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss090.xml')
@@ -1893,7 +1893,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Feed Link
 
-    public function testGetsFeedLinkFromRss20_None()
+    public function testGetsFeedLinkFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/feedlink/plain/none/rss20.xml')
@@ -1901,7 +1901,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss094_None()
+    public function testGetsFeedLinkFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/feedlink/plain/none/rss094.xml')
@@ -1909,7 +1909,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss093_None()
+    public function testGetsFeedLinkFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/feedlink/plain/none/rss093.xml')
@@ -1917,7 +1917,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss092_None()
+    public function testGetsFeedLinkFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/feedlink/plain/none/rss092.xml')
@@ -1925,7 +1925,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss091_None()
+    public function testGetsFeedLinkFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/feedlink/plain/none/rss091.xml')
@@ -1933,7 +1933,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss10_None()
+    public function testGetsFeedLinkFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/feedlink/plain/none/rss10.xml')
@@ -1941,7 +1941,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getFeedLink());
     }
 
-    public function testGetsFeedLinkFromRss090_None()
+    public function testGetsFeedLinkFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/feedlink/plain/none/rss090.xml')
@@ -2010,7 +2010,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Generator
 
-    public function testGetsGeneratorFromRss20_None()
+    public function testGetsGeneratorFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/generator/plain/none/rss20.xml')
@@ -2018,7 +2018,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss094_None()
+    public function testGetsGeneratorFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/generator/plain/none/rss094.xml')
@@ -2026,7 +2026,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss093_None()
+    public function testGetsGeneratorFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/generator/plain/none/rss093.xml')
@@ -2034,7 +2034,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss092_None()
+    public function testGetsGeneratorFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/generator/plain/none/rss092.xml')
@@ -2042,7 +2042,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss091_None()
+    public function testGetsGeneratorFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/generator/plain/none/rss091.xml')
@@ -2050,7 +2050,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss10_None()
+    public function testGetsGeneratorFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/generator/plain/none/rss10.xml')
@@ -2058,7 +2058,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getGenerator());
     }
 
-    public function testGetsGeneratorFromRss090_None()
+    public function testGetsGeneratorFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/generator/plain/none/rss090.xml')
@@ -2078,7 +2078,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($edate, $feed->getLastBuildDate());
     }
 
-    public function testGetsLastBuildDateFromRss20_None()
+    public function testGetsLastBuildDateFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/lastbuilddate/plain/none/rss20.xml')
@@ -2221,7 +2221,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Missing Hubs
 
-    public function testGetsHubsFromRss20_None()
+    public function testGetsHubsFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/hubs/plain/none/rss20.xml')
@@ -2229,7 +2229,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss094_None()
+    public function testGetsHubsFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/hubs/plain/none/rss094.xml')
@@ -2237,7 +2237,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss093_None()
+    public function testGetsHubsFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/hubs/plain/none/rss093.xml')
@@ -2245,7 +2245,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss092_None()
+    public function testGetsHubsFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/hubs/plain/none/rss092.xml')
@@ -2253,7 +2253,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss091_None()
+    public function testGetsHubsFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/hubs/plain/none/rss091.xml')
@@ -2261,7 +2261,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss10_None()
+    public function testGetsHubsFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/hubs/plain/none/rss10.xml')
@@ -2269,7 +2269,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getHubs());
     }
 
-    public function testGetsHubsFromRss090_None()
+    public function testGetsHubsFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/hubs/plain/none/rss090.xml')
@@ -2294,7 +2294,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.0
 
-    public function testGetsCategoriesFromRss090_Dc10()
+    public function testGetsCategoriesFromRss090Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/rss090.xml')
@@ -2303,7 +2303,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091_Dc10()
+    public function testGetsCategoriesFromRss091Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/rss091.xml')
@@ -2312,7 +2312,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092_Dc10()
+    public function testGetsCategoriesFromRss092Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/rss092.xml')
@@ -2321,7 +2321,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093_Dc10()
+    public function testGetsCategoriesFromRss093Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/rss093.xml')
@@ -2330,7 +2330,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094_Dc10()
+    public function testGetsCategoriesFromRss094Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/rss094.xml')
@@ -2339,7 +2339,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10_Dc10()
+    public function testGetsCategoriesFromRss10Dc10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc10/rss10.xml')
@@ -2350,7 +2350,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // DC 1.1
 
-    public function testGetsCategoriesFromRss090_Dc11()
+    public function testGetsCategoriesFromRss090Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/rss090.xml')
@@ -2359,7 +2359,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091_Dc11()
+    public function testGetsCategoriesFromRss091Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/rss091.xml')
@@ -2368,7 +2368,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092_Dc11()
+    public function testGetsCategoriesFromRss092Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/rss092.xml')
@@ -2377,7 +2377,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093_Dc11()
+    public function testGetsCategoriesFromRss093Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/rss093.xml')
@@ -2386,7 +2386,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094_Dc11()
+    public function testGetsCategoriesFromRss094Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/rss094.xml')
@@ -2395,7 +2395,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'topic2'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10_Dc11()
+    public function testGetsCategoriesFromRss10Dc11()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/dc11/rss10.xml')
@@ -2406,7 +2406,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // Atom 1.0
 
-    public function testGetsCategoriesFromRss090_Atom10()
+    public function testGetsCategoriesFromRss090Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom10/rss090.xml')
@@ -2415,7 +2415,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091_Atom10()
+    public function testGetsCategoriesFromRss091Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom10/rss091.xml')
@@ -2424,7 +2424,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092_Atom10()
+    public function testGetsCategoriesFromRss092Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom10/rss092.xml')
@@ -2433,7 +2433,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093_Atom10()
+    public function testGetsCategoriesFromRss093Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom10/rss093.xml')
@@ -2442,7 +2442,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094_Atom10()
+    public function testGetsCategoriesFromRss094Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom10/rss094.xml')
@@ -2451,7 +2451,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['topic1', 'Cat & Dog'], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10_Atom10()
+    public function testGetsCategoriesFromRss10Atom10()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/atom10/rss10.xml')
@@ -2462,7 +2462,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
 
     // No Categories In Entry
 
-    public function testGetsCategoriesFromRss20_None()
+    public function testGetsCategoriesFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/rss20.xml')
@@ -2471,7 +2471,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss090_None()
+    public function testGetsCategoriesFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/rss090.xml')
@@ -2480,7 +2480,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss091_None()
+    public function testGetsCategoriesFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/rss091.xml')
@@ -2489,7 +2489,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss092_None()
+    public function testGetsCategoriesFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/rss092.xml')
@@ -2498,7 +2498,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss093_None()
+    public function testGetsCategoriesFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/rss093.xml')
@@ -2507,7 +2507,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss094_None()
+    public function testGetsCategoriesFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/rss094.xml')
@@ -2516,7 +2516,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals([], array_values($feed->getCategories()->getValues()));
     }
 
-    public function testGetsCategoriesFromRss10_None()
+    public function testGetsCategoriesFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/category/plain/none/rss10.xml')
@@ -2636,7 +2636,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
     /**
      * Get Image data (Unencoded Text) Missing
      */
-    public function testGetsImageFromRss20_None()
+    public function testGetsImageFromRss20None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/rss20.xml')
@@ -2644,7 +2644,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss094_None()
+    public function testGetsImageFromRss094None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/rss094.xml')
@@ -2652,7 +2652,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss093_None()
+    public function testGetsImageFromRss093None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/rss093.xml')
@@ -2660,7 +2660,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss092_None()
+    public function testGetsImageFromRss092None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/rss092.xml')
@@ -2668,7 +2668,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss091_None()
+    public function testGetsImageFromRss091None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/rss091.xml')
@@ -2676,7 +2676,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss10_None()
+    public function testGetsImageFromRss10None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/rss10.xml')
@@ -2684,7 +2684,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $feed->getImage());
     }
 
-    public function testGetsImageFromRss090_None()
+    public function testGetsImageFromRss090None()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/image/plain/none/rss090.xml')

@@ -57,9 +57,11 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setComment(DOMDocument $dom, DOMElement $root)
     {
-        if (!$this->getDataContainer()->getComment()) {
+        // @codingStandardsIgnoreEnd
+        if (! $this->getDataContainer()->getComment()) {
             return;
         }
         $c = $dom->createElement('at:comment');
@@ -76,10 +78,12 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setBy(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $data = $this->container->getBy();
-        if ((!$data || empty($data))) {
+        if ((! $data || empty($data))) {
             return;
         }
         $author = $this->dom->createElement('at:by');
