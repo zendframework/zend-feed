@@ -11,6 +11,7 @@ namespace ZendTest\Feed\Writer\Renderer\Feed;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Reader;
 
@@ -98,11 +99,9 @@ class AtomTest extends TestCase
         $this->assertEquals('This is a test feed.', $feed->getTitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedTitleIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('title');
         $atomFeed->render();
@@ -155,11 +154,9 @@ class AtomTest extends TestCase
         $this->assertEquals(1234567890, $feed->getDateModified()->getTimestamp());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('dateModified');
         $atomFeed->render();
@@ -241,11 +238,9 @@ class AtomTest extends TestCase
         $atomFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedLinkToHtmlVersionOfFeedIfMissingThrowsExceptionIfIdMissing()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('link');
         $atomFeed->render();
@@ -259,11 +254,9 @@ class AtomTest extends TestCase
         $this->assertEquals('http://www.example.com/atom', $feed->getFeedLink());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedLinkToXmlAtomWhereTheFeedWillBeAvailableIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('feedLinks');
         $atomFeed->render();

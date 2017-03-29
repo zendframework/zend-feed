@@ -12,6 +12,7 @@ namespace ZendTest\Feed\Writer;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\InvalidArgumentException;
 
 /**
 * @group Zend_Feed
@@ -185,8 +186,8 @@ class DeletedTest extends TestCase
     {
         $entry = new Writer\Deleted;
 
-        $this->setExpectedException(
-            'Zend\Feed\Writer\Exception\InvalidArgumentException',
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
             'Invalid parameter: "uri" array value must be a non-empty string and valid URI/IRI'
         );
         $entry->setBy(['name' => 'joe', 'email' => 'joe@example.com', 'uri' => '']);
@@ -225,10 +226,8 @@ class DeletedTest extends TestCase
         $entry->setEncoding('ISO-8859-1');
         $this->assertEquals('ISO-8859-1', $entry->getEncoding());
 
-        $this->setExpectedException(
-            'Zend\Feed\Writer\Exception\InvalidArgumentException',
-            'Invalid parameter: parameter must be a non-empty string'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid parameter: parameter must be a non-empty string');
         $entry->setEncoding(null);
     }
 

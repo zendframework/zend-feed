@@ -12,6 +12,7 @@ namespace ZendTest\Feed\Writer;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 
 /**
  * @group      Zend_Feed
@@ -128,11 +129,9 @@ class EntryTest extends TestCase
         $this->assertEquals($expected, $entry->getEnclosure());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionOnMissingUri()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure([
@@ -141,11 +140,9 @@ class EntryTest extends TestCase
                              ]);
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionWhenUriIsInvalid()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure([
@@ -571,7 +568,7 @@ class EntryTest extends TestCase
     public function testSetsCommentCountDisallowed($count)
     {
         $entry = new Writer\Entry;
-        $this->setExpectedException('Zend\Feed\Writer\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $entry->setCommentCount($count);
     }
 

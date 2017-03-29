@@ -16,6 +16,7 @@ use Zend\Http\Client\Adapter\Test as TestAdapter;
 use Zend\Http\Response as HttpResponse;
 use Zend\Feed\Reader;
 use Zend\Feed\Reader\Http\ClientInterface;
+use Zend\Feed\Reader\Exception\InvalidArgumentException;
 
 /**
 * @group Zend_Feed
@@ -164,10 +165,10 @@ class ReaderTest extends TestCase
 
     /**
      * @group ZF-8328
-     * @expectedException Zend\Feed\Reader\Exception\RuntimeException
      */
     public function testImportsUriAndThrowsExceptionIfNotAFeed()
     {
+        $this->expectException(Reader\Exception\RuntimeException::class);
         if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testImportsUri() requires a network connection');
         }
@@ -291,7 +292,7 @@ class ReaderTest extends TestCase
      */
     public function testXxePreventionOnFeedParsing()
     {
-        $this->setExpectedException('Zend\Feed\Reader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $string = file_get_contents($this->feedSamplePath.'/Reader/xxe-atom10.xml');
         $string = str_replace('XXE_URI', $this->feedSamplePath.'/Reader/xxe-info.txt', $string);
         $feed = Reader\Reader::importString($string);
@@ -324,7 +325,7 @@ class ReaderTest extends TestCase
 
     public function testImportStringMethodThrowProperExceptionOnEmptyString()
     {
-        $this->setExpectedException('Zend\Feed\Reader\Exception\InvalidArgumentException');
+        $this->expectException(InvalidArgumentException::class);
         $string = ' ';
         $feed = Reader\Reader::importString($string);
     }
@@ -347,7 +348,7 @@ class ReaderTest extends TestCase
 
     public function testSetHttpClientThrowsException()
     {
-        $this->setExpectedException(Reader\Exception\InvalidHttpClientException::class);
+        $this->expectException(Reader\Exception\InvalidHttpClientException::class);
         Reader\Reader::setHttpClient(new stdClass);
     }
 

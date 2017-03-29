@@ -12,6 +12,7 @@ namespace ZendTest\Feed\Writer\Renderer\Feed;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer\Version;
 use Zend\Feed\Reader;
@@ -77,11 +78,9 @@ class RssTest extends TestCase
         $this->assertEquals('This is a test feed.', $feed->getTitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedTitleIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validWriter->remove('title');
         $rssFeed->render();
@@ -107,11 +106,9 @@ class RssTest extends TestCase
         $this->assertEquals('This is a test description.', $feed->getDescription());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedDescriptionThrowsExceptionIfMissing()
     {
+        $this->expectException(ExceptionInterface::class);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validWriter->remove('description');
         $rssFeed->render();
@@ -213,11 +210,9 @@ class RssTest extends TestCase
         $this->assertEquals('http://www.example.com', $feed->getLink());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedLinkToHtmlVersionOfFeedIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $rssFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validWriter->remove('link');
         $rssFeed->render();
@@ -417,11 +412,9 @@ class RssTest extends TestCase
         $this->assertEquals($expected, $feed->getImage());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionOnMissingLink()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'   => 'http://www.example.com/logo.gif',
                                            'title' => 'Image ALT'
@@ -430,11 +423,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionOnMissingTitle()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'  => 'http://www.example.com/logo.gif',
                                            'link' => 'http://www.example.com'
@@ -443,11 +434,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionOnMissingUri()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'link'  => 'http://www.example.com',
                                            'title' => 'Image ALT'
@@ -456,11 +445,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalDescriptionInvalid()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'         => 'http://www.example.com/logo.gif',
                                            'link'        => 'http://www.example.com',
@@ -471,11 +458,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalDescriptionEmpty()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'         => 'http://www.example.com/logo.gif',
                                            'link'        => 'http://www.example.com',
@@ -486,11 +471,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalHeightNotAnInteger()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'    => 'http://www.example.com/logo.gif',
                                            'link'   => 'http://www.example.com',
@@ -502,11 +485,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalHeightEmpty()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'    => 'http://www.example.com/logo.gif',
                                            'link'   => 'http://www.example.com',
@@ -518,11 +499,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalHeightGreaterThan400()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'    => 'http://www.example.com/logo.gif',
                                            'link'   => 'http://www.example.com',
@@ -534,11 +513,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalWidthNotAnInteger()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'    => 'http://www.example.com/logo.gif',
                                            'link'   => 'http://www.example.com',
@@ -550,11 +527,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalWidthEmpty()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'    => 'http://www.example.com/logo.gif',
                                            'link'   => 'http://www.example.com',
@@ -566,11 +541,9 @@ class RssTest extends TestCase
         $rssFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testImageThrowsExceptionIfOptionalWidthGreaterThan144()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->validWriter->setImage([
                                            'uri'    => 'http://www.example.com/logo.gif',
                                            'link'   => 'http://www.example.com',

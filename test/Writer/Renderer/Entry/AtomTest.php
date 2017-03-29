@@ -87,11 +87,9 @@ class AtomTest extends TestCase
         $this->assertEquals('This is a test entry.', $entry->getTitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedTitleIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('title');
         $atomFeed->render();
@@ -116,11 +114,9 @@ class AtomTest extends TestCase
         $this->assertEquals('<p class="xhtml:">This is test content for <em>xhtml:</em></p>', $entry->getContent());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedContentIfMissingThrowsExceptionIfThereIsNoLink()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('content');
         $this->validEntry->remove('link');
@@ -135,11 +131,9 @@ class AtomTest extends TestCase
         $this->assertEquals(1234567890, $entry->getDateModified()->getTimestamp());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('dateModified');
         $atomFeed->render();
@@ -227,22 +221,18 @@ class AtomTest extends TestCase
         $this->assertEquals($entry->getLink(), $entry->getId());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedIdIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('id');
         $this->validEntry->remove('link');
         $atomFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedIdThrowsExceptionIfNotUri()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('id');

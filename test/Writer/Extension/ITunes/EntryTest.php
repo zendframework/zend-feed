@@ -11,6 +11,7 @@ namespace ZendTest\Feed\Writer\Extension\ITunes;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 
 /**
 * @group Zend_Feed
@@ -25,20 +26,16 @@ class EntryTest extends TestCase
         $this->assertEquals('yes', $entry->getItunesBlock());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetBlockThrowsExceptionOnNonAlphaValue()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesBlock('123');
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetBlockThrowsExceptionIfValueGreaterThan255CharsLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesBlock(str_repeat('a', 256));
     }
@@ -57,11 +54,9 @@ class EntryTest extends TestCase
         $this->assertEquals(['joe'], $entry->getItunesAuthors());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddAuthorThrowsExceptionIfValueGreaterThan255CharsLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->addItunesAuthor(str_repeat('a', 256));
     }
@@ -87,29 +82,23 @@ class EntryTest extends TestCase
         $this->assertEquals('23:23:23', $entry->getItunesDuration());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetDurationThrowsExceptionOnUnknownFormat()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesDuration('abc');
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetDurationThrowsExceptionOnInvalidSeconds()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesDuration('23:456');
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetDurationThrowsExceptionOnInvalidMinutes()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesDuration('23:234:45');
     }
@@ -135,11 +124,9 @@ class EntryTest extends TestCase
         $this->assertEquals('clean', $entry->getItunesExplicit());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetExplicitThrowsExceptionOnUnknownTerm()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesExplicit('abc');
     }
@@ -154,11 +141,9 @@ class EntryTest extends TestCase
         $this->assertEquals($words, $entry->getItunesKeywords());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13'
@@ -166,11 +151,9 @@ class EntryTest extends TestCase
         $entry->setItunesKeywords($words);
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $words = [
             str_repeat('a', 253), str_repeat('b', 2)
@@ -185,11 +168,9 @@ class EntryTest extends TestCase
         $this->assertEquals('abc', $entry->getItunesSubtitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetSubtitleThrowsExceptionWhenValueExceeds255Chars()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesSubtitle(str_repeat('a', 256));
     }
@@ -201,11 +182,9 @@ class EntryTest extends TestCase
         $this->assertEquals('abc', $entry->getItunesSummary());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetSummaryThrowsExceptionWhenValueExceeds255Chars()
     {
+        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $entry->setItunesSummary(str_repeat('a', 4001));
     }

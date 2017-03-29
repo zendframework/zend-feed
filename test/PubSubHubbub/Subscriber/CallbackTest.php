@@ -16,6 +16,7 @@ use Zend\Feed\PubSubHubbub\HttpResponse;
 use Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback as CallbackSubscriber;
 use ArrayObject;
+use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
 
 /**
  * @group      Zend_Feed
@@ -87,13 +88,13 @@ class CallbackTest extends TestCase
 
     public function testThrowsExceptionOnInvalidHttpResponseObjectSet()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setHttpResponse(new \stdClass);
     }
 
     public function testThrowsExceptionIfNonObjectSetAsHttpResponseObject()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setHttpResponse('');
     }
 
@@ -110,19 +111,19 @@ class CallbackTest extends TestCase
 
     public function testThrowsExceptionOnSettingZeroAsSubscriberCount()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setSubscriberCount(0);
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsSubscriberCount()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setSubscriberCount(-1);
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsSubscriberCount()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setSubscriberCount('0aa');
     }
 
