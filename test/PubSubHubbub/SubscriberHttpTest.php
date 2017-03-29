@@ -112,10 +112,7 @@ class SubscriberHttpTest extends TestCase
                 $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods
-        );
+        $mocked = $this->getMockBuilder($className)->setMethods($stubMethods)->getMock();
         return $mocked;
     }
 }

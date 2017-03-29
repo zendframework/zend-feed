@@ -301,13 +301,13 @@ class SubscriberTest extends TestCase
                 $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods,
-            [],
-            str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
-            false
-        );
+
+        $mocked = $this->getMockBuilder($className)
+            ->setMethods($stubMethods)
+            ->setConstructorArgs([])
+            ->setMockClassName(str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())))
+            ->disableOriginalConstructor()
+            ->getMock();
         return $mocked;
     }
 }

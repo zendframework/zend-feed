@@ -140,7 +140,7 @@ class CallbackTest extends TestCase
      */
     public function testValidatesValidHttpGetData()
     {
-        $mockReturnValue = $this->getMock('Result', ['getArrayCopy']);
+        $mockReturnValue = $this->getMockBuilder('Result')->setMethods(['getArrayCopy'])->getMock();
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue([
@@ -193,7 +193,7 @@ class CallbackTest extends TestCase
 
     public function testReturnsTrueIfModeSetAsUnsubscribeFromHttpGetData()
     {
-        $mockReturnValue = $this->getMock('Result', ['getArrayCopy']);
+        $mockReturnValue = $this->getMockBuilder('Result')->setMethods(['getArrayCopy'])->getMock();
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue([
@@ -476,13 +476,12 @@ class CallbackTest extends TestCase
                 $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods,
-            [],
-            str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
-            false
-        );
+        $mocked = $this->getMockBuilder($className)
+            ->setMethods($stubMethods)
+            ->setConstructorArgs([])
+            ->setMockClassName(str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())))
+            ->disableOriginalConstructor()
+            ->getMock();
         return $mocked;
     }
 }

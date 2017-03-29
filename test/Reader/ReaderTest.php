@@ -303,7 +303,9 @@ class ReaderTest extends TestCase
     {
         $uri = 'http://example.com/feeds/reader.xml';
         $feedContents = file_get_contents($this->feedSamplePath . '/Reader/rss20.xml');
-        $response = $this->getMock('Zend\Feed\Reader\Http\ResponseInterface', ['getStatusCode', 'getBody']);
+        $response = $this->getMockBuilder('Zend\Feed\Reader\Http\ResponseInterface')
+            ->setMethods(['getStatusCode', 'getBody'])
+            ->getMock();
         $response->expects($this->once())
             ->method('getStatusCode')
             ->will($this->returnValue(200));
@@ -311,7 +313,9 @@ class ReaderTest extends TestCase
             ->method('getBody')
             ->will($this->returnValue($feedContents));
 
-        $client = $this->getMock('Zend\Feed\Reader\Http\ClientInterface', ['get']);
+        $client = $this->getMockBuilder('Zend\Feed\Reader\Http\ClientInterface')
+            ->setMethods(['get'])
+            ->getMock();
         $client->expects($this->once())
             ->method('get')
             ->with($this->equalTo($uri))
@@ -332,7 +336,7 @@ class ReaderTest extends TestCase
 
     public function testSetHttpFeedClient()
     {
-        $client = $this->getMock('Zend\Feed\Reader\Http\ClientInterface');
+        $client = $this->createMock('Zend\Feed\Reader\Http\ClientInterface');
         Reader\Reader::setHttpClient($client);
         $this->assertEquals($client, Reader\Reader::getHttpClient());
     }
