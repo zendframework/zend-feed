@@ -25,19 +25,21 @@ class Rss extends AbstractFeed
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(DOMDocument $dom, $type = null)
+    public function __construct(Reader\Reader $reader, DOMDocument $dom, $type = null)
     {
-        parent::__construct($dom, $type);
+        parent::__construct($reader, $dom, $type);
 
-        $manager = Reader\Reader::getExtensionManager();
+        $manager = $this->getReader()->getExtensionManager();
 
         $feed = $manager->get('DublinCore\Feed');
+        $feed->setReader($this->getReader());
         $feed->setDomDocument($dom);
         $feed->setType($this->data['type']);
         $feed->setXpath($this->xpath);
         $this->extensions['DublinCore\Feed'] = $feed;
 
         $feed = $manager->get('Atom\Feed');
+        $feed->setReader($this->getReader());
         $feed->setDomDocument($dom);
         $feed->setType($this->data['type']);
         $feed->setXpath($this->xpath);
@@ -122,7 +124,7 @@ class Rss extends AbstractFeed
             $authors = $this->getExtension('Atom')->getAuthors();
         } else {
             $authors = new Reader\Collection\Author(
-                Reader\Reader::arrayUnique($authors)
+                $this->getReader()->arrayUnique($authors)
             );
         }
 

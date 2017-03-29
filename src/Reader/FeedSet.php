@@ -22,6 +22,33 @@ class FeedSet extends ArrayObject
     public $atom = null;
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader
+     */
+    protected $reader = null;
+
+    /**
+     * Set the entry Feed Reader
+     *
+     * @param  Reader $reader
+     */
+    public function setReader(Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
      * Import a DOMNodeList from any document containing a set of links
      * for alternate versions of a document, which will normally refer to
      * RSS/RDF/Atom feeds for the current document.
@@ -51,11 +78,13 @@ class FeedSet extends ArrayObject
             } elseif (!isset($this->rdf) && $link->getAttribute('type') == 'application/rdf+xml') {
                 $this->rdf = $this->absolutiseUri(trim($link->getAttribute('href')), $uri);
             }
-            $this[] = new static([
+            $entity = new static([
                 'rel' => 'alternate',
                 'type' => $link->getAttribute('type'),
                 'href' => $this->absolutiseUri(trim($link->getAttribute('href')), $uri),
             ]);
+            $entity->setReader($this->getReader());
+            $this[] = $entity;
         }
     }
 
@@ -121,7 +150,7 @@ class FeedSet extends ArrayObject
             if (!$this->offsetExists('href')) {
                 return;
             }
-            $feed = Reader::import($this->offsetGet('href'));
+            $feed = $this->getReader()->import($this->offsetGet('href'));
             $this->offsetSet('feed', $feed);
             return $feed;
         }

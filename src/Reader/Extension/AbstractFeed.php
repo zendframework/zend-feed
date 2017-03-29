@@ -44,6 +44,33 @@ abstract class AbstractFeed
     protected $xpathPrefix = '';
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader
+     */
+    protected $reader = null;
+
+    /**
+     * Set the entry Feed Reader
+     *
+     * @param  Reader\Reader $reader
+     */
+    public function setReader(Reader\Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
      * Set the DOM document
      *
      * @param  DOMDocument $dom
@@ -99,7 +126,7 @@ abstract class AbstractFeed
     {
         $type = $this->data['type'];
         if (null === $type) {
-            $type = Reader\Reader::detectType($this->getDomDocument());
+            $type = $this->getReader()->detectType($this->getDomDocument());
             $this->setType($type);
         }
         return $type;

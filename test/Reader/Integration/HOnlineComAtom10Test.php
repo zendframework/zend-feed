@@ -21,13 +21,12 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        Reader\Reader::reset();
         $this->feedSamplePath = dirname(__FILE__) . '/_files/h-online.com-atom10.xml';
     }
 
     public function testGetsTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('The H - news feed', $feed->getTitle());
@@ -35,7 +34,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals([['name'=>'The H']], (array) $feed->getAuthors());
@@ -43,7 +42,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsSingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(['name'=>'The H'], $feed->getAuthor());
@@ -51,7 +50,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsCopyright()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(null, $feed->getCopyright());
@@ -59,7 +58,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('Technology news', $feed->getDescription());
@@ -67,7 +66,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLanguage()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(null, $feed->getLanguage());
@@ -75,7 +74,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://www.h-online.com', $feed->getLink());
@@ -83,7 +82,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
@@ -91,7 +90,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryCount()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(60, $feed->count());
@@ -103,7 +102,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryId()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -112,7 +111,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -121,7 +120,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -130,7 +129,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -139,7 +138,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -151,7 +150,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryContent()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -160,7 +159,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLinks()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -169,7 +168,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -178,7 +177,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -188,7 +187,7 @@ class HOnlineComAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();

@@ -23,6 +23,13 @@ abstract class AbstractEntry
     protected $data = [];
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader\Reader
+     */
+    protected $reader = null;
+
+    /**
      * DOM document object
      *
      * @var DOMDocument
@@ -64,17 +71,28 @@ abstract class AbstractEntry
      * @param  int $entryKey
      * @param  null|string $type
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(Reader\Reader $reader, DOMElement $entry, $entryKey, $type = null)
     {
+        $this->reader      = $reader;
         $this->entry       = $entry;
         $this->entryKey    = $entryKey;
         $this->domDocument = $entry->ownerDocument;
         if ($type !== null) {
             $this->data['type'] = $type;
         } else {
-            $this->data['type'] = Reader::detectType($entry);
+            $this->data['type'] = $this->getReader()->detectType($entry);
         }
         $this->_loadExtensions();
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
     }
 
     /**
@@ -209,13 +227,13 @@ abstract class AbstractEntry
      */
     protected function _loadExtensions()
     {
-        $all = Reader::getExtensions();
+        $all = $this->Reader()->getExtensions();
         $feed = $all['entry'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
-            $className = Reader::getPluginLoader()->getClassName($extension);
+            $className = $this->getReader()->getPluginLoader()->getClassName($extension);
             $this->extensions[$extension] = new $className(
                 $this->getElement(), $this->entryKey, $this->data['type']
             );

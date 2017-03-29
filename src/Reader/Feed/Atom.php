@@ -22,18 +22,20 @@ class Atom extends AbstractFeed
      * @param  DOMDocument $dom
      * @param  string $type
      */
-    public function __construct(DOMDocument $dom, $type = null)
+    public function __construct(Reader\Reader $reader, DOMDocument $dom, $type = null)
     {
-        parent::__construct($dom, $type);
-        $manager = Reader\Reader::getExtensionManager();
+        parent::__construct($reader, $dom, $type);
+        $manager = $this->getReader()->getExtensionManager();
 
         $atomFeed = $manager->get('Atom\Feed');
+        $atomFeed->setReader($this->getReader());
         $atomFeed->setDomDocument($dom);
         $atomFeed->setType($this->data['type']);
         $atomFeed->setXpath($this->xpath);
         $this->extensions['Atom\\Feed'] = $atomFeed;
 
         $atomFeed = $manager->get('DublinCore\Feed');
+        $atomFeed->setReader($this->getReader());
         $atomFeed->setDomDocument($dom);
         $atomFeed->setType($this->data['type']);
         $atomFeed->setXpath($this->xpath);

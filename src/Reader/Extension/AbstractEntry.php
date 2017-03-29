@@ -59,6 +59,33 @@ abstract class AbstractEntry
     protected $xpathPrefix = '';
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader
+     */
+    protected $reader = null;
+
+    /**
+     * Set the entry Feed Reader
+     *
+     * @param  Reader\Reader $reader
+     */
+    public function setReader(Reader\Reader $reader)
+    {
+        $this->reader = $reader;
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
+    }
+
+    /**
      * Set the entry DOMElement
      *
      * Has side effect of setting the DOMDocument for the entry.
@@ -159,7 +186,7 @@ abstract class AbstractEntry
     {
         $type = $this->data['type'];
         if ($type === null) {
-            $type = Reader\Reader::detectType($this->getEntryElement(), true);
+            $type = $this->getReader()->detectType($this->getEntryElement(), true);
             $this->setType($type);
         }
 

@@ -59,7 +59,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setEncoding('iso-8859-1');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('iso-8859-1', $feed->getEncoding());
     }
 
@@ -82,7 +82,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('UTF-8', $feed->getEncoding());
     }
 
@@ -90,7 +90,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('This is a test feed.', $feed->getTitle());
     }
 
@@ -112,7 +112,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->setTitle('<>&\'"áéíóú');
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getTitle());
     }
 
@@ -120,7 +120,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('This is a test description.', $feed->getDescription());
     }
 
@@ -139,7 +139,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->setDescription('<>&\'"áéíóú');
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getDescription());
     }
 
@@ -147,7 +147,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals(1234567890, $feed->getDateModified()->getTimestamp());
     }
 
@@ -166,7 +166,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setGenerator('FooFeedBuilder', '1.00', 'http://www.example.com');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('FooFeedBuilder', $feed->getGenerator());
     }
 
@@ -181,7 +181,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('Zend_Feed_Writer', $feed->getGenerator());
     }
 
@@ -193,7 +193,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setGenerator('<>&\'"áéíóú', '1.00', 'http://www.example.com');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getGenerator());
     }
 
@@ -202,7 +202,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setLanguage('fr');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('fr', $feed->getLanguage());
     }
 
@@ -217,7 +217,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals(null, $feed->getLanguage());
     }
 
@@ -225,7 +225,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('http://www.example.com', $feed->getLink());
     }
 
@@ -251,7 +251,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('http://www.example.com/atom', $feed->getFeedLink());
     }
 
@@ -269,7 +269,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed   = Reader\Reader::importString($atomFeed->saveXml());
+        $feed   = (new Reader\Reader())->importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals([
                                  'email'=> 'joe@example.com',
@@ -289,7 +289,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                                             'name' => '<>&\'"áéíóú',
                                             'uri'  => 'http://www.example.com/joe']);
         $atomFeed->render();
-        $feed   = Reader\Reader::importString($atomFeed->saveXml());
+        $feed   = (new Reader\Reader())->importString($atomFeed->saveXml());
         $author = $feed->getAuthor();
         $this->assertEquals([
                                  'email'=> '<>&\'"áéíóú',
@@ -312,7 +312,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setId('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6', $feed->getId());
     }
 
@@ -320,7 +320,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals($feed->getLink(), $feed->getId());
     }
 
@@ -329,7 +329,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setBaseUrl('http://www.example.com/base');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('http://www.example.com/base', $feed->getBaseUrl());
     }
 
@@ -338,7 +338,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setCopyright('Copyright © 2009 Paddy');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('Copyright © 2009 Paddy', $feed->getCopyright());
     }
 
@@ -347,7 +347,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setCopyright('<>&\'"áéíóú');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed = Reader\Reader::importString($atomFeed->saveXml());
+        $feed = (new Reader\Reader())->importString($atomFeed->saveXml());
         $this->assertEquals('<>&\'"áéíóú', $feed->getCopyright());
     }
 
@@ -361,7 +361,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                                            ]);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed     = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($atomFeed->saveXml());
         $expected = [
             ['term'   => 'cat_dog',
                   'label'  => 'Cats & Dogs',
@@ -383,7 +383,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                                            ]);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed     = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($atomFeed->saveXml());
         $expected = [
             ['term'   => 'cat_dog',
                   'label'  => '<>&\'"áéíóú',
@@ -402,7 +402,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed     = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($atomFeed->saveXml());
         $expected = [
             'http://www.example.com/hub', 'http://www.example.com/hub2'
         ];
@@ -416,7 +416,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         );
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
-        $feed     = Reader\Reader::importString($atomFeed->saveXml());
+        $feed     = (new Reader\Reader())->importString($atomFeed->saveXml());
         $expected = [
             'uri' => 'http://www.example.com/logo.gif'
         ];

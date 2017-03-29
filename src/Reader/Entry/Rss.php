@@ -38,13 +38,13 @@ class Rss extends AbstractEntry implements EntryInterface
      * @param  string $entryKey
      * @param  string $type
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(Reader\Reader $reader, DOMElement $entry, $entryKey, $type = null)
     {
-        parent::__construct($entry, $entryKey, $type);
+        parent::__construct($reader, $entry, $entryKey, $type);
         $this->xpathQueryRss = '//item[' . ($this->entryKey+1) . ']';
         $this->xpathQueryRdf = '//rss:item[' . ($this->entryKey+1) . ']';
 
-        $manager    = Reader\Reader::getExtensionManager();
+        $manager    = $this->getReader()->getExtensionManager();
         $extensions = [
             'DublinCore\Entry',
             'Content\Entry',
@@ -55,6 +55,7 @@ class Rss extends AbstractEntry implements EntryInterface
         ];
         foreach ($extensions as $name) {
             $extension = $manager->get($name);
+            $extension->setReader($this->getReader());
             $extension->setEntryElement($entry);
             $extension->setEntryKey($entryKey);
             $extension->setType($type);
@@ -125,7 +126,7 @@ class Rss extends AbstractEntry implements EntryInterface
             $authors = $this->getExtension('Atom')->getAuthors();
         } else {
             $authors = new Reader\Collection\Author(
-                Reader\Reader::arrayUnique($authors)
+                $this->getReader()->arrayUnique($authors)
             );
         }
 

@@ -29,18 +29,19 @@ class Atom extends AbstractEntry implements EntryInterface
      * @param  int $entryKey
      * @param  string $type
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(Reader\Reader $reader, DOMElement $entry, $entryKey, $type = null)
     {
-        parent::__construct($entry, $entryKey, $type);
+        parent::__construct($reader, $entry, $entryKey, $type);
 
         // Everyone by now should know XPath indices start from 1 not 0
         $this->xpathQuery = '//atom:entry[' . ($this->entryKey + 1) . ']';
 
-        $manager    = Reader\Reader::getExtensionManager();
+        $manager    = $this->getReader()->getExtensionManager();
         $extensions = ['Atom\Entry', 'Thread\Entry', 'DublinCore\Entry'];
 
         foreach ($extensions as $name) {
             $extension = $manager->get($name);
+            $extension->setReader($this->getReader());
             $extension->setEntryElement($entry);
             $extension->setEntryKey($entryKey);
             $extension->setType($type);

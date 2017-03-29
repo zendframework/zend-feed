@@ -25,6 +25,13 @@ abstract class AbstractEntry
     protected $data = [];
 
     /**
+     * Feed Reader instance
+     *
+     * @var Reader\Reader
+     */
+    protected $reader = null;
+
+    /**
      * DOM document object
      *
      * @var DOMDocument
@@ -66,19 +73,30 @@ abstract class AbstractEntry
      * @param  int $entryKey
      * @param  string $type
      */
-    public function __construct(DOMElement $entry, $entryKey, $type = null)
+    public function __construct(Reader\Reader $reader, DOMElement $entry, $entryKey, $type = null)
     {
+        $this->reader      = $reader;
         $this->entry       = $entry;
         $this->entryKey    = $entryKey;
         $this->domDocument = $entry->ownerDocument;
         if ($type !== null) {
             $this->data['type'] = $type;
         } elseif ($this->domDocument !== null) {
-            $this->data['type'] = Reader\Reader::detectType($this->domDocument);
+            $this->data['type'] = $this->getReader()->detectType($this->domDocument);
         } else {
             $this->data['type'] = Reader\Reader::TYPE_ANY;
         }
         $this->loadExtensions();
+    }
+
+    /**
+     * Get Feed Reader
+     *
+     * @return Reader\Reader
+     */
+    public function getReader()
+    {
+        return $this->reader;
     }
 
     /**
@@ -216,14 +234,16 @@ abstract class AbstractEntry
      */
     protected function loadExtensions()
     {
-        $all     = Reader\Reader::getExtensions();
-        $manager = Reader\Reader::getExtensionManager();
+        $all     = $this->getReader()->getExtensions();
+        $manager = $this->getReader()->getExtensionManager();
+
         $feed    = $all['entry'];
         foreach ($feed as $extension) {
             if (in_array($extension, $all['core'])) {
                 continue;
             }
             $plugin = $manager->get($extension);
+            $plugin->setReader($this->getReader());
             $plugin->setEntryElement($this->getElement());
             $plugin->setEntryKey($this->entryKey);
             $plugin->setType($this->data['type']);

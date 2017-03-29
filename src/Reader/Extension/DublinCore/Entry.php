@@ -10,7 +10,6 @@
 namespace Zend\Feed\Reader\Extension\DublinCore;
 
 use DateTime;
-use Zend\Feed\Reader;
 use Zend\Feed\Reader\Collection;
 use Zend\Feed\Reader\Extension;
 
@@ -65,7 +64,7 @@ class Entry extends Extension\AbstractEntry
                 ];
             }
             $authors = new Collection\Author(
-                Reader\Reader::arrayUnique($authors)
+                $this->getReader()->arrayUnique($authors)
             );
         } else {
             $authors = null;

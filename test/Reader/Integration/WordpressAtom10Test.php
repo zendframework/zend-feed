@@ -21,13 +21,12 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        Reader\Reader::reset();
         $this->feedSamplePath = dirname(__FILE__) . '/_files/wordpress-atom10.xml';
     }
 
     public function testGetsTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('Norm 2782', $feed->getTitle());
@@ -35,7 +34,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals([
@@ -45,7 +44,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsSingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(['name'=>'norm2782', 'uri'=>'http://www.norm2782.com'], $feed->getAuthor());
@@ -53,7 +52,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsCopyright()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(null, $feed->getCopyright());
@@ -61,7 +60,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('Why are you here?', $feed->getDescription());
@@ -69,7 +68,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLanguage()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('en', $feed->getLanguage());
@@ -77,7 +76,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('http://www.norm2782.com', $feed->getLink());
@@ -85,7 +84,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals('UTF-8', $feed->getEncoding());
@@ -93,7 +92,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryCount()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $this->assertEquals(10, $feed->count());
@@ -105,7 +104,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryId()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -114,7 +113,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryTitle()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -127,7 +126,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryAuthors()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -136,7 +135,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntrySingleAuthor()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -145,7 +144,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryDescription()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -157,7 +156,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryContent()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -166,7 +165,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLinks()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -175,7 +174,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -184,7 +183,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryPermaLink()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
@@ -194,7 +193,7 @@ class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
 
     public function testGetsEntryEncoding()
     {
-        $feed = Reader\Reader::importString(
+        $feed = (new Reader\Reader())->importString(
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
