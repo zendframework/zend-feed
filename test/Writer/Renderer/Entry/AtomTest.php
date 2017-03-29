@@ -10,6 +10,7 @@
 namespace ZendTest\Feed\Writer\Renderer\Entry;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 use Zend\Feed\Reader;
