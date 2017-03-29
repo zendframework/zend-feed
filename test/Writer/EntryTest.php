@@ -28,15 +28,15 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testAddsAuthorNameFromArray()
     {
         $entry = new Writer\Entry;
-        $entry->addAuthor(['name'=> 'Joe']);
-        $this->assertEquals([['name'=> 'Joe']], $entry->getAuthors());
+        $entry->addAuthor(['name' => 'Joe']);
+        $this->assertEquals([['name' => 'Joe']], $entry->getAuthors());
     }
 
     public function testAddsAuthorEmailFromArray()
     {
         $entry = new Writer\Entry;
         $entry->addAuthor(['name' => 'Joe',
-                                'email'=> 'joe@example.com']);
+                                'email' => 'joe@example.com']);
         $this->assertEquals([['name'  => 'Joe',
                                         'email' => 'joe@example.com']], $entry->getAuthors());
     }
@@ -44,9 +44,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testAddsAuthorUriFromArray()
     {
         $entry = new Writer\Entry;
-        $entry->addAuthor(['name'=> 'Joe',
+        $entry->addAuthor(['name' => 'Joe',
                                 'uri' => 'http://www.example.com']);
-        $this->assertEquals([['name'=> 'Joe',
+        $this->assertEquals([['name' => 'Joe',
                                         'uri' => 'http://www.example.com']], $entry->getAuthors());
     }
 
@@ -54,7 +54,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         try {
-            $entry->addAuthor(['name'=> '']);
+            $entry->addAuthor(['name' => '']);
             $this->fail();
         } catch (Writer\Exception\InvalidArgumentException $e) {
         }
@@ -87,7 +87,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         try {
-            $entry->addAuthor(['uri'=> 'notauri']);
+            $entry->addAuthor(['uri' => 'notauri']);
             $this->fail();
         } catch (Writer\Exception\InvalidArgumentException $e) {
         }
@@ -97,15 +97,15 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     {
         $entry = new Writer\Entry;
         $entry->addAuthors([
-                                ['name'=> 'Joe',
+                                ['name' => 'Joe',
                                       'uri' => 'http://www.example.com'],
-                                ['name'=> 'Jane',
+                                ['name' => 'Jane',
                                       'uri' => 'http://www.example.com']
                            ]);
         $expected = [
-            ['name'=> 'Joe',
+            ['name' => 'Joe',
                   'uri' => 'http://www.example.com'],
-            ['name'=> 'Jane',
+            ['name' => 'Jane',
                   'uri' => 'http://www.example.com']
         ];
         $this->assertEquals($expected, $entry->getAuthors());
@@ -447,9 +447,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
 
         $entry->setCommentFeedLink(['uri' => 'http://www.example.com/id/comments',
-                                         'type'=> 'rdf']);
+                                         'type' => 'rdf']);
         $this->assertEquals([['uri' => 'http://www.example.com/id/comments',
-                                        'type'=> 'rdf']], $entry->getCommentFeedLinks());
+                                        'type' => 'rdf']], $entry->getCommentFeedLinks());
     }
 
     public function testSetCommentFeedLinkThrowsExceptionOnEmptyString()
@@ -458,7 +458,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         try {
             $entry->setCommentFeedLink(['uri' => '',
-                                             'type'=> 'rdf']);
+                                             'type' => 'rdf']);
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -469,7 +469,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         try {
             $entry->setCommentFeedLink(['uri' => 'http://',
-                                             'type'=> 'rdf']);
+                                             'type' => 'rdf']);
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }
@@ -480,7 +480,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
         try {
             $entry->setCommentFeedLink(['uri' => 'http://www.example.com/id/comments',
-                                             'type'=> 'foo']);
+                                             'type' => 'foo']);
             $this->fail();
         } catch (Writer\Exception\ExceptionInterface $e) {
         }

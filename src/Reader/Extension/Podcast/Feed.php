@@ -29,7 +29,7 @@ class Feed extends Extension\AbstractFeed
 
         $author = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:author)');
 
-        if (!$author) {
+        if (! $author) {
             $author = null;
         }
 
@@ -51,7 +51,7 @@ class Feed extends Extension\AbstractFeed
 
         $block = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:block)');
 
-        if (!$block) {
+        if (! $block) {
             $block = null;
         }
 
@@ -83,7 +83,7 @@ class Feed extends Extension\AbstractFeed
                     $children = [];
 
                     foreach ($node->childNodes as $childNode) {
-                        if (!($childNode instanceof DOMText)) {
+                        if (! ($childNode instanceof DOMText)) {
                             $children[$childNode->getAttribute('text')] = null;
                         }
                     }
@@ -93,7 +93,7 @@ class Feed extends Extension\AbstractFeed
             }
         }
 
-        if (!$categories) {
+        if (! $categories) {
             $categories = null;
         }
 
@@ -115,7 +115,7 @@ class Feed extends Extension\AbstractFeed
 
         $explicit = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:explicit)');
 
-        if (!$explicit) {
+        if (! $explicit) {
             $explicit = null;
         }
 
@@ -137,7 +137,7 @@ class Feed extends Extension\AbstractFeed
 
         $image = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:image/@href)');
 
-        if (!$image) {
+        if (! $image) {
             $image = null;
         }
 
@@ -159,7 +159,7 @@ class Feed extends Extension\AbstractFeed
 
         $keywords = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:keywords)');
 
-        if (!$keywords) {
+        if (! $keywords) {
             $keywords = null;
         }
 
@@ -181,7 +181,7 @@ class Feed extends Extension\AbstractFeed
 
         $newFeedUrl = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:new-feed-url)');
 
-        if (!$newFeedUrl) {
+        if (! $newFeedUrl) {
             $newFeedUrl = null;
         }
 
@@ -206,13 +206,13 @@ class Feed extends Extension\AbstractFeed
         $email = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:email)');
         $name  = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:owner/itunes:name)');
 
-        if (!empty($email)) {
+        if (! empty($email)) {
             $owner = $email . (empty($name) ? '' : ' (' . $name . ')');
-        } elseif (!empty($name)) {
+        } elseif (! empty($name)) {
             $owner = $name;
         }
 
-        if (!$owner) {
+        if (! $owner) {
             $owner = null;
         }
 
@@ -234,7 +234,7 @@ class Feed extends Extension\AbstractFeed
 
         $subtitle = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:subtitle)');
 
-        if (!$subtitle) {
+        if (! $subtitle) {
             $subtitle = null;
         }
 
@@ -256,7 +256,7 @@ class Feed extends Extension\AbstractFeed
 
         $summary = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:summary)');
 
-        if (!$summary) {
+        if (! $summary) {
             $summary = null;
         }
 

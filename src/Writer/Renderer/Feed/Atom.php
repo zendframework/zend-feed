@@ -34,7 +34,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
      */
     public function render()
     {
-        if (!$this->container->getEncoding()) {
+        if (! $this->container->getEncoding()) {
             $this->container->setEncoding('UTF-8');
         }
         $this->dom = new DOMDocument('1.0', $this->container->getEncoding());
@@ -75,7 +75,7 @@ class Atom extends AbstractAtom implements Renderer\RendererInterface
             if ($entry instanceof Writer\Entry) {
                 $renderer = new Renderer\Entry\Atom($entry);
             } else {
-                if (!$this->dom->documentElement->hasAttribute('xmlns:at')) {
+                if (! $this->dom->documentElement->hasAttribute('xmlns:at')) {
                     $this->dom->documentElement->setAttribute(
                         'xmlns:at',
                         'http://purl.org/atompub/tombstones/1.0'

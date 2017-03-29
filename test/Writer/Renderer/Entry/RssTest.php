@@ -170,25 +170,25 @@ class RssTest extends \PHPUnit_Framework_TestCase
     public function testEntryHoldsAnyAuthorAdded()
     {
         $this->validEntry->addAuthor(['name' => 'Jane',
-                                            'email'=> 'jane@example.com',
+                                            'email' => 'jane@example.com',
                                             'uri'  => 'http://www.example.com/jane']);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
         $entry    = $feed->current();
         $author   = $entry->getAuthor();
-        $this->assertEquals(['name'=> 'Jane'], $entry->getAuthor());
+        $this->assertEquals(['name' => 'Jane'], $entry->getAuthor());
     }
 
     public function testEntryAuthorCharDataEncoding()
     {
         $this->validEntry->addAuthor(['name' => '<>&\'"áéíóú',
-                                            'email'=> 'jane@example.com',
+                                            'email' => 'jane@example.com',
                                             'uri'  => 'http://www.example.com/jane']);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
         $entry    = $feed->current();
         $author   = $entry->getAuthor();
-        $this->assertEquals(['name'=> '<>&\'"áéíóú'], $entry->getAuthor());
+        $this->assertEquals(['name' => '<>&\'"áéíóú'], $entry->getAuthor());
     }
 
     public function testEntryHoldsAnyEnclosureAdded()
@@ -339,9 +339,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $this->validEntry->setCommentFeedLinks([
                                                      ['uri' => 'http://www.example.com/atom/id/1',
-                                                           'type'=> 'atom'],
+                                                           'type' => 'atom'],
                                                      ['uri' => 'http://www.example.com/rss/id/1',
-                                                           'type'=> 'rss'],
+                                                           'type' => 'rss'],
                                                 ]);
         $feed  = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();
@@ -356,7 +356,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                                ['term'   => 'cat_dog',
                                                      'label'  => 'Cats & Dogs',
                                                      'scheme' => 'http://example.com/schema1'],
-                                               ['term'=> 'cat_dog2']
+                                               ['term' => 'cat_dog2']
                                           ]);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
@@ -381,7 +381,7 @@ class RssTest extends \PHPUnit_Framework_TestCase
                                                ['term'   => '<>&\'"áéíóú',
                                                      'label'  => 'Cats & Dogs',
                                                      'scheme' => 'http://example.com/schema1'],
-                                               ['term'=> 'cat_dog2']
+                                               ['term' => 'cat_dog2']
                                           ]);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());

@@ -125,9 +125,11 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZF-9723
      */
+    // @codingStandardsIgnoreStart
     public function testDetectsTypeFromStringOrToRemindPaddyAboutForgettingATestWhichLetsAStupidTypoSurviveUnnoticedForMonths()
     {
         $feed = '<?xml version="1.0" encoding="utf-8" ?><rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/"><channel></channel></rdf:RDF>';
+        // @codingStandardsIgnoreEnd
         $type = Reader\Reader::detectType($feed);
         $this->assertEquals(Reader\Reader::TYPE_RSS_10, $type);
     }
@@ -152,7 +154,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testImportsUri()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testImportsUri() requires a network connection');
         }
 
@@ -165,7 +167,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testImportsUriAndThrowsExceptionIfNotAFeed()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testImportsUri() requires a network connection');
         }
 
@@ -174,7 +176,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetsFeedLinksAsValueObject()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
 
@@ -185,7 +187,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testCompilesLinksAsArrayObject()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
@@ -197,7 +199,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testFeedSetLoadsFeedObjectWhenFeedArrayKeyAccessed()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
@@ -207,7 +209,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     public function testZeroCountFeedSetReturnedFromEmptyList()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.example.com');
@@ -219,7 +221,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsFeedLinksAndTrimsNewlines()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
 
@@ -232,7 +234,7 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetsFeedLinksAndNormalisesRelativeUrls()
     {
-        if (!getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
+        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
 
@@ -250,7 +252,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         $testAdapter = new TestAdapter();
         $response = new HttpResponse();
         $response->setStatusCode(200);
-        $response->setContent('<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head><body></body></html>');
+        $response->setContent('<!DOCTYPE html><html><head><link rel="alternate" type="application/rss+xml" '
+            . 'href="../test.rss"><link rel="alternate" type="application/atom+xml" href="/test.atom"></head>'
+            .'<body></body></html>');
         $testAdapter->setResponse($response);
         Reader\Reader::setHttpClient(new HttpClient(null, ['adapter' => $testAdapter]));
 
@@ -279,7 +283,9 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * This test is failing on windows:
-     * Failed asserting that exception of type "Zend\Feed\Reader\Exception\RuntimeException" matches expected exception "Zend\Feed\Reader\Exception\InvalidArgumentException". Message was: "DOMDocument cannot parse XML: Entity 'discloseInfo' failed to parse".
+     * Failed asserting that exception of type "Zend\Feed\Reader\Exception\RuntimeException" matches expected exception
+     * "Zend\Feed\Reader\Exception\InvalidArgumentException". Message was: "DOMDocument cannot parse XML: Entity
+     * 'discloseInfo' failed to parse".
      * @todo why is the assertEquals commented out?
      */
     public function testXxePreventionOnFeedParsing()
@@ -344,8 +350,10 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         Reader\Reader::setHttpClient(new stdClass);
     }
 
+    // @codingStandardsIgnoreStart
     protected function _getTempDirectory()
     {
+        // @codingStandardsIgnoreEnd
         $tmpdir = [];
         foreach ([$_ENV, $_SERVER] as $tab) {
             foreach (['TMPDIR', 'TEMP', 'TMP', 'windir', 'SystemRoot'] as $key) {
@@ -383,8 +391,10 @@ class ReaderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    // @codingStandardsIgnoreStart
     protected function _isGoodTmpDir($dir)
     {
+        // @codingStandardsIgnoreEnd
         return (is_readable($dir) && is_writable($dir));
     }
 }

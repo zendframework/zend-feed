@@ -77,7 +77,7 @@ class Feed
      */
     public function setItunesBlock($value)
     {
-        if (!ctype_alpha($value) && strlen($value) > 0) {
+        if (! ctype_alpha($value) && strlen($value) > 0) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "block" may only'
             . ' contain alphabetic characters');
         }
@@ -116,7 +116,7 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "author" may only'
             . ' contain a maximum of 255 characters each');
         }
-        if (!isset($this->data['authors'])) {
+        if (! isset($this->data['authors'])) {
             $this->data['authors'] = [];
         }
         $this->data['authors'][] = $value;
@@ -132,11 +132,11 @@ class Feed
      */
     public function setItunesCategories(array $values)
     {
-        if (!isset($this->data['categories'])) {
+        if (! isset($this->data['categories'])) {
             $this->data['categories'] = [];
         }
         foreach ($values as $key => $value) {
-            if (!is_array($value)) {
+            if (! is_array($value)) {
                 if ($this->stringWrapper->strlen($value) > 255) {
                     throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "category" may only'
                     . ' contain a maximum of 255 characters each');
@@ -169,11 +169,11 @@ class Feed
      */
     public function setItunesImage($value)
     {
-        if (!Uri::factory($value)->isValid()) {
+        if (! Uri::factory($value)->isValid()) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "image" may only'
             . ' be a valid URI/IRI');
         }
-        if (!in_array(substr($value, -3), ['jpg', 'png'])) {
+        if (! in_array(substr($value, -3), ['jpg', 'png'])) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "image" may only'
             . ' use file extension "jpg" or "png" which must be the last three'
             . ' characters of the URI (i.e. no query string or fragment)');
@@ -192,9 +192,9 @@ class Feed
     public function setItunesDuration($value)
     {
         $value = (string) $value;
-        if (!ctype_digit($value)
-            && !preg_match("/^\d+:[0-5]{1}[0-9]{1}$/", $value)
-            && !preg_match("/^\d+:[0-5]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$/", $value)
+        if (! ctype_digit($value)
+            && ! preg_match("/^\d+:[0-5]{1}[0-9]{1}$/", $value)
+            && ! preg_match("/^\d+:[0-5]{1}[0-9]{1}:[0-5]{1}[0-9]{1}$/", $value)
         ) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "duration" may only'
             . ' be of a specified [[HH:]MM:]SS format');
@@ -212,7 +212,7 @@ class Feed
      */
     public function setItunesExplicit($value)
     {
-        if (!in_array($value, ['yes', 'no', 'clean'])) {
+        if (! in_array($value, ['yes', 'no', 'clean'])) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "explicit" may only'
             . ' be one of "yes", "no" or "clean"');
         }
@@ -252,7 +252,7 @@ class Feed
      */
     public function setItunesNewFeedUrl($value)
     {
-        if (!Uri::factory($value)->isValid()) {
+        if (! Uri::factory($value)->isValid()) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "newFeedUrl" may only'
             . ' be a valid URI/IRI');
         }
@@ -283,7 +283,7 @@ class Feed
      */
     public function addItunesOwner(array $value)
     {
-        if (!isset($value['name']) || !isset($value['email'])) {
+        if (! isset($value['name']) || ! isset($value['email'])) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "owner" must'
             . ' be an array containing keys "name" and "email"');
         }
@@ -293,7 +293,7 @@ class Feed
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: any "owner" may only'
             . ' contain a maximum of 255 characters each for "name" and "email"');
         }
-        if (!isset($this->data['owners'])) {
+        if (! isset($this->data['owners'])) {
             $this->data['owners'] = [];
         }
         $this->data['owners'][] = $value;
@@ -345,14 +345,14 @@ class Feed
     public function __call($method, array $params)
     {
         $point = lcfirst(substr($method, 9));
-        if (!method_exists($this, 'setItunes' . ucfirst($point))
-            && !method_exists($this, 'addItunes' . ucfirst($point))
+        if (! method_exists($this, 'setItunes' . ucfirst($point))
+            && ! method_exists($this, 'addItunes' . ucfirst($point))
         ) {
             throw new Writer\Exception\BadMethodCallException(
                 'invalid method: ' . $method
             );
         }
-        if (!array_key_exists($point, $this->data) || empty($this->data[$point])) {
+        if (! array_key_exists($point, $this->data) || empty($this->data[$point])) {
             return;
         }
         return $this->data[$point];

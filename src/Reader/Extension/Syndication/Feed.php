@@ -39,8 +39,7 @@ class Feed extends Extension\AbstractFeed
                 return $period;
             default:
                 throw new Reader\Exception\InvalidArgumentException("Feed specified invalid update period: '$period'."
-                    .  " Must be one of hourly, daily, weekly or yearly"
-                );
+                    .  " Must be one of hourly, daily, weekly or yearly");
         }
     }
 
@@ -54,7 +53,7 @@ class Feed extends Extension\AbstractFeed
         $name = 'updateFrequency';
         $freq = $this->getData($name, 'number');
 
-        if (!$freq || $freq < 1) {
+        if (! $freq || $freq < 1) {
             $this->data[$name] = 1;
             return 1;
         }
@@ -72,7 +71,7 @@ class Feed extends Extension\AbstractFeed
         $name = 'updateFrequency';
         $freq = $this->getData($name, 'number');
 
-        if (!$freq || $freq < 1) {
+        if (! $freq || $freq < 1) {
             $this->data[$name] = 1;
             $freq = 1;
         }
@@ -130,7 +129,7 @@ class Feed extends Extension\AbstractFeed
 
         $data = $this->xpath->evaluate($type . '(' . $this->getXpathPrefix() . '/syn10:' . $name . ')');
 
-        if (!$data) {
+        if (! $data) {
             $data = null;
         }
 

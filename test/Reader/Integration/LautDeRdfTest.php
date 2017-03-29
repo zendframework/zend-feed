@@ -42,7 +42,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals([['name'=>'laut.de']], (array) $feed->getAuthors());
+        $this->assertEquals([['name' => 'laut.de']], (array) $feed->getAuthors());
     }
 
     public function testGetsSingleAuthor()
@@ -50,7 +50,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals(['name'=>'laut.de'], $feed->getAuthor());
+        $this->assertEquals(['name' => 'laut.de'], $feed->getAuthor());
     }
 
     public function testGetsCopyright()
@@ -123,7 +123,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals([['name'=>'laut.de']], (array) $entry->getAuthors());
+        $this->assertEquals([['name' => 'laut.de']], (array) $entry->getAuthors());
     }
 
     public function testGetsEntrySingleAuthor()
@@ -132,7 +132,7 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals(['name'=>'laut.de'], $entry->getAuthor());
+        $this->assertEquals(['name' => 'laut.de'], $entry->getAuthor());
     }
 
     // Technically, the next two tests should not pass. However the source feed has an encoding
@@ -146,7 +146,11 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.', $entry->getDescription());
+        $this->assertEquals(
+            'Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". '
+            . 'Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.',
+            $entry->getDescription()
+        );
     }
 
     public function testGetsEntryContent()
@@ -155,7 +159,11 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.', $entry->getContent());
+        $this->assertEquals(
+            'Schon lÃ¤nger haderten die KÃ¶lner mit der Plattform des "fiesen Rupert Murdoch". '
+            . 'Das Fass zum Ãberlaufen brachte aber ein Werbebanner von Deutschrapper Sido.',
+            $entry->getContent()
+        );
     }
 
     public function testGetsEntryLinks()
@@ -182,8 +190,10 @@ class LautDeRdfTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm',
-            $entry->getPermaLink());
+        $this->assertEquals(
+            'http://www.laut.de/vorlaut/news/2009/07/04/22426/index.htm',
+            $entry->getPermaLink()
+        );
     }
 
     public function testGetsEntryEncoding()

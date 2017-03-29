@@ -92,7 +92,7 @@ class Atom extends AbstractFeed
 
         $copyright = $this->getExtension('Atom')->getCopyright();
 
-        if (!$copyright) {
+        if (! $copyright) {
             $copyright = null;
         }
 
@@ -114,7 +114,7 @@ class Atom extends AbstractFeed
 
         $dateCreated = $this->getExtension('Atom')->getDateCreated();
 
-        if (!$dateCreated) {
+        if (! $dateCreated) {
             $dateCreated = null;
         }
 
@@ -136,7 +136,7 @@ class Atom extends AbstractFeed
 
         $dateModified = $this->getExtension('Atom')->getDateModified();
 
-        if (!$dateModified) {
+        if (! $dateModified) {
             $dateModified = null;
         }
 
@@ -168,7 +168,7 @@ class Atom extends AbstractFeed
 
         $description = $this->getExtension('Atom')->getDescription();
 
-        if (!$description) {
+        if (! $description) {
             $description = null;
         }
 
@@ -226,11 +226,11 @@ class Atom extends AbstractFeed
 
         $language = $this->getExtension('Atom')->getLanguage();
 
-        if (!$language) {
+        if (! $language) {
             $language = $this->xpath->evaluate('string(//@xml:lang[1])');
         }
 
-        if (!$language) {
+        if (! $language) {
             $language = null;
         }
 

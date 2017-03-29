@@ -85,7 +85,7 @@ class Rss extends AbstractFeed
 
         $authors = [];
         $authorsDc = $this->getExtension('DublinCore')->getAuthors();
-        if (!empty($authorsDc)) {
+        if (! empty($authorsDc)) {
             foreach ($authorsDc as $author) {
                 $authors[] = [
                     'name' => $author['name']
@@ -153,7 +153,7 @@ class Rss extends AbstractFeed
             $copyright = $this->xpath->evaluate('string(/rss/channel/copyright)');
         }
 
-        if (!$copyright && $this->getExtension('DublinCore') !== null) {
+        if (! $copyright && $this->getExtension('DublinCore') !== null) {
             $copyright = $this->getExtension('DublinCore')->getCopyright();
         }
 
@@ -161,7 +161,7 @@ class Rss extends AbstractFeed
             $copyright = $this->getExtension('Atom')->getCopyright();
         }
 
-        if (!$copyright) {
+        if (! $copyright) {
             $copyright = null;
         }
 
@@ -197,7 +197,7 @@ class Rss extends AbstractFeed
         if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
             $dateModified = $this->xpath->evaluate('string(/rss/channel/pubDate)');
-            if (!$dateModified) {
+            if (! $dateModified) {
                 $dateModified = $this->xpath->evaluate('string(/rss/channel/lastBuildDate)');
             }
             if ($dateModified) {
@@ -217,7 +217,8 @@ class Rss extends AbstractFeed
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
-                                    0, $e
+                                    0,
+                                    $e
                                 );
                             }
                         }
@@ -226,15 +227,15 @@ class Rss extends AbstractFeed
             }
         }
 
-        if (!$date) {
+        if (! $date) {
             $date = $this->getExtension('DublinCore')->getDate();
         }
 
-        if (!$date) {
+        if (! $date) {
             $date = $this->getExtension('Atom')->getDateModified();
         }
 
-        if (!$date) {
+        if (! $date) {
             $date = null;
         }
 
@@ -277,7 +278,8 @@ class Rss extends AbstractFeed
                                     'Could not load date due to unrecognised'
                                     .' format (should follow RFC 822 or 2822):'
                                     . $e->getMessage(),
-                                    0, $e
+                                    0,
+                                    $e
                                 );
                             }
                         }
@@ -286,7 +288,7 @@ class Rss extends AbstractFeed
             }
         }
 
-        if (!$date) {
+        if (! $date) {
             $date = null;
         }
 
@@ -313,7 +315,7 @@ class Rss extends AbstractFeed
             $description = $this->xpath->evaluate('string(/rdf:RDF/rss:channel/rss:description)');
         }
 
-        if (!$description && $this->getExtension('DublinCore') !== null) {
+        if (! $description && $this->getExtension('DublinCore') !== null) {
             $description = $this->getExtension('DublinCore')->getDescription();
         }
 
@@ -321,7 +323,7 @@ class Rss extends AbstractFeed
             $description = $this->getExtension('Atom')->getDescription();
         }
 
-        if (!$description) {
+        if (! $description) {
             $description = null;
         }
 
@@ -348,7 +350,7 @@ class Rss extends AbstractFeed
             $id = $this->xpath->evaluate('string(/rss/channel/guid)');
         }
 
-        if (!$id && $this->getExtension('DublinCore') !== null) {
+        if (! $id && $this->getExtension('DublinCore') !== null) {
             $id = $this->getExtension('DublinCore')->getId();
         }
 
@@ -356,7 +358,7 @@ class Rss extends AbstractFeed
             $id = $this->getExtension('Atom')->getId();
         }
 
-        if (!$id) {
+        if (! $id) {
             if ($this->getLink()) {
                 $id = $this->getLink();
             } elseif ($this->getTitle()) {
@@ -443,7 +445,7 @@ class Rss extends AbstractFeed
             $language = $this->xpath->evaluate('string(/rss/channel/language)');
         }
 
-        if (!$language && $this->getExtension('DublinCore') !== null) {
+        if (! $language && $this->getExtension('DublinCore') !== null) {
             $language = $this->getExtension('DublinCore')->getLanguage();
         }
 
@@ -451,11 +453,11 @@ class Rss extends AbstractFeed
             $language = $this->getExtension('Atom')->getLanguage();
         }
 
-        if (!$language) {
+        if (! $language) {
             $language = $this->xpath->evaluate('string(//@xml:lang[1])');
         }
 
-        if (!$language) {
+        if (! $language) {
             $language = null;
         }
 
@@ -486,7 +488,7 @@ class Rss extends AbstractFeed
             $link = $this->getExtension('Atom')->getLink();
         }
 
-        if (!$link) {
+        if (! $link) {
             $link = null;
         }
 
@@ -535,7 +537,7 @@ class Rss extends AbstractFeed
             $generator = $this->xpath->evaluate('string(/rss/channel/generator)');
         }
 
-        if (!$generator) {
+        if (! $generator) {
             if ($this->getType() !== Reader\Reader::TYPE_RSS_10 &&
             $this->getType() !== Reader\Reader::TYPE_RSS_090) {
                 $generator = $this->xpath->evaluate('string(/rss/channel/atom:generator)');
@@ -548,7 +550,7 @@ class Rss extends AbstractFeed
             $generator = $this->getExtension('Atom')->getGenerator();
         }
 
-        if (!$generator) {
+        if (! $generator) {
             $generator = null;
         }
 
@@ -575,15 +577,15 @@ class Rss extends AbstractFeed
             $title = $this->xpath->evaluate('string(/rdf:RDF/rss:channel/rss:title)');
         }
 
-        if (!$title && $this->getExtension('DublinCore') !== null) {
+        if (! $title && $this->getExtension('DublinCore') !== null) {
             $title = $this->getExtension('DublinCore')->getTitle();
         }
 
-        if (!$title) {
+        if (! $title) {
             $title = $this->getExtension('Atom')->getTitle();
         }
 
-        if (!$title) {
+        if (! $title) {
             $title = null;
         }
 

@@ -49,10 +49,14 @@ class Entry extends Extension\AbstractRenderer
      *
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _appendNamespaces()
     {
-        $this->getRootElement()->setAttribute('xmlns:thr',
-            'http://purl.org/syndication/thread/1.0');
+        // @codingStandardsIgnoreEnd
+        $this->getRootElement()->setAttribute(
+            'xmlns:thr',
+            'http://purl.org/syndication/thread/1.0'
+        );
     }
 
     /**
@@ -62,10 +66,12 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCommentLink(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $link = $this->getDataContainer()->getCommentLink();
-        if (!$link) {
+        if (! $link) {
             return;
         }
         $clink = $this->dom->createElement('link');
@@ -87,10 +93,12 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCommentFeedLinks(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $links = $this->getDataContainer()->getCommentFeedLinks();
-        if (!$links || empty($links)) {
+        if (! $links || empty($links)) {
             return;
         }
         foreach ($links as $link) {
@@ -114,8 +122,10 @@ class Entry extends Extension\AbstractRenderer
      * @param  DOMElement $root
      * @return void
      */
+    // @codingStandardsIgnoreStart
     protected function _setCommentCount(DOMDocument $dom, DOMElement $root)
     {
+        // @codingStandardsIgnoreEnd
         $count = $this->getDataContainer()->getCommentCount();
         if ($count === null) {
             return;

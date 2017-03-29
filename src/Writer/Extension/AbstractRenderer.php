@@ -160,5 +160,7 @@ abstract class AbstractRenderer implements RendererInterface
      *
      * @return void
      */
+    // @codingStandardsIgnoreStart
     abstract protected function _appendNamespaces();
+    // @codingStandardsIgnoreEnd
 }

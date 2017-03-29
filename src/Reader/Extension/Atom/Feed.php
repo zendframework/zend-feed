@@ -53,7 +53,7 @@ class Feed extends Extension\AbstractFeed
         if ($list->length) {
             foreach ($list as $author) {
                 $author = $this->getAuthorFromElement($author);
-                if (!empty($author)) {
+                if (! empty($author)) {
                     $authors[] = $author;
                 }
             }
@@ -91,7 +91,7 @@ class Feed extends Extension\AbstractFeed
             $copyright = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:rights)');
         }
 
-        if (!$copyright) {
+        if (! $copyright) {
             $copyright = null;
         }
 
@@ -175,7 +175,7 @@ class Feed extends Extension\AbstractFeed
             $description = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:subtitle)');
         }
 
-        if (!$description) {
+        if (! $description) {
             $description = null;
         }
 
@@ -197,7 +197,7 @@ class Feed extends Extension\AbstractFeed
         // TODO: Add uri support
         $generator = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:generator)');
 
-        if (!$generator) {
+        if (! $generator) {
             $generator = null;
         }
 
@@ -219,7 +219,7 @@ class Feed extends Extension\AbstractFeed
 
         $id = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:id)');
 
-        if (!$id) {
+        if (! $id) {
             if ($this->getLink()) {
                 $id = $this->getLink();
             } elseif ($this->getTitle()) {
@@ -247,11 +247,11 @@ class Feed extends Extension\AbstractFeed
 
         $language = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:lang)');
 
-        if (!$language) {
+        if (! $language) {
             $language = $this->xpath->evaluate('string(//@xml:lang[1])');
         }
 
-        if (!$language) {
+        if (! $language) {
             $language = null;
         }
 
@@ -273,7 +273,7 @@ class Feed extends Extension\AbstractFeed
 
         $imageUrl = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:logo)');
 
-        if (!$imageUrl) {
+        if (! $imageUrl) {
             $image = null;
         } else {
             $image = ['uri' => $imageUrl];
@@ -297,7 +297,7 @@ class Feed extends Extension\AbstractFeed
 
         $baseUrl = $this->xpath->evaluate('string(//@xml:base[1])');
 
-        if (!$baseUrl) {
+        if (! $baseUrl) {
             $baseUrl = null;
         }
         $this->data['baseUrl'] = $baseUrl;
@@ -394,7 +394,7 @@ class Feed extends Extension\AbstractFeed
 
         $title = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/atom:title)');
 
-        if (!$title) {
+        if (! $title) {
             $title = null;
         }
 
@@ -482,10 +482,10 @@ class Feed extends Extension\AbstractFeed
      */
     protected function absolutiseUri($link)
     {
-        if (!Uri::factory($link)->isAbsolute()) {
+        if (! Uri::factory($link)->isAbsolute()) {
             if ($this->getBaseUrl() !== null) {
                 $link = $this->getBaseUrl() . $link;
-                if (!Uri::factory($link)->isValid()) {
+                if (! Uri::factory($link)->isValid()) {
                     $link = null;
                 }
             }
@@ -523,12 +523,12 @@ class Feed extends Extension\AbstractFeed
         $prefixAtom03 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_03);
         $prefixAtom10 = $dom->lookupPrefix(Reader\Reader::NAMESPACE_ATOM_10);
         if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_10)
-            || !empty($prefixAtom10)
+            || ! empty($prefixAtom10)
         ) {
             return Reader\Reader::TYPE_ATOM_10;
         }
         if ($dom->isDefaultNamespace(Reader\Reader::NAMESPACE_ATOM_03)
-            || !empty($prefixAtom03)
+            || ! empty($prefixAtom03)
         ) {
             return Reader\Reader::TYPE_ATOM_03;
         }

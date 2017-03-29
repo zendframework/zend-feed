@@ -76,13 +76,13 @@ class Uri
             return;
         }
 
-        $this->scheme   = isset($parsed['scheme'])   ? $parsed['scheme']   : null;
-        $this->host     = isset($parsed['host'])     ? $parsed['host']     : null;
-        $this->port     = isset($parsed['port'])     ? $parsed['port']     : null;
-        $this->user     = isset($parsed['user'])     ? $parsed['user']     : null;
-        $this->pass     = isset($parsed['pass'])     ? $parsed['pass']     : null;
-        $this->path     = isset($parsed['path'])     ? $parsed['path']     : null;
-        $this->query    = isset($parsed['query'])    ? $parsed['query']    : null;
+        $this->scheme   = isset($parsed['scheme']) ? $parsed['scheme'] : null;
+        $this->host     = isset($parsed['host']) ? $parsed['host'] : null;
+        $this->port     = isset($parsed['port']) ? $parsed['port'] : null;
+        $this->user     = isset($parsed['user']) ? $parsed['user'] : null;
+        $this->pass     = isset($parsed['pass']) ? $parsed['pass'] : null;
+        $this->path     = isset($parsed['path']) ? $parsed['path'] : null;
+        $this->query    = isset($parsed['query']) ? $parsed['query'] : null;
         $this->fragment = isset($parsed['fragment']) ? $parsed['fragment'] : null;
     }
 
@@ -140,7 +140,7 @@ class Uri
             return false;
         }
 
-        if ($this->scheme && !in_array($this->scheme, $this->validSchemes)) {
+        if ($this->scheme && ! in_array($this->scheme, $this->validSchemes)) {
             return false;
         }
 

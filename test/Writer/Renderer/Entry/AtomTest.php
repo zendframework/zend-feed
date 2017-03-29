@@ -34,7 +34,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validWriter->setLink('http://www.example.com');
         $this->validWriter->setFeedLink('http://www.example.com/atom', 'atom');
         $this->validWriter->addAuthor(['name' => 'Joe',
-                                             'email'=> 'joe@example.com',
+                                             'email' => 'joe@example.com',
                                              'uri'  => 'http://www.example.com/joe']);
         $this->validEntry = $this->validWriter->createEntry();
         $this->validEntry->setTitle('This is a test entry.');
@@ -43,7 +43,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->validEntry->setDateCreated(1234567000);
         $this->validEntry->setLink('http://www.example.com/1');
         $this->validEntry->addAuthor(['name' => 'Jane',
-                                            'email'=> 'jane@example.com',
+                                            'email' => 'jane@example.com',
                                             'uri'  => 'http://www.example.com/jane']);
         $this->validEntry->setContent('<p class="xhtml:">This is test content for <em>xhtml:</em></p>');
         $this->validWriter->addEntry($this->validEntry);
@@ -107,7 +107,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     /**
      * @group ZFWATOMCONTENT
      */
-    public function testEntryContentHasBeenSet_Xhtml()
+    public function testEntryContentHasBeenSetXhtml()
     {
         $renderer = new Renderer\Feed\Atom($this->validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
@@ -168,7 +168,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $author   = $entry->getAuthor();
         $this->assertEquals([
                                  'name' => 'Jane',
-                                 'email'=> 'jane@example.com',
+                                 'email' => 'jane@example.com',
                                  'uri'  => 'http://www.example.com/jane'], $entry->getAuthor());
     }
 
@@ -212,8 +212,10 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $renderer = new Renderer\Feed\Atom($this->validWriter);
         $feed     = Reader\Reader::importString($renderer->render()->saveXml());
         $entry    = $feed->current();
-        $this->assertEquals('tag:diveintomark.org,2004-05-27:/archives/2004/05/27/howto-atom-linkblog',
-                            $entry->getId());
+        $this->assertEquals(
+            'tag:diveintomark.org,2004-05-27:/archives/2004/05/27/howto-atom-linkblog',
+            $entry->getId()
+        );
     }
 
     public function testFeedIdDefaultIsUsedIfNotSetByHand()
@@ -272,7 +274,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
                                                ['term'   => 'cat_dog',
                                                      'label'  => 'Cats & Dogs',
                                                      'scheme' => 'http://example.com/schema1'],
-                                               ['term'=> 'cat_dog2']
+                                               ['term' => 'cat_dog2']
                                           ]);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $atomFeed->render();
@@ -294,9 +296,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $renderer = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->setCommentFeedLinks([
                                                      ['uri' => 'http://www.example.com/atom/id/1',
-                                                           'type'=> 'atom'],
+                                                           'type' => 'atom'],
                                                      ['uri' => 'http://www.example.com/rss/id/1',
-                                                           'type'=> 'rss'],
+                                                           'type' => 'rss'],
                                                 ]);
         $feed  = Reader\Reader::importString($renderer->render()->saveXml());
         $entry = $feed->current();

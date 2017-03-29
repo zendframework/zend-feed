@@ -22,6 +22,7 @@ use ArrayObject;
  */
 class CallbackTest extends \PHPUnit_Framework_TestCase
 {
+    // @codingStandardsIgnoreStart
     /** @var CallbackSubscriber */
     public $_callback;
     /** @var \Zend\Db\Adapter\Adapter|\PHPUnit_Framework_MockObject_MockObject */
@@ -32,6 +33,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public $_rowset;
     /** @var array */
     public $_get;
+    // @codingStandardsIgnoreEnd
     /** @var DateTime */
     public $now;
 
@@ -315,7 +317,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
                     'verify_token'      => hash('sha256', 'cba'),
                     'created_time'      => $t->getTimestamp(),
                     'lease_seconds'     => 1234567,
-                    'subscription_state'=> 'verified',
+                    'subscription_state' => 'verified',
                     'expiration_time'   => $t->add(new DateInterval('PT1234567S'))->format('Y-m-d H:i:s')
                 ]),
                 $this->equalTo(['id' => 'verifytokenkey'])
@@ -458,8 +460,10 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1, $this->_callback->getHttpResponse()->getHeader('X-Hub-On-Behalf-Of'));
     }
 
+    // @codingStandardsIgnoreStart
     protected function _getCleanMock($className)
     {
+        // @codingStandardsIgnoreEnd
         $class       = new \ReflectionClass($className);
         $methods     = $class->getMethods();
         $stubMethods = [];
