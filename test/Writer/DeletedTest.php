@@ -10,13 +10,14 @@
 namespace ZendTest\Feed\Writer;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 
 /**
 * @group Zend_Feed
 * @group Zend_Feed_Writer
 */
-class DeletedTest extends \PHPUnit_Framework_TestCase
+class DeletedTest extends TestCase
 {
     public function testSetsReference()
     {

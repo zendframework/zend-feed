@@ -10,13 +10,14 @@
 namespace ZendTest\Feed\Reader\Entry;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
 
 /**
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
-class AtomTest extends \PHPUnit_Framework_TestCase
+class AtomTest extends TestCase
 {
     protected $feedSamplePath = null;
 

@@ -10,13 +10,14 @@
 namespace ZendTest\Feed\Writer;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 
 /**
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
-class EntryTest extends \PHPUnit_Framework_TestCase
+class EntryTest extends TestCase
 {
     protected $feedSamplePath = null;
 

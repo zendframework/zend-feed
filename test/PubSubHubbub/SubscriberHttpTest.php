@@ -9,6 +9,7 @@
 
 namespace ZendTest\Feed\PubSubHubbub;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\PubSubHubbub\PubSubHubbub;
 use Zend\Feed\PubSubHubbub\Subscriber;
 use Zend\Http\Client as HttpClient;
@@ -25,7 +26,7 @@ use Zend\Http\Client as HttpClient;
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
+class SubscriberHttpTest extends TestCase
 {
     /** @var Subscriber */
     protected $subscriber = null;

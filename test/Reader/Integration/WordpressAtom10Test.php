@@ -9,13 +9,14 @@
 
 namespace ZendTest\Feed\Reader\Integration;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
 
 /**
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
-class WordpressAtom10Test extends \PHPUnit_Framework_TestCase
+class WordpressAtom10Test extends TestCase
 {
     protected $feedSamplePath = null;
 

@@ -9,13 +9,14 @@
 
 namespace ZendTest\Feed\Writer\Extension\ITunes;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 
 /**
 * @group Zend_Feed
 * @group Zend_Feed_Writer
 */
-class EntryTest extends \PHPUnit_Framework_TestCase
+class EntryTest extends TestCase
 {
     public function testSetBlock()
     {

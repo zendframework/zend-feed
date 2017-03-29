@@ -11,6 +11,7 @@ namespace ZendTest\Feed\PubSubHubbub\Subscriber;
 
 use DateInterval;
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\PubSubHubbub\HttpResponse;
 use Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback as CallbackSubscriber;
@@ -20,7 +21,7 @@ use ArrayObject;
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
     // @codingStandardsIgnoreStart
     /** @var CallbackSubscriber */

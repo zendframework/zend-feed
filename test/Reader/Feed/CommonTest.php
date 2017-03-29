@@ -9,13 +9,14 @@
 
 namespace ZendTest\Feed\Reader\Feed;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
 
 /**
 * @group Zend_Feed
 * @group Reader\Reader
 */
-class CommonTest extends \PHPUnit_Framework_TestCase
+class CommonTest extends TestCase
 {
     protected $feedSamplePath = null;
 

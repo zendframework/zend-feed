@@ -10,6 +10,7 @@
 namespace ZendTest\Feed\Writer;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Version;
 
@@ -17,7 +18,7 @@ use Zend\Feed\Writer\Version;
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
-class FeedTest extends \PHPUnit_Framework_TestCase
+class FeedTest extends TestCase
 {
     protected $feedSamplePath = null;
 

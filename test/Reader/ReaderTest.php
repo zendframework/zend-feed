@@ -9,6 +9,7 @@
 
 namespace ZendTest\Feed\Reader;
 
+use PHPUnit\Framework\TestCase;
 use stdClass;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Client\Adapter\Test as TestAdapter;
@@ -20,7 +21,7 @@ use Zend\Feed\Reader\Http\ClientInterface;
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
-class ReaderTest extends \PHPUnit_Framework_TestCase
+class ReaderTest extends TestCase
 {
     protected $feedSamplePath = null;
 

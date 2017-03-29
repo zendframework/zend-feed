@@ -9,6 +9,7 @@
 
 namespace ZendTest\Feed\PubSubHubbub;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Response as HttpResponse;
 use Zend\Feed\PubSubHubbub\Publisher;
@@ -18,7 +19,7 @@ use Zend\Feed\PubSubHubbub\PubSubHubbub;
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class PublisherTest extends \PHPUnit_Framework_TestCase
+class PublisherTest extends TestCase
 {
     /** @var Publisher */
     protected $publisher = null;

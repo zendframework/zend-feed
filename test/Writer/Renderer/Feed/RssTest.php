@@ -10,6 +10,7 @@
 namespace ZendTest\Feed\Writer\Renderer\Feed;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer\Version;
@@ -19,7 +20,7 @@ use Zend\Feed\Reader;
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
-class RssTest extends \PHPUnit_Framework_TestCase
+class RssTest extends TestCase
 {
     protected $validWriter = null;
 
