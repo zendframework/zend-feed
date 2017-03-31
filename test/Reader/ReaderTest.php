@@ -241,19 +241,6 @@ class ReaderTest extends TestCase
     /**
      * @group ZF-8330
      */
-    public function testGetsFeedLinksAndNormalisesRelativeUrls()
-    {
-        if (! getenv('TESTS_ZEND_FEED_READER_ONLINE_ENABLED')) {
-            $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
-        }
-
-        $links = Reader\Reader::findFeedLinks('http://meiobit.com');
-        $this->assertEquals('http://meiobit.com/feed/', $links->rss);
-    }
-
-    /**
-     * @group ZF-8330
-     */
     public function testGetsFeedLinksAndNormalisesRelativeUrlsOnUriWithPath()
     {
         $currClient = Reader\Reader::getHttpClient();
