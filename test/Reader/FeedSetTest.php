@@ -28,7 +28,7 @@ class FeedSetTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider linkAndUriProvider
      */
-    public function testAbsolutiseUri($link, $uri, $result = 'http://example.com/feed')
+    public function testAbsolutiseUri($link, $uri, $result)
     {
         $method = new ReflectionMethod('Zend\Feed\Reader\FeedSet', 'absolutiseUri');
         $method->setAccessible(true);
@@ -39,10 +39,14 @@ class FeedSetTest extends PHPUnit_Framework_TestCase
     public function linkAndUriProvider()
     {
         return [
-            'fully-qualified'   => ['feed', 'http://example.com'],
-            'scheme-relative'   => ['feed', '//example.com'],
-            'protocol-relative' => ['//example.com/feed', 'https://example.org', 'https://example.com/feed'],
-            'protocol-relative-default' => ['//example.com/feed', '//example.org'],
+            'fully-qualified' => ['feed', 'http://example.com', 'http://example.com/feed'],
+            'default-scheme' => ['feed', '//example.com', 'http://example.com/feed'],
+            'relative-path' => ['./feed', 'http://example.com/page', 'http://example.com/page/feed'],
+            'relative-path-parent' => ['../feed', 'http://example.com/page', 'http://example.com/feed'],
+            'scheme-relative' => ['//example.com/feed', 'https://example.org', 'https://example.com/feed'],
+            'scheme-relative-default' => ['//example.com/feed', '//example.org', 'http://example.com/feed'],
+            'invalid-absolute' => ['ftp://feed', 'http://example.com', null],
+            'invalid' => ['', null, null],
         ];
     }
 }
