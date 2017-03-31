@@ -68,21 +68,25 @@ class FeedSet extends ArrayObject
         if (! $linkUri->isAbsolute() or ! $linkUri->isValid()) {
             if ($uri !== null) {
                 $uri = Uri::factory($uri);
-
+            }
+            if ($linkUri->getHost()) {
+                // protocol relative
+                $scheme = $uri && $uri->getScheme() ? $uri->getScheme() : 'http';
+                $link = sprintf('%s://%s', $scheme, ltrim($link, '/'));
+            } elseif ($uri !== null) {
                 if ($link[0] !== '/') {
                     $link = $uri->getPath() . '/' . $link;
                 }
-
                 $link   = sprintf(
                     '%s://%s/%s',
                     ($uri->getScheme() ?: 'http'),
                     $uri->getHost(),
                     $this->canonicalizePath($link)
                 );
+            }
 
-                if (! Uri::factory($link)->isValid()) {
-                    $link = null;
-                }
+            if (! Uri::factory($link)->isValid()) {
+                $link = null;
             }
         }
         return $link;
