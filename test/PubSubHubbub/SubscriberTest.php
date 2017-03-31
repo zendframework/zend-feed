@@ -9,16 +9,20 @@
 
 namespace ZendTest\Feed\PubSubHubbub;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\PubSubHubbub\Subscriber;
 use Zend\Feed\PubSubHubbub\PubSubHubbub;
 use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Http\Client as HttpClient;
+use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class SubscriberTest extends \PHPUnit_Framework_TestCase
+class SubscriberTest extends TestCase
 {
     /** @var Subscriber */
     protected $subscriber = null;
@@ -33,10 +37,10 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
         PubSubHubbub::setHttpClient($client);
         $this->subscriber = new Subscriber;
         $this->adapter = $this->_getCleanMock(
-            '\Zend\Db\Adapter\Adapter'
+            Adapter::class
         );
         $this->tableGateway = $this->_getCleanMock(
-            '\Zend\Db\TableGateway\TableGateway'
+            TableGateway::class
         );
         $this->tableGateway->expects($this->any())->method('getAdapter')
             ->will($this->returnValue($this->adapter));
@@ -93,19 +97,19 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingEmptyHubServerUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->addHubUrl('');
     }
 
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->addHubUrl(123);
     }
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->addHubUrl('http://');
     }
 
@@ -175,27 +179,27 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingEmptyTopicUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setTopicUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringTopicUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setTopicUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidTopicUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setTopicUrl('http://');
     }
 
     public function testThrowsExceptionOnMissingTopicUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->getTopicUrl();
     }
 
@@ -207,27 +211,27 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingEmptyCallbackUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setCallbackUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringCallbackUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setCallbackUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidCallbackUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setCallbackUrl('http://');
     }
 
     public function testThrowsExceptionOnMissingCallbackUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->getCallbackUrl();
     }
 
@@ -239,19 +243,19 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingZeroAsLeaseSeconds()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setLeaseSeconds(0);
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsLeaseSeconds()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setLeaseSeconds(-1);
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsLeaseSeconds()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setLeaseSeconds('0aa');
     }
 
@@ -263,7 +267,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testSetsPreferredVerificationModeThrowsExceptionOnSettingBadMode()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->setPreferredVerificationMode('abc');
     }
 
@@ -282,7 +286,7 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
 
     public function testGetStorageThrowsExceptionIfNoneSet()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->subscriber->getStorage();
     }
 
@@ -299,13 +303,13 @@ class SubscriberTest extends \PHPUnit_Framework_TestCase
                 $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods,
-            [],
-            str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
-            false
-        );
+
+        $mocked = $this->getMockBuilder($className)
+            ->setMethods($stubMethods)
+            ->setConstructorArgs([])
+            ->setMockClassName(str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())))
+            ->disableOriginalConstructor()
+            ->getMock();
         return $mocked;
     }
 }

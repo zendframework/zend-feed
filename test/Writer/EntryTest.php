@@ -10,13 +10,17 @@
 namespace ZendTest\Feed\Writer;
 
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
+use Zend\Feed\Writer\Source;
+use Zend\Feed\Writer\Extension\ITunes\Entry;
 
 /**
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
-class EntryTest extends \PHPUnit_Framework_TestCase
+class EntryTest extends TestCase
 {
     protected $feedSamplePath = null;
 
@@ -127,11 +131,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $entry->getEnclosure());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionOnMissingUri()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure([
@@ -140,11 +142,9 @@ class EntryTest extends \PHPUnit_Framework_TestCase
                              ]);
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionWhenUriIsInvalid()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $entry = new Writer\Entry;
         $entry->setEnclosure([
@@ -570,7 +570,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
     public function testSetsCommentCountDisallowed($count)
     {
         $entry = new Writer\Entry;
-        $this->setExpectedException('Zend\Feed\Writer\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $entry->setCommentCount($count);
     }
 
@@ -674,7 +674,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $foo = $entry->getExtension('foo');
         $this->assertNull($foo);
 
-        $this->assertInstanceOf('Zend\Feed\Writer\Extension\ITunes\Entry', $entry->getExtension('ITunes'));
+        $this->assertInstanceOf(Entry::class, $entry->getExtension('ITunes'));
     }
 
     /**
@@ -685,7 +685,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $entry = new Writer\Entry;
 
         $extensions = $entry->getExtensions();
-        $this->assertInstanceOf('Zend\Feed\Writer\Extension\ITunes\Entry', $extensions['ITunes\Entry']);
+        $this->assertInstanceOf(Entry::class, $extensions['ITunes\Entry']);
     }
 
     /**
@@ -700,7 +700,7 @@ class EntryTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($source);
 
         $entry->setSource($entry->createSource());
-        $this->assertInstanceOf('Zend\Feed\Writer\Source', $entry->getSource());
+        $this->assertInstanceOf(Source::class, $entry->getSource());
     }
 
     public function testFluentInterface()

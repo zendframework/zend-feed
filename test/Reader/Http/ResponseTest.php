@@ -9,7 +9,7 @@
 
 namespace ZendTest\Feed\Reader\Http;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader\Exception\InvalidArgumentException;
 use Zend\Feed\Reader\Http\Response;
 use ZendTest\Feed\Reader\TestAsset\Psr7Stream;
@@ -88,7 +88,8 @@ class ResponseTest extends TestCase
      */
     public function testConstructorRaisesExceptionForInvalidStatusCode($statusCode, $contains)
     {
-        $this->setExpectedException(InvalidArgumentException::class, $contains);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($contains);
         new Response($statusCode);
     }
 
@@ -112,7 +113,7 @@ class ResponseTest extends TestCase
      */
     public function testConstructorRaisesExceptionForInvalidBody($body)
     {
-        $this->setExpectedException(InvalidArgumentException::class);
+        $this->expectException(InvalidArgumentException::class);
         new Response(200, $body);
     }
 
@@ -163,7 +164,8 @@ class ResponseTest extends TestCase
      */
     public function testConstructorRaisesExceptionForInvalidHeaderStructures($headers, $contains)
     {
-        $this->setExpectedException(InvalidArgumentException::class, $contains);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($contains);
         new Response(200, '', $headers);
     }
 

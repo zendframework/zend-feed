@@ -11,16 +11,21 @@ namespace ZendTest\Feed\PubSubHubbub\Subscriber;
 
 use DateInterval;
 use DateTime;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\PubSubHubbub\HttpResponse;
 use Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback as CallbackSubscriber;
 use ArrayObject;
+use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Adapter\Adapter;
 
 /**
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallbackTest extends TestCase
 {
     // @codingStandardsIgnoreStart
     /** @var CallbackSubscriber */
@@ -42,13 +47,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->_callback = new CallbackSubscriber;
 
         $this->_adapter      = $this->_getCleanMock(
-            '\Zend\Db\Adapter\Adapter'
+            Adapter::class
         );
         $this->_tableGateway = $this->_getCleanMock(
-            '\Zend\Db\TableGateway\TableGateway'
+            TableGateway::class
         );
         $this->_rowset       = $this->_getCleanMock(
-            '\Zend\Db\ResultSet\ResultSet'
+            ResultSet::class
         );
 
         $this->_tableGateway->expects($this->any())
@@ -76,23 +81,23 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     public function testCanSetHttpResponseObject()
     {
         $this->_callback->setHttpResponse(new HttpResponse);
-        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
+        $this->assertInstanceOf(HttpResponse::class, $this->_callback->getHttpResponse());
     }
 
     public function testCanUsesDefaultHttpResponseObject()
     {
-        $this->assertInstanceOf('Zend\Feed\PubSubHubbub\HttpResponse', $this->_callback->getHttpResponse());
+        $this->assertInstanceOf(HttpResponse::class, $this->_callback->getHttpResponse());
     }
 
     public function testThrowsExceptionOnInvalidHttpResponseObjectSet()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setHttpResponse(new \stdClass);
     }
 
     public function testThrowsExceptionIfNonObjectSetAsHttpResponseObject()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setHttpResponse('');
     }
 
@@ -109,19 +114,19 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingZeroAsSubscriberCount()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setSubscriberCount(0);
     }
 
     public function testThrowsExceptionOnSettingLessThanZeroAsSubscriberCount()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setSubscriberCount(-1);
     }
 
     public function testThrowsExceptionOnSettingAnyScalarTypeCastToAZeroOrLessIntegerAsSubscriberCount()
     {
-        $this->setExpectedException('\Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->_callback->setSubscriberCount('0aa');
     }
 
@@ -138,7 +143,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidatesValidHttpGetData()
     {
-        $mockReturnValue = $this->getMock('Result', ['getArrayCopy']);
+        $mockReturnValue = $this->getMockBuilder('Result')->setMethods(['getArrayCopy'])->getMock();
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue([
@@ -191,7 +196,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testReturnsTrueIfModeSetAsUnsubscribeFromHttpGetData()
     {
-        $mockReturnValue = $this->getMock('Result', ['getArrayCopy']);
+        $mockReturnValue = $this->getMockBuilder('Result')->setMethods(['getArrayCopy'])->getMock();
         $mockReturnValue->expects($this->any())
             ->method('getArrayCopy')
             ->will($this->returnValue([
@@ -474,13 +479,12 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
                 $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods,
-            [],
-            str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())),
-            false
-        );
+        $mocked = $this->getMockBuilder($className)
+            ->setMethods($stubMethods)
+            ->setConstructorArgs([])
+            ->setMockClassName(str_replace('\\', '_', ($className . '_PubsubSubscriberMock_' . uniqid())))
+            ->disableOriginalConstructor()
+            ->getMock();
         return $mocked;
     }
 }

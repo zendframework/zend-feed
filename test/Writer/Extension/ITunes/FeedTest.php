@@ -9,13 +9,15 @@
 
 namespace ZendTest\Feed\Writer\Extension\ITunes;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 
 /**
 * @group Zend_Feed
 * @group Zend_Feed_Writer
 */
-class FeedTest extends \PHPUnit_Framework_TestCase
+class FeedTest extends TestCase
 {
     public function testSetBlock()
     {
@@ -24,20 +26,16 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('yes', $feed->getItunesBlock());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetBlockThrowsExceptionOnNonAlphaValue()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesBlock('123');
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetBlockThrowsExceptionIfValueGreaterThan255CharsLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesBlock(str_repeat('a', 256));
     }
@@ -56,11 +54,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(['joe'], $feed->getItunesAuthors());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddAuthorThrowsExceptionIfValueGreaterThan255CharsLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->addItunesAuthor(str_repeat('a', 256));
     }
@@ -76,11 +72,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($cats, $feed->getItunesCategories());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetCategoriesThrowsExceptionIfAnyCatNameGreaterThan255CharsLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $cats = [
             'cat1',
@@ -104,20 +98,16 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/image.jpg', $feed->getItunesImage());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetImageThrowsExceptionOnInvalidUri()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesImage('http://');
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetImageThrowsExceptionOnInvalidImageExtension()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesImage('http://www.example.com/image.gif');
     }
@@ -143,29 +133,23 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('23:23:23', $feed->getItunesDuration());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetDurationThrowsExceptionOnUnknownFormat()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesDuration('abc');
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetDurationThrowsExceptionOnInvalidSeconds()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesDuration('23:456');
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetDurationThrowsExceptionOnInvalidMinutes()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesDuration('23:234:45');
     }
@@ -191,11 +175,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('clean', $feed->getItunesExplicit());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetExplicitThrowsExceptionOnUnknownTerm()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesExplicit('abc');
     }
@@ -210,11 +192,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($words, $feed->getItunesKeywords());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13'
@@ -222,11 +202,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $feed->setItunesKeywords($words);
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $words = [
             str_repeat('a', 253), str_repeat('b', 2)
@@ -241,11 +219,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/feed', $feed->getItunesNewFeedUrl());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetNewFeedUrlThrowsExceptionOnInvalidUri()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesNewFeedUrl('http://');
     }
@@ -271,11 +247,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('abc', $feed->getItunesSubtitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetSubtitleThrowsExceptionWhenValueExceeds255Chars()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesSubtitle(str_repeat('a', 256));
     }
@@ -287,11 +261,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('abc', $feed->getItunesSummary());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testSetSummaryThrowsExceptionWhenValueExceeds4000Chars()
     {
+        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesSummary(str_repeat('a', 4001));
     }
