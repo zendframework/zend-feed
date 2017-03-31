@@ -743,7 +743,7 @@ use Zend\Feed\Reader\ExtensionPluginManager;
 use Zend\Feed\Reader\Reader;
 
 $extensions = new ExtensionPluginManager();
-$extensions->setInvokableClass('JungleBooksEntry', JungleBooks\Entry::class);
+$extensions->setInvokableClass('JungleBooks\Entry', JungleBooks\Entry::class);
 Reader::setExtensionManager(new ExtensionManager($extensions));
 Reader::registerExtension('JungleBooks');
 
@@ -804,8 +804,8 @@ use Zend\Feed\Reader\ExtensionPluginManager;
 use Zend\Feed\Reader\Reader;
 
 $extensions = new ExtensionPluginManager();
-$extensions->setInvokableClass('JungleBooksEntry', JungleBooks\Entry::class);
-$extensions->setInvokableClass('JungleBooksFeed', JungleBooks\Feed::class);
+$extensions->setInvokableClass('JungleBooks\Entry', JungleBooks\Entry::class);
+$extensions->setInvokableClass('JungleBooks\Feed', JungleBooks\Feed::class);
 Reader::setExtensionManager(new ExtensionManager($extensions));
 Reader::registerExtension('JungleBooks');
 
