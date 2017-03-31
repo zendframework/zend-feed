@@ -82,6 +82,14 @@ class AtomTest extends TestCase
         $this->assertEquals('My Title', $feed->getTitle());
     }
 
+    public function testGetsTitleNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getTitle());
+    }
+
     /**
      * Get Authors (Unencoded Text)
      */
@@ -148,6 +156,14 @@ class AtomTest extends TestCase
         );
     }
 
+    public function testGetsSingleAuthorNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getAuthor());
+    }
+
     /**
      * Get creation date (Unencoded Text)
      */
@@ -169,6 +185,14 @@ class AtomTest extends TestCase
         $this->assertEquals($edate, $feed->getDateCreated());
     }
 
+    public function testGetsDateCreatedNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getDateCreated());
+    }
+
     /**
      * Get modification date (Unencoded Text)
      */
@@ -188,6 +212,14 @@ class AtomTest extends TestCase
         );
         $edate = DateTime::createFromFormat(DateTime::ATOM, '2009-03-07T08:03:50Z');
         $this->assertEquals($edate, $feed->getDateModified());
+    }
+
+    public function testGetsDateModifiedNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getDateModified());
     }
 
     /**
@@ -220,6 +252,14 @@ class AtomTest extends TestCase
         $this->assertEquals('Zend_Feed', $feed->getGenerator());
     }
 
+    public function testGetsGeneratorNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getGenerator());
+    }
+
     /**
      * Get Copyright (Unencoded Text)
      */
@@ -237,6 +277,14 @@ class AtomTest extends TestCase
             file_get_contents($this->feedSamplePath.'/copyright/plain/atom10.xml')
         );
         $this->assertEquals('Copyright 2008', $feed->getCopyright());
+    }
+
+    public function testGetsCopyrightNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getCopyright());
     }
 
     /**
@@ -258,6 +306,14 @@ class AtomTest extends TestCase
         $this->assertEquals('My Description', $feed->getDescription());
     }
 
+    public function testGetsDescriptionNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getDescription());
+    }
+
     /**
      * Get Id (Unencoded Text)
      */
@@ -277,6 +333,14 @@ class AtomTest extends TestCase
         $this->assertEquals('123', $feed->getId());
     }
 
+    public function testGetsIdNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getId());
+    }
+
     /**
      * Get Language (Unencoded Text)
      */
@@ -294,6 +358,14 @@ class AtomTest extends TestCase
             file_get_contents($this->feedSamplePath.'/language/plain/atom10.xml')
         );
         $this->assertEquals('en-GB', $feed->getLanguage());
+    }
+
+    public function testGetsLanguageNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getLanguage());
     }
 
     /**
@@ -329,6 +401,14 @@ class AtomTest extends TestCase
             file_get_contents($this->feedSamplePath.'/link/plain/atom10-relative.xml')
         );
         $this->assertEquals('http://www.example.com', $feed->getLink());
+    }
+
+    public function testGetsLinkNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getLink());
     }
 
     /**
@@ -376,6 +456,14 @@ class AtomTest extends TestCase
         );
         $feed->setOriginalSourceUri('http://www.example.com/feed/atom');
         $this->assertEquals('http://www.example.com/feed/atom', $feed->getFeedLink());
+    }
+
+    public function testGetsFeedLinkNullFromEmpty()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath . '/empty.xml')
+        );
+        $this->assertNull($feed->getFeedLink());
     }
 
     /**
