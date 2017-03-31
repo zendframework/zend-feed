@@ -41,14 +41,14 @@ interface FeedInterface extends Iterator, Countable
     /**
      * Get the feed creation date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getDateCreated();
 
     /**
      * Get the feed modification date
      *
-     * @return string|null
+     * @return \DateTime|null
      */
     public function getDateModified();
 
