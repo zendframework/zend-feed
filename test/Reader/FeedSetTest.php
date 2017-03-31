@@ -28,12 +28,12 @@ class FeedSetTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider linkAndUriProvider
      */
-    public function testAbsolutiseUri($link, $uri)
+    public function testAbsolutiseUri($link, $uri, $result = 'http://example.com/feed')
     {
         $method = new ReflectionMethod('Zend\Feed\Reader\FeedSet', 'absolutiseUri');
         $method->setAccessible(true);
 
-        $this->assertEquals('http://example.com/feed', $method->invoke($this->feedSet, $link, $uri));
+        $this->assertEquals($result, $method->invoke($this->feedSet, $link, $uri));
     }
 
     public function linkAndUriProvider()
@@ -41,7 +41,8 @@ class FeedSetTest extends PHPUnit_Framework_TestCase
         return [
             'fully-qualified'   => ['feed', 'http://example.com'],
             'scheme-relative'   => ['feed', '//example.com'],
-            'double-slash-path' => ['//feed','//example.com'],
+            'protocol-relative' => ['//example.com/feed', 'https://example.org', 'https://example.com/feed'],
+            'protocol-relative-default' => ['//example.com/feed', '//example.org'],
         ];
     }
 }
