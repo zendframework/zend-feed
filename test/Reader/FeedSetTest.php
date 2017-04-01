@@ -28,20 +28,25 @@ class FeedSetTest extends TestCase
     /**
      * @dataProvider linkAndUriProvider
      */
-    public function testAbsolutiseUri($link, $uri)
+    public function testAbsolutiseUri($link, $uri, $result)
     {
         $method = new ReflectionMethod(FeedSet::class, 'absolutiseUri');
         $method->setAccessible(true);
 
-        $this->assertEquals('http://example.com/feed', $method->invoke($this->feedSet, $link, $uri));
+        $this->assertEquals($result, $method->invoke($this->feedSet, $link, $uri));
     }
 
     public function linkAndUriProvider()
     {
         return [
-            'fully-qualified'   => ['feed', 'http://example.com'],
-            'scheme-relative'   => ['feed', '//example.com'],
-            'double-slash-path' => ['//feed','//example.com'],
+            'fully-qualified' => ['feed', 'http://example.com', 'http://example.com/feed'],
+            'default-scheme' => ['feed', '//example.com', 'http://example.com/feed'],
+            'relative-path' => ['./feed', 'http://example.com/page', 'http://example.com/page/feed'],
+            'relative-path-parent' => ['../feed', 'http://example.com/page', 'http://example.com/feed'],
+            'scheme-relative' => ['//example.com/feed', 'https://example.org', 'https://example.com/feed'],
+            'scheme-relative-default' => ['//example.com/feed', '//example.org', 'http://example.com/feed'],
+            'invalid-absolute' => ['ftp://feed', 'http://example.com', null],
+            'invalid' => ['', null, null],
         ];
     }
 }

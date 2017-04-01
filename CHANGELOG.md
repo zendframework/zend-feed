@@ -44,6 +44,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - [#35](https://github.com/zendframework/zend-feed/pull/35) fixed
   "A non-numeric value encountered" in php 7.1
+- [#39](https://github.com/zendframework/zend-feed/pull/39) fixed protocol
+  relative link absolutisation
 - [#40](https://github.com/zendframework/zend-feed/pull/40) fixed service
   manager v3 compatibility aliases in extension plugin managers
 
