@@ -61,6 +61,10 @@ class FeedSet extends ArrayObject
 
     /**
      *  Attempt to turn a relative URI into an absolute URI
+     *
+     *  @param string $link
+     *  @param string $uri OPTIONAL
+     *  @return string|null absolutised link or null if invalid
      */
     protected function absolutiseUri($link, $uri = null)
     {
@@ -89,12 +93,28 @@ class FeedSet extends ArrayObject
         return $link;
     }
 
+    /**
+     * Resolves scheme relative link to absolute
+     *
+     * @param string $link
+     * @param string $scheme
+     * @return string
+     */
     private function resolveSchemeRelativeUri($link, $scheme)
     {
         $link = ltrim($link, '/');
         return sprintf('%s://%s', $scheme, $link);
     }
 
+    /**
+     *  Resolves relative link to absolute
+     *
+     *  @param string $link
+     *  @param string $scheme
+     *  @param string $host
+     *  @param string $uriPath
+     *  @return string
+     */
     private function resolveRelativeUri($link, $scheme, $host, $uriPath)
     {
         if ($link[0] !== '/') {
