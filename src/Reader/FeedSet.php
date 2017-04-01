@@ -61,31 +61,71 @@ class FeedSet extends ArrayObject
 
     /**
      *  Attempt to turn a relative URI into an absolute URI
+     *
+     *  @param string $link
+     *  @param string $uri OPTIONAL
+     *  @return string|null absolutised link or null if invalid
      */
     protected function absolutiseUri($link, $uri = null)
     {
         $linkUri = Uri::factory($link);
-        if (! $linkUri->isAbsolute() or ! $linkUri->isValid()) {
-            if ($uri !== null) {
-                $uri = Uri::factory($uri);
-
-                if ($link[0] !== '/') {
-                    $link = $uri->getPath() . '/' . $link;
-                }
-
-                $link   = sprintf(
-                    '%s://%s/%s',
-                    ($uri->getScheme() ?: 'http'),
-                    $uri->getHost(),
-                    $this->canonicalizePath($link)
-                );
-
-                if (! Uri::factory($link)->isValid()) {
-                    $link = null;
-                }
-            }
+        if ($linkUri->isAbsolute()) {
+            // invalid absolute link can not be recovered
+            return $linkUri->isValid() ? $link : null;
         }
+
+        $scheme = 'http';
+        if ($uri !== null) {
+            $uri = Uri::factory($uri);
+            $scheme = $uri->getScheme() ?: $scheme;
+        }
+
+        if ($linkUri->getHost()) {
+            $link = $this->resolveSchemeRelativeUri($link, $scheme);
+        } elseif ($uri !== null) {
+            $link = $this->resolveRelativeUri($link, $scheme, $uri->getHost(), $uri->getPath());
+        }
+
+        if (! Uri::factory($link)->isValid()) {
+            return null;
+        }
+
         return $link;
+    }
+
+    /**
+     * Resolves scheme relative link to absolute
+     *
+     * @param string $link
+     * @param string $scheme
+     * @return string
+     */
+    private function resolveSchemeRelativeUri($link, $scheme)
+    {
+        $link = ltrim($link, '/');
+        return sprintf('%s://%s', $scheme, $link);
+    }
+
+    /**
+     *  Resolves relative link to absolute
+     *
+     *  @param string $link
+     *  @param string $scheme
+     *  @param string $host
+     *  @param string $uriPath
+     *  @return string
+     */
+    private function resolveRelativeUri($link, $scheme, $host, $uriPath)
+    {
+        if ($link[0] !== '/') {
+            $link = $uriPath . '/' . $link;
+        }
+        return sprintf(
+            '%s://%s/%s',
+            $scheme,
+            $host,
+            $this->canonicalizePath($link)
+        );
     }
 
     /**
