@@ -277,7 +277,7 @@ exception will be raised. The end result will be an object of type
 support multiple (all existing) versions of these broad feed types.</p>
 <p>In the following example, we import an RDF/RSS 1.0 feed and extract some basic
 information that can be saved to a database or elsewhere.</p>
-<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
+<pre class="codehilite"><code class="language-php linenums">$feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 $data = [
     'title'        =&gt; $feed-&gt;getTitle(),
     'link'         =&gt; $feed-&gt;getLink(),
@@ -299,7 +299,6 @@ foreach ($feed as $entry) {
     $data['entries'][] = $edata;
 }</code></pre>
 
-
 <blockquote>
 <h2 id="importing-requires-an-http-client">Importing requires an HTTP client</h2>
 <p>To import a feed, you will need to have an <a href="../zend.feed.http-clients">HTTP client</a>
@@ -317,7 +316,7 @@ return <code>NULL</code>, indicating the information could not be found in the f
 should note that classes implementing <code>Zend\Feed\Reader\Feed\AbstractFeed</code> also
 implement the SPL <code>Iterator</code> and <code>Countable</code> interfaces.</p>
 <p>Feeds can also be imported from strings or files.</p>
-<pre class="codehilite"><code class="language-php">// from a URI
+<pre class="codehilite"><code class="language-php linenums">// from a URI
 $feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 
 // from a String
@@ -325,7 +324,6 @@ $feed = Zend\Feed\Reader\Reader::importString($feedXmlString);
 
 // from a file
 $feed = Zend\Feed\Reader\Reader::importFile('./feed.xml');</code></pre>
-
 
 <h2 id="retrieving-underlying-feed-and-entry-sources">Retrieving Underlying Feed and Entry Sources</h2>
 <p><code>Zend\Feed\Reader\Reader</code> does its best not to stick you in a narrow confine. If
@@ -357,14 +355,13 @@ and register an extension (covered later) to do this, but that's not always
 warranted for a quick check. You must register any new namespaces on the
 DOMXPath object before use unless they are registered by <code>Zend\Feed\Reader</code> or
 an extension beforehand.</p>
-<pre class="codehilite"><code class="language-php">$feed        = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
+<pre class="codehilite"><code class="language-php linenums">$feed        = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 $xpathPrefix = $feed-&gt;getXpathPrefix();
 $xpath       = $feed-&gt;getXpath();
 $xpath-&gt;registerNamespace('admin', 'http://webns.net/mvcb/');
 $reportErrorsTo = $xpath-&gt;evaluate(
     'string(' . $xpathPrefix . '/admin:errorReportsTo)'
 );</code></pre>
-
 
 <blockquote>
 <h3 id="do-not-register-duplicate-namespaces">Do not register duplicate namespaces</h3>
@@ -380,9 +377,8 @@ cache feeds (as XML) to avoid unnecessary network requests. To add a cache,
 create and configure your cache instance, and then tell
 <code>Zend\Feed\Reader\Reader</code> to use it. The cache key used is
 "<code>Zend\Feed\Reader\\</code>" followed by the MD5 hash of the feed's URI.</p>
-<pre class="codehilite"><code class="language-php">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
+<pre class="codehilite"><code class="language-php linenums">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
 Zend\Feed\Reader\Reader::setCache($cache);</code></pre>
-
 
 <h3 id="http-conditional-get-support">HTTP Conditional GET Support</h3>
 <p>The big question often asked when importing a feed frequently is if it has even
@@ -405,13 +401,12 @@ client implementations, as it requires the ability to send HTTP headers.</p>
 you request a <em>URI</em> of, but can be attempted regardless. Most common feed
 sources like blogs should however have this supported. To enable conditional
 requests, you will need to provide a cache to <code>Zend\Feed\Reader\Reader</code>.</p>
-<pre class="codehilite"><code class="language-php">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
+<pre class="codehilite"><code class="language-php linenums">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
 
 Zend\Feed\Reader\Reader::setCache($cache);
 Zend\Feed\Reader\Reader::useHttpConditionalGet();
 
 $feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');</code></pre>
-
 
 <p>In the example above, with HTTP Conditional <code>GET</code> requests enabled, the response
 header values for ETag and Last-Modified will be cached along with the feed. For
@@ -420,12 +415,11 @@ response is received containing a valid RSS or Atom XML document.</p>
 <p>If you intend on managing request headers from outside
 <code>Zend\Feed\Reader\Reader</code>, you can set the relevant If-None-Matches and
 If-Modified-Since request headers via the URI import method.</p>
-<pre class="codehilite"><code class="language-php">$lastEtagReceived = '5e6cefe7df5a7e95c8b1ba1a2ccaff3d';
+<pre class="codehilite"><code class="language-php linenums">$lastEtagReceived = '5e6cefe7df5a7e95c8b1ba1a2ccaff3d';
 $lastModifiedDateReceived = 'Wed, 08 Jul 2009 13:37:22 GMT';
 $feed = Zend\Feed\Reader\Reader::import(
     $uri, $lastEtagReceived, $lastModifiedDateReceived
 );</code></pre>
-
 
 <h2 id="locating-feed-uris-from-websites">Locating Feed URIs from Websites</h2>
 <p>These days, many websites are aware that the location of their XML feeds is not
@@ -445,7 +439,7 @@ access all the detected links. However, as a simple shortcut, you can just grab
 the first RSS, RDF, or Atom link using its public properties as in the example
 below. Otherwise, each element of the <code>ArrayObject</code> is a simple array with the
 keys <code>type</code> and <code>uri</code> where the type is one of "rdf", "rss", or "atom".</p>
-<pre class="codehilite"><code class="language-php">$links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
+<pre class="codehilite"><code class="language-php linenums">$links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
 
 if (isset($links-&gt;rdf)) {
     echo $links-&gt;rdf, &quot;\n&quot;; // http://www.planet-php.org/rdf/
@@ -456,7 +450,6 @@ if (isset($links-&gt;rss)) {
 if (isset($links-&gt;atom)) {
     echo $links-&gt;atom, &quot;\n&quot;; // http://www.planet-php.org/atom/
 }</code></pre>
-
 
 <p>Based on these links, you can then import from whichever source you wish in the usual manner.</p>
 <blockquote>
@@ -470,12 +463,11 @@ client. See the <a href="../http-clients/#providing-a-client-to-reader">section 
 indicate many links of any type. Perhaps it's a news site with a RSS feed for
 each news category. You can iterate over all links using the ArrayObject's
 iterator.</p>
-<pre class="codehilite"><code class="language-php">$links = Zend\Feed\Reader::findFeedLinks('http://www.planet-php.net');
+<pre class="codehilite"><code class="language-php linenums">$links = Zend\Feed\Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
     echo $link['href'], &quot;\n&quot;;
 }</code></pre>
-
 
 <h2 id="attribute-collections">Attribute Collections</h2>
 <p>In an attempt to simplify return types, return types from the various feed and
@@ -500,13 +492,12 @@ category name which supports HTML entities. In RSS 2.0, there is no label
 attribute so it is always set to the same value as the term for convenience.</p>
 <p>To access category labels by themselves in a simple value array, you might
 commit to something like:</p>
-<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
+<pre class="codehilite"><code class="language-php linenums">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
 $categories = $feed-&gt;getCategories();
 $labels = [];
 foreach ($categories as $cat) {
     $labels[] = $cat['label']
 }</code></pre>
-
 
 <p>It's a contrived example, but the point is that the labels are tied up with
 other information.</p>
@@ -516,10 +507,9 @@ obviously a judgement call. For categories it means the category labels (not the
 terms or schemes) while for authors it would be the authors' names (not their
 email addresses or URIs). The simple array is flat (just values) and passed
 through <code>array_unique()</code> to remove duplication.</p>
-<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
+<pre class="codehilite"><code class="language-php linenums">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
 $categories = $feed-&gt;getCategories();
 $labels = $categories-&gt;getValues();</code></pre>
-
 
 <p>The above example shows how to extract only labels and nothing else thus giving
 simple access to the category labels without any additional work to extract that
@@ -911,11 +901,10 @@ Three implementations exist:</p>
 </ul>
 <p>By default, <code>Zend\Feed\Reader\Reader</code> composes a <code>StandaloneExtensionManager</code>. You
 can inject an alternate implementation using <code>Reader::setExtensionManager()</code>:</p>
-<pre class="codehilite"><code class="language-php">$extensions = new Zend\Feed\Reader\ExtensionPluginManager();
+<pre class="codehilite"><code class="language-php linenums">$extensions = new Zend\Feed\Reader\ExtensionPluginManager();
 Zend\Feed\Reader\Reader::setExtensionManager(
     new ExtensionManager($extensions)
 );</code></pre>
-
 
 <p>The shipped implementations all provide the default extensions (so-called
 "Core Extensions") used internally by <code>Zend\Feed\Reader\Reader</code>. These
@@ -992,12 +981,11 @@ extensions in order to expose their API to feed and entry objects.  Below, we
 register the optional Syndication extension, and discover that it can be
 directly called from the entry API without any effort. (Note that
 extension names are case sensitive and use camelCasing for multiple terms.)</p>
-<pre class="codehilite"><code class="language-php">use Zend\Feed\Reader\Reader;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Feed\Reader\Reader;
 
 Reader::registerExtension('Syndication');
 $feed = Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
 $updatePeriod = $feed-&gt;getUpdatePeriod();</code></pre>
-
 
 <p>In the simple example above, we checked how frequently a feed is being updated
 using the <code>getUpdatePeriod()</code> method. Since it's not part of
@@ -1006,13 +994,12 @@ the newly registered Syndication extension.</p>
 <p>As you can also notice, methods provided by extensions are accessible from the
 main API using method overloading. As an alternative, you can also directly
 access any extension object for a similar result as seen below.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Feed\Reader\Reader;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Feed\Reader\Reader;
 
 Reader::registerExtension('Syndication');
 $feed = Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
 $syndication = $feed-&gt;getExtension('Syndication');
 $updatePeriod = $syndication-&gt;getUpdatePeriod();</code></pre>
-
 
 <h3 id="writing-zend92feed92reader-extensions">Writing Zend\Feed\Reader Extensions</h3>
 <p>Inevitably, there will be times when the <code>Zend\Feed\Reader</code> API is just
@@ -1035,7 +1022,7 @@ element quite simply with a standard name and namespace URI:</p>
 </ul>
 <p>A snippet of RSS containing this extension in practice could be something
 similar to:</p>
-<pre class="codehilite"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+<pre class="codehilite"><code class="language-xml linenums">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
 &lt;rss version=&quot;2.0&quot;
    xmlns:content=&quot;http://purl.org/rss/1.0/modules/content/&quot;
    xmlns:jungle=&quot;http://example.com/junglebooks/rss/module/1.0/&quot;&gt;
@@ -1060,10 +1047,9 @@ similar to:</p>
 &lt;/channel&gt;
 &lt;/rss&gt;</code></pre>
 
-
 <p>Implementing this new ISBN element as a simple entry level extension would
 require the following class (using your own namespace).</p>
-<pre class="codehilite"><code class="language-php">namespace My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php linenums">namespace My\FeedReader\Extension\JungleBooks;
 
 use Zend\Feed\Reader\Extension\AbstractEntry;
 
@@ -1096,7 +1082,6 @@ class Entry extends AbstractEntry
     }
 }</code></pre>
 
-
 <p>This extension creates a new method <code>getIsbn()</code>, which runs an XPath query on
 the current entry to extract the ISBN number enclosed by the <code>&lt;jungle:isbn&gt;</code>
 element. It can optionally store this to the internal non-persistent cache (no
@@ -1115,17 +1100,16 @@ your extension manager knows about it, and then register the extension with
 extensions, as it provides the ability to register new extensions without
 requiring extension of the plugin manager itself. To use it, first intall
 zend-servicemanager:</p>
-<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-servicemanager</code></pre>
-
+<pre class="codehilite"><code class="language-bash linenums">$ composer require zendframework/zend-servicemanager</code></pre>
 
 <p>From there:</p>
-<pre class="codehilite"><code class="language-php">use My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php linenums">use My\FeedReader\Extension\JungleBooks;
 use Zend\Feed\Reader\ExtensionManager;
 use Zend\Feed\Reader\ExtensionPluginManager;
 use Zend\Feed\Reader\Reader;
 
 $extensions = new ExtensionPluginManager();
-$extensions-&gt;setInvokableClass('JungleBooksEntry', JungleBooks\Entry::class);
+$extensions-&gt;setInvokableClass('JungleBooks\Entry', JungleBooks\Entry::class);
 Reader::setExtensionManager(new ExtensionManager($extensions));
 Reader::registerExtension('JungleBooks');
 
@@ -1134,13 +1118,12 @@ $feed = Reader::import('http://example.com/junglebooks/rss');
 // ISBN for whatever book the first entry in the feed was concerned with
 $firstIsbn = $feed-&gt;current()-&gt;getIsbn();</code></pre>
 
-
 <p>Writing a feed extension is not much different. The example feed from earlier
 included an unmentioned <code>&lt;jungle:dayPopular&gt;</code> element which Jungle Books have
 added to their standard to include a link to the day's most popular book (in
 terms of visitor traffic). Here's an extension which adds a
 <code>getDaysPopularBookLink()</code> method to the feel level API.</p>
-<pre class="codehilite"><code class="language-php">namespace My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php linenums">namespace My\FeedReader\Extension\JungleBooks;
 
 use Zend\Feed\Reader\Extension\AbstractFeed;
 
@@ -1173,17 +1156,16 @@ class Feed extends AbstractFeed
     }
 }</code></pre>
 
-
 <p>Let's add to the previous example; we'll register the new class with the
 extension manager, and then demonstrate using the newly exposed method:</p>
-<pre class="codehilite"><code class="language-php">use My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php linenums">use My\FeedReader\Extension\JungleBooks;
 use Zend\Feed\Reader\ExtensionManager;
 use Zend\Feed\Reader\ExtensionPluginManager;
 use Zend\Feed\Reader\Reader;
 
 $extensions = new ExtensionPluginManager();
-$extensions-&gt;setInvokableClass('JungleBooksEntry', JungleBooks\Entry::class);
-$extensions-&gt;setInvokableClass('JungleBooksFeed', JungleBooks\Feed::class);
+$extensions-&gt;setInvokableClass('JungleBooks\Entry', JungleBooks\Entry::class);
+$extensions-&gt;setInvokableClass('JungleBooks\Feed', JungleBooks\Feed::class);
 Reader::setExtensionManager(new ExtensionManager($extensions));
 Reader::registerExtension('JungleBooks');
 
@@ -1191,7 +1173,6 @@ $feed = Reader::import('http://example.com/junglebooks/rss');
 
 // URI to the information page of the day's most popular book with visitors
 $daysPopularBookLink = $feed-&gt;getDaysPopularBookLink();</code></pre>
-
 
 <p>Going through these examples, you'll note that while we need to register the
 feed and entry classes separately with the plugin manager, we don't register

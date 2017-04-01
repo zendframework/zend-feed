@@ -247,7 +247,7 @@ whitelist, and by checking and fixing nesting of tags, ensuring
 standards-compliant output.</p>
 <p>The following examples will show a basic usage of HTMLPurifier, but developers
 are urged to go through and read <a href="http://www.htmlpurifier.org/docs">HTMLPurifier's documentation</a>.</p>
-<pre class="codehilite"><code class="language-php">// Setting HTMLPurifier's options
+<pre class="codehilite"><code class="language-php linenums">// Setting HTMLPurifier's options
 $options = [
     // Allow only paragraph tags
     // and anchor tags wit the href attribute
@@ -309,7 +309,6 @@ foreach ($rss as $item) {
    ];
 }</code></pre>
 
-
 <blockquote>
 <h3 id="tidy-is-required">Tidy is required</h3>
 <p>HTMLPurifier is using the PHP <a href="http://php.net/tidy">Tidy extension</a> to clean
@@ -326,7 +325,7 @@ which complies to the current <a href="https://www.owasp.org/index.php/XSS_Preve
 and as such, is the recommended tool for escaping HTML tags and attributes,
 Javascript, CSS and URLs before outputing any potentially insecure data to the
 users.</p>
-<pre class="codehilite"><code class="language-php">try {
+<pre class="codehilite"><code class="language-php linenums">try {
     $rss = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rss/');
 } catch (Zend\Feed\Exception\Reader\RuntimeException $e) {
     // feed import failed
@@ -364,7 +363,6 @@ foreach ($rss as $item) {
         'description' =&gt; $escaper-&gt;escapeHtml($item-&gt;getDescription()),
     ];
 }</code></pre>
-
 
 <p>The feed data is now safe for output to HTML templates. You can, of course, skip
 escaping when simply storing the data persistently, but remember to escape it on

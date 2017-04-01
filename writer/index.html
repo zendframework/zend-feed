@@ -290,7 +290,7 @@ cover extensions in more detail at the end of this chapter.</p>
 <p>To use <code>Zend\Feed\Writer\Writer</code>, you will provide it with data, and then
 trigger the renderer. What follows is an example demonstrating generation of a
 minimal Atom 1.0 feed. Each feed or entry uses a separate data container.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Feed\Writer\Feed;
+<pre class="codehilite"><code class="language-php linenums">use Zend\Feed\Writer\Feed;
 
 /**
  * Create the parent feed
@@ -333,9 +333,8 @@ $feed-&gt;addEntry($entry);
  */
 $out = $feed-&gt;export('atom');</code></pre>
 
-
 <p>The output rendered should be as follows:</p>
-<pre class="codehilite"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+<pre class="codehilite"><code class="language-xml linenums">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;feed xmlns=&quot;http://www.w3.org/2005/Atom&quot;&gt;
     &lt;title type=&quot;text&quot;&gt;Paddy's Blog&lt;/title&gt;
     &lt;subtitle type=&quot;text&quot;&gt;Writing about PC Games since 176 BC.&lt;/subtitle&gt;
@@ -376,7 +375,6 @@ $out = $feed-&gt;export('atom');</code></pre>
         &lt;/content&gt;
     &lt;/entry&gt;
 &lt;/feed&gt;</code></pre>
-
 
 <p>This is a perfectly valid Atom 1.0 example. It should be noted that omitting an
 obligatory point of data, such as a title, will trigger an exception when

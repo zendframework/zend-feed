@@ -245,7 +245,7 @@ when writing code to work with <em>RSS</em> data. <code>Zend\Feed</code> support
 properties of the core <em>RSS</em> and <em>Atom</em> specifications.</p>
 </blockquote>
 <h2 id="reading-rss-feed-data">Reading RSS Feed Data</h2>
-<pre class="codehilite"><code class="language-php">// Fetch the latest Slashdot headlines
+<pre class="codehilite"><code class="language-php linenums">// Fetch the latest Slashdot headlines
 try {
     $slashdotRss =
         Zend\Feed\Reader\Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
@@ -271,7 +271,6 @@ foreach ($slashdotRss as $item) {
         'description' =&gt; $item-&gt;getDescription(),
     ];
 }</code></pre>
-
 
 <p>Your <code>$channel</code> array now contains the basic meta-information for the RSS
 channel and all items that it contained. The process is identical for Atom

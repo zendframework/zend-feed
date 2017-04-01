@@ -235,14 +235,13 @@ provide their full content inside the feed, splitting RSS' <code>description</co
 into two elements, <code>summary</code> and <code>content</code>, for that purpose.</p>
 <h2 id="basic-use-of-an-atom-feed">Basic Use of an Atom Feed</h2>
 <p>Read an Atom feed and print the <code>title</code> and <code>summary</code> of each entry:</p>
-<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/');
+<pre class="codehilite"><code class="language-php linenums">$feed = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/');
 echo 'The feed contains ' . $feed-&gt;count() . ' entries.' . &quot;\n\n&quot;;
 foreach ($feed as $entry) {
     echo 'Title: ' . $entry-&gt;getTitle() . &quot;\n&quot;;
     echo 'Description: ' . $entry-&gt;getDescription() . &quot;\n&quot;;
     echo 'URL: ' . $entry-&gt;getLink() . &quot;\n\n&quot;;
 }</code></pre>
-
 
 <blockquote>
 <h2 id="importing-requires-an-http-client">Importing requires an HTTP client</h2>
