@@ -9,6 +9,7 @@
 
 namespace ZendTest\Feed\PubSubHubbub;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\PubSubHubbub\PubSubHubbub;
 use Zend\Feed\Reader\Reader as FeedReader;
 
@@ -16,7 +17,7 @@ use Zend\Feed\Reader\Reader as FeedReader;
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class PubSubHubbubTest extends \PHPUnit_Framework_TestCase
+class PubSubHubbubTest extends TestCase
 {
     public function testCanDetectHubs()
     {

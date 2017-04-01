@@ -9,9 +9,12 @@
 
 namespace ZendTest\Feed\PubSubHubbub;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\PubSubHubbub\PubSubHubbub;
 use Zend\Feed\PubSubHubbub\Subscriber;
 use Zend\Http\Client as HttpClient;
+use Zend\Feed\PubSubHubbub\Model\Subscription;
+use Zend\Http\Client\Adapter\Socket;
 
 /**
  * Note that $this->_baseuri must point to a directory on a web server
@@ -25,7 +28,7 @@ use Zend\Http\Client as HttpClient;
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
+class SubscriberHttpTest extends TestCase
 {
     /** @var Subscriber */
     protected $subscriber = null;
@@ -51,11 +54,11 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
             }
             $uri = $this->baseuri . $name . '.php';
             $this->client = new HttpClient($uri);
-            $this->client->setAdapter('\Zend\Http\Client\Adapter\Socket');
+            $this->client->setAdapter(Socket::class);
             PubSubHubbub::setHttpClient($this->client);
             $this->subscriber = new Subscriber;
 
-            $this->storage = $this->_getCleanMock('\Zend\Feed\PubSubHubbub\Model\Subscription');
+            $this->storage = $this->_getCleanMock(Subscription::class);
             $this->subscriber->setStorage($this->storage);
         } else {
             // Skip tests
@@ -111,10 +114,7 @@ class SubscriberHttpTest extends \PHPUnit_Framework_TestCase
                 $stubMethods[] = $method->getName();
             }
         }
-        $mocked = $this->getMock(
-            $className,
-            $stubMethods
-        );
+        $mocked = $this->getMockBuilder($className)->setMethods($stubMethods)->getMock();
         return $mocked;
     }
 }

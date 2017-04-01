@@ -9,16 +9,18 @@
 
 namespace ZendTest\Feed\PubSubHubbub;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Response as HttpResponse;
 use Zend\Feed\PubSubHubbub\Publisher;
 use Zend\Feed\PubSubHubbub\PubSubHubbub;
+use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
 
 /**
  * @group      Zend_Feed
  * @group      Zend_Feed_Subsubhubbub
  */
-class PublisherTest extends \PHPUnit_Framework_TestCase
+class PublisherTest extends TestCase
 {
     /** @var Publisher */
     protected $publisher = null;
@@ -102,21 +104,21 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingEmptyHubServerUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->publisher->addHubUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringHubServerUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->publisher->addHubUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidHubServerUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->publisher->addHubUrl('http://');
     }
 
@@ -170,21 +172,21 @@ class PublisherTest extends \PHPUnit_Framework_TestCase
 
     public function testThrowsExceptionOnSettingEmptyUpdatedTopicUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->publisher->addUpdatedTopicUrl('');
     }
 
 
     public function testThrowsExceptionOnSettingNonStringUpdatedTopicUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->publisher->addUpdatedTopicUrl(123);
     }
 
 
     public function testThrowsExceptionOnSettingInvalidUpdatedTopicUrl()
     {
-        $this->setExpectedException('Zend\Feed\PubSubHubbub\Exception\ExceptionInterface');
+        $this->expectException(ExceptionInterface::class);
         $this->publisher->addUpdatedTopicUrl('http://');
     }
 

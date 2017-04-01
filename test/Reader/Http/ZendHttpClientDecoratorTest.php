@@ -9,7 +9,7 @@
 
 namespace ZendTest\Feed\Reader\Http;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\Prophecy\ObjectProphecy;
 use Zend\Feed\Reader\Exception\InvalidArgumentException;
@@ -198,7 +198,8 @@ class ZendHttpClientDecoratorTest extends TestCase
 
         $client = new ZendHttpClientDecorator($this->client->reveal());
 
-        $this->setExpectedException(InvalidArgumentException::class, $contains);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage($contains);
         $client->get('http://example.com', $headers);
     }
 }

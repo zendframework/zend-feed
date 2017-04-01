@@ -9,15 +9,18 @@
 
 namespace ZendTest\Feed\Writer\Renderer\Feed;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Reader;
+use Zend\Feed\Writer\Feed;
 
 /**
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
-class AtomTest extends \PHPUnit_Framework_TestCase
+class AtomTest extends TestCase
 {
     protected $validWriter = null;
 
@@ -45,7 +48,7 @@ class AtomTest extends \PHPUnit_Framework_TestCase
     {
         $writer = new Writer\Feed;
         $feed   = new Renderer\Feed\Atom($writer);
-        $this->assertInstanceOf('Zend\Feed\Writer\Feed', $feed->getDataContainer());
+        $this->assertInstanceOf(Feed::class, $feed->getDataContainer());
     }
 
     public function testBuildMethodRunsMinimalWriterContainerProperlyBeforeICheckAtomCompliance()
@@ -97,11 +100,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('This is a test feed.', $feed->getTitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedTitleIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('title');
         $atomFeed->render();
@@ -154,11 +155,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1234567890, $feed->getDateModified()->getTimestamp());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('dateModified');
         $atomFeed->render();
@@ -240,11 +239,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $atomFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedLinkToHtmlVersionOfFeedIfMissingThrowsExceptionIfIdMissing()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('link');
         $atomFeed->render();
@@ -258,11 +255,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://www.example.com/atom', $feed->getFeedLink());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedLinkToXmlAtomWhereTheFeedWillBeAvailableIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validWriter->remove('feedLinks');
         $atomFeed->render();

@@ -9,13 +9,14 @@
 
 namespace ZendTest\Feed\Reader\Integration;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
 
 /**
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
-class LautDeRdfTest extends \PHPUnit_Framework_TestCase
+class LautDeRdfTest extends TestCase
 {
     protected $feedSamplePath = null;
 

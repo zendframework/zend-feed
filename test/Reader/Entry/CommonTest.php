@@ -9,13 +9,16 @@
 
 namespace ZendTest\Feed\Reader\Entry;
 
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
+use Zend\Feed\Reader\Entry\AbstractEntry;
+use Zend\Feed\Reader\Extension\Atom\Entry;
 
 /**
 * @group Zend_Feed
 * @group Zend_Feed_Reader
 */
-class CommonTest extends \PHPUnit_Framework_TestCase
+class CommonTest extends TestCase
 {
     protected $feedSamplePath = null;
 
@@ -34,7 +37,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertInstanceOf('DOMDocument', $entry->getDomDocument());
+        $this->assertInstanceOf(\DOMDocument::class, $entry->getDomDocument());
     }
 
     public function testGetsDomXpathObject()
@@ -43,7 +46,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertInstanceOf('DOMXPath', $entry->getXpath());
+        $this->assertInstanceOf(\DOMXPath::class, $entry->getXpath());
     }
 
     public function testGetsXpathPrefixString()
@@ -61,7 +64,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertInstanceOf('DOMElement', $entry->getElement());
+        $this->assertInstanceOf(\DOMElement::class, $entry->getElement());
     }
 
     public function testSaveXmlOutputsXmlStringForEntry()
@@ -81,7 +84,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
             file_get_contents($this->feedSamplePath.'/atom.xml')
         );
         $entry = $feed->current();
-        $this->assertInstanceOf('Zend\Feed\Reader\Extension\Atom\Entry', $entry->getExtension('Atom'));
+        $this->assertInstanceOf(Entry::class, $entry->getExtension('Atom'));
     }
 
     public function testReturnsNullIfExtensionDoesNotExist()
@@ -127,7 +130,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         );
         $entry = $feed->current();
         $stub = $this->getMockForAbstractClass(
-            'Zend\Feed\Reader\Entry\AbstractEntry',
+            AbstractEntry::class,
             [$entry->getElement(), $entry->getId()]
         );
         $this->assertEquals($entry->getType(), $stub->getType());
@@ -144,7 +147,7 @@ class CommonTest extends \PHPUnit_Framework_TestCase
         $entry = $feed->current();
         $domElement = new \DOMElement($entry->getElement()->tagName);
         $stub = $this->getMockForAbstractClass(
-            'Zend\Feed\Reader\Entry\AbstractEntry',
+            AbstractEntry::class,
             [$domElement, $entry->getId()]
         );
         $this->assertEquals($stub->getType(), Reader\Reader::TYPE_ANY);

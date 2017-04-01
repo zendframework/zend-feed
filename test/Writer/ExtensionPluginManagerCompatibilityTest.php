@@ -9,7 +9,7 @@
 
 namespace ZendTest\Feed\Writer;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer\Exception\InvalidArgumentException;
 use Zend\Feed\Writer\ExtensionPluginManager;
 use Zend\ServiceManager\ServiceManager;

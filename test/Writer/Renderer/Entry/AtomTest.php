@@ -9,6 +9,8 @@
 
 namespace ZendTest\Feed\Writer\Renderer\Entry;
 
+use PHPUnit\Framework\TestCase;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 use Zend\Feed\Reader;
@@ -17,7 +19,7 @@ use Zend\Feed\Reader;
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
-class AtomTest extends \PHPUnit_Framework_TestCase
+class AtomTest extends TestCase
 {
     protected $validWriter = null;
     protected $validEntry = null;
@@ -86,11 +88,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('This is a test entry.', $entry->getTitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedTitleIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('title');
         $atomFeed->render();
@@ -115,11 +115,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('<p class="xhtml:">This is test content for <em>xhtml:</em></p>', $entry->getContent());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedContentIfMissingThrowsExceptionIfThereIsNoLink()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('content');
         $this->validEntry->remove('link');
@@ -134,11 +132,9 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1234567890, $entry->getDateModified()->getTimestamp());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedUpdatedDateIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('dateModified');
         $atomFeed->render();
@@ -226,22 +222,18 @@ class AtomTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($entry->getLink(), $entry->getId());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedIdIfMissingThrowsException()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('id');
         $this->validEntry->remove('link');
         $atomFeed->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testFeedIdThrowsExceptionIfNotUri()
     {
+        $this->expectException(ExceptionInterface::class);
         $this->markTestIncomplete('Pending Zend\URI fix for validation');
         $atomFeed = new Renderer\Feed\Atom($this->validWriter);
         $this->validEntry->remove('id');

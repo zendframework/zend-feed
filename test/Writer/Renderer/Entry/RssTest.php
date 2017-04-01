@@ -9,6 +9,8 @@
 
 namespace ZendTest\Feed\Writer\Renderer\Entry;
 
+use PHPUnit\Framework\TestCase;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer;
 use Zend\Feed\Reader;
@@ -17,7 +19,7 @@ use Zend\Feed\Reader;
  * @group      Zend_Feed
  * @group      Zend_Feed_Writer
  */
-class RssTest extends \PHPUnit_Framework_TestCase
+class RssTest extends TestCase
 {
     protected $validWriter = null;
     protected $validEntry = null;
@@ -75,11 +77,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('This is a test entry.', $entry->getTitle());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testEntryTitleIfMissingThrowsExceptionIfDescriptionAlsoMissing()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validEntry->remove('title');
         $this->validEntry->remove('description');
@@ -103,11 +103,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('This is a test entry description.', $entry->getDescription());
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testEntryDescriptionIfMissingThrowsExceptionIfAlsoNoTitle()
     {
+        $this->expectException(ExceptionInterface::class);
         $atomFeed = new Renderer\Feed\Rss($this->validWriter);
         $this->validEntry->remove('description');
         $this->validEntry->remove('title');
@@ -207,11 +205,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('http://example.com/audio.mp3', $enc->url);
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionOnMissingType()
     {
+        $this->expectException(ExceptionInterface::class);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $this->validEntry->setEnclosure([
                                               'uri'    => 'http://example.com/audio.mp3',
@@ -220,11 +216,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $renderer->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionOnMissingLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $this->validEntry->setEnclosure([
                                               'type' => 'audio/mpeg',
@@ -233,11 +227,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $renderer->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionOnNonNumericLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $this->validEntry->setEnclosure([
                                               'type'   => 'audio/mpeg',
@@ -247,11 +239,9 @@ class RssTest extends \PHPUnit_Framework_TestCase
         $renderer->render();
     }
 
-    /**
-     * @expectedException Zend\Feed\Writer\Exception\ExceptionInterface
-     */
     public function testAddsEnclosureThrowsExceptionOnNegativeLength()
     {
+        $this->expectException(ExceptionInterface::class);
         $renderer = new Renderer\Feed\Rss($this->validWriter);
         $this->validEntry->setEnclosure([
                                               'type'   => 'audio/mpeg',

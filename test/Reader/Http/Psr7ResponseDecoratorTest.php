@@ -9,7 +9,7 @@
 
 namespace ZendTest\Feed\Reader\Http;
 
-use PHPUnit_Framework_TestCase as TestCase;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface as Psr7ResponseInterface;
 use Zend\Feed\Reader\Http\Psr7ResponseDecorator;
 use Zend\Feed\Reader\Http\HeaderAwareResponseInterface;
