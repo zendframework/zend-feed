@@ -577,8 +577,8 @@ class Reader implements ReaderImportInterface
      */
     public static function registerExtension($name)
     {
-        $feedName  = $name . '\Feed';
-        $entryName = $name . '\Entry';
+        $feedName  = $name . 'Feed';
+        $entryName = $name . 'Entry';
         $manager   = static::getExtensionManager();
         if (static::isRegistered($name)) {
             if ($manager->has($feedName) || $manager->has($entryName)) {
