@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend\Feed">  
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Zend\Feed\Reader - zend-feed</title>
 
-    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/zf-web.css" rel="stylesheet">
-    <link href="../css/zf.css" rel="stylesheet">
-    <link href="../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="..">zend-feed</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="..">zend-feed</a>
             </span>
         </div>
 
@@ -228,11 +207,11 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">zend-feed</a> &raquo;</li>
+  <li><a href="..">zend-feed</a></li>
   
     
       
-        <li>Reader &raquo;</li>
+        <li>Reader</li>
       
     
   
@@ -277,7 +256,7 @@ exception will be raised. The end result will be an object of type
 support multiple (all existing) versions of these broad feed types.</p>
 <p>In the following example, we import an RDF/RSS 1.0 feed and extract some basic
 information that can be saved to a database or elsewhere.</p>
-<pre class="codehilite"><code class="language-php linenums">$feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
+<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 $data = [
     'title'        =&gt; $feed-&gt;getTitle(),
     'link'         =&gt; $feed-&gt;getLink(),
@@ -316,7 +295,7 @@ return <code>NULL</code>, indicating the information could not be found in the f
 should note that classes implementing <code>Zend\Feed\Reader\Feed\AbstractFeed</code> also
 implement the SPL <code>Iterator</code> and <code>Countable</code> interfaces.</p>
 <p>Feeds can also be imported from strings or files.</p>
-<pre class="codehilite"><code class="language-php linenums">// from a URI
+<pre class="codehilite"><code class="language-php">// from a URI
 $feed = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 
 // from a String
@@ -355,7 +334,7 @@ and register an extension (covered later) to do this, but that's not always
 warranted for a quick check. You must register any new namespaces on the
 DOMXPath object before use unless they are registered by <code>Zend\Feed\Reader</code> or
 an extension beforehand.</p>
-<pre class="codehilite"><code class="language-php linenums">$feed        = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
+<pre class="codehilite"><code class="language-php">$feed        = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rdf/');
 $xpathPrefix = $feed-&gt;getXpathPrefix();
 $xpath       = $feed-&gt;getXpath();
 $xpath-&gt;registerNamespace('admin', 'http://webns.net/mvcb/');
@@ -377,7 +356,7 @@ cache feeds (as XML) to avoid unnecessary network requests. To add a cache,
 create and configure your cache instance, and then tell
 <code>Zend\Feed\Reader\Reader</code> to use it. The cache key used is
 "<code>Zend\Feed\Reader\\</code>" followed by the MD5 hash of the feed's URI.</p>
-<pre class="codehilite"><code class="language-php linenums">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
+<pre class="codehilite"><code class="language-php">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
 Zend\Feed\Reader\Reader::setCache($cache);</code></pre>
 
 <h3 id="http-conditional-get-support">HTTP Conditional GET Support</h3>
@@ -401,7 +380,7 @@ client implementations, as it requires the ability to send HTTP headers.</p>
 you request a <em>URI</em> of, but can be attempted regardless. Most common feed
 sources like blogs should however have this supported. To enable conditional
 requests, you will need to provide a cache to <code>Zend\Feed\Reader\Reader</code>.</p>
-<pre class="codehilite"><code class="language-php linenums">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
+<pre class="codehilite"><code class="language-php">$cache = Zend\Cache\StorageFactory::adapterFactory('Memory');
 
 Zend\Feed\Reader\Reader::setCache($cache);
 Zend\Feed\Reader\Reader::useHttpConditionalGet();
@@ -415,7 +394,7 @@ response is received containing a valid RSS or Atom XML document.</p>
 <p>If you intend on managing request headers from outside
 <code>Zend\Feed\Reader\Reader</code>, you can set the relevant If-None-Matches and
 If-Modified-Since request headers via the URI import method.</p>
-<pre class="codehilite"><code class="language-php linenums">$lastEtagReceived = '5e6cefe7df5a7e95c8b1ba1a2ccaff3d';
+<pre class="codehilite"><code class="language-php">$lastEtagReceived = '5e6cefe7df5a7e95c8b1ba1a2ccaff3d';
 $lastModifiedDateReceived = 'Wed, 08 Jul 2009 13:37:22 GMT';
 $feed = Zend\Feed\Reader\Reader::import(
     $uri, $lastEtagReceived, $lastModifiedDateReceived
@@ -439,7 +418,7 @@ access all the detected links. However, as a simple shortcut, you can just grab
 the first RSS, RDF, or Atom link using its public properties as in the example
 below. Otherwise, each element of the <code>ArrayObject</code> is a simple array with the
 keys <code>type</code> and <code>uri</code> where the type is one of "rdf", "rss", or "atom".</p>
-<pre class="codehilite"><code class="language-php linenums">$links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
+<pre class="codehilite"><code class="language-php">$links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
 
 if (isset($links-&gt;rdf)) {
     echo $links-&gt;rdf, &quot;\n&quot;; // http://www.planet-php.org/rdf/
@@ -463,7 +442,7 @@ client. See the <a href="../http-clients/#providing-a-client-to-reader">section 
 indicate many links of any type. Perhaps it's a news site with a RSS feed for
 each news category. You can iterate over all links using the ArrayObject's
 iterator.</p>
-<pre class="codehilite"><code class="language-php linenums">$links = Zend\Feed\Reader::findFeedLinks('http://www.planet-php.net');
+<pre class="codehilite"><code class="language-php">$links = Zend\Feed\Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
     echo $link['href'], &quot;\n&quot;;
@@ -492,7 +471,7 @@ category name which supports HTML entities. In RSS 2.0, there is no label
 attribute so it is always set to the same value as the term for convenience.</p>
 <p>To access category labels by themselves in a simple value array, you might
 commit to something like:</p>
-<pre class="codehilite"><code class="language-php linenums">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
+<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
 $categories = $feed-&gt;getCategories();
 $labels = [];
 foreach ($categories as $cat) {
@@ -507,7 +486,7 @@ obviously a judgement call. For categories it means the category labels (not the
 terms or schemes) while for authors it would be the authors' names (not their
 email addresses or URIs). The simple array is flat (just values) and passed
 through <code>array_unique()</code> to remove duplication.</p>
-<pre class="codehilite"><code class="language-php linenums">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
+<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://www.example.com/atom.xml');
 $categories = $feed-&gt;getCategories();
 $labels = $categories-&gt;getValues();</code></pre>
 
@@ -901,7 +880,7 @@ Three implementations exist:</p>
 </ul>
 <p>By default, <code>Zend\Feed\Reader\Reader</code> composes a <code>StandaloneExtensionManager</code>. You
 can inject an alternate implementation using <code>Reader::setExtensionManager()</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">$extensions = new Zend\Feed\Reader\ExtensionPluginManager();
+<pre class="codehilite"><code class="language-php">$extensions = new Zend\Feed\Reader\ExtensionPluginManager();
 Zend\Feed\Reader\Reader::setExtensionManager(
     new ExtensionManager($extensions)
 );</code></pre>
@@ -981,7 +960,7 @@ extensions in order to expose their API to feed and entry objects.  Below, we
 register the optional Syndication extension, and discover that it can be
 directly called from the entry API without any effort. (Note that
 extension names are case sensitive and use camelCasing for multiple terms.)</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\Feed\Reader\Reader;
+<pre class="codehilite"><code class="language-php">use Zend\Feed\Reader\Reader;
 
 Reader::registerExtension('Syndication');
 $feed = Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
@@ -994,7 +973,7 @@ the newly registered Syndication extension.</p>
 <p>As you can also notice, methods provided by extensions are accessible from the
 main API using method overloading. As an alternative, you can also directly
 access any extension object for a similar result as seen below.</p>
-<pre class="codehilite"><code class="language-php linenums">use Zend\Feed\Reader\Reader;
+<pre class="codehilite"><code class="language-php">use Zend\Feed\Reader\Reader;
 
 Reader::registerExtension('Syndication');
 $feed = Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
@@ -1022,7 +1001,7 @@ element quite simply with a standard name and namespace URI:</p>
 </ul>
 <p>A snippet of RSS containing this extension in practice could be something
 similar to:</p>
-<pre class="codehilite"><code class="language-xml linenums">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+<pre class="codehilite"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
 &lt;rss version=&quot;2.0&quot;
    xmlns:content=&quot;http://purl.org/rss/1.0/modules/content/&quot;
    xmlns:jungle=&quot;http://example.com/junglebooks/rss/module/1.0/&quot;&gt;
@@ -1049,7 +1028,7 @@ similar to:</p>
 
 <p>Implementing this new ISBN element as a simple entry level extension would
 require the following class (using your own namespace).</p>
-<pre class="codehilite"><code class="language-php linenums">namespace My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php">namespace My\FeedReader\Extension\JungleBooks;
 
 use Zend\Feed\Reader\Extension\AbstractEntry;
 
@@ -1100,10 +1079,10 @@ your extension manager knows about it, and then register the extension with
 extensions, as it provides the ability to register new extensions without
 requiring extension of the plugin manager itself. To use it, first intall
 zend-servicemanager:</p>
-<pre class="codehilite"><code class="language-bash linenums">$ composer require zendframework/zend-servicemanager</code></pre>
+<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-servicemanager</code></pre>
 
 <p>From there:</p>
-<pre class="codehilite"><code class="language-php linenums">use My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php">use My\FeedReader\Extension\JungleBooks;
 use Zend\Feed\Reader\ExtensionManager;
 use Zend\Feed\Reader\ExtensionPluginManager;
 use Zend\Feed\Reader\Reader;
@@ -1123,7 +1102,7 @@ included an unmentioned <code>&lt;jungle:dayPopular&gt;</code> element which Jun
 added to their standard to include a link to the day's most popular book (in
 terms of visitor traffic). Here's an extension which adds a
 <code>getDaysPopularBookLink()</code> method to the feel level API.</p>
-<pre class="codehilite"><code class="language-php linenums">namespace My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php">namespace My\FeedReader\Extension\JungleBooks;
 
 use Zend\Feed\Reader\Extension\AbstractFeed;
 
@@ -1158,7 +1137,7 @@ class Feed extends AbstractFeed
 
 <p>Let's add to the previous example; we'll register the new class with the
 extension manager, and then demonstrate using the newly exposed method:</p>
-<pre class="codehilite"><code class="language-php linenums">use My\FeedReader\Extension\JungleBooks;
+<pre class="codehilite"><code class="language-php">use My\FeedReader\Extension\JungleBooks;
 use Zend\Feed\Reader\ExtensionManager;
 use Zend\Feed\Reader\ExtensionPluginManager;
 use Zend\Feed\Reader\Reader;
@@ -1207,7 +1186,7 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -1228,14 +1207,15 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -1244,14 +1224,11 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
     </div>
 </div>
 
-
-    <script src="../js/jquery-1.10.2.min.js"></script>
-    <script src="../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '..';</script>
+    <script src="../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
-    <script src="../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -1283,7 +1260,7 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -1292,112 +1269,6 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>

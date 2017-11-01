@@ -4,36 +4,15 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Zend\Feed">  
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>HTTP Clients - zend-feed</title>
 
-    <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/font-hack/2.018/css/hack.min.css">
-    <link href="//fonts.googleapis.com/css?family=PT+Sans:400,400italic,700,700italic&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-    <link href="../css/base.css" rel="stylesheet">
-    <link href="../css/zf-web.css" rel="stylesheet">
-    <link href="../css/zf.css" rel="stylesheet">
-    <link href="../css/prism-zf.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.18/webfont.js"></script>
-    <script>
-    WebFont.load({
-        google: {
-            families: ['Open Sans', 'PT Sans']
-        }
-    });
-    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/styles-482aa2add1.css">
 
     
 </head>
@@ -57,8 +36,8 @@
 
             <!-- Main title -->
             <span class="navbar-brand">
-              <a class="logo-link" href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Zend Framework"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
-              <a href="..">zend-feed</a>
+                <a class="logo-link" href="https://framework.zend.com/" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" height="28" alt="Zend Framework" /></a>
+                <a href="..">zend-feed</a>
             </span>
         </div>
 
@@ -222,11 +201,11 @@
         <div class="col-md-9" role="main">
 
 <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
-  <li><a href="..">zend-feed</a> &raquo;</li>
+  <li><a href="..">zend-feed</a></li>
   
     
       
-        <li>Reader &raquo;</li>
+        <li>Reader</li>
       
     
   
@@ -247,7 +226,7 @@ component for implementing this behavior.</p>
 <h2 id="clientinterface-and-headerawareclientinterface">ClientInterface and HeaderAwareClientInterface</h2>
 <p>First, we define two interfaces for clients,
 <code>Zend\Feed\Reader\Http\ClientInterface</code> and <code>HeaderAwareClientInterface</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Zend\Feed\Reader\Http;
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 interface ClientInterface
 {
@@ -276,7 +255,7 @@ interface HeaderAwareClientInterface extends ClientInterface
 HTTP GET request. The second allows providing headers to the client; typically,
 these are used for HTTP caching headers. <code>$headers</code> must be in the following
 structure:</p>
-<pre class="codehilite"><code class="language-php linenums">$headers = [
+<pre class="codehilite"><code class="language-php">$headers = [
     'X-Header-Name' =&gt; [
         'header',
         'values',
@@ -286,7 +265,7 @@ structure:</p>
 <p>i.e., each key is a header name, and each value is an array of values for that
 header. If the header represents only a single value, it should be an array with
 that value:</p>
-<pre class="codehilite"><code class="language-php linenums">$headers = [
+<pre class="codehilite"><code class="language-php">$headers = [
     'Accept' =&gt; [ 'application/rss+xml' ],
 ];</code></pre>
 
@@ -294,7 +273,7 @@ that value:</p>
 <h2 id="responseinterface-and-headerawareresponseinterface">ResponseInterface and HeaderAwareResponseInterface</h2>
 <p>Responses are modeled using <code>Zend\Feed\Reader\Http\ResponseInterface</code> and
 <code>HeaderAwareResponseInterface</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Zend\Feed\Reader\Http;
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 class ResponseInterface
 {
@@ -336,7 +315,7 @@ check the instance against <code>HeaderAwareResponseInterface</code>, and only c
 <p>zend-feed ships with a generic <code>ResponseInterface</code> implementation,
 <code>Zend\Feed\Http\Response</code>. It implements <code>HeaderAwareResponseInterface</code>, and
 defines the following constructor:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Zend\Feed\Reader\Http;
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 class Response implements HeaderAwareResponseInterface
 {
@@ -354,7 +333,7 @@ class Response implements HeaderAwareResponseInterface
 <p><a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a> defines a set of HTTP message
 interfaces, but not a client interface. To facilitate wrapping an HTTP client
 that uses PSR-7 messages, we provide <code>Zend\Feed\Reader\Psr7ResponseDecorator</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Zend\Feed\Reader\Http;
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
@@ -375,12 +354,12 @@ class Psr7ResponseDecorator implements HeaderAwareResponseInterface
 and return the decorator.</p>
 <p>To use the PSR-7 response, you will need to add the PSR-7 interfaces to your
 application, if they are not already installed by the client of your choice:</p>
-<pre class="codehilite"><code class="language-bash linenums">$ composer require psr/http-message</code></pre>
+<pre class="codehilite"><code class="language-bash">$ composer require psr/http-message</code></pre>
 
 <h2 id="zend-http">zend-http</h2>
 <p>We also provide a zend-http client decorator,
 <code>Zend\Feed\Reader\Http\ZendHttpClientDecorator</code>:</p>
-<pre class="codehilite"><code class="language-php linenums">namespace Zend\Feed\Reader\Http;
+<pre class="codehilite"><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 use Zend\Http\Client as HttpClient;
 
@@ -401,7 +380,7 @@ class ZendHttpClientDecorator implements HeaderAwareClientInterface
 zend-http response returned, including status, body, and headers.</p>
 <p>zend-http is the default implementation assumed by <code>Zend\Feed\Reader\Reader</code>,
 but <em>is not installed by default</em>. You may install it using composer:</p>
-<pre class="codehilite"><code class="language-bash linenums">$ composer require zendframework/zend-http</code></pre>
+<pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-http</code></pre>
 
 <h2 id="providing-a-client-to-reader">Providing a client to Reader</h2>
 <p>By default, <code>Zend\Feed\Reader\Reader</code> will lazy load a zend-http client. If you
@@ -418,7 +397,7 @@ instance of that implementation. Once you do, you can use the static method
 <code>setHttpClient()</code> to inject it.</p>
 <p>As an example, let's say you've created a PSR-7-based implementation named
 <code>My\Http\Psr7FeedClient</code>. You could then do the following:</p>
-<pre class="codehilite"><code class="language-php linenums">use My\Http\Psr7FeedClient;
+<pre class="codehilite"><code class="language-php">use My\Http\Psr7FeedClient;
 use Zend\Feed\Reader\Reader;
 
 Reader::setHttpClient(new Psr7FeedClient());</code></pre>
@@ -450,7 +429,7 @@ operations.</p>
             <div class="col-lg-3">
               <p>
                 <strong>Zend Framework</strong><br />
-                <a href="http://framework.zend.com/">framework.zend.com</a><br />
+                <a href="https://framework.zend.com/">framework.zend.com</a><br />
                 <a href="https://docs.zendframework.com">docs.zendframework.com</a><br />
                 <a href="https://packages.zendframework.com">packages.zendframework.com</a><br />
                 <a href="https://apigility.org">apigility.org</a><br />
@@ -471,14 +450,15 @@ operations.</p>
                 <h4>Copyright</h4>
                 <div class="hline-w"></div>
 
-                <p>&copy; 2006-2016 by <a href="http://www.zend.com">Zend</a>, a <a href="http://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2017 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
             </div>
 
             <div class="col-lg-4">
                 <h4>Contacts</h4>
                 <div class="hline-w"></div>
                 <p>
-                    <a href="irc://irc.freenode.net/zftalk" class="btn-social btn-outline" alt="IRC" title="IRC"><i class="fa fa-comment"></i></a>
+                    <a href="https://discourse.zendframework.com" class="btn-social btn-outline" alt="Forum" title="Forum"><i class="fa fa-comments"></i></a>
+                    <a href="https://zendframework-slack.herokuapp.com" class="btn-social btn-outline" alt="Slack" title="Slack"><i class="fa fa-slack"></i></a>
                     <a href="https://github.com/zendframework" class="btn-social btn-outline" alt="Github" title="Github"><i class="fa fa-github"></i></a>
                     <a href="https://twitter.com/zfdevteam" class="btn-social btn-outline" alt="Twitter" title="Twitter"><i class="fa fa-twitter"></i></a>
                 </p>
@@ -487,14 +467,11 @@ operations.</p>
     </div>
 </div>
 
-
-    <script src="../js/jquery-1.10.2.min.js"></script>
-    <script src="../js/bootstrap-3.0.3.min.js"></script>
-    <script src="../js/prism-zf.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
     <script>var base_url = '..';</script>
+    <script src="../js/scripts-0b6185f4a5.js"></script>
     <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
-    <script src="../js/base.js"></script>
 
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
         <div class="modal-dialog">
@@ -526,7 +503,7 @@ operations.</p>
     <div class="zf-components">
   <div class="zf-components-grid">
     <div class="zf-logo">
-      <a href="http://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
+      <a href="https://framework.zend.com" data-toggle="tooltip" data-placement="bottom" title="Go to the ZF homepage"><img src="../img/zf-logo-mark.svg" alt="Zend Framework" width="250" /></a>
     </div>
 
     <div class="component-list"></div>
@@ -535,112 +512,6 @@ operations.</p>
   </div>
 </div>
 
-    <script>
-  // Prepare the component list dropdown for display
-  $(function () {
-    var components = $(".zf-components"),
-        componentList = components.find(".component-list"),
-        sidebar = $(".bs-sidebar.affix"),
-        sidebarInitialPos = sidebar.css("position"),
-        hidden,
-        componentToggle = $(".component-toggle"),
-        navbar = $(".navbar-fixed-top"),
-        rollUpLink = $(".zf-components-rollup a");
-
-    // Initial setup on document load
-    components.insertBefore(navbar);
-    $(".zf-logo a").tooltip();
-    componentToggle.tooltip();
-    rollUpLink.attr({ href: "#", alt: "Hide component list" });
-
-    // Cast initial sidebar position value
-    if (undefined === sidebarInitialPos) {
-      sidebarInitialPos = "fixed";
-    }
-
-    // Setup onclick events to toggle list
-    componentToggle.click(toggleComponentList);
-    rollUpLink.click(toggleComponentList);
-
-    // Toggle the component list display
-    function toggleComponentList(event) {
-      event.preventDefault();
-
-      if (hidden === undefined) {
-        // Not loaded yet; load and display.
-        loadComponentList();
-        return;
-      }
-
-      if (hidden) {
-        // Hidden; display.
-        showComponentList();
-        return;
-      }
-
-      // Currently visible; hide
-      hideComponentList();
-    }
-
-    // Show the component list
-    function showComponentList() {
-      navbar.css({position: "relative"});
-      sidebar.css({position: "relative"});
-      components
-        .css({"margin-top": "-" + components.outerHeight() + "px"})
-        .show()
-        .animate({"margin-top": 0}, {
-          complete: function () {
-            componentToggle
-              .data("placement", "top")
-              .attr("data-original-title", "Hide component list");
-            hidden = false;
-          },
-          queue: false
-        });
-    }
-
-    // Hide the component list
-    function hideComponentList() {
-      components.animate({"margin-top": "-" + components.outerHeight() + "px"}, {
-        complete: function () {
-          navbar.css({position: "fixed"});
-          sidebar.css({position: sidebarInitialPos});
-          componentToggle
-            .data("placement", "bottom")
-            .attr("data-original-title", "Show component list");
-          components.hide();
-          hidden = true;
-        },
-        queue: false
-      });
-      sidebar.animate({ top: sidebarInitialTop + "px" }, { queue: false});
-    }
-
-    // Inject a component into the componet list DOM.
-    function injectComponent(index, component) {
-      componentList.append('<div class="component"><h4><a href="' + component.url + '">' + component.name + '</a></h4><p>' + component.description + '</p></div>');
-    }
-
-    // Parse the component list, build the DOM, and display it.
-    function parseComponentList(components) {
-      $.each(components, injectComponent);
-      showComponentList();
-    }
-
-    // Fetch the component list and display it.
-    function loadComponentList () {
-      $.ajax({
-        url: "//docs.zendframework.com/zf-mkdoc-theme/scripts/zf-component-list.json",
-        dataType: "text json",
-        success: parseComponentList,
-        error: function (e) {
-          console.log("Error occurred with XHR call", e);
-        }
-      });
-    }
-  });
-</script>
-    </body>
+</body>
 
 </html>
