@@ -71,7 +71,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->db->select(['id' => $key]);
-        if (count($result)) {
+        if ($result && count($result)) {
             return $result->current()->getArrayCopy();
         }
         return false;
@@ -91,7 +91,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
                 .' of "' . $key . '" must be a non-empty string');
         }
         $result = $this->db->select(['id' => $key]);
-        if (count($result)) {
+        if ($result && count($result)) {
             return true;
         }
         return false;
@@ -106,7 +106,7 @@ class Subscription extends AbstractModel implements SubscriptionPersistenceInter
     public function deleteSubscription($key)
     {
         $result = $this->db->select(['id' => $key]);
-        if (count($result)) {
+        if ($result && count($result)) {
             $this->db->delete(
                 ['id' => $key]
             );
