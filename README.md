@@ -8,6 +8,5 @@ a natural syntax for accessing elements of feeds, feed attributes, and entry
 attributes. `Zend\Feed` also has extensive support for modifying feed and entry
 structure with the same natural syntax, and turning the result back into XML.
 
-
 - File issues at https://github.com/zendframework/zend-feed/issues
-- Documentation is at https://zendframework.github.io/zend-feed/
+- Documentation is at https://docs.zendframework.com/zend-feed/
