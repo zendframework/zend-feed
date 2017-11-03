@@ -1821,7 +1821,7 @@ class RssTest extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath.'/link/plain/none/rss090.xml')
         );
-        $this->assertEquals(0, count($feed));
+        $this->assertCount(0, $feed);
     }
 
     /**

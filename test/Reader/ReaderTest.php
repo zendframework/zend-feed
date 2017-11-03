@@ -222,7 +222,7 @@ class ReaderTest extends TestCase
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.example.com');
-        $this->assertEquals(0, count($links));
+        $this->assertCount(0, $links);
     }
 
     /**
