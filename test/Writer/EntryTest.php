@@ -601,7 +601,7 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::setEncoding
+     * @covers \Zend\Feed\Writer\Entry::setEncoding
      */
     public function testSetEncodingThrowsExceptionIfNull()
     {
@@ -614,7 +614,7 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::addCategory
+     * @covers \Zend\Feed\Writer\Entry::addCategory
      */
     public function testAddCategoryThrowsExceptionIfNotSetTerm()
     {
@@ -627,7 +627,7 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::addCategory
+     * @covers \Zend\Feed\Writer\Entry::addCategory
      */
     public function testAddCategoryThrowsExceptionIfSchemeNull()
     {
@@ -640,7 +640,7 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::setEnclosure
+     * @covers \Zend\Feed\Writer\Entry::setEnclosure
      */
     public function testSetEnclosureThrowsExceptionIfNotSetUri()
     {
@@ -653,7 +653,7 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::setEnclosure
+     * @covers \Zend\Feed\Writer\Entry::setEnclosure
      */
     public function testSetEnclosureThrowsExceptionIfNotValidUri()
     {
@@ -666,7 +666,7 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::getExtension
+     * @covers \Zend\Feed\Writer\Entry::getExtension
      */
     public function testGetExtension()
     {
@@ -678,7 +678,7 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::getExtensions
+     * @covers \Zend\Feed\Writer\Entry::getExtensions
      */
     public function testGetExtensions()
     {
@@ -689,8 +689,8 @@ class EntryTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Entry::getSource
-     * @covers Zend\Feed\Writer\Entry::createSource
+     * @covers \Zend\Feed\Writer\Entry::getSource
+     * @covers \Zend\Feed\Writer\Entry::createSource
      */
     public function testGetSource()
     {
