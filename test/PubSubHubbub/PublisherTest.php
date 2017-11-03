@@ -10,11 +10,11 @@
 namespace ZendTest\Feed\PubSubHubbub;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Http\Client as HttpClient;
-use Zend\Http\Response as HttpResponse;
+use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
 use Zend\Feed\PubSubHubbub\Publisher;
 use Zend\Feed\PubSubHubbub\PubSubHubbub;
-use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
+use Zend\Http\Client as HttpClient;
+use Zend\Http\Response as HttpResponse;
 
 /**
  * @group      Zend_Feed

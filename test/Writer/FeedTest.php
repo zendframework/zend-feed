@@ -12,10 +12,10 @@ namespace ZendTest\Feed\Writer;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
-use Zend\Feed\Writer\Exception\ExceptionInterface;
-use Zend\Feed\Writer\Version;
 use Zend\Feed\Writer\Deleted;
 use Zend\Feed\Writer\Entry;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
+use Zend\Feed\Writer\Version;
 
 /**
  * @group      Zend_Feed

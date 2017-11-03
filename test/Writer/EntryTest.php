@@ -13,8 +13,8 @@ use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
-use Zend\Feed\Writer\Source;
 use Zend\Feed\Writer\Extension\ITunes\Entry;
+use Zend\Feed\Writer\Source;
 
 /**
  * @group      Zend_Feed

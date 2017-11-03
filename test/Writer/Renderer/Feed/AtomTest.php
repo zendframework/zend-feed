@@ -10,11 +10,11 @@
 namespace ZendTest\Feed\Writer\Renderer\Feed;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Feed\Reader;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
-use Zend\Feed\Writer\Renderer;
-use Zend\Feed\Reader;
 use Zend\Feed\Writer\Feed;
+use Zend\Feed\Writer\Renderer;
 
 /**
  * @group      Zend_Feed
