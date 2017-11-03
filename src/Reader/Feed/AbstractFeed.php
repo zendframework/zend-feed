@@ -172,7 +172,7 @@ abstract class AbstractFeed implements FeedInterface
      */
     public function saveXml()
     {
-        return $this->getDomDocument()->saveXml();
+        return $this->getDomDocument()->saveXML();
     }
 
     /**

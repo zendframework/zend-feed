@@ -121,7 +121,7 @@ abstract class AbstractEntry
         $dom = new DOMDocument('1.0', $this->getEncoding());
         $entry = $dom->importNode($this->getElement(), true);
         $dom->appendChild($entry);
-        return $dom->saveXml();
+        return $dom->saveXML();
     }
 
     /**
