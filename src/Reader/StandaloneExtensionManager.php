@@ -11,7 +11,7 @@ namespace Zend\Feed\Reader;
 
 class StandaloneExtensionManager implements ExtensionManagerInterface
 {
-    private $extensions = [
+    protected $extensions = [
         'Atom\Entry'            => 'Zend\Feed\Reader\Extension\Atom\Entry',
         'Atom\Feed'             => 'Zend\Feed\Reader\Extension\Atom\Feed',
         'Content\Entry'         => 'Zend\Feed\Reader\Extension\Content\Entry',
