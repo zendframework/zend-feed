@@ -458,7 +458,7 @@ Method | Description
 `getDateCreated()` | Returns the date on which the current entry was created. Generally only applicable to Atom where it represents the date the resource described by an Atom 1.0 document was created.
 `getDateModified()` | Returns the date on which the current entry was last modified.
 `getContent()` | Returns the content of the current entry (this has any entities reversed if possible, assuming the content type is HTML). The description is returned if a separate content element does not exist.
-`getEnclosure()` | Returns class object containing the value of all attributes from a multi-media `<enclosure>` element including as array keys: url, length, type. In accordance with the RSS Best Practices Profile of the RSS Advisory Board, no support is offers for multiple enclosures since such support forms no part of the RSS specification.
+`getEnclosure()` | Returns class object (stdClass) containing the value of all attributes from a multi-media `<enclosure>` element including as class attributes: url, length, type. In accordance with the RSS Best Practices Profile of the RSS Advisory Board, no support is offers for multiple enclosures since such support forms no part of the RSS specification.
 `getCommentCount()` | Returns the number of comments made on this entry at the time the feed was last generated.
 `getCommentLink()` | Returns a URI pointing to the HTML page where comments can be made on this entry.
 `getCommentFeedLink([string $type = ‘atom'|'rss'])` | Returns a URI pointing to a feed of the provided type containing all comments for this entry (type defaults to Atom/RSS depending on current feed type).
