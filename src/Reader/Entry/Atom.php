@@ -188,7 +188,7 @@ class Atom extends AbstractEntry implements EntryInterface
                 // if description is empty then try to get the entry content
                 $description = $this->getContent();
             }
-            if (!empty($description)) {
+            if (! empty($description)) {
                 // search image tag in content and grab the first image
                 preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $description, $image);
                 if (array_key_exists('src', $image)) {
@@ -198,7 +198,6 @@ class Atom extends AbstractEntry implements EntryInterface
                 }
             }
         }
-        
         return $enclosure;
     }
     
