@@ -174,6 +174,33 @@ class Atom extends AbstractEntry implements EntryInterface
     }
 
     /**
+     * Get the entry image
+     *
+     * @return array|null
+     */
+    public function getImage()
+    {
+         $enclosure = $this->getEnclosure();
+        // get the image from description of post
+        if (empty($enclosure)) {
+            $description = $this->getDescription();
+            if (empty($description)) {
+                // if description is empty then try to get the entry content
+                $description = $this->getContent();
+            }
+            if (!empty($description)) {
+                // search image tag in content and grab the first image
+                preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $description, $image);
+                if (array_key_exists('src', $image)) {
+                    $enclosure->url = $image['src'];
+                    $enclosure->length = "";
+                    $enclosure->type = 'image/generic';
+                }
+            }
+        }
+    }
+    
+    /**
      * Get the entry ID
      *
      * @return string
