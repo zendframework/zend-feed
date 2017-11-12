@@ -200,7 +200,6 @@ class Atom extends AbstractEntry implements EntryInterface
         }
         return $enclosure;
     }
-    
     /**
      * Get the entry ID
      *
