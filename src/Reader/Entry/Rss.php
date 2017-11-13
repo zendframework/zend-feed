@@ -273,6 +273,32 @@ class Rss extends AbstractEntry implements EntryInterface
 
         return $this->data['description'];
     }
+    
+    /**
+     * Get the entry Thumbnail
+     *
+     * @return string
+     */
+    public function getThumbnail()
+    {
+        if (array_key_exists('thumbnail', $this->data)) {
+            return $this->data['thumbnail'];
+        }
+
+        $thumbnail = $this->xpath->evaluate('string(' . $this->xpathQueryRdf . '/media:thumbnail)');
+        
+        if (empty($thumbnail)) {
+            $thumbnail = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/media:thumbnail)');
+        }
+        
+        if (! $thumbnail) {
+            $thumbnail = null;
+        }
+
+        $this->data['$thumbnail'] = $thumbnail;
+
+        return $this->data['$thumbnail'];
+    }
 
     /**
      * Get the entry enclosure
