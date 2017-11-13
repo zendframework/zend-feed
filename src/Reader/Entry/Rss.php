@@ -273,7 +273,6 @@ class Rss extends AbstractEntry implements EntryInterface
 
         return $this->data['description'];
     }
-    
     /**
      * Get the entry Thumbnail
      *
@@ -286,11 +285,9 @@ class Rss extends AbstractEntry implements EntryInterface
         }
 
         $thumbnail = $this->xpath->evaluate('string(' . $this->xpathQueryRdf . '/media:thumbnail)');
-        
         if (empty($thumbnail)) {
             $thumbnail = $this->xpath->evaluate('string(' . $this->xpathQueryRss . '/media:thumbnail)');
         }
-        
         if (! $thumbnail) {
             $thumbnail = null;
         }
