@@ -408,7 +408,6 @@ class Entry extends Extension\AbstractEntry
         }
 
         $thumbnail = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/media:thumbnail)');
-        
         if (! $thumbnail) {
             $thumbnail = null;
         }
