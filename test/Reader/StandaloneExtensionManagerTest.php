@@ -16,6 +16,11 @@ use Zend\Feed\Reader\ExtensionManagerInterface;
 
 class StandaloneExtensionManagerTest extends TestCase
 {
+    /**
+     * @var StandaloneExtensionManager
+     */
+    private $extensions;
+
     public function setUp()
     {
         $this->extensions = new StandaloneExtensionManager();
@@ -81,17 +86,11 @@ class StandaloneExtensionManagerTest extends TestCase
         $this->assertNotSame($extension, $test);
     }
 
-    public function testAddingPlugin()
+    public function testPluginAddRemove()
     {
         $this->extensions->add('Test/Test', 'mytestextension');
         $this->assertTrue($this->extensions->has('Test/Test'));
-    }
-
-    public function testRemovingPlugin()
-    {
-        $this->extensions->add('Test/Test', 'mytestextension');
-        $this->assertTrue($this->extensions->remove('Test/Test'));
+        $this->extensions->remove('Test/Test');
         $this->assertFalse($this->extensions->has('Test/Test'));
-        $this->assertFalse($this->extensions->remove('Test/Test'));
     }
 }

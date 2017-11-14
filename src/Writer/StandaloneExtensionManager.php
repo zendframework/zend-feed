@@ -47,4 +47,25 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
         $class = $this->extensions[$extension];
         return new $class();
     }
+
+    /**
+     * Add an extension.
+     *
+     * @param string $name
+     * @param string $class
+     */
+    public function add($name, $class)
+    {
+        $this->extensions[$name] = $class;
+    }
+
+    /**
+     * Remove an extension.
+     *
+     * @param string $name
+     */
+    public function remove($name)
+    {
+        unset($this->extensions[$name]);
+    }
 }
