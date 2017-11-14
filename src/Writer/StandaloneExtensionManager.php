@@ -9,6 +9,8 @@
 
 namespace Zend\Feed\Writer;
 
+use Zend\ServiceManager\Exception\InvalidServiceException;
+
 class StandaloneExtensionManager implements ExtensionManagerInterface
 {
     private $extensions = [
@@ -56,7 +58,22 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
      */
     public function add($name, $class)
     {
-        $this->extensions[$name] = $class;
+        if (is_string($class) && ((
+            is_a($class, Extension\AbstractRenderer::class, true) ||
+            'Feed' === substr($class, -4) ||
+            'Entry' === substr($class, -5)
+        ))) {
+            $this->extensions[$name] = $class;
+
+            return;
+        }
+
+        throw new InvalidServiceException(sprintf(
+            'Plugin of type %s is invalid; must implement %s\Extension\RendererInterface '
+            . 'or the classname must end in "Feed" or "Entry"',
+            $class,
+            __NAMESPACE__
+        ));
     }
 
     /**

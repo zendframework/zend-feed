@@ -9,6 +9,8 @@
 
 namespace Zend\Feed\Reader;
 
+use Zend\ServiceManager\Exception\InvalidServiceException;
+
 class StandaloneExtensionManager implements ExtensionManagerInterface
 {
     private $extensions = [
@@ -58,7 +60,20 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
      */
     public function add($name, $class)
     {
-        $this->extensions[$name] = $class;
+        if (is_string($class) && (
+            is_a($class, Extension\AbstractEntry::class, true) ||
+            is_a($class, Extension\AbstractFeed::class, true))
+        ){
+            $this->extensions[$name] = $class;
+            return;
+        }
+
+        throw new InvalidServiceException(sprintf(
+            'Plugin of type %s is invalid; must implement %2$s\Extension\AbstractFeed '
+            . 'or %2$s\Extension\AbstractEntry',
+            $class,
+            __NAMESPACE__
+        ));
     }
 
     /**

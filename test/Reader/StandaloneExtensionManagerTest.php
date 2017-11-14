@@ -88,9 +88,9 @@ class StandaloneExtensionManagerTest extends TestCase
 
     public function testPluginAddRemove()
     {
-        $this->extensions->add('Test/Test', 'mytestextension');
-        $this->assertTrue($this->extensions->has('Test/Test'));
-        $this->extensions->remove('Test/Test');
-        $this->assertFalse($this->extensions->has('Test/Test'));
+        $this->extensions->add('Test/Entry', 'MyTestExtension_Entry');
+        $this->assertTrue($this->extensions->has('Test/Entry'));
+        $this->extensions->remove('Test/Entry');
+        $this->assertFalse($this->extensions->has('Test/Entry'));
     }
 }
