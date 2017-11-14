@@ -88,7 +88,8 @@ class StandaloneExtensionManagerTest extends TestCase
 
     public function testPluginAddRemove()
     {
-        $this->extensions->add('Test/Entry', 'MyTestExtension_Entry');
+        $ext = $this->createMock(\Zend\Feed\Reader\Extension\AbstractEntry::class);
+        $this->extensions->add('Test/Entry', get_class($ext));
         $this->assertTrue($this->extensions->has('Test/Entry'));
         $this->extensions->remove('Test/Entry');
         $this->assertFalse($this->extensions->has('Test/Entry'));
