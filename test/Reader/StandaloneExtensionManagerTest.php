@@ -93,5 +93,7 @@ class StandaloneExtensionManagerTest extends TestCase
         $this->assertTrue($this->extensions->has('Test/Entry'));
         $this->extensions->remove('Test/Entry');
         $this->assertFalse($this->extensions->has('Test/Entry'));
+        $this->expectException(\Zend\Feed\Reader\Exception\InvalidArgumentException::class);
+        $this->extensions->add('Test/Entry', 'blah');
     }
 }

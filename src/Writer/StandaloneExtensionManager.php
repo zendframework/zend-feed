@@ -9,7 +9,7 @@
 
 namespace Zend\Feed\Writer;
 
-use Zend\ServiceManager\Exception\InvalidServiceException;
+use Zend\Feed\Writer\Exception\InvalidArgumentException;
 
 class StandaloneExtensionManager implements ExtensionManagerInterface
 {
@@ -68,7 +68,7 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
             return;
         }
 
-        throw new InvalidServiceException(sprintf(
+        throw new InvalidArgumentException(sprintf(
             'Plugin of type %s is invalid; must implement %s\Extension\RendererInterface '
             . 'or the classname must end in "Feed" or "Entry"',
             $class,

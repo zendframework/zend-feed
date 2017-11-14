@@ -9,7 +9,7 @@
 
 namespace Zend\Feed\Reader;
 
-use Zend\ServiceManager\Exception\InvalidServiceException;
+use Zend\Feed\Reader\Exception\InvalidArgumentException;
 
 class StandaloneExtensionManager implements ExtensionManagerInterface
 {
@@ -68,7 +68,7 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
             return;
         }
 
-        throw new InvalidServiceException(sprintf(
+        throw new InvalidArgumentException(sprintf(
             'Plugin of type %s is invalid; must implement %2$s\Extension\AbstractFeed '
             . 'or %2$s\Extension\AbstractEntry',
             $class,
