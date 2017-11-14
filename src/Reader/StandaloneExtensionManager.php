@@ -12,19 +12,19 @@ namespace Zend\Feed\Reader;
 class StandaloneExtensionManager implements ExtensionManagerInterface
 {
     private $extensions = [
-        'Atom\Entry'            => 'Zend\Feed\Reader\Extension\Atom\Entry',
-        'Atom\Feed'             => 'Zend\Feed\Reader\Extension\Atom\Feed',
-        'Content\Entry'         => 'Zend\Feed\Reader\Extension\Content\Entry',
-        'CreativeCommons\Entry' => 'Zend\Feed\Reader\Extension\CreativeCommons\Entry',
-        'CreativeCommons\Feed'  => 'Zend\Feed\Reader\Extension\CreativeCommons\Feed',
-        'DublinCore\Entry'      => 'Zend\Feed\Reader\Extension\DublinCore\Entry',
-        'DublinCore\Feed'       => 'Zend\Feed\Reader\Extension\DublinCore\Feed',
-        'Podcast\Entry'         => 'Zend\Feed\Reader\Extension\Podcast\Entry',
-        'Podcast\Feed'          => 'Zend\Feed\Reader\Extension\Podcast\Feed',
-        'Slash\Entry'           => 'Zend\Feed\Reader\Extension\Slash\Entry',
-        'Syndication\Feed'      => 'Zend\Feed\Reader\Extension\Syndication\Feed',
-        'Thread\Entry'          => 'Zend\Feed\Reader\Extension\Thread\Entry',
-        'WellFormedWeb\Entry'   => 'Zend\Feed\Reader\Extension\WellFormedWeb\Entry',
+        'Atom\Entry'            => Zend\Feed\Reader\Extension\Atom\Entry::class,
+        'Atom\Feed'             => Zend\Feed\Reader\Extension\Atom\Feed::class,
+        'Content\Entry'         => Zend\Feed\Reader\Extension\Content\Entry::class,
+        'CreativeCommons\Entry' => Zend\Feed\Reader\Extension\CreativeCommons\Entry::class,
+        'CreativeCommons\Feed'  => Zend\Feed\Reader\Extension\CreativeCommons\Feed::class,
+        'DublinCore\Entry'      => Zend\Feed\Reader\Extension\DublinCore\Entry::class,
+        'DublinCore\Feed'       => Zend\Feed\Reader\Extension\DublinCore\Feed::class,
+        'Podcast\Entry'         => Zend\Feed\Reader\Extension\Podcast\Entry::class,
+        'Podcast\Feed'          => Zend\Feed\Reader\Extension\Podcast\Feed::class,
+        'Slash\Entry'           => Zend\Feed\Reader\Extension\Slash\Entry::class,
+        'Syndication\Feed'      => Zend\Feed\Reader\Extension\Syndication\Feed::class,
+        'Thread\Entry'          => Zend\Feed\Reader\Extension\Thread\Entry::class,
+        'WellFormedWeb\Entry'   => Zend\Feed\Reader\Extension\WellFormedWeb\Entry::class,
     ];
 
     /**
