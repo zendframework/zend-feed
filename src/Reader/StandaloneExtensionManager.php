@@ -9,9 +9,9 @@
 
 namespace Zend\Feed\Reader;
 
-class StandaloneExtensionManager implements ExtensionManagerInterface
+final class StandaloneExtensionManager implements ExtensionManagerInterface
 {
-    protected $extensions = [
+    private $extensions = [
         'Atom\Entry'            => 'Zend\Feed\Reader\Extension\Atom\Entry',
         'Atom\Feed'             => 'Zend\Feed\Reader\Extension\Atom\Feed',
         'Content\Entry'         => 'Zend\Feed\Reader\Extension\Content\Entry',
@@ -48,5 +48,31 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
     {
         $class = $this->extensions[$extension];
         return new $class();
+    }
+
+    /**
+     * Add an extension.
+     *
+     * @param string $name
+     * @param string $class
+     */
+    public function add($name, $class)
+    {
+        $this->extensions[$name] = $class;
+    }
+
+    /**
+     * Remove an extension.
+     *
+     * @param string $name
+     * @return bool
+     */
+    public function remove($name)
+    {
+        if (array_key_exists($name, $this->extensions)) {
+            unset($this->extensions[$name]);
+            return true;
+        }
+        return false;
     }
 }

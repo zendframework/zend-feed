@@ -80,4 +80,18 @@ class StandaloneExtensionManagerTest extends TestCase
         $this->assertInstanceOf($pluginClass, $test);
         $this->assertNotSame($extension, $test);
     }
+
+    public function testAddingPlugin()
+    {
+        $this->extensions->add('Test/Test', 'mytestextension');
+        $this->assertTrue($this->extensions->has('Test/Test'));
+    }
+
+    public function testRemovingPlugin()
+    {
+        $this->extensions->add('Test/Test', 'mytestextension');
+        $this->assertTrue($this->extensions->remove('Test/Test'));
+        $this->assertFalse($this->extensions->has('Test/Test'));
+        $this->assertFalse($this->extensions->remove('Test/Test'));
+    }
 }
