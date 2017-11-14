@@ -34,17 +34,21 @@ class StandaloneExtensionManagerTest extends TestCase
     public function defaultPlugins()
     {
         return [
-            'Atom\Renderer\Feed'           => Extension\Atom\Renderer\Feed::class,
-            'Content\Renderer\Entry'       => Extension\Content\Renderer\Entry::class,
-            'DublinCore\Renderer\Entry'    => Extension\DublinCore\Renderer\Entry::class,
-            'DublinCore\Renderer\Feed'     => Extension\DublinCore\Renderer\Feed::class,
-            'ITunes\Entry'                 => Extension\ITunes\Entry::class,
-            'ITunes\Feed'                  => Extension\ITunes\Feed::class,
-            'ITunes\Renderer\Entry'        => Extension\ITunes\Renderer\Entry::class,
-            'ITunes\Renderer\Feed'         => Extension\ITunes\Renderer\Feed::class,
-            'Slash\Renderer\Entry'         => Extension\Slash\Renderer\Entry::class,
-            'Threading\Renderer\Entry'     => Extension\Threading\Renderer\Entry::class,
-            'WellFormedWeb\Renderer\Entry' => Extension\WellFormedWeb\Renderer\Entry::class,
+            'Atom\Renderer\Feed'           => ['Atom\Renderer\Feed' => Extension\Atom\Renderer\Feed::class],
+            'Content\Renderer\Entry'       => [
+                'Content\Renderer\Entry' => Extension\Content\Renderer\Entry::class
+            ],
+            'DublinCore\Renderer\Entry'    => ['DublinCore\Renderer\Entry' => Extension\DublinCore\Renderer\Entry::class],
+            'DublinCore\Renderer\Feed'     => ['DublinCore\Renderer\Feed' => Extension\DublinCore\Renderer\Feed::class],
+            'ITunes\Entry'                 => ['ITunes\Entry' => Extension\ITunes\Entry::class],
+            'ITunes\Feed'                  => ['ITunes\Feed' => Extension\ITunes\Feed::class],
+            'ITunes\Renderer\Entry'        => ['ITunes\Renderer\Entry' => Extension\ITunes\Renderer\Entry::class],
+            'ITunes\Renderer\Feed'         => ['ITunes\Renderer\Feed' => Extension\ITunes\Renderer\Feed::class],
+            'Slash\Renderer\Entry'         => ['Slash\Renderer\Entry' => Extension\Slash\Renderer\Entry::class],
+            'Threading\Renderer\Entry'     => ['Threading\Renderer\Entry' => Extension\Threading\Renderer\Entry::class],
+            'WellFormedWeb\Renderer\Entry' => [
+                'WellFormedWeb\Renderer\Entry' => Extension\WellFormedWeb\Renderer\Entry::class
+            ],
         ];
     }
 
