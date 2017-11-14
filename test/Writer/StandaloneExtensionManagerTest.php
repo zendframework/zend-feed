@@ -101,6 +101,11 @@ class StandaloneExtensionManagerTest extends TestCase
         $this->extensions->remove('Test/Feed');
         $this->assertFalse($this->extensions->has('Test/Feed'));
 
+        $this->extensions->add('Test/Entry', 'MyTestExtension_Entry');
+        $this->assertTrue($this->extensions->has('Test/Entry'));
+        $this->extensions->remove('Test/Entry');
+        $this->assertFalse($this->extensions->has('Test/Entry'));
+
         $ext = $this->createMock(\Zend\Feed\Writer\Extension\AbstractRenderer::class);
         $this->extensions->add('Test/Thing', get_class($ext));
         $this->assertTrue($this->extensions->has('Test/Thing'));
