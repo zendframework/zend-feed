@@ -65,14 +65,9 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
      * Remove an extension.
      *
      * @param string $name
-     * @return bool
      */
     public function remove($name)
     {
-        if (array_key_exists($name, $this->extensions)) {
-            unset($this->extensions[$name]);
-            return true;
-        }
-        return false;
+        unset($this->extensions[$name]);
     }
 }
