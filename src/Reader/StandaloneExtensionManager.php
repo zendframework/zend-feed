@@ -9,7 +9,7 @@
 
 namespace Zend\Feed\Reader;
 
-final class StandaloneExtensionManager implements ExtensionManagerInterface
+class StandaloneExtensionManager implements ExtensionManagerInterface
 {
     private $extensions = [
         'Atom\Entry'            => 'Zend\Feed\Reader\Extension\Atom\Entry',
