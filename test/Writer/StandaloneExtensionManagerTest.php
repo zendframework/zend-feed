@@ -9,10 +9,8 @@
 namespace ZendTest\Feed\Writer;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Feed\Reader\StandaloneExtensionManager;
-use Zend\Feed\Reader\Extension\WellFormedWeb\Entry;
-use Zend\Feed\Reader\Extension\Syndication\Feed;
-use Zend\Feed\Reader\ExtensionManagerInterface;
+use Zend\Feed\Writer\StandaloneExtensionManager;
+use Zend\Feed\Writer\ExtensionManagerInterface;
 
 class StandaloneExtensionManagerTest extends TestCase
 {
