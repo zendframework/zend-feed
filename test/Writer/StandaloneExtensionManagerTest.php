@@ -94,25 +94,30 @@ class StandaloneExtensionManagerTest extends TestCase
         $this->assertNotSame($extension, $test);
     }
 
-    public function testPluginAddRemove()
+    public function testAddAcceptsValidExtensionClasses()
     {
         $this->extensions->add('Test/Feed', 'MyTestExtension_Feed');
         $this->assertTrue($this->extensions->has('Test/Feed'));
-        $this->extensions->remove('Test/Feed');
-        $this->assertFalse($this->extensions->has('Test/Feed'));
 
         $this->extensions->add('Test/Entry', 'MyTestExtension_Entry');
         $this->assertTrue($this->extensions->has('Test/Entry'));
-        $this->extensions->remove('Test/Entry');
-        $this->assertFalse($this->extensions->has('Test/Entry'));
 
         $ext = $this->createMock(\Zend\Feed\Writer\Extension\AbstractRenderer::class);
         $this->extensions->add('Test/Thing', get_class($ext));
         $this->assertTrue($this->extensions->has('Test/Thing'));
-        $this->extensions->remove('Test/Thing');
-        $this->assertFalse($this->extensions->has('Test/Thing'));
+    }
 
+    public function testAddRejectsInvalidExtensions()
+    {
         $this->expectException(\Zend\Feed\Writer\Exception\InvalidArgumentException::class);
         $this->extensions->add('Test/Feed', 'blah');
+    }
+
+    public function testExtensionRemoval()
+    {
+        $this->extensions->add('Test/Entry', 'MyTestExtension_Entry');
+        $this->assertTrue($this->extensions->has('Test/Entry'));
+        $this->extensions->remove('Test/Entry');
+        $this->assertFalse($this->extensions->has('Test/Entry'));
     }
 }
