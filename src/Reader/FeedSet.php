@@ -54,7 +54,7 @@ class FeedSet extends ArrayObject
             $this[] = new static([
                 'rel' => 'alternate',
                 'type' => $link->getAttribute('type'),
-                'title' => $link->getAttribute('title'),
+                'title' => $link->nodeValue,
                 'href' => $this->absolutiseUri(trim($link->getAttribute('href')), $uri),
             ]);
         }
