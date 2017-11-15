@@ -202,7 +202,10 @@ class ReaderTest extends TestCase
         $links = Reader\Reader::findFeedLinks('http://www.planet-php.net');
         $this->assertInstanceOf(FeedSet::class, $links);
         $this->assertEquals([
-            'rel' => 'alternate', 'type' => 'application/rss+xml', 'href' => 'http://www.planet-php.org/rss/', 'title' => 'RSS'
+            'rel' => 'alternate',
+            'type' => 'application/rss+xml',
+            'href' => 'http://www.planet-php.org/rss/',
+            'title' => 'RSS'
         ], (array) $links->getIterator()->current());
     }
 
