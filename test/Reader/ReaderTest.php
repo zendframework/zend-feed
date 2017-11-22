@@ -9,21 +9,21 @@
 
 namespace ZendTest\Feed\Reader;
 
+use Interop\Container\ContainerInterface;
+use My\Extension\JungleBooks\Entry;
+use My\Extension\JungleBooks\Feed;
 use PHPUnit\Framework\TestCase;
 use stdClass;
+use Zend\Feed\Reader;
+use Zend\Feed\Reader\Exception\InvalidArgumentException;
+use Zend\Feed\Reader\Feed\FeedInterface;
+use Zend\Feed\Reader\Feed\Rss;
+use Zend\Feed\Reader\FeedSet;
+use Zend\Feed\Reader\Http\ClientInterface;
+use Zend\Feed\Reader\Http\ResponseInterface;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\Client\Adapter\Test as TestAdapter;
 use Zend\Http\Response as HttpResponse;
-use Zend\Feed\Reader;
-use Zend\Feed\Reader\Http\ClientInterface;
-use Zend\Feed\Reader\Exception\InvalidArgumentException;
-use Zend\Feed\Reader\Feed\FeedInterface;
-use Zend\Feed\Reader\Http\ResponseInterface;
-use My\Extension\JungleBooks\Feed;
-use My\Extension\JungleBooks\Entry;
-use Interop\Container\ContainerInterface;
-use Zend\Feed\Reader\Feed\Rss;
-use Zend\Feed\Reader\FeedSet;
 
 /**
 * @group Zend_Feed
@@ -222,7 +222,7 @@ class ReaderTest extends TestCase
             $this->markTestSkipped('testGetsFeedLinksAsValueObject() requires a network connection');
         }
         $links = Reader\Reader::findFeedLinks('http://www.example.com');
-        $this->assertEquals(0, count($links));
+        $this->assertCount(0, $links);
     }
 
     /**

@@ -12,10 +12,10 @@ namespace ZendTest\Feed\Writer;
 use DateTime;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
-use Zend\Feed\Writer\Exception\ExceptionInterface;
-use Zend\Feed\Writer\Version;
 use Zend\Feed\Writer\Deleted;
 use Zend\Feed\Writer\Entry;
+use Zend\Feed\Writer\Exception\ExceptionInterface;
+use Zend\Feed\Writer\Version;
 
 /**
  * @group      Zend_Feed
@@ -890,7 +890,7 @@ class FeedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::orderByDate
+     * @covers \Zend\Feed\Writer\Feed::orderByDate
      */
     public function testAddsAndOrdersEntriesByModifiedDate()
     {
@@ -906,7 +906,7 @@ class FeedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::getEntry
+     * @covers \Zend\Feed\Writer\Feed::getEntry
      */
     public function testGetEntry()
     {
@@ -918,7 +918,7 @@ class FeedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::removeEntry
+     * @covers \Zend\Feed\Writer\Feed::removeEntry
      */
     public function testGetEntryException()
     {
@@ -931,7 +931,7 @@ class FeedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::removeEntry
+     * @covers \Zend\Feed\Writer\Feed::removeEntry
      */
     public function testRemoveEntry()
     {
@@ -954,9 +954,8 @@ class FeedTest extends TestCase
         $this->assertEquals('1230000000', $writer->getEntry(1)->getDateCreated()->getTimestamp());
     }
 
-
     /**
-     * @covers Zend\Feed\Writer\Feed::removeEntry
+     * @covers \Zend\Feed\Writer\Feed::removeEntry
      */
     public function testRemoveEntryException()
     {
@@ -969,7 +968,7 @@ class FeedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::createTombstone
+     * @covers \Zend\Feed\Writer\Feed::createTombstone
      */
     public function testCreateTombstone()
     {
@@ -982,7 +981,7 @@ class FeedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::addTombstone
+     * @covers \Zend\Feed\Writer\Feed::addTombstone
      */
     public function testAddTombstone()
     {
@@ -994,7 +993,7 @@ class FeedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::export
+     * @covers \Zend\Feed\Writer\Feed::export
      */
     public function testExportRss()
     {
@@ -1023,7 +1022,7 @@ EOT;
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::export
+     * @covers \Zend\Feed\Writer\Feed::export
      */
     public function testExportRssIgnoreExceptions()
     {
@@ -1045,7 +1044,7 @@ EOT;
     }
 
     /**
-     * @covers Zend\Feed\Writer\Feed::export
+     * @covers \Zend\Feed\Writer\Feed::export
      */
     public function testExportWrongTypeException()
     {

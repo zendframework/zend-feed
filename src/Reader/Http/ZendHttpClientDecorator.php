@@ -9,9 +9,9 @@
 
 namespace Zend\Feed\Reader\Http;
 
+use Zend\Feed\Reader\Exception;
 use Zend\Http\Client as ZendHttpClient;
 use Zend\Http\Headers;
-use Zend\Feed\Reader\Exception;
 
 class ZendHttpClientDecorator implements HeaderAwareClientInterface
 {

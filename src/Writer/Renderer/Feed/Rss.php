@@ -65,7 +65,7 @@ class Rss extends Renderer\AbstractRenderer implements Renderer\RendererInterfac
         foreach ($this->extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
-            $ext->setDOMDocument($this->getDOMDocument(), $channel);
+            $ext->setDomDocument($this->getDomDocument(), $channel);
             $ext->render();
         }
 
