@@ -15,7 +15,6 @@
         "slack": "https://zendframework-slack.herokuapp.com",
         "forum": "https://discourse.zendframework.com/c/questions/components"
     },
-
     "require": {
         "php": "^5.6 || ^7.0",
         "zendframework/zend-escaper": "^2.5.2",
