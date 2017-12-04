@@ -107,7 +107,7 @@ foreach ($rss as $item) {
 To help prevent XSS attacks, Zend Framework provides the [zend-escaper component](https://github.com/zendframework/zend-escaper),
 which complies to the current [OWASP recommendations](https://www.owasp.org/index.php/XSS_Prevention_Cheat_Sheet),
 and as such, is the recommended tool for escaping HTML tags and attributes,
-Javascript, CSS and URLs before outputing any potentially insecure data to the
+Javascript, CSS and URLs before outputting any potentially insecure data to the
 users.
 
 ```php
