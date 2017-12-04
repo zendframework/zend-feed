@@ -9,17 +9,17 @@
 
 namespace ZendTest\Feed\PubSubHubbub\Subscriber;
 
+use ArrayObject;
 use DateInterval;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
 use Zend\Feed\PubSubHubbub\HttpResponse;
 use Zend\Feed\PubSubHubbub\Model;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback as CallbackSubscriber;
-use ArrayObject;
-use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
-use Zend\Db\ResultSet\ResultSet;
-use Zend\Db\TableGateway\TableGateway;
-use Zend\Db\Adapter\Adapter;
 
 /**
  * @group      Zend_Feed

@@ -168,7 +168,7 @@ class DeletedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Deleted::getBy
+     * @covers \Zend\Feed\Writer\Deleted::getBy
      */
     public function testGetBy()
     {
@@ -194,9 +194,9 @@ class DeletedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Deleted::getComment
-     * @covers Zend\Feed\Writer\Deleted::setComment
-     * @covers Zend\Feed\Writer\Deleted::remove
+     * @covers \Zend\Feed\Writer\Deleted::getComment
+     * @covers \Zend\Feed\Writer\Deleted::setComment
+     * @covers \Zend\Feed\Writer\Deleted::remove
      */
     public function testCommentAndRemove()
     {
@@ -213,8 +213,8 @@ class DeletedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Deleted::getEncoding
-     * @covers Zend\Feed\Writer\Deleted::setEncoding
+     * @covers \Zend\Feed\Writer\Deleted::getEncoding
+     * @covers \Zend\Feed\Writer\Deleted::setEncoding
      */
     public function testEncoding()
     {
@@ -232,8 +232,8 @@ class DeletedTest extends TestCase
     }
 
     /**
-     * @covers Zend\Feed\Writer\Deleted::getType
-     * @covers Zend\Feed\Writer\Deleted::setType
+     * @covers \Zend\Feed\Writer\Deleted::getType
+     * @covers \Zend\Feed\Writer\Deleted::setType
      */
     public function testType()
     {

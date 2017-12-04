@@ -46,14 +46,14 @@ use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Zend\Feed\Reader\Http\ClientInterface as FeedReaderHttpClientInterface;
 use Zend\Feed\Reader\Http\Psr7ResponseDecorator;
- 
+
 class GuzzleClient implements FeedReaderHttpClientInterface
 {
     /**
      * @var GuzzleClientInterface
      */
     private $client;
- 
+
     /**
      * @param GuzzleClientInterface|null $client
      */
@@ -61,7 +61,7 @@ class GuzzleClient implements FeedReaderHttpClientInterface
     {
         $this->client = $client ?: new Client();
     }
- 
+
     /**
      * {@inheritdoc}
      */

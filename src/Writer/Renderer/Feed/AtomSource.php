@@ -60,7 +60,7 @@ class AtomSource extends AbstractAtom implements Renderer\RendererInterface
         foreach ($this->extensions as $ext) {
             $ext->setType($this->getType());
             $ext->setRootElement($this->getRootElement());
-            $ext->setDOMDocument($this->getDOMDocument(), $root);
+            $ext->setDomDocument($this->getDomDocument(), $root);
             $ext->render();
         }
         return $this;

@@ -12,9 +12,9 @@ namespace Zend\Feed\Reader;
 use DOMDocument;
 use DOMXPath;
 use Zend\Cache\Storage\StorageInterface as CacheStorage;
+use Zend\Feed\Reader\Exception\InvalidHttpClientException;
 use Zend\Http as ZendHttp;
 use Zend\Stdlib\ErrorHandler;
-use Zend\Feed\Reader\Exception\InvalidHttpClientException;
 
 /**
 */

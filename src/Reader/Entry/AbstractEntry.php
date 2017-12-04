@@ -126,7 +126,7 @@ abstract class AbstractEntry
         $deep  = version_compare(PHP_VERSION, '7', 'ge') ? 1 : true;
         $entry = $dom->importNode($this->getElement(), $deep);
         $dom->appendChild($entry);
-        return $dom->saveXml();
+        return $dom->saveXML();
     }
 
     /**
