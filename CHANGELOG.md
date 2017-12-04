@@ -17,6 +17,15 @@ All notable changes to this project will be documented in this file, in reverse 
   to the attributes incorporated in the `FeedSet` instance, per what was already
   documented.
 
+- [#55](https://github.com/zendframework/zend-feed/pull/55) makes two API
+  additions to the `StandaloneExtensionManager` implementations of both the reader
+  and writer subcomponents:
+
+  - `$manager->add($name, $class)` will add an extension class using the
+    provided name.
+  - `$manager->remove($name)` will remove an existing extension by the provided
+    name.
+
 ### Changed
 
 - Nothing.
