@@ -864,9 +864,9 @@ manager". Extension managers must implement <code>Zend\Feed\Reader\ExtensionMana
 Three implementations exist:</p>
 <ul>
 <li><code>Zend\Feed\Reader\StandaloneExtensionManager</code> is a hard-coded implementation
-  seeded with all feed and entry implementations. You can extend it to add
-  extensions, though it's likely easier to copy and paste it, adding your
-  changes.</li>
+  seeded with all feed and entry implementations. You can add simple extensions
+  from it using <code>add</code> and <code>remove</code> methods. <code>ExtensionPluginManager</code> is
+  recommended for more complex needs.</li>
 <li><code>Zend\Feed\Reader\ExtensionPluginManager</code> is a <code>Zend\ServiceManager\AbstractPluginManager</code>
   implementation, <code>Zend\Feed\Reader\ExtensionManager</code>; as such, you can extend
   it to add more extensions, use a <code>Zend\ServiceManager\ConfigInterface</code> instance
@@ -1077,7 +1077,8 @@ your extension manager knows about it, and then register the extension with
 <code>Zend\Feed\Reader\Reader</code>.</p>
 <p>The following example uses <code>Zend\Feed\Reader\ExtensionPluginManager</code> to manage
 extensions, as it provides the ability to register new extensions without
-requiring extension of the plugin manager itself. To use it, first intall
+requiring extension of the plugin manager itself (note that this example works
+with ServiceManager v2, but not v3). To use it, first install
 zend-servicemanager:</p>
 <pre class="codehilite"><code class="language-bash">$ composer require zendframework/zend-servicemanager</code></pre>
 
