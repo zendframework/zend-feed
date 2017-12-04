@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file, in reverse 
   additional aliases to the `Writer\ExtensionPluginManager` to ensure plugins
   will be pulled as expected.
 
+- [#63](https://github.com/zendframework/zend-feed/pull/63) adds the feed title
+  to the attributes incorporated in the `FeedSet` instance, per what was already
+  documented.
+
 ### Changed
 
 - Nothing.
