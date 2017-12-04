@@ -6,27 +6,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
-
-### Deprecated
-
-- Nothing.
-
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-## 2.8.1 - TBD
-
-### Added
-
 - [#53](https://github.com/zendframework/zend-feed/pull/53) adds a number of
   additional aliases to the `Writer\ExtensionPluginManager` to ensure plugins
   will be pulled as expected.
+
+### Changed
+
+- Nothing.
 
 ### Deprecated
 
