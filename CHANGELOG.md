@@ -38,7 +38,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#50](https://github.com/zendframework/zend-feed/pull/50) fixes a few issues
+  in the PubSubHubbub `Subscription` model where counting was being performed on
+  uncountable data; this ensures the subcomponent will work correctly under PHP
+  7.2.
 
 ## 2.8.0 - 2017-04-02
 
