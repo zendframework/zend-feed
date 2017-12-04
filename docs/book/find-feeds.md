@@ -11,7 +11,7 @@ $feedLinks = Zend\Feed\Reader\Reader::findFeedLinks('http://www.example.com/news
 > ## Finding feed links requires an HTTP client
 >
 > To find feed links, you will need to have an [HTTP client](zend.feed.http-clients)
-> available. 
+> available.
 >
 > If you are not using zend-http, you will need to inject `Reader` with the HTTP
 > client. See the [section on providing a client to Reader](http-clients.md#providing-a-client-to-reader).

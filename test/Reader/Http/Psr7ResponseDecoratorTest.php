@@ -11,8 +11,8 @@ namespace ZendTest\Feed\Reader\Http;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface as Psr7ResponseInterface;
-use Zend\Feed\Reader\Http\Psr7ResponseDecorator;
 use Zend\Feed\Reader\Http\HeaderAwareResponseInterface;
+use Zend\Feed\Reader\Http\Psr7ResponseDecorator;
 use Zend\Feed\Reader\Http\ResponseInterface;
 use ZendTest\Feed\Reader\TestAsset\Psr7Stream;
 
