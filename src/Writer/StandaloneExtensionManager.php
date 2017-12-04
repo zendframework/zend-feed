@@ -58,11 +58,13 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
      */
     public function add($name, $class)
     {
-        if (is_string($class) && ((
-            is_a($class, Extension\AbstractRenderer::class, true) ||
-            'Feed' === substr($class, -4) ||
-            'Entry' === substr($class, -5)
-        ))) {
+        if (is_string($class)
+            && ((
+                is_a($class, Extension\AbstractRenderer::class, true)
+                || 'Feed' === substr($class, -4)
+                || 'Entry' === substr($class, -5)
+            ))
+        ) {
             $this->extensions[$name] = $class;
 
             return;

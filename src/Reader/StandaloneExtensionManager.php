@@ -60,9 +60,11 @@ class StandaloneExtensionManager implements ExtensionManagerInterface
      */
     public function add($name, $class)
     {
-        if (is_string($class) && (
-            is_a($class, Extension\AbstractEntry::class, true) ||
-            is_a($class, Extension\AbstractFeed::class, true))
+        if (is_string($class)
+            && (
+                is_a($class, Extension\AbstractEntry::class, true)
+                || is_a($class, Extension\AbstractFeed::class, true)
+            )
         ) {
             $this->extensions[$name] = $class;
             return;
