@@ -24,7 +24,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#53](https://github.com/zendframework/zend-feed/pull/53) adds a number of
+  additional aliases to the `Writer\ExtensionPluginManager` to ensure plugins
+  will be pulled as expected.
 
 ### Deprecated
 
