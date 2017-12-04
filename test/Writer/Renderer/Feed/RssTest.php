@@ -11,12 +11,12 @@ namespace ZendTest\Feed\Writer\Renderer\Feed;
 
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use Zend\Feed\Reader;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
+use Zend\Feed\Writer\Feed;
 use Zend\Feed\Writer\Renderer;
 use Zend\Feed\Writer\Version;
-use Zend\Feed\Reader;
-use Zend\Feed\Writer\Feed;
 
 /**
  * @group      Zend_Feed

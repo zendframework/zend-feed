@@ -71,7 +71,7 @@ foreach ($feed as $entry) {
 > ## Importing requires an HTTP client
 >
 > To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
-> available. 
+> available.
 >
 > If you are not using zend-http, you will need to inject `Reader` with the HTTP
 > client. See the [section on providing a client to Reader](http-clients.md#providing-a-client-to-reader).
@@ -255,7 +255,7 @@ Based on these links, you can then import from whichever source you wish in the 
 > ### Finding feed links requires an HTTP client
 >
 > To find feed links, you will need to have an [HTTP client](zend.feed.http-clients)
-> available. 
+> available.
 >
 > If you are not using zend-http, you will need to inject `Reader` with the HTTP
 > client. See the [section on providing a client to Reader](http-clients.md#providing-a-client-to-reader).
@@ -468,7 +468,7 @@ The extended API for entries is identical to that for feeds with the exception
 of the `Iterator` methods, which are not needed here.
 
 > ### Modified vs Created dates
-> 
+>
 > There is often confusion over the concepts of *modified* and *created* dates.
 > In Atom, these are two clearly defined concepts (so knock yourself out) but in
 > RSS they are vague. RSS 2.0 defines a single `<pubDate>` element which
@@ -577,7 +577,7 @@ valid RSS module; you can insert Atom elements into RSS feeds.  I've even seen
 RDF feeds which use a lot of Atom in place of more common extensions like
 Dublin Core.
 
-The following is a list of non-Core extensions that are offered, but not registered 
+The following is a list of non-Core extensions that are offered, but not registered
 by default. If you want to use them, you'll need to
 tell `Zend\Feed\Reader\Reader` to load them in advance of importing a feed.
 Additional non-Core extensions will be included in future iterations of the

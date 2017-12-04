@@ -10,13 +10,13 @@
 namespace ZendTest\Feed\PubSubHubbub;
 
 use PHPUnit\Framework\TestCase;
-use Zend\Feed\PubSubHubbub\Subscriber;
-use Zend\Feed\PubSubHubbub\PubSubHubbub;
-use Zend\Feed\PubSubHubbub\Model\Subscription;
-use Zend\Http\Client as HttpClient;
-use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
-use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Adapter\Adapter;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
+use Zend\Feed\PubSubHubbub\Model\Subscription;
+use Zend\Feed\PubSubHubbub\PubSubHubbub;
+use Zend\Feed\PubSubHubbub\Subscriber;
+use Zend\Http\Client as HttpClient;
 
 /**
  * @group      Zend_Feed

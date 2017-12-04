@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#52](https://github.com/zendframework/zend-feed/pull/52) adds support for PHP
+  7.2
+
 - [#53](https://github.com/zendframework/zend-feed/pull/53) adds a number of
   additional aliases to the `Writer\ExtensionPluginManager` to ensure plugins
   will be pulled as expected.
@@ -20,7 +23,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#52](https://github.com/zendframework/zend-feed/pull/52) removes support for
+  HHVM.
 
 ### Fixed
 
