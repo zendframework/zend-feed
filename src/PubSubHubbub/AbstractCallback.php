@@ -288,9 +288,6 @@ abstract class AbstractCallback implements CallbackInterface
     {
         // @codingStandardsIgnoreEnd
         $body = file_get_contents('php://input');
-        if (strlen(trim($body)) == 0 && isset($GLOBALS['HTTP_RAW_POST_DATA'])) {
-            $body = $GLOBALS['HTTP_RAW_POST_DATA'];
-        }
         if (strlen(trim($body)) > 0) {
             return $body;
         }
