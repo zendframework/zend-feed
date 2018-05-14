@@ -266,7 +266,7 @@ each news category. You can iterate over all links using the ArrayObject's
 iterator.
 
 ```php
-$links = Zend\Feed\Reader::findFeedLinks('http://www.planet-php.net');
+$links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
     echo $link['href'], "\n";
