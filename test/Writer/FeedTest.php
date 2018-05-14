@@ -1081,4 +1081,11 @@ EOT;
 
         $this->assertSame($return, $writer);
     }
+
+    public function testSetTitleShouldAllowAStringWithTheContentsZero()
+    {
+        $feed = new Writer\Feed();
+        $feed->setTitle('0');
+        $this->assertEquals('0', $feed->getTitle());
+    }
 }

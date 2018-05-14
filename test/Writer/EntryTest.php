@@ -730,4 +730,11 @@ class EntryTest extends TestCase
 
         $this->assertSame($result, $entry);
     }
+
+    public function testSetTitleShouldAllowAStringWithTheContentsZero()
+    {
+        $entry = new Writer\Entry();
+        $entry->setTitle('0');
+        $this->assertEquals('0', $entry->getTitle());
+    }
 }
