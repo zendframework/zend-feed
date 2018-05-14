@@ -26,6 +26,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- [#68](https://github.com/zendframework/zend-feed/pull/68) fixes the behavior of `Zend\Feed\Writer\AbstractFeed::setTitle()` and
+  `Zend\Feed\Writer\Entry::setTitle()` to accept the string `"0"`.
+
 - [#68](https://github.com/zendframework/zend-feed/pull/68) updates both `Zend\Feed\Writer\AbstractFeed` and `Zend\Feed\Writer\Entry`
   to no longer throw an exception for entry titles which have a string value of `0`.
 
