@@ -255,6 +255,23 @@ class Atom extends AbstractEntry implements EntryInterface
 
         return $this->data['title'];
     }
+    /**
+     * Get the entry thumbnail
+     *
+     * @return string
+     */
+    public function getThumbnail()
+    {
+        if (array_key_exists('thumbnail', $this->data)) {
+            return $this->data['thumbnail'];
+        }
+
+        $thumbnail = $this->getExtension('Atom')->getThumbnail();
+
+        $this->data['thumbnail'] = $thumbnail;
+
+        return $this->data['thumbnail'];
+    }
 
     /**
      * Get the number of comments/replies for current entry
