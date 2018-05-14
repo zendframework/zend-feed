@@ -13,9 +13,11 @@ use ArrayObject;
 use DateInterval;
 use DateTime;
 use PHPUnit\Framework\TestCase;
+use ReflectionProperty;
 use Zend\Db\Adapter\Adapter;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
+use Zend\Feed\PubSubHubbub\AbstractCallback;
 use Zend\Feed\PubSubHubbub\Exception\ExceptionInterface;
 use Zend\Feed\PubSubHubbub\HttpResponse;
 use Zend\Feed\PubSubHubbub\Model;
@@ -76,6 +78,27 @@ class CallbackTest extends TestCase
 
         $_SERVER['REQUEST_METHOD'] = 'get';
         $_SERVER['QUERY_STRING']   = 'xhub.subscription=verifytokenkey';
+    }
+
+    /**
+     * Mock the input stream that the callback will read from.
+     *
+     * Creates a php://temp stream based on $contents, that is then injected as
+     * the $inputStream property of the callback via reflection.
+     *
+     * @param AbstractCallback $callback
+     * @param string $contents
+     * @return void
+     */
+    public function mockInputStream(AbstractCallback $callback, $contents)
+    {
+        $inputStream = fopen('php://temp', 'wb+');
+        fwrite($inputStream, $contents);
+        rewind($inputStream);
+
+        $r = new ReflectionProperty($callback, 'inputStream');
+        $r->setAccessible(true);
+        $r->setValue($callback, $inputStream);
     }
 
     public function testCanSetHttpResponseObject()
@@ -338,7 +361,8 @@ class CallbackTest extends TestCase
         $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
         $_SERVER['CONTENT_TYPE']       = 'application/atom+xml';
         $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
-        $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml; // dirty  alternative to php://input
+
+        $this->mockInputStream($this->_callback, $feedXml);
 
         $this->_tableGateway->expects($this->any())
             ->method('select')
@@ -372,7 +396,8 @@ class CallbackTest extends TestCase
         $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
         $_SERVER['CONTENT_TYPE']       = 'application/atom+xml';
         $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
-        $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
+
+        $this->mockInputStream($this->_callback, $feedXml);
 
         $this->_callback->handle([]);
         $this->assertEquals(404, $this->_callback->getHttpResponse()->getStatusCode());
@@ -384,7 +409,9 @@ class CallbackTest extends TestCase
         $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
         $_SERVER['CONTENT_TYPE']       = 'application/kml+xml';
         $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
-        $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
+
+        $this->mockInputStream($this->_callback, $feedXml);
+
         $this->_callback->handle([]);
         $this->assertEquals(404, $this->_callback->getHttpResponse()->getStatusCode());
     }
@@ -401,7 +428,8 @@ class CallbackTest extends TestCase
         $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
         $_SERVER['CONTENT_TYPE']       = 'application/rss+xml';
         $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
-        $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
+
+        $this->mockInputStream($this->_callback, $feedXml);
 
         $this->_tableGateway->expects($this->any())
             ->method('select')
@@ -436,7 +464,8 @@ class CallbackTest extends TestCase
         $_SERVER['REQUEST_URI']        = '/some/path/callback/verifytokenkey';
         $_SERVER['CONTENT_TYPE']       = 'application/atom+xml';
         $feedXml                       = file_get_contents(__DIR__ . '/_files/atom10.xml');
-        $GLOBALS['HTTP_RAW_POST_DATA'] = $feedXml;
+
+        $this->mockInputStream($this->_callback, $feedXml);
 
         $this->_tableGateway->expects($this->any())
             ->method('select')

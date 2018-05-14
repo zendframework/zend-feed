@@ -10,7 +10,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#16](https://github.com/zendframework/zend-feed/pull/16) updates the `Zend\Feed\Pubsubhubbub\AbstractCallback` to no longer use the
+  `$GLOBALS['HTTP_RAW_POST_DATA']` value as a fallback when `php://input` is
+  empty. The fallback existed because, prior to PHP 5.6, `php://input` could
+  only be read once. As we now require PHP 5.6, the fallback is unnecessary,
+  and best removed as the globals value is deprecated.
 
 ### Deprecated
 
