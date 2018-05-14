@@ -3,7 +3,7 @@
         {
             "location": "/",
             "text": "zend-feed\n\n\n\n\n\n\nZend\\Feed\n provides functionality for consuming RSS and Atom feeds. It provides\na natural syntax for accessing elements of feeds, feed attributes, and entry\nattributes. \nZend\\Feed\n also has extensive support for modifying feed and entry\nstructure with the same natural syntax, and turning the result back into XML.\n\n\n\n\nFile issues at https://github.com/zendframework/zend-feed/issues\n\n\nDocumentation is at https://docs.zendframework.com/zend-feed/",
-            "title": "Home"
+            "title": "zend-feed"
         },
         {
             "location": "/#zend-feed",
