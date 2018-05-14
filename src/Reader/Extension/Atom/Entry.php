@@ -396,6 +396,26 @@ class Entry extends Extension\AbstractEntry
 
         return $this->data['title'];
     }
+    /**
+     * Get the entry Thumbnail
+     *
+     * @return string
+     */
+    public function getThumbnail()
+    {
+        if (array_key_exists('thumbnail', $this->data)) {
+            return $this->data['thumbnail'];
+        }
+
+        $thumbnail = $this->getXpath()->evaluate('string(' . $this->getXpathPrefix() . '/media:thumbnail)');
+        if (! $thumbnail) {
+            $thumbnail = null;
+        }
+
+        $this->data['$thumbnail'] = $thumbnail;
+
+        return $this->data['$thumbnail'];
+    }
 
     /**
      * Get the number of comments/replies for current entry
