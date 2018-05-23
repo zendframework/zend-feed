@@ -34,6 +34,8 @@
 
         <item>
             <title>Shake Shake Shake Your Spices</title>
+            <itunes:episode>10</itunes:episode>
+            <itunes:episodeType>bonus</itunes:episodeType>
 			<itunes:explicit>no</itunes:explicit>
             <itunes:author>John Doe</itunes:author>
 			<itunes:block>yes</itunes:block>
@@ -51,7 +53,6 @@
             <itunes:duration>7:04</itunes:duration>
             <itunes:keywords>salt, pepper, shaker, exciting
             </itunes:keywords>
-            <itunes:image href="https://www.example.com/podcasts/everything/episode.png" />
         </item>
 
         <item>

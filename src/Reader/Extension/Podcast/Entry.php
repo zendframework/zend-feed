@@ -188,6 +188,50 @@ class Entry extends Extension\AbstractEntry
     }
 
     /**
+     * Get the episode number
+     *
+     * @return null|int
+     */
+    public function getEpisode()
+    {
+        if (isset($this->data['episode'])) {
+            return $this->data['episode'];
+        }
+
+        $episode = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:episode)');
+
+        if (! $episode) {
+            $episode = null;
+        }
+
+        $this->data['episode'] = null === $episode ? $episode : (int) $episode;
+
+        return $this->data['episode'];
+    }
+
+    /**
+     * Get the episode number
+     *
+     * @return string One of "full", "trailer", or "bonus"; defaults to "full".
+     */
+    public function getEpisodeType()
+    {
+        if (isset($this->data['episodeType'])) {
+            return $this->data['episodeType'];
+        }
+
+        $type = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:episodeType)');
+
+        if (! $type) {
+            $type = 'full';
+        }
+
+        $this->data['episodeType'] = (string) $type;
+
+        return $this->data['episodeType'];
+    }
+
+    /**
      * Register iTunes namespace
      *
      */

@@ -145,10 +145,18 @@ class Feed extends Extension\AbstractFeed
     /**
      * Get the entry keywords
      *
+     * @deprecated since 2.10.0; itunes:keywords is no longer part of the
+     *     iTunes podcast RSS specification.
      * @return string
      */
     public function getKeywords()
     {
+        trigger_error(
+            'itunes:keywords has been deprecated in the iTunes podcast RSS specification,'
+            . ' and should not be relied on.',
+            \E_USER_DEPRECATED
+        );
+
         if (isset($this->data['keywords'])) {
             return $this->data['keywords'];
         }
@@ -259,6 +267,51 @@ class Feed extends Extension\AbstractFeed
         $this->data['summary'] = $summary;
 
         return $this->data['summary'];
+    }
+
+    /**
+     * Get the type of podcast
+     *
+     * @return string One of "episodic" or "serial". Defaults to "episodic"
+     *     if no itunes:type tag is encountered.
+     */
+    public function getPodcastType()
+    {
+        if (isset($this->data['podcastType'])) {
+            return $this->data['podcastType'];
+        }
+
+        $type = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:type)');
+
+        if (! $type) {
+            $type = 'episodic';
+        }
+
+        $this->data['podcastType'] = (string) $type;
+
+        return $this->data['podcastType'];
+    }
+
+    /**
+     * Is the podcast complete (no more episodes will post)?
+     *
+     * @return bool
+     */
+    public function isComplete()
+    {
+        if (isset($this->data['complete'])) {
+            return $this->data['complete'];
+        }
+
+        $complete = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:complete)');
+
+        if (! $complete) {
+            $complete = false;
+        }
+
+        $this->data['complete'] = $complete === 'Yes';
+
+        return $this->data['complete'];
     }
 
     /**

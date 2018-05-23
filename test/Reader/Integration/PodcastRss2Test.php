@@ -245,7 +245,14 @@ class PodcastRss2Test extends TestCase
         $expected = 'salt, pepper, shaker, exciting
             ';
         $expected = str_replace("\r\n", "\n", $expected);
-        $this->assertEquals($expected, $entry->getKeywords());
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
+        $keywords = $entry->getKeywords();
+        restore_error_handler();
+
+        $this->assertEquals($expected, $keywords);
     }
 
     public function testGetsEntryEncoding()
@@ -278,9 +285,92 @@ class PodcastRss2Test extends TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
+
         $this->assertEquals(
             'https://www.example.com/podcasts/everything/episode.png',
             $entry->getItunesImage()
         );
+    }
+
+    public function testCanRetrievePodcastType()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $this->assertEquals('serial', $feed->getPodcastType());
+    }
+
+    public function testPodcastTypeIsEpisodicWhenNoTagPresent()
+    {
+        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-no-type.xml';
+        $feed = Reader\Reader::importString(
+            file_get_contents($feedSamplePath)
+        );
+        $this->assertEquals('episodic', $feed->getPodcastType());
+    }
+
+    public function testIsNotCompleteByDefault()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $this->assertFalse($feed->isComplete());
+    }
+
+    public function testIsCompleteReturnsTrueWhenTagValueIsYes()
+    {
+        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-complete.xml';
+        $feed = Reader\Reader::importString(
+            file_get_contents($feedSamplePath)
+        );
+        $this->assertTrue($feed->isComplete());
+    }
+
+    public function testIsCompleteReturnsFalseWhenTagValueIsSomethingOtherThanYes()
+    {
+        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-incomplete.xml';
+        $feed = Reader\Reader::importString(
+            file_get_contents($feedSamplePath)
+        );
+        $this->assertFalse($feed->isComplete());
+    }
+
+    public function testGetEpisodeReturnsNullIfNoTagPresent()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $entry = $feed->current();
+        $this->assertNull($entry->getEpisode());
+    }
+
+    public function testGetEpisodeTypeReturnsFullIfNoTagPresent()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $entry = $feed->current();
+
+        $this->assertEquals('full', $entry->getEpisodeType());
+    }
+
+    public function testGetEpisodeReturnsValueWhenTagPresent()
+    {
+        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-episode.xml';
+        $feed = Reader\Reader::importString(
+            file_get_contents($feedSamplePath)
+        );
+        $entry = $feed->current();
+        $this->assertEquals(10, $entry->getEpisode());
+    }
+
+    public function testGetEpisodeTypeReturnsValueWhenTagPresent()
+    {
+        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-episode.xml';
+        $feed = Reader\Reader::importString(
+            file_get_contents($feedSamplePath)
+        );
+        $entry = $feed->current();
+        $this->assertEquals('bonus', $entry->getEpisodeType());
     }
 }
