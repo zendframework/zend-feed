@@ -163,12 +163,20 @@ class Entry
     /**
      * Set keywords
      *
+     * @deprecated since 2.10.0; itunes:keywords is no longer part of the
+     *     iTunes podcast RSS specification.
      * @param  array $value
      * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesKeywords(array $value)
     {
+        trigger_error(
+            'itunes:keywords has been deprecated in the iTunes podcast RSS specification,'
+            . ' and should not be relied on.',
+            \E_USER_DEPRECATED
+        );
+
         if (count($value) > 12) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "keywords" may only'
             . ' contain a maximum of 12 terms');
@@ -243,6 +251,50 @@ class Entry
 
         $this->data['image'] = $value;
         return $this;
+    }
+
+    /**
+     * Get the episode number
+     *
+     * @return null|int
+     */
+    public function getEpisode()
+    {
+        if (isset($this->data['episode'])) {
+            return $this->data['episode'];
+        }
+
+        $episode = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:episode)');
+
+        if (! $episode) {
+            $episode = null;
+        }
+
+        $this->data['episode'] = null === $episode ? $episode : (int) $episode;
+
+        return $this->data['episode'];
+    }
+
+    /**
+     * Get the episode number
+     *
+     * @return string One of "full", "trailer", or "bonus"; defaults to "full".
+     */
+    public function getEpisodeType()
+    {
+        if (isset($this->data['episodeType'])) {
+            return $this->data['episodeType'];
+        }
+
+        $type = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:episodeType)');
+
+        if (! $type) {
+            $type = 'full';
+        }
+
+        $this->data['episodeType'] = (string) $type;
+
+        return $this->data['episodeType'];
     }
 
     /**

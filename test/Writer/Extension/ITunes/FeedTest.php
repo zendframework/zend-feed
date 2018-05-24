@@ -188,28 +188,52 @@ class FeedTest extends TestCase
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12'
         ];
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
         $feed->setItunesKeywords($words);
+        restore_error_handler();
+
         $this->assertEquals($words, $feed->getItunesKeywords());
     }
 
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
-        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13'
         ];
-        $feed->setItunesKeywords($words);
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
+        try {
+            $feed->setItunesKeywords($words);
+            $this->fail('Expected exception when setting more keywords than allowed');
+        } catch (ExceptionInterface $e) {
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
-        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $words = [
             str_repeat('a', 253), str_repeat('b', 2)
         ];
-        $feed->setItunesKeywords($words);
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
+        try {
+            $feed->setItunesKeywords($words);
+            $this->fail('Expected exception when setting keywords exceeding character length');
+        } catch (ExceptionInterface $e) {
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public function testSetNewFeedUrl()

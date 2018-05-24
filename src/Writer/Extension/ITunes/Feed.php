@@ -223,12 +223,20 @@ class Feed
     /**
      * Set feed keywords
      *
+     * @deprecated since 2.10.0; itunes:keywords is no longer part of the
+     *     iTunes podcast RSS specification.
      * @param  array $value
      * @return Feed
      * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesKeywords(array $value)
     {
+        trigger_error(
+            'itunes:keywords has been deprecated in the iTunes podcast RSS specification,'
+            . ' and should not be relied on.',
+            \E_USER_DEPRECATED
+        );
+
         if (count($value) > 12) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "keywords" may only'
             . ' contain a maximum of 12 terms');

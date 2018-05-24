@@ -18,8 +18,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Deprecated
 
-- [#75](https://github.com/zendframework/zend-feed/pull/75) deprecates `Zend\Feed\Reader\Extension\Podcast\Feed::getKeywords()`, as the iTunes Podcast RSS
-  specification no longer supports it.
+- [#75](https://github.com/zendframework/zend-feed/pull/75) deprecates each of:
+  - `Zend\Feed\Reader\Extension\Podcast\Entry::getKeywords()`
+  - `Zend\Feed\Reader\Extension\Podcast\Feed::getKeywords()`
+  - `Zend\Feed\Writer\Extension\ITunes\Entry::setKeywords()`
+  - `Zend\Feed\Writer\Extension\ITunes\Feed::setKeywords()`
+  as the iTunes Podcast RSS specification no longer supports keywords.
 
 ### Removed
 
