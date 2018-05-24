@@ -137,28 +137,52 @@ class EntryTest extends TestCase
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12'
         ];
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
         $entry->setItunesKeywords($words);
+        restore_error_handler();
+
         $this->assertEquals($words, $entry->getItunesKeywords());
     }
 
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
-        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13'
         ];
-        $entry->setItunesKeywords($words);
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
+        try {
+            $entry->setItunesKeywords($words);
+            $this->fail('Expected exception when setting more keywords than allowed');
+        } catch (ExceptionInterface $e) {
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
-        $this->expectException(ExceptionInterface::class);
         $entry = new Writer\Entry;
         $words = [
             str_repeat('a', 253), str_repeat('b', 2)
         ];
-        $entry->setItunesKeywords($words);
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
+        try {
+            $entry->setItunesKeywords($words);
+            $this->fail('Expected exception when setting keywords exceeding character length');
+        } catch (ExceptionInterface $e) {
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public function testSetSubtitle()
@@ -237,5 +261,145 @@ class EntryTest extends TestCase
         $entry = new Writer\Entry();
         $entry->setItunesImage($url);
         $this->assertEquals($url, $entry->getItunesImage());
+    }
+
+    public function nonNumericEpisodeNumbers()
+    {
+        return [
+            'null'       => [null],
+            'true'       => [true],
+            'false'      => [false],
+            'zero-float' => [0.000],
+            'float'      => [1.1],
+            'string'     => ['not-a-number'],
+            'array'      => [[1]],
+            'object'     => [(object) ['number' => 1]],
+        ];
+    }
+
+    /**
+     * @dataProvider nonNumericEpisodeNumbers
+     * @param mixed $number
+     */
+    public function testSetEpisodeRaisesExceptionForNonNumericEpisodeNumbers($number)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('may only be an integer');
+        $entry->setItunesEpisode($number);
+    }
+
+    public function testSetEpisodeSetsNumberInEntry()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesEpisode(42);
+        $this->assertEquals(42, $entry->getItunesEpisode());
+    }
+
+    public function invalidEpisodeTypes()
+    {
+        return [
+            'null'       => [null],
+            'true'       => [true],
+            'false'      => [false],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['not-a-type'],
+            'array'      => [['full']],
+            'object'     => [(object) ['type' => 'full']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidEpisodeTypes
+     * @param mixed $type
+     */
+    public function testSetEpisodeTypeRaisesExceptionForInvalidTypes($type)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be one of');
+        $entry->setItunesEpisodeType($type);
+    }
+
+    public function validEpisodeTypes()
+    {
+        return [
+            'full'    => ['full'],
+            'trailer' => ['trailer'],
+            'bonus'   => ['bonus'],
+        ];
+    }
+
+    /**
+     * @dataProvider validEpisodeTypes
+     * @param string $type
+     */
+    public function testEpisodeTypeMaybeMutatedWithAcceptedValues($type)
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesEpisodeType($type);
+        $this->assertEquals($type, $entry->getItunesEpisodeType());
+    }
+
+    public function invalidClosedCaptioningFlags()
+    {
+        return [
+            'null'       => [null],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['Yes'],
+            'array'      => [['Yes']],
+            'object'     => [(object) ['isClosedCaptioned' => 'Yes']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidClosedCaptioningFlags
+     * @param mixed $status
+     */
+    public function testSettingClosedCaptioningToNonBooleanRaisesException($status)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be a boolean');
+        $entry->setItunesIsClosedCaptioned($status);
+    }
+
+    public function testSettingClosedCaptioningToFalseDoesNothing()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesIsClosedCaptioned(false);
+        $this->assertNull($entry->getItunesIsClosedCaptioned());
+    }
+
+    public function testSettingClosedCaptioningToTrueUpdatesContainer()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesIsClosedCaptioned(true);
+        $this->assertTrue($entry->getItunesIsClosedCaptioned());
+    }
+
+    /**
+     * @dataProvider nonNumericEpisodeNumbers
+     * @param mixed $number
+     */
+    public function testSetSeasonRaisesExceptionForNonNumericSeasonNumbers($number)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('may only be an integer');
+        $entry->setItunesSeason($number);
+    }
+
+    public function testSetSeasonSetsNumberInEntry()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesSeason(42);
+        $this->assertEquals(42, $entry->getItunesSeason());
     }
 }

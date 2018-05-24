@@ -163,12 +163,20 @@ class Entry
     /**
      * Set keywords
      *
+     * @deprecated since 2.10.0; itunes:keywords is no longer part of the
+     *     iTunes podcast RSS specification.
      * @param  array $value
      * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesKeywords(array $value)
     {
+        trigger_error(
+            'itunes:keywords has been deprecated in the iTunes podcast RSS specification,'
+            . ' and should not be relied on.',
+            \E_USER_DEPRECATED
+        );
+
         if (count($value) > 12) {
             throw new Writer\Exception\InvalidArgumentException('invalid parameter: "keywords" may only'
             . ' contain a maximum of 12 terms');
@@ -242,6 +250,96 @@ class Entry
         }
 
         $this->data['image'] = $value;
+        return $this;
+    }
+
+    /**
+     * Set the episode number
+     *
+     * @param int $number
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesEpisode($number)
+    {
+        if (! is_numeric($number) || is_float($number)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "number" may only be an integer; received %s',
+                is_object($number) ? get_class($number) : gettype($number)
+            ));
+        }
+
+        $this->data['episode'] = (int) $number;
+
+        return $this;
+    }
+
+    /**
+     * Set the episode type
+     *
+     * @param string $type One of "full", "trailer", or "bonus".
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesEpisodeType($type)
+    {
+        $validTypes = ['full', 'trailer', 'bonus'];
+        if (! in_array($type, $validTypes, true)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "episodeType" MUST be one of the strings [%s]; received %s',
+                implode(', ', $validTypes),
+                is_object($type) ? get_class($type) : var_export($type, true)
+            ));
+        }
+
+        $this->data['episodeType'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Set the status of closed captioning
+     *
+     * @param bool $status
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesIsClosedCaptioned($status)
+    {
+        if (! is_bool($status)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "isClosedCaptioned" MUST be a boolean; received %s',
+                is_object($status) ? get_class($status) : var_export($status, true)
+            ));
+        }
+
+        if (! $status) {
+            return $this;
+        }
+
+        $this->data['isClosedCaptioned'] = true;
+
+        return $this;
+    }
+
+    /**
+     * Set the season number to which the episode belongs
+     *
+     * @param int $number
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesSeason($number)
+    {
+        if (! is_numeric($number) || is_float($number)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "season" may only be an integer; received %s',
+                is_object($number) ? get_class($number) : gettype($number)
+            ));
+        }
+
+        $this->data['season'] = (int) $number;
+
         return $this;
     }
 
