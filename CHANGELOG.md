@@ -6,6 +6,19 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#78](https://github.com/zendframework/zend-feed/pull/78) adds support for the Google Play Podcasts 1.0 DTD in both the Reader and
+  Writer subcomponents. The following new classes provide the support:
+
+  - `Zend\Feed\Reader\Extension\GooglePlayPodcast\Entry`
+  - `Zend\Feed\Reader\Extension\GooglePlayPodcast\Feed`
+  - `Zend\Feed\Writer\Extension\GooglePlayPodcast\Entry`
+  - `Zend\Feed\Writer\Extension\GooglePlayPodcast\Feed`
+  - `Zend\Feed\Writer\Extension\GooglePlayPodcast\Renderer\Entry`
+  - `Zend\Feed\Writer\Extension\GooglePlayPodcast\Renderer\Feed`
+
+  The extensions are registered by default with both `Zend\Feed\Reader\Reader`
+  and `Zend\Feed\Writer\Writer`.
+
 - [#77](https://github.com/zendframework/zend-feed/pull/77) adds support for `itunes:image` for each of:
   - `Zend\Feed\Reader\Extension\Podcast\Entry`, via `getItunesImage()`; previously only the `Feed` supported it.
   - `Zend\Feed\Writer\Extension\ITunes\Entry`, via `setItunesImage()`; previously only the `Feed` supported it.
