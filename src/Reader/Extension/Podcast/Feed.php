@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-feed for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-feed/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Feed\Reader\Extension\Podcast;
@@ -12,8 +10,6 @@ namespace Zend\Feed\Reader\Extension\Podcast;
 use DOMText;
 use Zend\Feed\Reader\Extension;
 
-/**
-*/
 class Feed extends Extension\AbstractFeed
 {
     /**
@@ -125,7 +121,7 @@ class Feed extends Extension\AbstractFeed
     }
 
     /**
-     * Get the entry image
+     * Get the feed/podcast image
      *
      * @return string
      */

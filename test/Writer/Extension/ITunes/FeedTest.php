@@ -267,4 +267,54 @@ class FeedTest extends TestCase
         $feed = new Writer\Feed;
         $feed->setItunesSummary(str_repeat('a', 4001));
     }
+
+    public function invalidImageUrls()
+    {
+        return [
+            'null'                  => [null],
+            'true'                  => [true],
+            'false'                 => [false],
+            'zero'                  => [0],
+            'int'                   => [1],
+            'zero-float'            => [0.0],
+            'float'                 => [1.1],
+            'string'                => ['scheme:/host.path'],
+            'invalid-extension-gif' => ['https://example.com/image.gif', 'file extension'],
+            'invalid-extension-uc'  => ['https://example.com/image.PNG', 'file extension'],
+            'array'                 => [['https://example.com/image.png']],
+            'object'                => [(object) ['image' => 'https://example.com/image.png']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidImageUrls
+     * @param mixed $url
+     * @param string $expectedMessage
+     */
+    public function testSetItunesImageRaisesExceptionForInvalidUrl($url, $expectedMessage = 'valid URI')
+    {
+        $feed = new Writer\Feed();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage($expectedMessage);
+        $feed->setItunesImage($url);
+    }
+
+    public function validImageUrls()
+    {
+        return [
+            'jpg' => ['https://example.com/image.jpg'],
+            'png' => ['https://example.com/image.png'],
+        ];
+    }
+
+    /**
+     * @dataProvider validImageUrls
+     * @param string $url
+     */
+    public function testSetItunesImageSetsInternalDataWithValidUrl($url)
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesImage($url);
+        $this->assertEquals($url, $feed->getItunesImage());
+    }
 }

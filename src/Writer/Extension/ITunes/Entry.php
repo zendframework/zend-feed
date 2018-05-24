@@ -9,6 +9,7 @@
 
 namespace Zend\Feed\Writer\Extension\ITunes;
 
+use Zend\Feed\Uri;
 use Zend\Feed\Writer;
 use Zend\Stdlib\StringUtils;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
@@ -214,6 +215,33 @@ class Entry
             . ' contain a maximum of 4000 characters');
         }
         $this->data['summary'] = $value;
+        return $this;
+    }
+
+    /**
+     * Set entry image (icon)
+     *
+     * @param  string $value
+     * @return Feed
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesImage($value)
+    {
+        if (! is_string($value) || ! Uri::factory($value)->isValid()) {
+            throw new Writer\Exception\InvalidArgumentException(
+                'invalid parameter: "image" may only  be a valid URI/IRI'
+            );
+        }
+
+        if (! in_array(substr($value, -3), ['jpg', 'png'])) {
+            throw new Writer\Exception\InvalidArgumentException(
+                'invalid parameter: "image" may only use file extension "jpg"'
+                . ' or "png" which must be the last three characters of the URI'
+                . ' (i.e. no query string or fragment)'
+            );
+        }
+
+        $this->data['image'] = $value;
         return $this;
     }
 

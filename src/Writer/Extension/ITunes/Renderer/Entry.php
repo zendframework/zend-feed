@@ -36,6 +36,7 @@ class Entry extends Extension\AbstractRenderer
         $this->_setAuthors($this->dom, $this->base);
         $this->_setBlock($this->dom, $this->base);
         $this->_setDuration($this->dom, $this->base);
+        $this->_setImage($this->dom, $this->base);
         $this->_setExplicit($this->dom, $this->base);
         $this->_setKeywords($this->dom, $this->base);
         $this->_setSubtitle($this->dom, $this->base);
@@ -124,6 +125,27 @@ class Entry extends Extension\AbstractRenderer
         $el = $dom->createElement('itunes:duration');
         $text = $dom->createTextNode($duration);
         $el->appendChild($text);
+        $root->appendChild($el);
+        $this->called = true;
+    }
+
+    /**
+     * Set feed image (icon)
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
+     * @return void
+     */
+    // @codingStandardsIgnoreStart
+    protected function _setImage(DOMDocument $dom, DOMElement $root)
+    {
+        // @codingStandardsIgnoreEnd
+        $image = $this->getDataContainer()->getItunesImage();
+        if (! $image) {
+            return;
+        }
+        $el = $dom->createElement('itunes:image');
+        $el->setAttribute('href', $image);
         $root->appendChild($el);
         $this->called = true;
     }
