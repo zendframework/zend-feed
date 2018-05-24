@@ -373,4 +373,34 @@ class PodcastRss2Test extends TestCase
         $entry = $feed->current();
         $this->assertEquals('bonus', $entry->getEpisodeType());
     }
+
+    public function testIsClosedCaptionedReturnsTrueWhenEpisodeDefinesItWithValueYes()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $entry = $feed->current();
+        $this->assertTrue($entry->isClosedCaptioned());
+    }
+
+    public function testIsClosedCaptionedReturnsFalseWhenEpisodeDefinesItWithValueOtherThanYes()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $feed->next(); // Second entry uses "No" as value
+        $entry = $feed->current();
+        $this->assertFalse($entry->isClosedCaptioned());
+    }
+
+    public function testIsClosedCaptionedReturnsFalseWhenEpisodeDoesNotDefineIt()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $feed->next();
+        $feed->next(); // Third entry does not define it
+        $entry = $feed->current();
+        $this->assertFalse($entry->isClosedCaptioned());
+    }
 }

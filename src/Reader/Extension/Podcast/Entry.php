@@ -240,6 +240,26 @@ class Entry extends Extension\AbstractEntry
     }
 
     /**
+     * Is the episode closed captioned?
+     *
+     * Returns true only if itunes:isClosedCaptioned has the value 'Yes'.
+     *
+     * @return bool
+     */
+    public function isClosedCaptioned()
+    {
+        if (isset($this->data['isClosedCaptioned'])) {
+            return $this->data['isClosedCaptioned'];
+        }
+
+        $status = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:isClosedCaptioned)');
+
+        $this->data['isClosedCaptioned'] = $status === 'Yes';
+
+        return $this->data['isClosedCaptioned'];
+    }
+
+    /**
      * Register iTunes namespace
      *
      */

@@ -52,6 +52,7 @@
             <itunes:keywords>salt, pepper, shaker, exciting
             </itunes:keywords>
             <itunes:image href="https://www.example.com/podcasts/everything/episode.png" />
+            <itunes:isClosedCaptioned>Yes</itunes:isClosedCaptioned>
         </item>
 
         <item>
@@ -71,6 +72,7 @@
             <itunes:duration>4:34</itunes:duration>
             <itunes:keywords>metric, socket, wrenches, tool
             </itunes:keywords>
+            <itunes:isClosedCaptioned>No</itunes:isClosedCaptioned>
         </item>
 
         <item>
