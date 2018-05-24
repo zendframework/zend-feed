@@ -41,6 +41,8 @@ class Entry extends Extension\AbstractRenderer
         $this->_setKeywords($this->dom, $this->base);
         $this->_setSubtitle($this->dom, $this->base);
         $this->_setSummary($this->dom, $this->base);
+        $this->_setEpisode($this->dom, $this->base);
+        $this->_setEpisodeType($this->dom, $this->base);
         if ($this->called) {
             $this->_appendNamespaces();
         }
@@ -233,6 +235,50 @@ class Entry extends Extension\AbstractRenderer
         }
         $el = $dom->createElement('itunes:summary');
         $text = $dom->createTextNode($summary);
+        $el->appendChild($text);
+        $root->appendChild($el);
+        $this->called = true;
+    }
+
+    /**
+     * Set entry episode number
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
+     * @return void
+     */
+    // @codingStandardsIgnoreStart
+    protected function _setEpisode(DOMDocument $dom, DOMElement $root)
+    {
+        // @codingStandardsIgnoreEnd
+        $episode = $this->getDataContainer()->getItunesEpisode();
+        if (! $episode) {
+            return;
+        }
+        $el = $dom->createElement('itunes:episode');
+        $text = $dom->createTextNode($episode);
+        $el->appendChild($text);
+        $root->appendChild($el);
+        $this->called = true;
+    }
+
+    /**
+     * Set entry episode type
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
+     * @return void
+     */
+    // @codingStandardsIgnoreStart
+    protected function _setEpisodeType(DOMDocument $dom, DOMElement $root)
+    {
+        // @codingStandardsIgnoreEnd
+        $type = $this->getDataContainer()->getItunesEpisodeType();
+        if (! $type) {
+            return;
+        }
+        $el = $dom->createElement('itunes:episodeType');
+        $text = $dom->createTextNode($type);
         $el->appendChild($text);
         $root->appendChild($el);
         $this->called = true;

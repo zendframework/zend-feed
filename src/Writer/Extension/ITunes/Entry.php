@@ -254,47 +254,47 @@ class Entry
     }
 
     /**
-     * Get the episode number
+     * Set the episode number
      *
-     * @return null|int
+     * @param int $number
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
      */
-    public function getEpisode()
+    public function setItunesEpisode($number)
     {
-        if (isset($this->data['episode'])) {
-            return $this->data['episode'];
+        if (! is_numeric($number) || is_float($number)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "number" may only be an integer; received %s',
+                is_object($number) ? get_class($number) : gettype($number)
+            ));
         }
 
-        $episode = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:episode)');
+        $this->data['episode'] = (int) $number;
 
-        if (! $episode) {
-            $episode = null;
-        }
-
-        $this->data['episode'] = null === $episode ? $episode : (int) $episode;
-
-        return $this->data['episode'];
+        return $this;
     }
 
     /**
-     * Get the episode number
+     * Set the episode type
      *
-     * @return string One of "full", "trailer", or "bonus"; defaults to "full".
+     * @param string $type One of "full", "trailer", or "bonus".
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
      */
-    public function getEpisodeType()
+    public function setItunesEpisodeType($type)
     {
-        if (isset($this->data['episodeType'])) {
-            return $this->data['episodeType'];
+        $validTypes = ['full', 'trailer', 'bonus'];
+        if (! in_array($type, $validTypes, true)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "episodeType" MUST be one of the strings [%s]; received %s',
+                implode(', ', $validTypes),
+                is_object($type) ? get_class($type) : var_export($type, true)
+            ));
         }
 
-        $type = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:episodeType)');
+        $this->data['episodeType'] = $type;
 
-        if (! $type) {
-            $type = 'full';
-        }
-
-        $this->data['episodeType'] = (string) $type;
-
-        return $this->data['episodeType'];
+        return $this;
     }
 
     /**

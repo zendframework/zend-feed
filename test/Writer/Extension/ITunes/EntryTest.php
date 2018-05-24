@@ -262,4 +262,85 @@ class EntryTest extends TestCase
         $entry->setItunesImage($url);
         $this->assertEquals($url, $entry->getItunesImage());
     }
+
+    public function nonNumericEpisodeNumbers()
+    {
+        return [
+            'null'       => [null],
+            'true'       => [true],
+            'false'      => [false],
+            'zero-float' => [0.000],
+            'float'      => [1.1],
+            'string'     => ['not-a-number'],
+            'array'      => [[1]],
+            'object'     => [(object) ['number' => 1]],
+        ];
+    }
+
+    /**
+     * @dataProvider nonNumericEpisodeNumbers
+     * @param mixed $number
+     */
+    public function testSetEpisodeRaisesExceptionForNonNumericEpisodeNumbers($number)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('may only be an integer');
+        $entry->setItunesEpisode($number);
+    }
+
+    public function testSetEpisodeSetsNumberInEntry()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesEpisode(42);
+        $this->assertEquals(42, $entry->getItunesEpisode());
+    }
+
+    public function invalidEpisodeTypes()
+    {
+        return [
+            'null'       => [null],
+            'true'       => [true],
+            'false'      => [false],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['not-a-type'],
+            'array'      => [['full']],
+            'object'     => [(object) ['type' => 'full']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidEpisodeTypes
+     * @param mixed $type
+     */
+    public function testSetEpisodeTypeRaisesExceptionForInvalidTypes($type)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be one of');
+        $entry->setItunesEpisodeType($type);
+    }
+
+    public function validEpisodeTypes()
+    {
+        return [
+            'full'    => ['full'],
+            'trailer' => ['trailer'],
+            'bonus'   => ['bonus'],
+        ];
+    }
+
+    /**
+     * @dataProvider validEpisodeTypes
+     * @param string $type
+     */
+    public function testEpisodeTypeMaybeMutatedWithAcceptedValues($type)
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesEpisodeType($type);
+        $this->assertEquals($type, $entry->getItunesEpisodeType());
+    }
 }
