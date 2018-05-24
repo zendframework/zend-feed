@@ -192,6 +192,7 @@ class Writer
         static::registerExtension('WellFormedWeb');
         static::registerExtension('Threading');
         static::registerExtension('ITunes');
+        static::registerExtension('GooglePlayPodcast');
     }
 
     public static function lcfirst($str)
