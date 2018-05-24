@@ -18,6 +18,13 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Writer\Extension\ITunes\Entry::setEpisode()`, corresponding to the
   `itunes:episode` tag, and allowing setting the number of the episode the entry represents.
 
+- [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Writer\Extension\ITunes\Feed::setItunesComplete()`, corresponding to the
+  `itunes:complete` tag. It allows setting a boolean flag, indicating whether or not the
+  podcast is complete (will not air new episodes).
+
+- [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Writer\Extension\ITunes\Feed::setItunesType()`, corresponding to the
+  `itunes:type` tag, and allowing setting the podcast type (one of "serial" or "episodic").
+
 - [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Reader\Extension\Podcast\Entry::getEpisodeType()`, corresponding to the
   `itunes:episodeType` tag, and returning the type of episode the entry represents
   (one of "full", "trailer", or "bonus", and defaulting to "full").

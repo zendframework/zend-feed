@@ -341,4 +341,91 @@ class FeedTest extends TestCase
         $feed->setItunesImage($url);
         $this->assertEquals($url, $feed->getItunesImage());
     }
+
+    public function invalidPodcastTypes()
+    {
+        return [
+            'null'       => [null],
+            'true'       => [true],
+            'false'      => [false],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['not-a-type'],
+            'array'      => [['episodic']],
+            'object'     => [(object) ['type' => 'episodic']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidPodcastTypes
+     * @param mixed $type
+     */
+    public function testSetItunesTypeWithInvalidTypeRaisesException($type)
+    {
+        $feed = new Writer\Feed();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be one of');
+        $feed->setItunesType($type);
+    }
+
+    public function validPodcastTypes()
+    {
+        return [
+            'episodic' => ['episodic'],
+            'serial'   => ['serial'],
+        ];
+    }
+
+    /**
+     * @dataProvider validPodcastTypes
+     * @param mixed $type
+     */
+    public function testSetItunesTypeMutatesTypeWithValidData($type)
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesType($type);
+        $this->assertEquals($type, $feed->getItunesType());
+    }
+
+    public function invalidCompleteStatuses()
+    {
+        return [
+            'null'       => [null],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['not-a-status'],
+            'array'      => [[true]],
+            'object'     => [(object) ['complete' => true]],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidCompleteStatuses
+     * @param mixed $status
+     */
+    public function testSetItunesCompleteRaisesExceptionForInvalidStatus($status)
+    {
+        $feed = new Writer\Feed();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be boolean');
+        $feed->setItunesComplete($status);
+    }
+
+    public function testSetItunesCompleteWithTrueSetsDataInContainer()
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesComplete(true);
+        $this->assertEquals('Yes', $feed->getItunesComplete());
+    }
+
+    public function testSetItunesCompleteWithFalseDoesNotSetDataInContainer()
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesComplete(false);
+        $this->assertNull($feed->getItunesComplete());
+    }
 }

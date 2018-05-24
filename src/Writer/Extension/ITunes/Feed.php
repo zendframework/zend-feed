@@ -343,6 +343,51 @@ class Feed
     }
 
     /**
+     * Set podcast type
+     *
+     * @param  string $type
+     * @return Feed
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesType($type)
+    {
+        $validTypes = ['episodic', 'serial'];
+        if (! in_array($type, $validTypes, true)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "type" MUST be one of [%s]; received %s',
+                implode(', ', $validTypes),
+                is_object($type) ? get_class($type) : var_export($type, true)
+            ));
+        }
+        $this->data['type'] = $type;
+        return $this;
+    }
+
+    /**
+     * Set "completion" status (whether more episodes will be released)
+     *
+     * @param  bool $status
+     * @return Feed
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesComplete($status)
+    {
+        if (! is_bool($status)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "complete" MUST be boolean; received %s',
+                is_object($status) ? get_class($status) : var_export($status, true)
+            ));
+        }
+
+        if (! $status) {
+            return $this;
+        }
+
+        $this->data['complete'] = 'Yes';
+        return $this;
+    }
+
+    /**
      * Overloading: proxy to internal setters
      *
      * @param  string $method
@@ -360,6 +405,7 @@ class Feed
                 'invalid method: ' . $method
             );
         }
+
         if (! array_key_exists($point, $this->data) || empty($this->data[$point])) {
             return;
         }
