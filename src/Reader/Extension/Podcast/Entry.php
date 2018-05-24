@@ -102,10 +102,18 @@ class Entry extends Extension\AbstractEntry
     /**
      * Get the entry keywords
      *
+     * @deprecated since 2.10.0; itunes:keywords is no longer part of the
+     *     iTunes podcast RSS specification.
      * @return string
      */
     public function getKeywords()
     {
+        trigger_error(
+            'itunes:keywords has been deprecated in the iTunes podcast RSS specification,'
+            . ' and should not be relied on.',
+            \E_USER_DEPRECATED
+        );
+
         if (isset($this->data['keywords'])) {
             return $this->data['keywords'];
         }
