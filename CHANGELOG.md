@@ -11,6 +11,14 @@ All notable changes to this project will be documented in this file, in reverse 
   - `Zend\Feed\Writer\Extension\ITunes\Entry`, via `setItunesImage()`; previously only the `Feed` supported it.
   - `Zend\Feed\Writer\Extension\ITunes\Renderer\Entry`; previously on the `Feed` supported it.
 
+- [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Writer\Extension\ITunes\Entry::setItunesSeason()`, corresponding to the
+  `itunes:season` tag, and allowing setting the season number of the episode the
+  entry represents.
+
+- [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Writer\Extension\ITunes\Entry::setItunesIsClosedCaptioned()`, corresponding to the
+  `itunes:isClosedCaptioned` tag, and allowing setting the status of closed
+  captioning support in the episode the entry represents.
+
 - [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Writer\Extension\ITunes\Entry::setItunesEpisodeType()`, corresponding to the
   `itunes:episodeType` tag, and allowing setting the type of episode the entry represents
   (one of "full", "trailer", or "bonus", and defaulting to "full").
@@ -28,6 +36,13 @@ All notable changes to this project will be documented in this file, in reverse 
 - [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Reader\Extension\Podcast\Entry::getEpisodeType()`, corresponding to the
   `itunes:episodeType` tag, and returning the type of episode the entry represents
   (one of "full", "trailer", or "bonus", and defaulting to "full").
+
+- [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Reader\Extension\Podcast\Entry::getSeason()`, corresponding to the
+  `itunes:season` tag, and returning the season number of the episode the entry represents.
+
+- [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Reader\Extension\Podcast\Entry::isClsoedCaptioned()`, corresponding to the
+  `itunes:isClosedCaptioned` tag, and returning the status of closed captioning
+  in the episode the entry represents.
 
 - [#75](https://github.com/zendframework/zend-feed/pull/75) adds `Zend\Feed\Reader\Extension\Podcast\Entry::getEpisode()`, corresponding to the
   `itunes:episode` tag, and returning the number of the episode the entry represents.
