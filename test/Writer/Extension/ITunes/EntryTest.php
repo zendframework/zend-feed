@@ -343,4 +343,44 @@ class EntryTest extends TestCase
         $entry->setItunesEpisodeType($type);
         $this->assertEquals($type, $entry->getItunesEpisodeType());
     }
+
+    public function invalidClosedCaptioningFlags()
+    {
+        return [
+            'null'       => [null],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['Yes'],
+            'array'      => [['Yes']],
+            'object'     => [(object) ['isClosedCaptioned' => 'Yes']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidClosedCaptioningFlags
+     * @param mixed $status
+     */
+    public function testSettingClosedCaptioningToNonBooleanRaisesException($status)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be a boolean');
+        $entry->setItunesIsClosedCaptioned($status);
+    }
+
+    public function testSettingClosedCaptioningToFalseDoesNothing()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesIsClosedCaptioned(false);
+        $this->assertNull($entry->getItunesIsClosedCaptioned());
+    }
+
+    public function testSettingClosedCaptioningToTrueUpdatesContainer()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesIsClosedCaptioned(true);
+        $this->assertTrue($entry->getItunesIsClosedCaptioned());
+    }
 }

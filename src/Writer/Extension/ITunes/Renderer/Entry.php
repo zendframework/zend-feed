@@ -43,6 +43,7 @@ class Entry extends Extension\AbstractRenderer
         $this->_setSummary($this->dom, $this->base);
         $this->_setEpisode($this->dom, $this->base);
         $this->_setEpisodeType($this->dom, $this->base);
+        $this->_setClosedCaptioned($this->dom, $this->base);
         if ($this->called) {
             $this->_appendNamespaces();
         }
@@ -279,6 +280,28 @@ class Entry extends Extension\AbstractRenderer
         }
         $el = $dom->createElement('itunes:episodeType');
         $text = $dom->createTextNode($type);
+        $el->appendChild($text);
+        $root->appendChild($el);
+        $this->called = true;
+    }
+
+    /**
+     * Set closed captioning status for episode
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
+     * @return void
+     */
+    // @codingStandardsIgnoreStart
+    protected function _setClosedCaptioned(DOMDocument $dom, DOMElement $root)
+    {
+        // @codingStandardsIgnoreEnd
+        $status = $this->getDataContainer()->getItunesIsClosedCaptioned();
+        if (! $status) {
+            return;
+        }
+        $el = $dom->createElement('itunes:isClosedCaptioned');
+        $text = $dom->createTextNode('Yes');
         $el->appendChild($text);
         $root->appendChild($el);
         $this->called = true;

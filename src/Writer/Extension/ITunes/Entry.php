@@ -298,6 +298,31 @@ class Entry
     }
 
     /**
+     * Set the status of closed captioning
+     *
+     * @param bool $status
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesIsClosedCaptioned($status)
+    {
+        if (! is_bool($status)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "isClosedCaptioned" MUST be a boolean; received %s',
+                is_object($status) ? get_class($status) : var_export($status, true)
+            ));
+        }
+
+        if (! $status) {
+            return $this;
+        }
+
+        $this->data['isClosedCaptioned'] = true;
+
+        return $this;
+    }
+
+    /**
      * Overloading to itunes specific setters
      *
      * @param  string $method
