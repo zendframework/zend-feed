@@ -260,6 +260,28 @@ class Entry extends Extension\AbstractEntry
     }
 
     /**
+     * Get the season number
+     *
+     * @return null|int
+     */
+    public function getSeason()
+    {
+        if (isset($this->data['season'])) {
+            return $this->data['season'];
+        }
+
+        $season = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:season)');
+
+        if (! $season) {
+            $season = null;
+        }
+
+        $this->data['season'] = null === $season ? $season : (int) $season;
+
+        return $this->data['season'];
+    }
+
+    /**
      * Register iTunes namespace
      *
      */

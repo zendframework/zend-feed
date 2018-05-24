@@ -403,4 +403,23 @@ class PodcastRss2Test extends TestCase
         $entry = $feed->current();
         $this->assertFalse($entry->isClosedCaptioned());
     }
+
+    public function testGetSeasonReturnsNullIfNoTagPresent()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $entry = $feed->current();
+        $this->assertNull($entry->getSeason());
+    }
+
+    public function testGetSeasonReturnsValueWhenTagPresent()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $feed->next(); // second item defines the tag
+        $entry = $feed->current();
+        $this->assertEquals(3, $entry->getSeason());
+    }
 }
