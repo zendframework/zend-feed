@@ -383,4 +383,23 @@ class EntryTest extends TestCase
         $entry->setItunesIsClosedCaptioned(true);
         $this->assertTrue($entry->getItunesIsClosedCaptioned());
     }
+
+    /**
+     * @dataProvider nonNumericEpisodeNumbers
+     * @param mixed $number
+     */
+    public function testSetSeasonRaisesExceptionForNonNumericSeasonNumbers($number)
+    {
+        $entry = new Writer\Entry();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('may only be an integer');
+        $entry->setItunesSeason($number);
+    }
+
+    public function testSetSeasonSetsNumberInEntry()
+    {
+        $entry = new Writer\Entry();
+        $entry->setItunesSeason(42);
+        $this->assertEquals(42, $entry->getItunesSeason());
+    }
 }

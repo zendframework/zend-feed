@@ -323,6 +323,27 @@ class Entry
     }
 
     /**
+     * Set the season number to which the episode belongs
+     *
+     * @param int $number
+     * @return self
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesSeason($number)
+    {
+        if (! is_numeric($number) || is_float($number)) {
+            throw new Writer\Exception\InvalidArgumentException(sprintf(
+                'invalid parameter: "season" may only be an integer; received %s',
+                is_object($number) ? get_class($number) : gettype($number)
+            ));
+        }
+
+        $this->data['season'] = (int) $number;
+
+        return $this;
+    }
+
+    /**
      * Overloading to itunes specific setters
      *
      * @param  string $method
