@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-feed for the canonical source repository
+ * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-feed/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Feed\Reader\Integration;
@@ -12,18 +10,14 @@ namespace ZendTest\Feed\Reader\Integration;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Reader;
 
-/**
-* @group Zend_Feed
-* @group Zend_Feed_Reader
-*/
-class PodcastRss2Test extends TestCase
+class GoolePlayPodcastRss2Test extends TestCase
 {
     protected $feedSamplePath = null;
 
     public function setup()
     {
         Reader\Reader::reset();
-        $this->feedSamplePath = dirname(__FILE__) . '/_files/podcast.xml';
+        $this->feedSamplePath = dirname(__FILE__) . '/_files/google-podcast.xml';
     }
 
     /**
@@ -56,7 +50,7 @@ class PodcastRss2Test extends TestCase
                 'Gadgets' => null
             ],
             'TV & Film' => null
-        ], $feed->getItunesCategories());
+        ], $feed->getPlayPodcastCategories());
     }
 
     public function testGetsTitle()
@@ -72,7 +66,7 @@ class PodcastRss2Test extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals('John Doe', $feed->getCastAuthor());
+        $this->assertEquals('John Doe', $feed->getPlayPodcastAuthor());
     }
 
     public function testGetsFeedBlock()
@@ -80,7 +74,7 @@ class PodcastRss2Test extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals('no', $feed->getBlock());
+        $this->assertEquals('no', $feed->getPlayPodcastBlock());
     }
 
     public function testGetsCopyright()
@@ -102,6 +96,19 @@ class PodcastRss2Test extends TestCase
             iTunes Store';
         $expected = str_replace("\r\n", "\n", $expected);
         $this->assertEquals($expected, $feed->getDescription());
+    }
+
+    public function testGetsPodcastDescription()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $expected = 'All About Everything is a show about everything.
+            Each week we dive into any subject known to man and talk
+            about it as much as we can. Look for our Podcast in the
+            iTunes Store';
+        $expected = str_replace("\r\n", "\n", $expected);
+        $this->assertEquals($expected, $feed->getPlayPodcastDescription());
     }
 
     public function testGetsLanguage()
@@ -133,7 +140,7 @@ class PodcastRss2Test extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals('yes', $feed->getExplicit());
+        $this->assertEquals('yes', $feed->getPlayPodcastExplicit());
     }
 
     public function testGetsEntryCount()
@@ -149,7 +156,10 @@ class PodcastRss2Test extends TestCase
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
         );
-        $this->assertEquals('http://example.com/podcasts/everything/AllAboutEverything.jpg', $feed->getItunesImage());
+        $this->assertEquals(
+            'http://example.com/podcasts/everything/AllAboutEverything.jpg',
+            $feed->getPlayPodcastImage()
+        );
     }
 
     /**
@@ -162,7 +172,7 @@ class PodcastRss2Test extends TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('yes', $entry->getBlock());
+        $this->assertEquals('yes', $entry->getPlayPodcastBlock());
     }
 
     public function testGetsEntryId()
@@ -198,7 +208,7 @@ class PodcastRss2Test extends TestCase
             file_get_contents($this->feedSamplePath)
         );
         $entry = $feed->current();
-        $this->assertEquals('no', $entry->getExplicit());
+        $this->assertEquals('no', $entry->getPlayPodcastExplicit());
     }
 
     public function testGetsSubtitle()
@@ -213,7 +223,7 @@ class PodcastRss2Test extends TestCase
         $this->assertEquals($expected, $entry->getSubtitle());
     }
 
-    public function testGetsSummary()
+    public function testGetsEpisodeDescription()
     {
         $feed = Reader\Reader::importString(
             file_get_contents($this->feedSamplePath)
@@ -224,7 +234,7 @@ class PodcastRss2Test extends TestCase
                 construction materials, and overall aesthetics. Come and
                 join the party!';
         $expected = str_replace("\r\n", "\n", $expected);
-        $this->assertEquals($expected, $entry->getSummary());
+        $this->assertEquals($expected, $entry->getPlayPodcastDescription());
     }
 
     public function testGetsDuration()
@@ -234,25 +244,6 @@ class PodcastRss2Test extends TestCase
         );
         $entry = $feed->current();
         $this->assertEquals('7:04', $entry->getDuration());
-    }
-
-    public function testGetsKeywords()
-    {
-        $feed = Reader\Reader::importString(
-            file_get_contents($this->feedSamplePath)
-        );
-        $entry = $feed->current();
-        $expected = 'salt, pepper, shaker, exciting
-            ';
-        $expected = str_replace("\r\n", "\n", $expected);
-
-        set_error_handler(function ($errno, $errstr) {
-            return (bool) preg_match('/itunes:keywords/', $errstr);
-        }, \E_USER_DEPRECATED);
-        $keywords = $entry->getKeywords();
-        restore_error_handler();
-
-        $this->assertEquals($expected, $keywords);
     }
 
     public function testGetsEntryEncoding()
@@ -302,7 +293,7 @@ class PodcastRss2Test extends TestCase
 
     public function testPodcastTypeIsEpisodicWhenNoTagPresent()
     {
-        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-no-type.xml';
+        $feedSamplePath = dirname(__FILE__) . '/_files/google-podcast-no-type.xml';
         $feed = Reader\Reader::importString(
             file_get_contents($feedSamplePath)
         );
@@ -319,7 +310,7 @@ class PodcastRss2Test extends TestCase
 
     public function testIsCompleteReturnsTrueWhenTagValueIsYes()
     {
-        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-complete.xml';
+        $feedSamplePath = dirname(__FILE__) . '/_files/google-podcast-complete.xml';
         $feed = Reader\Reader::importString(
             file_get_contents($feedSamplePath)
         );
@@ -328,7 +319,7 @@ class PodcastRss2Test extends TestCase
 
     public function testIsCompleteReturnsFalseWhenTagValueIsSomethingOtherThanYes()
     {
-        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-incomplete.xml';
+        $feedSamplePath = dirname(__FILE__) . '/_files/google-podcast-incomplete.xml';
         $feed = Reader\Reader::importString(
             file_get_contents($feedSamplePath)
         );
@@ -356,7 +347,7 @@ class PodcastRss2Test extends TestCase
 
     public function testGetEpisodeReturnsValueWhenTagPresent()
     {
-        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-episode.xml';
+        $feedSamplePath = dirname(__FILE__) . '/_files/google-podcast-episode.xml';
         $feed = Reader\Reader::importString(
             file_get_contents($feedSamplePath)
         );
@@ -366,7 +357,7 @@ class PodcastRss2Test extends TestCase
 
     public function testGetEpisodeTypeReturnsValueWhenTagPresent()
     {
-        $feedSamplePath = dirname(__FILE__) . '/_files/podcast-episode.xml';
+        $feedSamplePath = dirname(__FILE__) . '/_files/google-podcast-episode.xml';
         $feed = Reader\Reader::importString(
             file_get_contents($feedSamplePath)
         );

@@ -672,6 +672,7 @@ class Reader implements ReaderImportInterface
         static::registerExtension('WellFormedWeb');
         static::registerExtension('Thread');
         static::registerExtension('Podcast');
+        static::registerExtension('GooglePlayPodcast');
     }
 
     /**

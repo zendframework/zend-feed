@@ -188,28 +188,52 @@ class FeedTest extends TestCase
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12'
         ];
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
         $feed->setItunesKeywords($words);
+        restore_error_handler();
+
         $this->assertEquals($words, $feed->getItunesKeywords());
     }
 
     public function testSetKeywordsThrowsExceptionIfMaxKeywordsExceeded()
     {
-        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $words = [
             'a1', 'a2', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'a9', 'a10', 'a11', 'a12', 'a13'
         ];
-        $feed->setItunesKeywords($words);
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
+        try {
+            $feed->setItunesKeywords($words);
+            $this->fail('Expected exception when setting more keywords than allowed');
+        } catch (ExceptionInterface $e) {
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public function testSetKeywordsThrowsExceptionIfFormattedKeywordsExceeds255CharLength()
     {
-        $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $words = [
             str_repeat('a', 253), str_repeat('b', 2)
         ];
-        $feed->setItunesKeywords($words);
+
+        set_error_handler(function ($errno, $errstr) {
+            return (bool) preg_match('/itunes:keywords/', $errstr);
+        }, \E_USER_DEPRECATED);
+        try {
+            $feed->setItunesKeywords($words);
+            $this->fail('Expected exception when setting keywords exceeding character length');
+        } catch (ExceptionInterface $e) {
+        } finally {
+            restore_error_handler();
+        }
     }
 
     public function testSetNewFeedUrl()
@@ -266,5 +290,142 @@ class FeedTest extends TestCase
         $this->expectException(ExceptionInterface::class);
         $feed = new Writer\Feed;
         $feed->setItunesSummary(str_repeat('a', 4001));
+    }
+
+    public function invalidImageUrls()
+    {
+        return [
+            'null'                  => [null],
+            'true'                  => [true],
+            'false'                 => [false],
+            'zero'                  => [0],
+            'int'                   => [1],
+            'zero-float'            => [0.0],
+            'float'                 => [1.1],
+            'string'                => ['scheme:/host.path'],
+            'invalid-extension-gif' => ['https://example.com/image.gif', 'file extension'],
+            'invalid-extension-uc'  => ['https://example.com/image.PNG', 'file extension'],
+            'array'                 => [['https://example.com/image.png']],
+            'object'                => [(object) ['image' => 'https://example.com/image.png']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidImageUrls
+     * @param mixed $url
+     * @param string $expectedMessage
+     */
+    public function testSetItunesImageRaisesExceptionForInvalidUrl($url, $expectedMessage = 'valid URI')
+    {
+        $feed = new Writer\Feed();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage($expectedMessage);
+        $feed->setItunesImage($url);
+    }
+
+    public function validImageUrls()
+    {
+        return [
+            'jpg' => ['https://example.com/image.jpg'],
+            'png' => ['https://example.com/image.png'],
+        ];
+    }
+
+    /**
+     * @dataProvider validImageUrls
+     * @param string $url
+     */
+    public function testSetItunesImageSetsInternalDataWithValidUrl($url)
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesImage($url);
+        $this->assertEquals($url, $feed->getItunesImage());
+    }
+
+    public function invalidPodcastTypes()
+    {
+        return [
+            'null'       => [null],
+            'true'       => [true],
+            'false'      => [false],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['not-a-type'],
+            'array'      => [['episodic']],
+            'object'     => [(object) ['type' => 'episodic']],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidPodcastTypes
+     * @param mixed $type
+     */
+    public function testSetItunesTypeWithInvalidTypeRaisesException($type)
+    {
+        $feed = new Writer\Feed();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be one of');
+        $feed->setItunesType($type);
+    }
+
+    public function validPodcastTypes()
+    {
+        return [
+            'episodic' => ['episodic'],
+            'serial'   => ['serial'],
+        ];
+    }
+
+    /**
+     * @dataProvider validPodcastTypes
+     * @param mixed $type
+     */
+    public function testSetItunesTypeMutatesTypeWithValidData($type)
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesType($type);
+        $this->assertEquals($type, $feed->getItunesType());
+    }
+
+    public function invalidCompleteStatuses()
+    {
+        return [
+            'null'       => [null],
+            'zero'       => [0],
+            'int'        => [1],
+            'zero-float' => [0.0],
+            'float'      => [1.1],
+            'string'     => ['not-a-status'],
+            'array'      => [[true]],
+            'object'     => [(object) ['complete' => true]],
+        ];
+    }
+
+    /**
+     * @dataProvider invalidCompleteStatuses
+     * @param mixed $status
+     */
+    public function testSetItunesCompleteRaisesExceptionForInvalidStatus($status)
+    {
+        $feed = new Writer\Feed();
+        $this->expectException(ExceptionInterface::class);
+        $this->expectExceptionMessage('MUST be boolean');
+        $feed->setItunesComplete($status);
+    }
+
+    public function testSetItunesCompleteWithTrueSetsDataInContainer()
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesComplete(true);
+        $this->assertEquals('Yes', $feed->getItunesComplete());
+    }
+
+    public function testSetItunesCompleteWithFalseDoesNotSetDataInContainer()
+    {
+        $feed = new Writer\Feed();
+        $feed->setItunesComplete(false);
+        $this->assertNull($feed->getItunesComplete());
     }
 }
