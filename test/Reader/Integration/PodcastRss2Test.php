@@ -271,4 +271,16 @@ class PodcastRss2Test extends TestCase
 
         $this->assertEquals($expected, $entry->getEnclosure());
     }
+
+    public function testCanRetrieveEntryImage()
+    {
+        $feed = Reader\Reader::importString(
+            file_get_contents($this->feedSamplePath)
+        );
+        $entry = $feed->current();
+        $this->assertEquals(
+            'https://www.example.com/podcasts/everything/episode.png',
+            $entry->getItunesImage()
+        );
+    }
 }

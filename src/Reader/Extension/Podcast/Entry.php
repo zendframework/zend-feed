@@ -1,18 +1,14 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-feed for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-feed/blob/master/LICENSE.md New BSD License
  */
 
 namespace Zend\Feed\Reader\Extension\Podcast;
 
 use Zend\Feed\Reader\Extension;
 
-/**
-*/
 class Entry extends Extension\AbstractEntry
 {
     /**
@@ -167,6 +163,28 @@ class Entry extends Extension\AbstractEntry
         $this->data['summary'] = $summary;
 
         return $this->data['summary'];
+    }
+
+    /**
+     * Get the entry image
+     *
+     * @return string
+     */
+    public function getItunesImage()
+    {
+        if (isset($this->data['image'])) {
+            return $this->data['image'];
+        }
+
+        $image = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:image/@href)');
+
+        if (! $image) {
+            $image = null;
+        }
+
+        $this->data['image'] = $image;
+
+        return $this->data['image'];
     }
 
     /**

@@ -50,6 +50,7 @@
             <itunes:duration>7:04</itunes:duration>
             <itunes:keywords>salt, pepper, shaker, exciting
             </itunes:keywords>
+            <itunes:image href="https://www.example.com/podcasts/everything/episode.png" />
         </item>
 
         <item>
