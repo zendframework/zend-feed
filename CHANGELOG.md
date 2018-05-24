@@ -6,11 +6,15 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#77](https://github.com/zendframework/zend-feed/pull/77) adds support for `itunes:image` for each of:
+  - `Zend\Feed\Reader\Extension\Podcast\Entry`, via `getItunesImage()`; previously only the `Feed` supported it.
+  - `Zend\Feed\Writer\Extension\ITunes\Entry`, via `setItunesImage()`; previously only the `Feed` supported it.
+  - `Zend\Feed\Writer\Extension\ITunes\Renderer\Entry`; previously on the `Feed` supported it.
 
 ### Changed
 
-- Nothing.
+- [#77](https://github.com/zendframework/zend-feed/pull/77) updates URI validation for `Zend\Feed\Writer\Extension\ITunes\Feed::setItunesImage()` to
+  first check that we have received a string value before proceeding.
 
 ### Deprecated
 
