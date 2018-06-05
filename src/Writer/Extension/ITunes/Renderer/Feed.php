@@ -345,7 +345,7 @@ class Feed extends Extension\AbstractRenderer
             return;
         }
         $el = $dom->createElement('itunes:type');
-        $text = $dom->createTextNode($summary);
+        $text = $dom->createTextNode($type);
         $el->appendChild($text);
         $root->appendChild($el);
         $this->called = true;
