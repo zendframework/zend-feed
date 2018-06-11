@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.10.3 - TBD
+## 2.10.3 - 2018-08-01
 
 ### Added
 
@@ -10,7 +10,36 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- This release modifies how `Zend\Feed\Pubsubhubbub\AbstractCallback::_detectCallbackUrl()`
+  marshals the request URI. In prior releases, we would attempt to inspect the
+  `X-Rewrite-Url` and `X-Original-Url` headers, using their values, if present.
+  These headers are issued by the ISAPI_Rewrite module for IIS (developed by
+  HeliconTech). However, we have no way of guaranteeing that the module is what
+  issued the headers, making it an unreliable source for discovering the URI. As
+  such, we have removed this feature in this release.
+
+  The method is not called internally. If you are calling the method from your
+  own extension and need support for ISAPI_Rewrite, you will need to override
+  the method as follows:
+
+  ```php
+  protected function _detectCallbackUrl()
+  {
+      $callbackUrl = null;
+      if (isset($_SERVER['HTTP_X_REWRITE_URL'])) {
+          $callbackUrl = $_SERVER['HTTP_X_REWRITE_URL'];
+      }
+      if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) {
+          $callbackUrl = $_SERVER['HTTP_X_ORIGINAL_URL'];
+      }
+
+      return $callbackUrl ?: parent::__detectCallbackUrl();
+  }
+  ```
+
+  If you use an approach such as the above, make sure you also instruct your web
+  server to strip any incoming headers of the same name so that you can
+  guarantee they are issued by the ISAPI_Rewrite module.
 
 ### Deprecated
 
