@@ -353,6 +353,35 @@ class ReaderTest extends TestCase
         Reader\Reader::setHttpClient(new stdClass);
     }
 
+    public function testReaderEmitsNoticeDuringFeedImportWhenGooglePlayPodcastExtensionUnavailable()
+    {
+        Reader\Reader::setExtensionManager(new TestAsset\CustomExtensionManager());
+
+        $notices = (object) [
+            'messages' => [],
+        ];
+
+        set_error_handler(function ($errno, $errstr) use ($notices) {
+            $notices->messages[] = $errstr;
+        }, \E_USER_NOTICE);
+        $feed = Reader\Reader::importFile(
+            dirname(__FILE__) . '/Entry/_files/Atom/title/plain/atom10.xml'
+        );
+        restore_error_handler();
+
+        $message = array_reduce($notices->messages, function ($toReturn, $message) {
+            if ('' !== $toReturn) {
+                return $toReturn;
+            }
+            return false === strstr($message, 'GooglePlayPodcast') ? '' : $message;
+        }, '');
+
+        $this->assertNotEmpty(
+            $message,
+            'GooglePlayPodcast extension was present in extension manager, but was not expected to be'
+        );
+    }
+
     // @codingStandardsIgnoreStart
     protected function _getTempDirectory()
     {
