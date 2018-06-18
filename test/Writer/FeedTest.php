@@ -28,6 +28,12 @@ class FeedTest extends TestCase
     public function setup()
     {
         $this->feedSamplePath = dirname(__FILE__) . '/Writer/_files';
+        Writer\Writer::reset();
+    }
+
+    public function tearDown()
+    {
+        Writer\Writer::reset();
     }
 
     public function testAddsAuthorNameFromArray()
@@ -1087,5 +1093,32 @@ EOT;
         $feed = new Writer\Feed();
         $feed->setTitle('0');
         $this->assertEquals('0', $feed->getTitle());
+    }
+
+    public function testFeedWriterEmitsNoticeDuringFeedImportWhenGooglePlayPodcastExtensionUnavailable()
+    {
+        Writer\Writer::setExtensionManager(new TestAsset\CustomExtensionManager());
+
+        $notices = (object) [
+            'messages' => [],
+        ];
+
+        set_error_handler(function ($errno, $errstr) use ($notices) {
+            $notices->messages[] = $errstr;
+        }, \E_USER_NOTICE);
+        $writer = new Writer\Feed();
+        restore_error_handler();
+
+        $message = array_reduce($notices->messages, function ($toReturn, $message) {
+            if ('' !== $toReturn) {
+                return $toReturn;
+            }
+            return false === strstr($message, 'GooglePlayPodcast') ? '' : $message;
+        }, '');
+
+        $this->assertNotEmpty(
+            $message,
+            'GooglePlayPodcast extension was present in extension manager, but was not expected to be'
+        );
     }
 }

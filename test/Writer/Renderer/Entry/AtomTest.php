@@ -1,10 +1,8 @@
 <?php
 /**
- * Zend Framework (http://framework.zend.com/)
- *
- * @link      http://github.com/zendframework/zf2 for the canonical source repository
- * @copyright Copyright (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @see       https://github.com/zendframework/zend-feed for the canonical source repository
+ * @copyright Copyright (c) 2005-2018 Zend Technologies USA Inc. (https://www.zend.com)
+ * @license   https://github.com/zendframework/zend-feed/blob/master/LICENSE.md New BSD License
  */
 
 namespace ZendTest\Feed\Writer\Renderer\Entry;
@@ -14,6 +12,7 @@ use Zend\Feed\Reader;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Renderer;
+use ZendTest\Feed\Writer\TestAsset;
 
 /**
  * @group      Zend_Feed
@@ -26,6 +25,7 @@ class AtomTest extends TestCase
 
     public function setUp()
     {
+        Writer\Writer::reset();
         $this->validWriter = new Writer\Feed;
 
         $this->validWriter->setType('atom');
@@ -53,6 +53,7 @@ class AtomTest extends TestCase
 
     public function tearDown()
     {
+        Writer\Writer::reset();
         $this->validWriter = null;
         $this->validEntry  = null;
     }
@@ -297,5 +298,35 @@ class AtomTest extends TestCase
         // Skipped over due to ZFR bug (detects Atom in error when RSS requested)
         //$this->assertEquals('http://www.example.com/rss/id/1', $entry->getCommentFeedLink('rss'));
         $this->assertEquals('http://www.example.com/atom/id/1', $entry->getCommentFeedLink('atom'));
+    }
+
+    public function testEntryRendererEmitsNoticeDuringInstantiationWhenGooglePlayPodcastExtensionUnavailable()
+    {
+        // Since we create feed and entry writer instances in the test constructor,
+        // we need to reset it _now_ before creating a new renderer.
+        Writer\Writer::reset();
+        Writer\Writer::setExtensionManager(new TestAsset\CustomExtensionManager());
+
+        $notices = (object) [
+            'messages' => [],
+        ];
+
+        set_error_handler(function ($errno, $errstr) use ($notices) {
+            $notices->messages[] = $errstr;
+        }, \E_USER_NOTICE);
+        $renderer = new Renderer\Entry\Atom($this->validEntry);
+        restore_error_handler();
+
+        $message = array_reduce($notices->messages, function ($toReturn, $message) {
+            if ('' !== $toReturn) {
+                return $toReturn;
+            }
+            return false === strstr($message, 'GooglePlayPodcast') ? '' : $message;
+        }, '');
+
+        $this->assertNotEmpty(
+            $message,
+            'GooglePlayPodcast extension was present in extension manager, but was not expected to be'
+        );
     }
 }

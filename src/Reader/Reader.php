@@ -577,16 +577,6 @@ class Reader implements ReaderImportInterface
      */
     public static function registerExtension($name)
     {
-        $manager   = static::getExtensionManager();
-        $feedName  = $name . '\Feed';
-        $entryName = $name . '\Entry';
-
-        if (static::isRegistered($name)) {
-            if ($manager->has($feedName) || $manager->has($entryName)) {
-                return;
-            }
-        }
-
         if (! static::hasExtension($name)) {
             throw new Exception\RuntimeException(sprintf(
                 'Could not load extension "%s" using Plugin Loader.'
@@ -595,9 +585,19 @@ class Reader implements ReaderImportInterface
             ));
         }
 
+        // Return early if already registered.
+        if (static::isRegistered($name)) {
+            return;
+        }
+
+        $manager   = static::getExtensionManager();
+
+        $feedName = $name . '\Feed';
         if ($manager->has($feedName)) {
             static::$extensions['feed'][] = $feedName;
         }
+
+        $entryName = $name . '\Entry';
         if ($manager->has($entryName)) {
             static::$extensions['entry'][] = $entryName;
         }
