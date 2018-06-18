@@ -15,6 +15,7 @@ use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
 use Zend\Feed\Writer\Feed;
 use Zend\Feed\Writer\Renderer;
+use ZendTest\Feed\Writer\TestAsset;
 
 /**
  * @group      Zend_Feed
@@ -26,6 +27,7 @@ class AtomTest extends TestCase
 
     public function setUp()
     {
+        Writer\Writer::reset();
         $this->validWriter = new Writer\Feed;
         $this->validWriter->setTitle('This is a test feed.');
         $this->validWriter->setDescription('This is a test description.');
@@ -41,6 +43,7 @@ class AtomTest extends TestCase
 
     public function tearDown()
     {
+        Writer\Writer::reset();
         $this->validWriter = null;
     }
 
@@ -419,5 +422,35 @@ class AtomTest extends TestCase
             'uri' => 'http://www.example.com/logo.gif'
         ];
         $this->assertEquals($expected, $feed->getImage());
+    }
+
+    public function testFeedRendererEmitsNoticeDuringFeedImportWhenGooglePlayPodcastExtensionUnavailable()
+    {
+        // Since we create feed and entry writer instances in the test constructor,
+        // we need to reset it _now_ before creating a new renderer.
+        Writer\Writer::reset();
+        Writer\Writer::setExtensionManager(new TestAsset\CustomExtensionManager());
+
+        $notices = (object) [
+            'messages' => [],
+        ];
+
+        set_error_handler(function ($errno, $errstr) use ($notices) {
+            $notices->messages[] = $errstr;
+        }, \E_USER_NOTICE);
+        $renderer = new Renderer\Feed\Atom($this->validWriter);
+        restore_error_handler();
+
+        $message = array_reduce($notices->messages, function ($toReturn, $message) {
+            if ('' !== $toReturn) {
+                return $toReturn;
+            }
+            return false === strstr($message, 'GooglePlayPodcast') ? '' : $message;
+        }, '');
+
+        $this->assertNotEmpty(
+            $message,
+            'GooglePlayPodcast extension was present in extension manager, but was not expected to be'
+        );
     }
 }
