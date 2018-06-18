@@ -24,7 +24,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 - Nothing.
 
-## 2.10.2 - TBD
+## 2.10.2 - 2018-06-18
 
 ### Added
 
@@ -44,7 +44,19 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#81](https://github.com/zendframework/zend-feed/pull/81) updates the `Zend\Feed\Reader\Reader` and `Zend\Feed\Writer\Writer` classes to
+  conditionally register their respective "GooglePlayPodcast" extensions only if
+  their extension managers are aware of it. This is done due to the fact that
+  existing `ExtensionManagerInterface` implementations may not register it by
+  default as the extension did not exist in releases prior to 2.10.0. By having
+  the registration conditional, we prevent an exception from being raised; users
+  are not impacted by its absence, as the extension features were not exposed
+  previously.
+  
+  Both `Reader` and `Writer` emit an `E_USER_NOTICE` when the extension is not
+  found in the extension manager, indicating that the
+  `ExtensionManagerInterface` implementation should be updated to add entries
+  for the "GooglePlayPodcast" entry, feed, and/or renderer classes.
 
 ## 2.10.1 - 2018-06-05
 
