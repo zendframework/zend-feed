@@ -53,7 +53,7 @@ class HttpResponse
      */
     public function sendHeaders()
     {
-        if (count($this->headers) || (200 != $this->statusCode)) {
+        if ($this->headers || (200 != $this->statusCode)) {
             $this->canSendHeaders(true);
         } elseif (200 == $this->statusCode) {
             return;

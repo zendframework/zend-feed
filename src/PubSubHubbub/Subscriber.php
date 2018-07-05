@@ -564,10 +564,7 @@ class Subscriber
      */
     public function isSuccess()
     {
-        if (count($this->errors) > 0) {
-            return false;
-        }
-        return true;
+        return ! $this->errors;
     }
 
     /**
