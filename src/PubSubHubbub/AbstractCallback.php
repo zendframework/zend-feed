@@ -211,28 +211,31 @@ abstract class AbstractCallback implements CallbackInterface
     protected function _detectCallbackUrl()
     {
         // @codingStandardsIgnoreEnd
-        $callbackUrl = '';
-        if (isset($_SERVER['HTTP_X_ORIGINAL_URL'])) {
-            $callbackUrl = $_SERVER['HTTP_X_ORIGINAL_URL'];
-        } elseif (isset($_SERVER['HTTP_X_REWRITE_URL'])) {
-            $callbackUrl = $_SERVER['HTTP_X_REWRITE_URL'];
-        } elseif (isset($_SERVER['REQUEST_URI'])) {
-            $callbackUrl = $_SERVER['REQUEST_URI'];
-            $scheme = 'http';
-            if ($_SERVER['HTTPS'] == 'on') {
-                $scheme = 'https';
-            }
-            $schemeAndHttpHost = $scheme . '://' . $this->_getHttpHost();
-            if (strpos($callbackUrl, $schemeAndHttpHost) === 0) {
-                $callbackUrl = substr($callbackUrl, strlen($schemeAndHttpHost));
-            }
-        } elseif (isset($_SERVER['ORIG_PATH_INFO'])) {
-            $callbackUrl = $_SERVER['ORIG_PATH_INFO'];
-            if (! empty($_SERVER['QUERY_STRING'])) {
-                $callbackUrl .= '?' . $_SERVER['QUERY_STRING'];
-            }
+        $callbackUrl = null;
+
+        // IIS7 with URL Rewrite: make sure we get the unencoded url
+        // (double slash problem).
+        $iisUrlRewritten = isset($_SERVER['IIS_WasUrlRewritten']) ? $_SERVER['IIS_WasUrlRewritten'] : null;
+        $unencodedUrl    = isset($_SERVER['UNENCODED_URL']) ? $_SERVER['UNENCODED_URL'] : null;
+        if ('1' == $iisUrlRewritten && ! empty($unencodedUrl)) {
+            return $unencodedUrl;
         }
-        return $callbackUrl;
+
+        // HTTP proxy requests setup request URI with scheme and host [and port]
+        // + the URL path, only use URL path.
+        if (isset($_SERVER['REQUEST_URI'])) {
+            $callbackUrl = $this->buildCallbackUrlFromRequestUri();
+        }
+
+        if (null !== $callbackUrl) {
+            return $callbackUrl;
+        }
+
+        if (isset($_SERVER['ORIG_PATH_INFO'])) {
+            return $this->buildCallbackUrlFromOrigPathInfo();
+        }
+
+        return '';
     }
 
     /**
@@ -247,19 +250,19 @@ abstract class AbstractCallback implements CallbackInterface
         if (! empty($_SERVER['HTTP_HOST'])) {
             return $_SERVER['HTTP_HOST'];
         }
-        $scheme = 'http';
-        if ($_SERVER['HTTPS'] == 'on') {
-            $scheme = 'https';
-        }
-        $name = $_SERVER['SERVER_NAME'];
-        $port = $_SERVER['SERVER_PORT'];
-        if (($scheme == 'http' && $port == 80)
-            || ($scheme == 'https' && $port == 443)
+
+        $https  = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : null;
+        $scheme = $https === 'on' ? 'https' : 'http';
+        $name   = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : '';
+        $port   = isset($_SERVER['SERVER_PORT']) ? (int) $_SERVER['SERVER_PORT'] : 80;
+
+        if (($scheme === 'http' && $port === 80)
+            || ($scheme === 'https' && $port === 443)
         ) {
             return $name;
         }
 
-        return $name . ':' . $port;
+        return sprintf('%s:%d', $name, $port);
     }
 
     /**
@@ -303,5 +306,39 @@ abstract class AbstractCallback implements CallbackInterface
             : file_get_contents($this->inputStream);
 
         return strlen(trim($body)) > 0 ? $body : false;
+    }
+
+    /**
+     * Build the callback URL from the REQUEST_URI server parameter.
+     *
+     * @return string
+     */
+    private function buildCallbackUrlFromRequestUri()
+    {
+        $callbackUrl = $_SERVER['REQUEST_URI'];
+        $https = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : null;
+        $scheme = $https === 'on' ? 'https' : 'http';
+        if ($https === 'on') {
+            $scheme = 'https';
+        }
+        $schemeAndHttpHost = $scheme . '://' . $this->_getHttpHost();
+        if (strpos($callbackUrl, $schemeAndHttpHost) === 0) {
+            $callbackUrl = substr($callbackUrl, strlen($schemeAndHttpHost));
+        }
+        return $callbackUrl;
+    }
+
+    /**
+     * Build the callback URL from the ORIG_PATH_INFO server parameter.
+     *
+     * @return string
+     */
+    private function buildCallbackUrlFromOrigPathInfo()
+    {
+        $callbackUrl = $_SERVER['ORIG_PATH_INFO'];
+        if (! empty($_SERVER['QUERY_STRING'])) {
+            $callbackUrl .= '?' . $_SERVER['QUERY_STRING'];
+        }
+        return $callbackUrl;
     }
 }
