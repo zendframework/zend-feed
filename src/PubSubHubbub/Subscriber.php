@@ -667,7 +667,7 @@ class Subscriber
      *
      * @param  string $hubUrl
      * @param  string $mode
-     * @return string
+     * @return array
      * @throws Exception\InvalidArgumentException
      */
     // @codingStandardsIgnoreStart
