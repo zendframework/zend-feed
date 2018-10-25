@@ -7,7 +7,6 @@
 
 namespace Zend\Feed\Writer\Extension\GooglePlayPodcast;
 
-use Zend\Feed\Uri;
 use Zend\Feed\Writer;
 use Zend\Stdlib\StringUtils;
 use Zend\Stdlib\StringWrapper\StringWrapperInterface;
