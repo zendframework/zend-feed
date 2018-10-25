@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- Composer requirements for ext-dom and ext-libxml
 
 ### Changed
 
