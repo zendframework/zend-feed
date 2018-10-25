@@ -280,7 +280,7 @@ class Reader implements ReaderImportInterface
      *
      * @param  string $uri
      * @param  Http\ClientInterface $client
-     * @return self
+     * @return Feed\FeedInterface
      * @throws Exception\RuntimeException if response is not an Http\ResponseInterface
      */
     public static function importRemoteFeed($uri, Http\ClientInterface $client)

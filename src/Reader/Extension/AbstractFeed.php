@@ -115,12 +115,12 @@ abstract class AbstractFeed
         return $this->data;
     }
 
-	/**
-	 * Set the XPath query
-	 *
-	 * @param  DOMXPath $xpath
-	 * @return AbstractFeed
-	 */
+    /**
+     * Set the XPath query
+     *
+     * @param  DOMXPath $xpath
+     * @return AbstractFeed
+     */
     public function setXpath(DOMXPath $xpath = null)
     {
         if (null === $xpath) {
