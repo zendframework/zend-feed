@@ -10,7 +10,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- [#93](https://github.com/zendframework/zend-feed/pull/93) `Writer\Feed`, `Writer\Entry` and `Writer\Deleted` all now
+ accept `DateTimeImmutable` instances as an arguments to methods that previously only accepted `DateTime` or Unix
+ Timestamps, such as `Writer\Feed::setDateModified()`
 
 ### Deprecated
 
