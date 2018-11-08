@@ -10,6 +10,7 @@
 namespace ZendTest\Feed\Writer;
 
 use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Deleted;
@@ -180,6 +181,14 @@ class FeedTest extends TestCase
         $this->assertEquals($myDate, $writer->getDateCreated());
     }
 
+    public function testSetDateCreatedUsesDateTimeImmutableObject()
+    {
+        $myDate = new DateTimeImmutable('@' . 1234567890);
+        $writer = new Writer\Feed;
+        $writer->setDateCreated($myDate);
+        $this->assertEquals($myDate, $writer->getDateCreated());
+    }
+
     public function testSetDateModifiedDefaultsToCurrentTime()
     {
         $writer = new Writer\Feed;
@@ -221,6 +230,14 @@ class FeedTest extends TestCase
     public function testSetDateModifiedUsesDateTimeObject()
     {
         $myDate = new DateTime('@' . 1234567890);
+        $writer = new Writer\Feed;
+        $writer->setDateModified($myDate);
+        $this->assertEquals($myDate, $writer->getDateModified());
+    }
+
+    public function testSetDateModifiedUsesDateTimeImmutableObject()
+    {
+        $myDate = new DateTimeImmutable('@' . 1234567890);
         $writer = new Writer\Feed;
         $writer->setDateModified($myDate);
         $this->assertEquals($myDate, $writer->getDateModified());
@@ -299,6 +316,14 @@ class FeedTest extends TestCase
     public function testSetLastBuildDateUsesDateTimeObject()
     {
         $myDate = new DateTime('@' . 1234567890);
+        $writer = new Writer\Feed;
+        $writer->setLastBuildDate($myDate);
+        $this->assertEquals($myDate, $writer->getLastBuildDate());
+    }
+
+    public function testSetLastBuildDateUsesDateTimeImmutableObject()
+    {
+        $myDate = new DateTimeImmutable('@' . 1234567890);
         $writer = new Writer\Feed;
         $writer->setLastBuildDate($myDate);
         $this->assertEquals($myDate, $writer->getLastBuildDate());
