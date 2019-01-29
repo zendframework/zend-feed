@@ -375,6 +375,9 @@ class Atom extends Renderer\AbstractRenderer implements Renderer\RendererInterfa
 
     /**
      * Load a HTML string and attempt to normalise to XML
+     *
+     * @param string $content
+     * @return \DOMElement
      */
     // @codingStandardsIgnoreStart
     protected function _loadXhtml($content)

@@ -564,7 +564,7 @@ class AbstractFeed
     /**
      * Get an array with feed authors
      *
-     * @return array
+     * @return array|null
      */
     public function getAuthors()
     {
