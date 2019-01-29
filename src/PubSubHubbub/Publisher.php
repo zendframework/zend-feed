@@ -348,7 +348,7 @@ class Publisher
      */
     public function isSuccess()
     {
-        return ! (count($this->errors) != 0);
+        return ! $this->errors;
     }
 
     /**
