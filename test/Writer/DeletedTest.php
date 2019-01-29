@@ -10,6 +10,7 @@
 namespace ZendTest\Feed\Writer;
 
 use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\InvalidArgumentException;
@@ -84,6 +85,14 @@ class DeletedTest extends TestCase
     public function testSetWhenUsesDateTimeObject()
     {
         $myDate = new DateTime('@' . 1234567890);
+        $entry = new Writer\Deleted;
+        $entry->setWhen($myDate);
+        $this->assertEquals($myDate, $entry->getWhen());
+    }
+
+    public function testSetWhenUsesDateTimeImmutableObject()
+    {
+        $myDate = new DateTimeImmutable('@' . 1234567890);
         $entry = new Writer\Deleted;
         $entry->setWhen($myDate);
         $this->assertEquals($myDate, $entry->getWhen());
