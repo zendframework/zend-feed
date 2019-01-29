@@ -488,15 +488,15 @@ detailed below, the class also implements the <code>Countable</code> and <code>I
 </tr>
 <tr>
 <td><code>setDateCreated()</code></td>
-<td>Sets the date on which this feed was created. Generally only applicable to Atom, where it represents the date the resource described by an Atom 1.0 document was created. The expected parameter may be a UNIX timestamp or a <code>DateTime</code> object.</td>
+<td>Sets the date on which this feed was created. Generally only applicable to Atom, where it represents the date the resource described by an Atom 1.0 document was created. The expected parameter may be a UNIX timestamp or an object implementing <code>DateTimeInterface</code> such as <code>DateTime</code> or <code>DateTimeImmutable</code>.</td>
 </tr>
 <tr>
 <td><code>setDateModified()</code></td>
-<td>Sets the date on which this feed was last modified. The expected parameter may be a UNIX timestamp or a <code>DateTime</code> object.</td>
+<td>Sets the date on which this feed was last modified. The expected parameter may be a UNIX timestamp or an object implementing <code>DateTimeInterface</code> such as <code>DateTime</code> or <code>DateTimeImmutable</code>.</td>
 </tr>
 <tr>
 <td><code>setLastBuildDate()</code></td>
-<td>Sets the date on which this feed was last build. The expected parameter may be a UNIX timestamp or a <code>DateTime</code> object. This will only be rendered for RSS 2.0 feeds, and is automatically rendered as the current date by default when not explicitly set.</td>
+<td>Sets the date on which this feed was last build. The expected parameter may be a UNIX timestamp or an object implementing <code>DateTimeInterface</code> such as <code>DateTime</code> or <code>DateTimeImmutable</code>. This will only be rendered for RSS 2.0 feeds, and is automatically rendered as the current date by default when not explicitly set.</td>
 </tr>
 <tr>
 <td><code>setLanguage()</code></td>
@@ -601,11 +601,11 @@ specific extension object separately if required.</p>
 </tr>
 <tr>
 <td><code>setDateCreated()</code></td>
-<td>Sets the date on which this entry was created. Generally only applicable to Atom where it represents the date the resource described by an Atom 1.0 document was created. The expected parameter may be a UNIX timestamp or a <code>DateTime</code> object. If omitted, the date used will be the current date and time.</td>
+<td>Sets the date on which this entry was created. Generally only applicable to Atom where it represents the date the resource described by an Atom 1.0 document was created. The expected parameter may be a UNIX timestamp or an object implementing <code>DateTimeInterface</code> such as <code>DateTime</code> or <code>DateTimeImmutable</code>. If omitted, the date used will be the current date and time.</td>
 </tr>
 <tr>
 <td><code>setDateModified()</code></td>
-<td>Sets the date on which this entry was last modified. The expected parameter may be a UNIX timestamp or a <code>DateTime</code> object. If omitted, the date used will be the current date and time.</td>
+<td>Sets the date on which this entry was last modified. The expected parameter may be a UNIX timestamp or an object implementing <code>DateTimeInterface</code> such as <code>DateTime</code> or <code>DateTimeImmutable</code>. If omitted, the date used will be the current date and time.</td>
 </tr>
 <tr>
 <td><code>setCopyright()</code></td>
