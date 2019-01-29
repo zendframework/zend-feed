@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- [#94](https://github.com/zendframework/zend-feed/pull/94) adds support for PHP 7.3.
+
 - [#91](https://github.com/zendframework/zend-feed/pull/91) adds explicit requirements for both ext-dom and ext-libxml to the package.
 
 ### Changed
@@ -20,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#94](https://github.com/zendframework/zend-feed/pull/94) removes support for zend-stdlib v2 releases.
 
 ### Fixed
 
