@@ -17,6 +17,8 @@
     },
     "require": {
         "php": "^5.6 || ^7.0",
+        "ext-dom": "*",
+        "ext-libxml": "*",
         "zendframework/zend-escaper": "^2.5.2",
         "zendframework/zend-stdlib": "^2.7.7 || ^3.1"
     },
