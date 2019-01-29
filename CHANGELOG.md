@@ -2,15 +2,19 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 2.10.4 - TBD
+## 2.11.0 - 2019-01-29
 
 ### Added
 
-- Nothing.
+- [#94](https://github.com/zendframework/zend-feed/pull/94) adds support for PHP 7.3.
+
+- [#91](https://github.com/zendframework/zend-feed/pull/91) adds explicit requirements for both ext-dom and ext-libxml to the package.
 
 ### Changed
 
-- Nothing.
+- [#93](https://github.com/zendframework/zend-feed/pull/93) `Writer\Feed`, `Writer\Entry` and `Writer\Deleted` all now accept
+  `DateTimeImmutable` instances as an arguments to methods that previously only
+  accepted `DateTime` or Unix Timestamps, such as `Writer\Feed::setDateModified()`.
 
 ### Deprecated
 
@@ -18,7 +22,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- [#94](https://github.com/zendframework/zend-feed/pull/94) removes support for zend-stdlib v2 releases.
 
 ### Fixed
 

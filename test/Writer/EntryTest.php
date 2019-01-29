@@ -10,6 +10,7 @@
 namespace ZendTest\Feed\Writer;
 
 use DateTime;
+use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 use Zend\Feed\Writer;
 use Zend\Feed\Writer\Exception\ExceptionInterface;
@@ -240,6 +241,14 @@ class EntryTest extends TestCase
         $this->assertEquals($myDate, $entry->getDateCreated());
     }
 
+    public function testSetDateCreatedUsesDateTimeImmutableObject()
+    {
+        $myDate = new DateTimeImmutable('@' . 1234567890);
+        $entry = new Writer\Entry;
+        $entry->setDateCreated($myDate);
+        $this->assertEquals($myDate, $entry->getDateCreated());
+    }
+
     public function testSetDateModifiedDefaultsToCurrentTime()
     {
         $entry = new Writer\Entry;
@@ -281,6 +290,14 @@ class EntryTest extends TestCase
     public function testSetDateModifiedUsesDateTimeObject()
     {
         $myDate = new DateTime('@' . 1234567890);
+        $entry = new Writer\Entry;
+        $entry->setDateModified($myDate);
+        $this->assertEquals($myDate, $entry->getDateModified());
+    }
+
+    public function testSetDateModifiedUsesDateTimeImmutableObject()
+    {
+        $myDate = new DateTimeImmutable('@' . 1234567890);
         $entry = new Writer\Entry;
         $entry->setDateModified($myDate);
         $this->assertEquals($myDate, $entry->getDateModified());
