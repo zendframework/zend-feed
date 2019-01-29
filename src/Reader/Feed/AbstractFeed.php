@@ -263,7 +263,7 @@ abstract class AbstractFeed implements FeedInterface
      * Return an Extension object with the matching name (postfixed with _Feed)
      *
      * @param string $name
-     * @return \Zend\Feed\Reader\Extension\AbstractFeed
+     * @return \Zend\Feed\Reader\Extension\AbstractFeed|null
      */
     public function getExtension($name)
     {

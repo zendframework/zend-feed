@@ -112,6 +112,7 @@ class Feed extends AbstractFeed implements Iterator, Countable
      * added to a feed container in order to be indexed.
      *
      * @param int $index
+     * @return Entry
      * @throws Exception\InvalidArgumentException
      */
     public function getEntry($index = 0)

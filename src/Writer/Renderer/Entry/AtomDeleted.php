@@ -32,7 +32,7 @@ class AtomDeleted extends Renderer\AbstractRenderer implements Renderer\Renderer
     /**
      * Render atom entry
      *
-     * @return \Zend\Feed\Writer\Renderer\Entry\Atom
+     * @return \Zend\Feed\Writer\Renderer\Entry\AtomDeleted
      */
     public function render()
     {

@@ -75,7 +75,7 @@ class Response implements HeaderAwareResponseInterface
     /**
      * Validate that we have a status code argument that will work for our context.
      *
-     * @param mixed $body
+     * @param int $statusCode
      * @throws Exception\InvalidArgumentException for arguments not castable
      *     to integer HTTP status codes.
      */

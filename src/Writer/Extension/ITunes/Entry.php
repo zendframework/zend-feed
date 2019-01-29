@@ -71,7 +71,6 @@ class Entry
      * Set a block value of "yes" or "no". You may also set an empty string.
      *
      * @param  string
-     * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesBlock($value)
@@ -230,7 +229,7 @@ class Entry
      * Set entry image (icon)
      *
      * @param  string $value
-     * @return Feed
+     * @return Entry
      * @throws Writer\Exception\InvalidArgumentException
      */
     public function setItunesImage($value)

@@ -133,7 +133,7 @@ class HttpResponse
      * Can we send headers?
      *
      * @param  bool $throw Whether or not to throw an exception if headers have been sent; defaults to false
-     * @return HttpResponse
+     * @return bool
      * @throws Exception\RuntimeException
      */
     public function canSendHeaders($throw = false)

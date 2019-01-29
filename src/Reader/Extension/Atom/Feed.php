@@ -479,6 +479,9 @@ class Feed extends Extension\AbstractFeed
     /**
      *  Attempt to absolutise the URI, i.e. if a relative URI apply the
      *  xml:base value as a prefix to turn into an absolute URI.
+     *
+     * @param string $link
+     * @return string|null
      */
     protected function absolutiseUri($link)
     {
