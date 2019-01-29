@@ -130,7 +130,7 @@ abstract class AbstractFeed implements FeedInterface
      */
     public function current()
     {
-        if (substr($this->getType(), 0, 3) == 'rss') {
+        if (0 === strpos($this->getType(), 'rss')) {
             $reader = new Reader\Entry\Rss($this->entries[$this->key()], $this->key(), $this->getType());
         } else {
             $reader = new Reader\Entry\Atom($this->entries[$this->key()], $this->key(), $this->getType());

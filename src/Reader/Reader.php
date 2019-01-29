@@ -349,11 +349,11 @@ class Reader implements ReaderImportInterface
 
         static::registerCoreExtensions();
 
-        if (substr($type, 0, 3) == 'rss') {
+        if (0 === strpos($type, 'rss')) {
             $reader = new Feed\Rss($dom, $type);
-        } elseif (substr($type, 8, 5) == 'entry') {
+        } elseif (8 === strpos($type, 'entry')) {
             $reader = new Entry\Atom($dom->documentElement, 0, self::TYPE_ATOM_10);
-        } elseif (substr($type, 0, 4) == 'atom') {
+        } elseif (0 === strpos($type, 'atom')) {
             $reader = new Feed\Atom($dom, $type);
         } else {
             throw new Exception\RuntimeException('The URI used does not point to a '
