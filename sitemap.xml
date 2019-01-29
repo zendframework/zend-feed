@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +12,7 @@
     
     <url>
      <loc>/intro/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,55 +21,55 @@
         
     <url>
      <loc>/reader/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/http-clients/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/psr7-clients/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/importing/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/find-feeds/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/consuming-rss/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/consuming-atom/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/consuming-atom-entry/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/security/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -78,7 +78,7 @@
     
     <url>
      <loc>/writer/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -86,7 +86,7 @@
     
     <url>
      <loc>/pubsubhubbub/</loc>
-     <lastmod>2018-08-01</lastmod>
+     <lastmod>2019-01-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
