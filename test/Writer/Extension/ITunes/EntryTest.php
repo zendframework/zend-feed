@@ -185,6 +185,20 @@ class EntryTest extends TestCase
         }
     }
 
+    public function testSetTitle()
+    {
+        $entry = new Writer\Entry;
+        $entry->setItunesTitle('abc');
+        $this->assertEquals('abc', $entry->getItunesTitle());
+    }
+
+    public function testSetTitleThrowsExceptionWhenValueExceeds255Chars()
+    {
+        $this->expectException(ExceptionInterface::class);
+        $entry = new Writer\Entry;
+        $entry->setItunesTitle(str_repeat('a', 256));
+    }
+
     public function testSetSubtitle()
     {
         $entry = new Writer\Entry;

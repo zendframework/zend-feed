@@ -192,6 +192,23 @@ class Entry
     }
 
     /**
+     * Set title
+     *
+     * @param  string $value
+     * @return Entry
+     * @throws Writer\Exception\InvalidArgumentException
+     */
+    public function setItunesTitle($value)
+    {
+        if ($this->stringWrapper->strlen($value) > 255) {
+            throw new Writer\Exception\InvalidArgumentException('invalid parameter: "title" may only'
+            . ' contain a maximum of 255 characters');
+        }
+        $this->data['title'] = $value;
+        return $this;
+    }
+
+    /**
      * Set subtitle
      *
      * @param  string $value
