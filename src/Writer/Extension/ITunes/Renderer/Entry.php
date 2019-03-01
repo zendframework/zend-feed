@@ -39,6 +39,7 @@ class Entry extends Extension\AbstractRenderer
         $this->_setImage($this->dom, $this->base);
         $this->_setExplicit($this->dom, $this->base);
         $this->_setKeywords($this->dom, $this->base);
+        $this->_setTitle($this->dom, $this->base);
         $this->_setSubtitle($this->dom, $this->base);
         $this->_setSummary($this->dom, $this->base);
         $this->_setEpisode($this->dom, $this->base);
@@ -193,6 +194,28 @@ class Entry extends Extension\AbstractRenderer
         }
         $el = $dom->createElement('itunes:keywords');
         $text = $dom->createTextNode(implode(',', $keywords));
+        $el->appendChild($text);
+        $root->appendChild($el);
+        $this->called = true;
+    }
+
+    /**
+     * Set entry title
+     *
+     * @param  DOMDocument $dom
+     * @param  DOMElement $root
+     * @return void
+     */
+    // @codingStandardsIgnoreStart
+    protected function _setTitle(DOMDocument $dom, DOMElement $root)
+    {
+        // @codingStandardsIgnoreEnd
+        $title = $this->getDataContainer()->getItunesTitle();
+        if (! $title) {
+            return;
+        }
+        $el = $dom->createElement('itunes:title');
+        $text = $dom->createTextNode($title);
         $el->appendChild($text);
         $root->appendChild($el);
         $this->called = true;
