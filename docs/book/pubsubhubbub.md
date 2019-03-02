@@ -1,4 +1,4 @@
-# Zend\\Feed\\PubSubHubbub
+# PubSubHubbub
 
 `Zend\Feed\PubSubHubbub` is an implementation of the [PubSubHubbub Core 0.2/0.3
 Specification (Working Draft)](http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html).

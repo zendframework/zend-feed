@@ -1,4 +1,4 @@
-# Zend\\Feed\\Reader and Security
+# Security
 
 As with any data coming from a source that is beyond the developer's control,
 special attention needs to be given to securing, validating and filtering that

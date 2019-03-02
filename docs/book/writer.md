@@ -1,4 +1,4 @@
-# Zend\\Feed\\Writer
+# Writer
 
 `Zend\Feed\Writer` is the sibling component to `Zend\Feed\Reader` responsible
 for *generating* feeds. It supports the Atom 1.0 specification (RFC 4287) and

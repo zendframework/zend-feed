@@ -1,4 +1,4 @@
-# Feed Discovery from Web Pages
+# Feed Discovery
 
 Web pages often contain `<link>` tags that refer to feeds with content relevant
 to the particular page. `Zend\Feed\Reader\Reader` enables you to retrieve all

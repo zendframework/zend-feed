@@ -1,4 +1,4 @@
-# Consuming a Single Atom Entry
+# Consuming Atom Entries
 
 Single Atom `<entry>` elements are also valid by themselves. Usually the URL for
 an entry is the feed's URL followed by `/<entryId>`, such as

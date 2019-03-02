@@ -1,4 +1,4 @@
-# Zend\\Feed\\Reader
+# Basic Usage
 
 `Zend\Feed\Reader` is a component used to consume RSS and Atom feeds of
 any version, including RDF/RSS 1.0, RSS 2.0, Atom 0.3, and Atom 1.0. The API for

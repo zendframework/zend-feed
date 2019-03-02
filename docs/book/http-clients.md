@@ -1,4 +1,4 @@
-# HTTP Clients and zend-feed
+# HTTP Clients
 
 Several operations in zend-feed's Reader subcomponent require an HTTP client:
 
