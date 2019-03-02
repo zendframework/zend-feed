@@ -1,10 +1,10 @@
 docs_dir: docs/book
 site_dir: docs/html
 pages:
-    - index.md
+    - Home: index.md
     - Introduction: intro.md
     - Reader:
-        - "Zend\\Feed\\Reader": reader.md
+        - 'Basic Usage': reader.md
         - 'HTTP Clients': http-clients.md
         - 'Using PSR-7 Clients': psr7-clients.md
         - 'Importing Feeds': importing.md
@@ -16,6 +16,5 @@ pages:
     - Writer: writer.md
     - Pubsubhubbub: pubsubhubbub.md
 site_name: zend-feed
-site_description: Zend\Feed
+site_description: 'Consume and generate Atom and RSS feeds, and interact with Pubsubhubbub.'
 repo_url: 'https://github.com/zendframework/zend-feed'
-copyright: 'Copyright (c) 2005-2017 <a href="http://www.zend.com/">Zend Technologies USA Inc.</a>'
