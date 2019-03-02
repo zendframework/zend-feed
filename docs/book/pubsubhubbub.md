@@ -1,7 +1,7 @@
 # PubSubHubbub
 
 `Zend\Feed\PubSubHubbub` is an implementation of the [PubSubHubbub Core 0.2/0.3
-Specification (Working Draft)](http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html).
+Specification (Working Draft)](http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.3.html).
 It offers implementations of a Pubsubhubbub Publisher and Subscriber suited to
 PHP applications.
 
