@@ -417,4 +417,35 @@ class RssTest extends TestCase
             'GooglePlayPodcast extension was present in extension manager, but was not expected to be'
         );
     }
+
+    public function testPermalinkShouldBeEqualToLinkOfEntry()
+    {
+        // Render
+        $renderer = new Renderer\Feed\Rss($this->validWriter);
+        $feed     = Reader\Reader::importString($renderer->render()->saveXml());
+        /** @var \Zend\Feed\Reader\Entry\Rss $entry */
+        $entry    = $feed->current();
+
+        // Test
+        $this->assertSame(
+            $this->validEntry->getLink(),
+            $entry->getPermalink()
+        );
+    }
+
+    public function testPermalinkShouldBeNullOnNonAbsoluteUri()
+    {
+        // Update entry
+        $this->validEntry->remove('link');
+        $this->validEntry->setId('non-absolute-uri');
+
+        // Render
+        $renderer = new Renderer\Feed\Rss($this->validWriter);
+        $feed     = Reader\Reader::importString($renderer->render()->saveXml());
+        /** @var \Zend\Feed\Reader\Entry\Rss $entry */
+        $entry    = $feed->current();
+
+        // Test
+        $this->assertNull($entry->getPermalink());
+    }
 }
