@@ -73,7 +73,7 @@ may handle any feed updates forwarded from a Hub by using
 `Zend\Feed\PubSubHubbub\Subscriber\Callback`. These classes, their use cases,
 and etheir APIs are covered in subsequent sections.
 
-## Zend\\Feed\\PubSubHubbub\\Publisher
+## Publisher
 
 In Pubsubhubbub, the Publisher is the party publishing a live feed with content
 updates. This may be a blog, an aggregator, or even a web service with a public
@@ -147,7 +147,7 @@ notifications reach all Subscribers. In many cases, as a final alternative, Hubs
 may frequently poll your feeds to offer some additional tolerance for failures
 both in terms of their own temporary downtime or Publisher errors or downtime.
 
-## Zend\\Feed\\PubSubHubbub\\Subscriber
+## Subscriber
 
 In Pubsubhubbub, the Subscriber is the party who wishes to receive updates to
 any Topic (RSS or Atom feed). They achieve this by subscribing to one or more of
