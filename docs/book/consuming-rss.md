@@ -10,7 +10,7 @@ $channel = Zend\Feed\Reader\Reader::import('http://rss.example.com/channelName')
 
 > ### Importing requires an HTTP client
 >
-> To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
+> To import a feed, you will need to have an [HTTP client](http-clients.md)
 > available.
 >
 > If you are not using zend-http, you will need to inject `Reader` with the HTTP
