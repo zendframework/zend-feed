@@ -14,7 +14,7 @@ $entry = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/1');
 echo 'Entry title: ' . $entry->getTitle();
 ```
 
-> ## Importing requires an HTTP client
+> ### Importing requires an HTTP client
 >
 > To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
 > available.

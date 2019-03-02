@@ -8,7 +8,7 @@ feeds referenced by a web page with one method call:
 $feedLinks = Zend\Feed\Reader\Reader::findFeedLinks('http://www.example.com/news.html');
 ```
 
-> ## Finding feed links requires an HTTP client
+> ### Finding feed links requires an HTTP client
 >
 > To find feed links, you will need to have an [HTTP client](zend.feed.http-clients)
 > available.

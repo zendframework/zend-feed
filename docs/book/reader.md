@@ -68,7 +68,7 @@ foreach ($feed as $entry) {
 }
 ```
 
-> ## Importing requires an HTTP client
+> ### Importing requires an HTTP client
 >
 > To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
 > available.
@@ -178,7 +178,7 @@ response with a status code of 200, this means the feed has changed and
 `Zend\Feed\Reader\Reader` will parse the new version and save it to the cache.
 It will also cache the new ETag and Last-Modified header values for future use.
 
-> #### Conditional GET requires a HeaderAwareClientInterface
+> ### Conditional GET requires a HeaderAwareClientInterface
 >
 > Conditional GET support only works for `Zend\Feed\Reader\Http\HeaderAwareClientInterface`
 > client implementations, as it requires the ability to send HTTP headers.

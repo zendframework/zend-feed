@@ -8,7 +8,7 @@ to consume it:
 $feed = Zend\Feed\Reader\Reader::import('http://feeds.example.com/feedName');
 ```
 
-> ## Importing requires an HTTP client
+> ### Importing requires an HTTP client
 >
 > To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
 > available.

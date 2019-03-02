@@ -342,7 +342,7 @@ if ($callback->hasFeedUpdate()) {
 }
 ```
 
-> #### Query and body parameters
+> ### Query and body parameters
 >
 > It should be noted that `Zend\Feed\PubSubHubbub\Subscriber\Callback` may
 > independently parse any incoming query string and other parameters. This is
@@ -351,7 +351,7 @@ if ($callback->hasFeedUpdate()) {
 > keys are ignored and periods are converted to underscores. Pubsubhubbub
 > features both of these in the query strings it generates.
 
-> #### Always delay feed processing
+> ### Always delay feed processing
 >
 > It is essential that developers recognise that Hubs are only concerned with
 > sending requests and receiving a response which verifies its receipt. If a
