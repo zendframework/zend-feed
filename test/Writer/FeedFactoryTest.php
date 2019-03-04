@@ -49,7 +49,8 @@ class FeedFactoryTest extends TestCase
         $this->assertSame($data['copyright'], $feed->getCopyright());
         $this->assertInstanceOf(DateTime::class, $feed->getDateCreated());
         $this->assertSame(
-            '2019-01-15', $feed->getDateCreated()->format('Y-m-d')
+            '2019-01-15',
+            $feed->getDateCreated()->format('Y-m-d')
         );
     }
 
@@ -73,12 +74,14 @@ class FeedFactoryTest extends TestCase
             'entries' => [
                 [
                     'date_created' => DateTime::createFromFormat(
-                        'Y-m-d', '2019-01-15'
+                        'Y-m-d',
+                        '2019-01-15'
                     ),
                 ],
                 [
                     'date_created' => DateTime::createFromFormat(
-                        'Y-m-d', '2019-01-15'
+                        'Y-m-d',
+                        '2019-01-15'
                     ),
                 ],
             ],
