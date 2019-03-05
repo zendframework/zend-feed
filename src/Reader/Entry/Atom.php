@@ -49,10 +49,7 @@ class Atom extends AbstractEntry implements EntryInterface
     }
 
     /**
-     * Get the specified author
-     *
-     * @param  int $index
-     * @return string|null
+     * @inheritdoc
      */
     public function getAuthor($index = 0)
     {

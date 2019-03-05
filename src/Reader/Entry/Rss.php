@@ -63,10 +63,7 @@ class Rss extends AbstractEntry implements EntryInterface
     }
 
     /**
-     * Get an author entry
-     *
-     * @param int $index
-     * @return string
+     * @inheritdoc
      */
     public function getAuthor($index = 0)
     {

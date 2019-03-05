@@ -44,7 +44,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Nothing.
+- [#100](https://github.com/zendframework/zend-feed/pull/100) fixes parameter and return value annotations for a number of classes to
+  specify the correct types.
 
 ## 2.11.0 - 2019-01-29
 
