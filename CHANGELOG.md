@@ -6,7 +6,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- Nothing.
+- [#96](https://github.com/zendframework/zend-feed/pull/96) adds the methods `Zend\Feed\Reader\Extension\Podcast\Entry::getTitle() : string`
+  and `Zend\Feed\Writer\Extension\ITunes\Entry::setTitle(string $value)`; these
+  provide the ability to read and manipulate `<itunes:title>` tags in feeds.
 
 ### Changed
 
