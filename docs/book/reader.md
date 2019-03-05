@@ -1,4 +1,4 @@
-# Zend\\Feed\\Reader
+# Basic Usage
 
 `Zend\Feed\Reader` is a component used to consume RSS and Atom feeds of
 any version, including RDF/RSS 1.0, RSS 2.0, Atom 0.3, and Atom 1.0. The API for
@@ -68,9 +68,9 @@ foreach ($feed as $entry) {
 }
 ```
 
-> ## Importing requires an HTTP client
+> ### Importing requires an HTTP client
 >
-> To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
+> To import a feed, you will need to have an [HTTP client](http-clients.md)
 > available.
 >
 > If you are not using zend-http, you will need to inject `Reader` with the HTTP
@@ -178,7 +178,7 @@ response with a status code of 200, this means the feed has changed and
 `Zend\Feed\Reader\Reader` will parse the new version and save it to the cache.
 It will also cache the new ETag and Last-Modified header values for future use.
 
-> #### Conditional GET requires a HeaderAwareClientInterface
+> ### Conditional GET requires a HeaderAwareClientInterface
 >
 > Conditional GET support only works for `Zend\Feed\Reader\Http\HeaderAwareClientInterface`
 > client implementations, as it requires the ability to send HTTP headers.
@@ -254,7 +254,7 @@ Based on these links, you can then import from whichever source you wish in the 
 
 > ### Finding feed links requires an HTTP client
 >
-> To find feed links, you will need to have an [HTTP client](zend.feed.http-clients)
+> To find feed links, you will need to have an [HTTP client](http-clients.md)
 > available.
 >
 > If you are not using zend-http, you will need to inject `Reader` with the HTTP

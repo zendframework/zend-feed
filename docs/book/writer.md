@@ -1,4 +1,4 @@
-# Zend\\Feed\\Writer
+# Writer
 
 `Zend\Feed\Writer` is the sibling component to `Zend\Feed\Reader` responsible
 for *generating* feeds. It supports the Atom 1.0 specification (RFC 4287) and
@@ -229,7 +229,7 @@ Method | Description
 `removeEntry()` | Accepts a parameter indicating an array index of the entry to remove from the feed.
 `export()` | Exports the entire data hierarchy to an XML feed. The method has two parameters. The first is the feed type, one of "atom" or "rss". The second is an optional boolean to set indicating whether or not Exceptions are thrown. The default is `TRUE`.
 
-> #### Retrieval methods
+> ### Retrieval methods
 >
 > In addition to the setters listed above, `Feed` instances also provide
 > matching getters to retrieve data from the `Feed` data container. For
@@ -268,7 +268,7 @@ Method | Description
 `setCommentFeedLinks()` | Same as `setCommentFeedLink()`, except it accepts an array of arrays, where each subarray contains the expected parameters of `setCommentFeedLink()`.
 `setEncoding()` | Sets the encoding of entry text. This will default to UTF-8, which is the preferred encoding.
 
-> #### Retrieval methods
+> ### Retrieval methods
 >
 > In addition to the setters listed above, `Entry` instances also provide
 > matching getters to retrieve data from the `Entry` data container. For

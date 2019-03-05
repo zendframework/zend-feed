@@ -1,7 +1,7 @@
-# Zend\\Feed\\PubSubHubbub
+# PubSubHubbub
 
 `Zend\Feed\PubSubHubbub` is an implementation of the [PubSubHubbub Core 0.2/0.3
-Specification (Working Draft)](http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html).
+Specification (Working Draft)](http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.3.html).
 It offers implementations of a Pubsubhubbub Publisher and Subscriber suited to
 PHP applications.
 
@@ -73,7 +73,7 @@ may handle any feed updates forwarded from a Hub by using
 `Zend\Feed\PubSubHubbub\Subscriber\Callback`. These classes, their use cases,
 and etheir APIs are covered in subsequent sections.
 
-## Zend\\Feed\\PubSubHubbub\\Publisher
+## Publisher
 
 In Pubsubhubbub, the Publisher is the party publishing a live feed with content
 updates. This may be a blog, an aggregator, or even a web service with a public
@@ -147,7 +147,7 @@ notifications reach all Subscribers. In many cases, as a final alternative, Hubs
 may frequently poll your feeds to offer some additional tolerance for failures
 both in terms of their own temporary downtime or Publisher errors or downtime.
 
-## Zend\\Feed\\PubSubHubbub\\Subscriber
+## Subscriber
 
 In Pubsubhubbub, the Subscriber is the party who wishes to receive updates to
 any Topic (RSS or Atom feed). They achieve this by subscribing to one or more of
@@ -342,7 +342,7 @@ if ($callback->hasFeedUpdate()) {
 }
 ```
 
-> #### Query and body parameters
+> ### Query and body parameters
 >
 > It should be noted that `Zend\Feed\PubSubHubbub\Subscriber\Callback` may
 > independently parse any incoming query string and other parameters. This is
@@ -351,7 +351,7 @@ if ($callback->hasFeedUpdate()) {
 > keys are ignored and periods are converted to underscores. Pubsubhubbub
 > features both of these in the query strings it generates.
 
-> #### Always delay feed processing
+> ### Always delay feed processing
 >
 > It is essential that developers recognise that Hubs are only concerned with
 > sending requests and receiving a response which verifies its receipt. If a

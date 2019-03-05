@@ -1,4 +1,4 @@
-# Consuming a Single Atom Entry
+# Consuming Atom Entries
 
 Single Atom `<entry>` elements are also valid by themselves. Usually the URL for
 an entry is the feed's URL followed by `/<entryId>`, such as
@@ -14,9 +14,9 @@ $entry = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/1');
 echo 'Entry title: ' . $entry->getTitle();
 ```
 
-> ## Importing requires an HTTP client
+> ### Importing requires an HTTP client
 >
-> To import a feed, you will need to have an [HTTP client](zend.feed.http-clients)
+> To import a feed, you will need to have an [HTTP client](http-clients.md)
 > available.
 >
 > If you are not using zend-http, you will need to inject `Reader` with the HTTP
