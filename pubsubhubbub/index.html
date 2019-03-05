@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Zend\Feed">  
+    <meta name="description" content="Consume and generate Atom and RSS feeds, and interact with Pubsubhubbub.">  
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Pubsubhubbub - zend-feed</title>
@@ -75,12 +75,6 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-feed</a>
-                    </li>
-                
-            
-                
-                    <li class="subnavigation__list-item ">
                         <a href="../intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
@@ -92,7 +86,7 @@
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../reader/" class="subnavigation__link">Zend\Feed\Reader</a>
+        <a href="../reader/" class="subnavigation__link">Basic Usage</a>
     </li>
 
                             
@@ -253,11 +247,11 @@
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#zend92feed92pubsubhubbub92publisher" class="toc__link">Zend\Feed\PubSubHubbub\Publisher</a>
+                        <a href="#publisher" class="toc__link">Publisher</a>
                     </li>
                 
                     <li class="toc__entry">
-                        <a href="#zend92feed92pubsubhubbub92subscriber" class="toc__link">Zend\Feed\PubSubHubbub\Subscriber</a>
+                        <a href="#subscriber" class="toc__link">Subscriber</a>
                     </li>
                 
             </ul>
@@ -265,8 +259,8 @@
     
 
 
-    <h1 id="zend92feed92pubsubhubbub">Zend\Feed\PubSubHubbub</h1>
-<p><code>Zend\Feed\PubSubHubbub</code> is an implementation of the <a href="http://pubsubhubbub.googlecode.com/svn/trunk/pubsubhubbub-core-0.3.html">PubSubHubbub Core 0.2/0.3
+    <h1 id="pubsubhubbub">PubSubHubbub</h1>
+<p><code>Zend\Feed\PubSubHubbub</code> is an implementation of the <a href="http://pubsubhubbub.github.io/PubSubHubbub/pubsubhubbub-core-0.3.html">PubSubHubbub Core 0.2/0.3
 Specification (Working Draft)</a>.
 It offers implementations of a Pubsubhubbub Publisher and Subscriber suited to
 PHP applications.</p>
@@ -328,7 +322,7 @@ the classes <code>Zend\Feed\PubSubHubbub\Publisher</code> and
 may handle any feed updates forwarded from a Hub by using
 <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code>. These classes, their use cases,
 and etheir APIs are covered in subsequent sections.</p>
-<h2 id="zend92feed92pubsubhubbub92publisher">Zend\Feed\PubSubHubbub\Publisher</h2>
+<h2 id="publisher">Publisher</h2>
 <p>In Pubsubhubbub, the Publisher is the party publishing a live feed with content
 updates. This may be a blog, an aggregator, or even a web service with a public
 feed based API. In order for these updates to be pushed to Subscribers, the
@@ -392,7 +386,7 @@ soon as possible (with a reasonable maximum number of retries) to ensure
 notifications reach all Subscribers. In many cases, as a final alternative, Hubs
 may frequently poll your feeds to offer some additional tolerance for failures
 both in terms of their own temporary downtime or Publisher errors or downtime.</p>
-<h2 id="zend92feed92pubsubhubbub92subscriber">Zend\Feed\PubSubHubbub\Subscriber</h2>
+<h2 id="subscriber">Subscriber</h2>
 <p>In Pubsubhubbub, the Subscriber is the party who wishes to receive updates to
 any Topic (RSS or Atom feed). They achieve this by subscribing to one or more of
 the Hubs advertised by that Topic, usually as a set of one or more Atom 1.0
@@ -596,14 +590,14 @@ if ($callback-&gt;hasFeedUpdate()) {
 }</code></pre>
 
 <blockquote>
-<h4 id="query-and-body-parameters">Query and body parameters</h4>
+<h3 id="query-and-body-parameters">Query and body parameters</h3>
 <p>It should be noted that <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code> may
 independently parse any incoming query string and other parameters. This is
 necessary since PHP alters the structure and keys of a query string when it is
 parsed into the <code>$_GET</code> or <code>$_POST</code> superglobals; for example, all duplicate
 keys are ignored and periods are converted to underscores. Pubsubhubbub
 features both of these in the query strings it generates.</p>
-<h4 id="always-delay-feed-processing">Always delay feed processing</h4>
+<h3 id="always-delay-feed-processing">Always delay feed processing</h3>
 <p>It is essential that developers recognise that Hubs are only concerned with
 sending requests and receiving a response which verifies its receipt. If a
 feed update is received, it should never be processed on the spot since this
@@ -749,12 +743,6 @@ $route = SegmentRoute::factory([
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href=".." class="subnavigation__link">zend-feed</a>
-                    </li>
-                
-            
-                
-                    <li class="subnavigation__list-item ">
                         <a href="../intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
@@ -766,7 +754,7 @@ $route = SegmentRoute::factory([
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../reader/" class="subnavigation__link">Zend\Feed\Reader</a>
+        <a href="../reader/" class="subnavigation__link">Basic Usage</a>
     </li>
 
                             
