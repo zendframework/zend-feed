@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8857d47defecc50f052b87ec248bbdf",
+    "content-hash": "1fdca955b6832b5c98c451b223a6a965",
     "packages": [
         {
             "name": "zendframework/zend-escaper",
