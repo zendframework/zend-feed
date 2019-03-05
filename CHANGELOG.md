@@ -16,6 +16,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Deprecated
 
+- [#101](https://github.com/zendframework/zend-feed/pull/101) deprecates the method `Zend\Feed\Writer\Writer::lcfirst()`; use the PHP
+  built-in function instead.
+
 - [#97](https://github.com/zendframework/zend-feed/pull/97) deprecates the classes `Zend\Feed\Reader\AbstractEntry` (use
   `Zend\Feed\Reader\Entry\AbstractEntry` instead), `Zend\Feed\Reader\AbstractFeed` (use `Zend\Feed\Reader\Feed\AbstractFeed` instead), and
   `Zend\Feed\Reader\Collection` (use Zend\Feed\Reader\Collection\Author`, `Zend\Feed\Reader\Collection\Category`, or
