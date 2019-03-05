@@ -130,6 +130,28 @@ class Entry extends Extension\AbstractEntry
     }
 
     /**
+     * Get the entry title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        if (isset($this->data['title'])) {
+            return $this->data['title'];
+        }
+
+        $title = $this->xpath->evaluate('string(' . $this->getXpathPrefix() . '/itunes:title)');
+
+        if (! $title) {
+            $title = null;
+        }
+
+        $this->data['title'] = $title;
+
+        return $this->data['title'];
+    }
+
+    /**
      * Get the entry subtitle
      *
      * @return string

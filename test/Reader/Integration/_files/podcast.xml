@@ -37,6 +37,7 @@
 			<itunes:explicit>no</itunes:explicit>
             <itunes:author>John Doe</itunes:author>
 			<itunes:block>yes</itunes:block>
+            <itunes:title>Shake Shake Shake Your Spices With A Shaker</itunes:title>
             <itunes:subtitle>A short primer on table spices
             </itunes:subtitle>
             <itunes:summary>This week we talk about salt and pepper
@@ -58,6 +59,7 @@
         <item>
             <title>Socket Wrench Shootout</title>
             <itunes:author>Jane Doe</itunes:author>
+            <itunes:title>Socket Wrench Shootout With A Tool</itunes:title>
             <itunes:subtitle>Comparing socket wrenches is fun!
             </itunes:subtitle>
             <itunes:summary>This week we talk about metric vs. old
@@ -79,6 +81,7 @@
         <item>
             <title>Red, Whine, &amp; Blue</title>
             <itunes:author>Various</itunes:author>
+            <itunes:title>Red, Whine &amp; Blue</itunes:title>
             <itunes:subtitle>Red + Blue != Purple</itunes:subtitle>
             <itunes:summary>This week we talk about surviving in a Red
                 state if you are a Blue person. Or vice versa.

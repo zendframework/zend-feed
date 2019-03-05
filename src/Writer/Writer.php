@@ -205,10 +205,15 @@ class Writer
             );
     }
 
+    /**
+     * @deprecated This method is deprecated and will be removed with version 3.0
+     *     Use PHP's lcfirst function instead. @see https://php.net/manual/function.lcfirst.php
+     * @param string $str
+     * @return string
+     */
     public static function lcfirst($str)
     {
-        $str[0] = strtolower($str[0]);
-        return $str;
+        return lcfirst($str);
     }
 
     /**

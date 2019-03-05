@@ -13,6 +13,9 @@ use DOMDocument;
 use DOMElement;
 use DOMXPath;
 
+/**
+ * @deprecated This (abstract) class is deprecated. Use Zend\Feed\Reader\Entry\AbstractEntry instead.
+ */
 abstract class AbstractEntry
 {
     /**

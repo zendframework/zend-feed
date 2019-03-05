@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## 2.12.0 - 2019-03-05
+
+### Added
+
+- [#96](https://github.com/zendframework/zend-feed/pull/96) adds the methods `Zend\Feed\Reader\Extension\Podcast\Entry::getTitle() : string`
+  and `Zend\Feed\Writer\Extension\ITunes\Entry::setTitle(string $value)`; these
+  provide the ability to read and manipulate `<itunes:title>` tags in feeds.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- [#101](https://github.com/zendframework/zend-feed/pull/101) deprecates the method `Zend\Feed\Writer\Writer::lcfirst()`; use the PHP
+  built-in function instead.
+
+- [#97](https://github.com/zendframework/zend-feed/pull/97) deprecates the classes `Zend\Feed\Reader\AbstractEntry` (use
+  `Zend\Feed\Reader\Entry\AbstractEntry` instead), `Zend\Feed\Reader\AbstractFeed` (use `Zend\Feed\Reader\Feed\AbstractFeed` instead), and
+  `Zend\Feed\Reader\Collection` (use Zend\Feed\Reader\Collection\Author`, `Zend\Feed\Reader\Collection\Category`, or
+  `Zend\Feed\Reader\Collection\Collection` instead, based on context).
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## 2.11.1 - 2019-03-05
 
 ### Added
