@@ -44,6 +44,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
+- [#99](https://github.com/zendframework/zend-feed/pull/99) provides a fix to `Zend\Feed\Writer\Renderer\Entry\Rss` to ensure that
+  relative URIs provided for the feed disable the `isPermalink` flag.
+
 - [#100](https://github.com/zendframework/zend-feed/pull/100) fixes parameter and return value annotations for a number of classes to
   specify the correct types.
 
