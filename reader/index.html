@@ -12,6 +12,7 @@
     <title>Basic Usage - zend-feed</title>
 
     <link rel="stylesheet" href="../css/styles-18b942728f.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
 </head>
 <body id="page-top">
 
@@ -66,7 +67,7 @@
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-feed</a>
+            <a href="">zend-feed</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -75,7 +76,7 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
@@ -86,55 +87,55 @@
                             
                                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Basic Usage</a>
+        <a href="reader/" class="subnavigation__link">Basic Usage</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../http-clients/" class="subnavigation__link">HTTP Clients</a>
+        <a href="http-clients/" class="subnavigation__link">HTTP Clients</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../psr7-clients/" class="subnavigation__link">Using PSR-7 Clients</a>
+        <a href="psr7-clients/" class="subnavigation__link">Using PSR-7 Clients</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../importing/" class="subnavigation__link">Importing Feeds</a>
+        <a href="importing/" class="subnavigation__link">Importing Feeds</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../find-feeds/" class="subnavigation__link">Feed Discovery</a>
+        <a href="find-feeds/" class="subnavigation__link">Feed Discovery</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../consuming-rss/" class="subnavigation__link">Consuming RSS Feeds</a>
+        <a href="consuming-rss/" class="subnavigation__link">Consuming RSS Feeds</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../consuming-atom/" class="subnavigation__link">Consuming Atom Feeds</a>
+        <a href="consuming-atom/" class="subnavigation__link">Consuming Atom Feeds</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../consuming-atom-entry/" class="subnavigation__link">Consuming Atom Entries</a>
+        <a href="consuming-atom-entry/" class="subnavigation__link">Consuming Atom Entries</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../security/" class="subnavigation__link">Security</a>
+        <a href="security/" class="subnavigation__link">Security</a>
     </li>
 
                             
@@ -144,13 +145,13 @@
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../writer/" class="subnavigation__link">Writer</a>
+                        <a href="writer/" class="subnavigation__link">Writer</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../pubsubhubbub/" class="subnavigation__link">Pubsubhubbub</a>
+                        <a href="pubsubhubbub/" class="subnavigation__link">Pubsubhubbub</a>
                     </li>
                 
             
@@ -230,7 +231,7 @@
         <li><a href="https://docs.zendframework.com/">Documentation</a></li>
 
         
-            <li><a href="..">zend-feed</a></li>
+            <li><a href="">zend-feed</a></li>
 
             
                 
@@ -493,13 +494,13 @@ keys <code>type</code> and <code>uri</code> where the type is one of "rdf", "rss
 <pre class="codehilite"><code class="language-php">$links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
 
 if (isset($links-&gt;rdf)) {
-    echo $links-&gt;rdf, &quot;\n&quot;; // http://www.planet-php.org/rdf/
+    echo $links-&gt;rdf, "\n"; // http://www.planet-php.org/rdf/
 }
 if (isset($links-&gt;rss)) {
-    echo $links-&gt;rss, &quot;\n&quot;; // http://www.planet-php.org/rss/
+    echo $links-&gt;rss, "\n"; // http://www.planet-php.org/rss/
 }
 if (isset($links-&gt;atom)) {
-    echo $links-&gt;atom, &quot;\n&quot;; // http://www.planet-php.org/atom/
+    echo $links-&gt;atom, "\n"; // http://www.planet-php.org/atom/
 }</code></pre>
 
 <p>Based on these links, you can then import from whichever source you wish in the usual manner.</p>
@@ -517,7 +518,7 @@ iterator.</p>
 <pre class="codehilite"><code class="language-php">$links = Zend\Feed\Reader\Reader::findFeedLinks('http://www.planet-php.net');
 
 foreach ($links as $link) {
-    echo $link['href'], &quot;\n&quot;;
+    echo $link['href'], "\n";
 }</code></pre>
 
 <h2 id="attribute-collections">Attribute Collections</h2>
@@ -1077,10 +1078,10 @@ element quite simply with a standard name and namespace URI:</p>
 </ul>
 <p>A snippet of RSS containing this extension in practice could be something
 similar to:</p>
-<pre class="codehilite"><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
-&lt;rss version=&quot;2.0&quot;
-   xmlns:content=&quot;http://purl.org/rss/1.0/modules/content/&quot;
-   xmlns:jungle=&quot;http://example.com/junglebooks/rss/module/1.0/&quot;&gt;
+<pre class="codehilite"><code class="language-xml">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;rss version="2.0"
+   xmlns:content="http://purl.org/rss/1.0/modules/content/"
+   xmlns:jungle="http://example.com/junglebooks/rss/module/1.0/"&gt;
 &lt;channel&gt;
     &lt;title&gt;Jungle Books Customer Reviews&lt;/title&gt;
     &lt;link&gt;http://example.com/junglebooks&lt;/link&gt;
@@ -1247,7 +1248,7 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
         
         <li class="page-nav__item">
             
-                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../intro/">
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="intro/">
                     <i class="fa fa-chevron-left"></i> Previous
                 </a>
             
@@ -1256,7 +1257,7 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
         
         <li class="page-nav__item">
             
-                <a rel="next" class="page-nav__link page-nav__link--next" href="../http-clients/">
+                <a rel="next" class="page-nav__link page-nav__link--next" href="http-clients/">
                     Next <i class="fa fa-chevron-right"></i>
                 </a>
             
@@ -1291,7 +1292,7 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
                     
     <div class="subnavigation hidden-print">
         <h4 class="subnavigation__title">
-            <a href="..">zend-feed</a>
+            <a href="">zend-feed</a>
         </h4>
 
         <h5 class="subnavigation__subtitle">Table of Contents</h5>
@@ -1300,7 +1301,7 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../intro/" class="subnavigation__link">Introduction</a>
+                        <a href="intro/" class="subnavigation__link">Introduction</a>
                     </li>
                 
             
@@ -1311,55 +1312,55 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
                             
                                 
     <li class="subnavigation__list-item subnavigation__list-item--active">
-        <a href="./" class="subnavigation__link">Basic Usage</a>
+        <a href="reader/" class="subnavigation__link">Basic Usage</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../http-clients/" class="subnavigation__link">HTTP Clients</a>
+        <a href="http-clients/" class="subnavigation__link">HTTP Clients</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../psr7-clients/" class="subnavigation__link">Using PSR-7 Clients</a>
+        <a href="psr7-clients/" class="subnavigation__link">Using PSR-7 Clients</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../importing/" class="subnavigation__link">Importing Feeds</a>
+        <a href="importing/" class="subnavigation__link">Importing Feeds</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../find-feeds/" class="subnavigation__link">Feed Discovery</a>
+        <a href="find-feeds/" class="subnavigation__link">Feed Discovery</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../consuming-rss/" class="subnavigation__link">Consuming RSS Feeds</a>
+        <a href="consuming-rss/" class="subnavigation__link">Consuming RSS Feeds</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../consuming-atom/" class="subnavigation__link">Consuming Atom Feeds</a>
+        <a href="consuming-atom/" class="subnavigation__link">Consuming Atom Feeds</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../consuming-atom-entry/" class="subnavigation__link">Consuming Atom Entries</a>
+        <a href="consuming-atom-entry/" class="subnavigation__link">Consuming Atom Entries</a>
     </li>
 
                             
                                 
     <li class="subnavigation__list-item ">
-        <a href="../security/" class="subnavigation__link">Security</a>
+        <a href="security/" class="subnavigation__link">Security</a>
     </li>
 
                             
@@ -1369,13 +1370,13 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../writer/" class="subnavigation__link">Writer</a>
+                        <a href="writer/" class="subnavigation__link">Writer</a>
                     </li>
                 
             
                 
                     <li class="subnavigation__list-item ">
-                        <a href="../pubsubhubbub/" class="subnavigation__link">Pubsubhubbub</a>
+                        <a href="pubsubhubbub/" class="subnavigation__link">Pubsubhubbub</a>
                     </li>
                 
             
@@ -1453,9 +1454,8 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
         var base_url = '..',
             siteName = 'zend-feed';
     </script>
-    <script src="../js/scripts-0bcb0a3bb3.js"></script>
-        <script src="../search/require.js"></script>
-        <script src="../search/search.js"></script>
+    <script src="../js/scripts-edc4cfa790.js"></script>
+        <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
@@ -1484,6 +1484,14 @@ extension now, spanning the classes <code>JungleBooks\Feed</code> and <code>Jung
             </div>
         </div>
     </div>
+
+<script>
+// Anchors
+anchors.options.placement = 'left';
+anchors.add(
+    '.content h1:not(.content__title), .content h2, .content > h3, .content h4, .content h5'
+);
+</script>
 
 
 
