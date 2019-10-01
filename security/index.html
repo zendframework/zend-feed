@@ -337,7 +337,7 @@ whitelist, and by checking and fixing nesting of tags, ensuring
 standards-compliant output.</p>
 <p>The following examples will show a basic usage of HTMLPurifier, but developers
 are urged to go through and read <a href="http://www.htmlpurifier.org/docs">HTMLPurifier's documentation</a>.</p>
-<pre class="codehilite"><code class="language-php">// Setting HTMLPurifier's options
+<p> <pre class=codehilite><code class=language-php>// Setting HTMLPurifier's options
 $options = [
     // Allow only paragraph tags
     // and anchor tags wit the href attribute
@@ -376,7 +376,7 @@ try {
    $rss = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rss/');
 } catch (Zend\Feed\Exception\Reader\RuntimeException $e) {
    // feed import failed
-   echo "Exception caught importing feed: {$e-&gt;getMessage()}\n";
+   echo &quot;Exception caught importing feed: {$e-&gt;getMessage()}\n&quot;;
    exit;
 }
 
@@ -397,14 +397,13 @@ foreach ($rss as $item) {
        'link'        =&gt; $item-&gt;getLink(),
        'description' =&gt; $purifier-&gt;purify($item-&gt;getDescription()),
    ];
-}</code></pre>
-
+}</code></pre></p>
 <blockquote>
-<h3 id="tidy-is-required">Tidy is required</h3>
+<h3>Tidy is required</h3>
 <p>HTMLPurifier is using the PHP <a href="http://php.net/tidy">Tidy extension</a> to clean
 and repair the final output. If this extension is not available, it will
 silently fail, but its availability has no impact on the library's security.</p>
-<h3 id="caching">Caching</h3>
+<h3>Caching</h3>
 <p>For the sake of this example, the HTMLPurifier's cache is disabled, but it is
 recommended to configure caching and use its standalone include file as it can
 improve the performance of HTMLPurifier substantially.</p>
@@ -415,11 +414,11 @@ which complies to the current <a href="https://www.owasp.org/index.php/XSS_Preve
 and as such, is the recommended tool for escaping HTML tags and attributes,
 Javascript, CSS and URLs before outputting any potentially insecure data to the
 users.</p>
-<pre class="codehilite"><code class="language-php">try {
+<p> <pre class=codehilite><code class=language-php>try {
     $rss = Zend\Feed\Reader\Reader::import('http://www.planet-php.net/rss/');
 } catch (Zend\Feed\Exception\Reader\RuntimeException $e) {
     // feed import failed
-    echo "Exception caught importing feed: {$e-&gt;getMessage()}\n";
+    echo &quot;Exception caught importing feed: {$e-&gt;getMessage()}\n&quot;;
     exit;
 }
 
@@ -452,8 +451,7 @@ foreach ($rss as $item) {
         'link'        =&gt; $escaper-&gt;escapeUrl($link),
         'description' =&gt; $escaper-&gt;escapeHtml($item-&gt;getDescription()),
     ];
-}</code></pre>
-
+}</code></pre></p>
 <p>The feed data is now safe for output to HTML templates. You can, of course, skip
 escaping when simply storing the data persistently, but remember to escape it on
 output later!</p>
@@ -494,7 +492,7 @@ when and how to use them to secure your web applications.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/security.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/book/security.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

@@ -321,16 +321,15 @@ provide their full content inside the feed, splitting RSS' <code>description</co
 into two elements, <code>summary</code> and <code>content</code>, for that purpose.</p>
 <h2 id="basic-use-of-an-atom-feed">Basic Use of an Atom Feed</h2>
 <p>Read an Atom feed and print the <code>title</code> and <code>summary</code> of each entry:</p>
-<pre class="codehilite"><code class="language-php">$feed = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/');
-echo 'The feed contains ' . $feed-&gt;count() . ' entries.' . "\n\n";
+<p> <pre class=codehilite><code class=language-php>$feed = Zend\Feed\Reader\Reader::import('http://atom.example.com/feed/');
+echo 'The feed contains ' . $feed-&gt;count() . ' entries.' . &quot;\n\n&quot;;
 foreach ($feed as $entry) {
-    echo 'Title: ' . $entry-&gt;getTitle() . "\n";
-    echo 'Description: ' . $entry-&gt;getDescription() . "\n";
-    echo 'URL: ' . $entry-&gt;getLink() . "\n\n";
-}</code></pre>
-
+    echo 'Title: ' . $entry-&gt;getTitle() . &quot;\n&quot;;
+    echo 'Description: ' . $entry-&gt;getDescription() . &quot;\n&quot;;
+    echo 'URL: ' . $entry-&gt;getLink() . &quot;\n\n&quot;;
+}</code></pre></p>
 <blockquote>
-<h3 id="importing-requires-an-http-client">Importing requires an HTTP client</h3>
+<h3>Importing requires an HTTP client</h3>
 <p>To import a feed, you will need to have an <a href="../http-clients/">HTTP client</a>
 available.</p>
 <p>If you are not using zend-http, you will need to inject <code>Reader</code> with the HTTP
@@ -398,7 +397,7 @@ others in common use on blogs.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/consuming-atom.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/book/consuming-atom.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

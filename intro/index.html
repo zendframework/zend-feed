@@ -293,10 +293,6 @@
             <ul class="toc__list">
                 
                     <li class="toc__entry">
-                        <a href="#rss-optional-properties" class="toc__link">RSS optional properties</a>
-                    </li>
-                
-                    <li class="toc__entry">
                         <a href="#reading-rss-feed-data" class="toc__link">Reading RSS Feed Data</a>
                     </li>
                 
@@ -323,20 +319,20 @@ Atom feeds.</p>
 and saving relevant portions of the feed data to a simple PHP array, which could
 then be used for printing the data, storing to a database, etc.</p>
 <blockquote>
-<h3 id="rss-optional-properties">RSS optional properties</h3>
+<h3>RSS optional properties</h3>
 <p>Many <em>RSS</em> feeds have different channel and item properties available. The
 <em>RSS</em> specification provides for many optional properties, so be aware of this
 when writing code to work with <em>RSS</em> data. <code>Zend\Feed</code> supports all optional
 properties of the core <em>RSS</em> and <em>Atom</em> specifications.</p>
 </blockquote>
 <h2 id="reading-rss-feed-data">Reading RSS Feed Data</h2>
-<pre class="codehilite"><code class="language-php">// Fetch the latest Slashdot headlines
+<p> <pre class=codehilite><code class=language-php>// Fetch the latest Slashdot headlines
 try {
     $slashdotRss =
         Zend\Feed\Reader\Reader::import('http://rss.slashdot.org/Slashdot/slashdot');
 } catch (Zend\Feed\Reader\Exception\RuntimeException $e) {
     // feed import failed
-    echo "Exception caught importing feed: {$e-&gt;getMessage()}\n";
+    echo &quot;Exception caught importing feed: {$e-&gt;getMessage()}\n&quot;;
     exit;
 }
 
@@ -355,8 +351,7 @@ foreach ($slashdotRss as $item) {
         'link'        =&gt; $item-&gt;getLink(),
         'description' =&gt; $item-&gt;getDescription(),
     ];
-}</code></pre>
-
+}</code></pre></p>
 <p>Your <code>$channel</code> array now contains the basic meta-information for the RSS
 channel and all items that it contained. The process is identical for Atom
 feeds since <code>Zend\Feed</code> provides a common feed API; i.e. all getters and
@@ -394,7 +389,7 @@ setters are the same regardless of feed format.</p>
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/intro.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/book/intro.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>

@@ -403,7 +403,7 @@ object. In the event of any errors, it is strongly recommended to attempt the
 operation for failed Hub Endpoints at least once more at a future time. This may
 require the use of either a scheduled task for this purpose or a job queue,
 though such extra steps are optional.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Feed\PubSubHubbub\Publisher;
+<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Publisher;
 
 $publisher = Publisher;
 $publisher-&gt;addHubUrls([
@@ -425,8 +425,7 @@ if (! $publisher-&gt;isSuccess()) {
     }
 }
 
-// reschedule notifications for the failed Hubs in $failedHubs</code></pre>
-
+// reschedule notifications for the failed Hubs in $failedHubs</code></pre></p>
 <p>If you prefer having more concrete control over the Publisher, the methods
 <code>addHubUrls()</code> and <code>addUpdatedTopicUrls()</code> pass each array value to the singular
 <code>addHubUrl()</code> and <code>addUpdatedTopicUrl()</code> public methods. There are also matching
@@ -464,7 +463,7 @@ confirm all subscriptions and unsubscriptions. This is handled by using an
 instance of <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code> when the callback URL
 is accessed.</p>
 <blockquote>
-<h3 id="query-strings-in-callback-urls">Query strings in callback URLs</h3>
+<h3>Query strings in callback URLs</h3>
 <p><code>Zend\Feed\PubSubHubbub\Subscriber</code> implements the Pubsubhubbub 0.2/0.3
 specification. As this is a new specification version, not all Hubs currently
 implement it. The new specification allows the callback URL to include a query
@@ -474,7 +473,7 @@ query string component of the Subscriber callback URI be presented as a path
 element, i.e. recognised as a parameter in the route associated with the
 callback URI and used by the application's router.</p>
 </blockquote>
-<h3 id="subscribing-and-unsubscribing">Subscribing and Unsubscribing</h3>
+<h3>Subscribing and Unsubscribing</h3>
 <p><code>Zend\Feed\PubSubHubbub\Subscriber</code> implements a full Pubsubhubbub Subscriber
 capable of subscribing to, or unsubscribing from, any Topic via any Hub
 advertised by that Topic. It operates in conjunction with
@@ -496,7 +495,7 @@ automatic subscription refreshing, and rules out Hub errors for additional
 redundancy.</p>
 <p>With the relevant information to hand, a subscription can be attempted as
 demonstrated below:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Feed\PubSubHubbub\Model\Subscription;
+<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Feed\PubSubHubbub\Subscriber;
 
 $storage    = new Subscription;
@@ -505,8 +504,7 @@ $subscriber-&gt;setStorage($storage);
 $subscriber-&gt;addHubUrl('http://hubbub.example.com');
 $subscriber-&gt;setTopicUrl('http://www.example.net/rss.xml');
 $subscriber-&gt;setCallbackUrl('http://www.mydomain.com/hubbub/callback');
-$subscriber-&gt;subscribeAll();</code></pre>
-
+$subscriber-&gt;subscribeAll();</code></pre></p>
 <p>In order to store subscriptions and offer access to this data for general use,
 the component requires a database (a schema is provided later in this section).
 By default, it is assumed the table name is "subscription", and it utilises
@@ -522,7 +520,7 @@ as the resulting class implements the interface
 <code>Zend\Feed\PubSubHubbub\Model\SubscriptionInterface</code>.</p>
 <p>An example schema (MySQL) for a subscription table accessible by the provided
 model may look similar to:</p>
-<pre class="codehilite"><code class="language-sql">CREATE TABLE IF NOT EXISTS `subscription` (
+<p> <pre class=codehilite><code class=language-sql>CREATE TABLE IF NOT EXISTS `subscription` (
   `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hub_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -533,8 +531,7 @@ model may look similar to:</p>
   `expiration_time` datetime DEFAULT NULL,
   `subscription_state` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;</code></pre>
-
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;</code></pre></p>
 <p>Behind the scenes, the Subscriber above will send a request to the Hub endpoint
 containing the following parameters (based on the previous example):</p>
 <div class="table-responsive"><table>
@@ -587,7 +584,7 @@ for this reason the component is deliberately designed to work across almost any
 set of options with minimum end-user configuration required. Conventions are
 great when they work!</p>
 <blockquote>
-<h3 id="verification-modes">Verification modes</h3>
+<h3>Verification modes</h3>
 <p>While Hubs may require the use of a specific verification mode (both are
 supported by <code>Zend\Feed\PubSubHubbub</code>), you may indicate a specific preference
 using the <code>setPreferredVerificationMode()</code> method. In <code>sync</code> (synchronous)
@@ -613,7 +610,7 @@ storage solution where these defaults are not apt either by passing in a new
 model supporting the required interface or by passing a new instance of
 <code>Zend\Db\TableGateway\TableGateway</code> to the default model's constructor to change
 the used table name.</p>
-<h3 id="handling-subscriber-callbacks">Handling Subscriber Callbacks</h3>
+<h3>Handling Subscriber Callbacks</h3>
 <p>Whenever a subscription or unsubscription request is made, the Hub must verify
 the request by forwarding a new verification request to the callback URL set in
 the subscription or unsubscription parameters. To handle these Hub requests,
@@ -622,7 +619,7 @@ the callback URL should trigger the execution of an instance of
 <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code> to handle the request.</p>
 <p>The <code>Callback</code> class should be configured to use the same storage medium as the
 <code>Subscriber</code> class. The bulk of the work is handled internal to these classes.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Feed\PubSubHubbub\Model\Subscription;
+<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback;
 
 $storage = new Subscription();
@@ -642,17 +639,16 @@ if ($callback-&gt;hasFeedUpdate()) {
     /*
      * Process the feed update asynchronously to avoid a Hub timeout.
      */
-}</code></pre>
-
+}</code></pre></p>
 <blockquote>
-<h3 id="query-and-body-parameters">Query and body parameters</h3>
+<h3>Query and body parameters</h3>
 <p>It should be noted that <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code> may
 independently parse any incoming query string and other parameters. This is
 necessary since PHP alters the structure and keys of a query string when it is
 parsed into the <code>$_GET</code> or <code>$_POST</code> superglobals; for example, all duplicate
 keys are ignored and periods are converted to underscores. Pubsubhubbub
 features both of these in the query strings it generates.</p>
-<h3 id="always-delay-feed-processing">Always delay feed processing</h3>
+<h3>Always delay feed processing</h3>
 <p>It is essential that developers recognise that Hubs are only concerned with
 sending requests and receiving a response which verifies its receipt. If a
 feed update is received, it should never be processed on the spot since this
@@ -668,7 +664,7 @@ Hubs are expected to distribute vast volumes of updates so their resources are
 stretched; please process feeds asynchronously (e.g. in a separate process or
 a job queue or even a cronjob) as much as possible.</p>
 </blockquote>
-<h3 id="setting-up-and-using-a-callback-url-route">Setting Up And Using A Callback URL Route</h3>
+<h3>Setting Up And Using A Callback URL Route</h3>
 <p>As noted earlier, the <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code> class
 receives the combined key associated with any subscription from the Hub via one
 of two methods. The technically preferred method is to add this key to the
@@ -688,7 +684,7 @@ it also requires manually defining a route for this purpose. This is achieved by
 called the method <code>Zend\Feed\PubSubHubbub\Subscriber\Callback::setSubscriptionKey()</code>
 with the parameter being the key value available from the router. The example
 below demonstrates this using a zend-mvc controller.</p>
-<pre class="codehilite"><code class="language-php">use Zend\Feed\PubSubHubbub\Model\Subscription;
+<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -723,11 +719,10 @@ class CallbackController extends AbstractActionController
              */
         }
     }
-}</code></pre>
-
+}</code></pre></p>
 <p>The example below illustrates adding a route mapping the path segment to a route
 parameter, using zend-mvc:</p>
-<pre class="codehilite"><code class="language-php">use Zend\Mvc\Router\Http\Segment as SegmentRoute;;
+<p> <pre class=codehilite><code class=language-php>use Zend\Mvc\Router\Http\Segment as SegmentRoute;;
 
 // Route defininition for enabling appending of a PuSH Subscription's lookup key
 $route = SegmentRoute::factory([
@@ -739,7 +734,7 @@ $route = SegmentRoute::factory([
       'controller' =&gt; 'application-index',
       'action' =&gt; 'index',
    ]
-]);</code></pre>
+]);</code></pre></p>
 
 
 
@@ -769,7 +764,7 @@ $route = SegmentRoute::factory([
     <div class="help-wanted">
         <p>
             Found a mistake or want to contribute to the documentation?
-            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/pubsubhubbub.md" target="_blank" class="help-wanted__link">
+            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/book/pubsubhubbub.md" target="_blank" class="help-wanted__link">
                 Edit this page on GitHub!
             </a>
         </p>
