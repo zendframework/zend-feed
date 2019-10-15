@@ -107,7 +107,7 @@ though such extra steps are optional.
 ```php
 use Zend\Feed\PubSubHubbub\Publisher;
 
-$publisher = Publisher;
+$publisher = new Publisher;
 $publisher->addHubUrls([
     'http://pubsubhubbub.appspot.com/',
     'http://hubbub.example.com',
