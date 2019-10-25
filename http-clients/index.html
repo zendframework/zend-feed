@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Consume and generate Atom and RSS feeds, and interact with Pubsubhubbub.">  
+    <link rel="canonical" href="https://docs.zendframework.com/zend-feed/http-clients/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+
+    <title>HTTP Clients - zend-feed - Zend Framework Docs</title>
+
+    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+</head>
+<body id="page-top">
+
+    
+    <div class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+
+            
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            
+            <span class="navbar-brand">
+                <a class="logo-link" href="https://framework.zend.com/" data-tooltip data-placement="bottom" title="Go to the ZF homepage">
+                    <img src="../img/zend-framework-logo.svg" height="28" alt="Zend Framework">
+                </a>
+            </span>
+        </div>
+
+        <div class="navbar-collapse collapse">
+
+            
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="https://framework.zend.com/about">About</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/downloads">Install</a>
+                </li>
+                <li class="active">
+                    <a href="https://docs.zendframework.com">Documentation</a>
+                </li>
+                <li>
+                    <a href="https://www.zend.com/en/services/training">Training</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/blog">Blog</a>
+                </li>
+                <li>
+                    <a href="https://framework.zend.com/participate">Participate</a>
+                </li>
+            </ul>
+
+            
+            
+                <div class="nav navbar-nav navbar-collapse visible-xs-block ">
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">zend-feed</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reader</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../reader/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">HTTP Clients</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr7-clients/" class="subnavigation__link">Using PSR-7 Clients</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../importing/" class="subnavigation__link">Importing Feeds</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../find-feeds/" class="subnavigation__link">Feed Discovery</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../consuming-rss/" class="subnavigation__link">Consuming RSS Feeds</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../consuming-atom/" class="subnavigation__link">Consuming Atom Feeds</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../consuming-atom-entry/" class="subnavigation__link">Consuming Atom Entries</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../security/" class="subnavigation__link">Security</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../writer/" class="subnavigation__link">Writer</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../pubsubhubbub/" class="subnavigation__link">Pubsubhubbub</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                </div>
+            
+
+            
+            <div class="nav navbar-nav navbar-collapse visible-xs-block">
+                <div class="component-selector">
+    <h4 class="component-selector__title">Components</h4>
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <header class="header">
+    <div class="container">
+        <div class="row">
+
+            
+            <div class="col-xs-8">
+                <h1 class="header__title">
+                    Documentation
+
+                    
+                        <small class="header__subtitle">zend-feed</small>
+                    
+                </h1>
+            </div>
+
+            
+            <div class="col-xs-4 text-right">
+                
+                    
+
+                    <a href="#" class="header__link header__link--search" data-toggle="modal" data-target="#mkdocs_search_modal" title="Open search">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                    <a href="https://github.com/zendframework/zend-feed/" class="header__link header__link--github" title="Go to repository of zend-feed">
+                        <i class="fa fa-github"></i> GitHub
+                    </a>
+                
+            </div>
+        </div>
+    </div>
+</header>
+
+    
+    <div class="laminas-announcement">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 col-xs-12 content" role="main">
+            <!-- content:begin -->
+                
+                    <ol class="breadcrumb" role="navigation" aria-label="breadcrumbs navigation">
+    <li><a href="https://framework.zend.com/">Home</a></li>
+
+    
+        <li><a href="https://docs.zendframework.com/">Documentation</a></li>
+
+        
+            <li><a href="..">zend-feed</a></li>
+
+            
+                
+                    
+                    
+                        <li>Reader</li>
+                    
+                
+            
+
+            <li class="active">HTTP Clients</li>
+        
+    
+</ol>
+
+
+
+
+
+
+    
+    
+        <h2 class="chapter__headline">Reader</h2>
+    
+
+    <div>
+        
+    
+
+    
+    
+        <div class="toc">
+            <h6 class="toc__headline">In This Article</h6>
+            <ul class="toc__list">
+                
+                    <li class="toc__entry">
+                        <a href="#clientinterface-and-headerawareclientinterface" class="toc__link">ClientInterface and HeaderAwareClientInterface</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#responseinterface-and-headerawareresponseinterface" class="toc__link">ResponseInterface and HeaderAwareResponseInterface</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#response" class="toc__link">Response</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#psr-7-response" class="toc__link">PSR-7 Response</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#zend-http" class="toc__link">zend-http</a>
+                    </li>
+                
+                    <li class="toc__entry">
+                        <a href="#providing-a-client-to-reader" class="toc__link">Providing a client to Reader</a>
+                    </li>
+                
+            </ul>
+        </div>
+    
+
+    </div>
+
+    <h1 id="http-clients">HTTP Clients</h1>
+<p>Several operations in zend-feed's Reader subcomponent require an HTTP client:</p>
+<ul>
+<li>importing a feed</li>
+<li>finding links in a feed</li>
+</ul>
+<p>In order to allow developers a choice in HTTP clients, the subcomponent defines
+several interfaces and classes. Elsewhere in the documentation, we reference
+where an HTTP client may be used; this document details what constitutes an HTTP
+client and its behavior, and some of the concrete classes available within the
+component for implementing this behavior.</p>
+<h2 id="clientinterface-and-headerawareclientinterface">ClientInterface and HeaderAwareClientInterface</h2>
+<p>First, we define two interfaces for clients,
+<code>Zend\Feed\Reader\Http\ClientInterface</code> and <code>HeaderAwareClientInterface</code>:</p>
+<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+
+interface ClientInterface
+{
+    /**
+     * Make a GET request to a given URL.
+     *
+     * @param string $url
+     * @return ResponseInterface
+     */
+    public function get($url);
+}
+
+interface HeaderAwareClientInterface extends ClientInterface
+{
+    /**
+     * Make a GET request to a given URL.
+     *
+     * @param string $url
+     * @param array $headers
+     * @return ResponseInterface
+     */
+    public function get($url, array $headers = []);
+}</code></pre></p>
+<p>The first is header-agnostic, and assumes that the client will simply perform an
+HTTP GET request. The second allows providing headers to the client; typically,
+these are used for HTTP caching headers. <code>$headers</code> must be in the following
+structure:</p>
+<p> <pre class=codehilite><code class=language-php>$headers = [
+    'X-Header-Name' =&gt; [
+        'header',
+        'values',
+    ],
+];</code></pre></p>
+<p>i.e., each key is a header name, and each value is an array of values for that
+header. If the header represents only a single value, it should be an array with
+that value:</p>
+<p> <pre class=codehilite><code class=language-php>$headers = [
+    'Accept' =&gt; [ 'application/rss+xml' ],
+];</code></pre></p>
+<p>A call to <code>get()</code> should yield a <em>response</em>.</p>
+<h2 id="responseinterface-and-headerawareresponseinterface">ResponseInterface and HeaderAwareResponseInterface</h2>
+<p>Responses are modeled using <code>Zend\Feed\Reader\Http\ResponseInterface</code> and
+<code>HeaderAwareResponseInterface</code>:</p>
+<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+
+class ResponseInterface
+{
+    /**
+     * Retrieve the status code.
+     *
+     * @return int
+     */
+    public function getStatusCode();
+
+    /**
+     * Retrieve the response body contents.
+     *
+     * @return string
+     */
+    public function getBody();
+}
+
+class HeaderAwareResponseInterface extends ResponseInterface
+{
+    /**
+     * Retrieve a named header line.
+     *
+     * Retrieve a header by name; all values MUST be concatenated to a single
+     * line. If no matching header is found, return the $default value.
+     *
+     * @param string $name
+     * @param null|string $default
+     * @return string
+    public function getHeaderLine($name, $default = null);
+}</code></pre></p>
+<p>Internally, <code>Reader</code> will typehint against <code>ClientInterface</code> for the bulk of
+operations. In some cases, however, certain capabilities are only possible if
+the response can provide headers (e.g., for caching); in such cases, it will
+check the instance against <code>HeaderAwareResponseInterface</code>, and only call
+<code>getHeaderLine()</code> if it matches.</p>
+<h2 id="response">Response</h2>
+<p>zend-feed ships with a generic <code>ResponseInterface</code> implementation,
+<code>Zend\Feed\Http\Response</code>. It implements <code>HeaderAwareResponseInterface</code>, and
+defines the following constructor:</p>
+<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+
+class Response implements HeaderAwareResponseInterface
+{
+    /**
+     * Constructor
+     *
+     * @param int $statusCode Response status code
+     * @param string $body Response body
+     * @param array $headers Response headers, if available
+     */
+    public function __construct($statusCode, $body, array $headers = []);
+}</code></pre></p>
+<h2 id="psr-7-response">PSR-7 Response</h2>
+<p><a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a> defines a set of HTTP message
+interfaces, but not a client interface. To facilitate wrapping an HTTP client
+that uses PSR-7 messages, we provide <code>Zend\Feed\Reader\Psr7ResponseDecorator</code>:</p>
+<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+
+use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
+
+class Psr7ResponseDecorator implements HeaderAwareResponseInterface
+{
+    /**
+     * @param PsrResponseInterface $response
+     */
+    public function __construct(PsrResponseInterface $response);
+
+    /**
+     * @return PsrResponseInterface
+     */
+    public function getDecoratedResponse();
+}</code></pre></p>
+<p>Clients can then take the PSR-7 response they receive, pass it to the decorator,
+and return the decorator.</p>
+<p>To use the PSR-7 response, you will need to add the PSR-7 interfaces to your
+application, if they are not already installed by the client of your choice:</p>
+<p> <pre class=codehilite><code class=language-bash>$ composer require psr/http-message</code></pre></p>
+<h2 id="zend-http">zend-http</h2>
+<p>We also provide a zend-http client decorator,
+<code>Zend\Feed\Reader\Http\ZendHttpClientDecorator</code>:</p>
+<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+
+use Zend\Http\Client as HttpClient;
+
+class ZendHttpClientDecorator implements HeaderAwareClientInterface
+{
+    /**
+     * @param HttpClient $client
+     */
+    public function __construct(HttpClient $client);
+
+    /**
+     * @return HttpClient
+     */
+    public function getDecoratedClient();
+}</code></pre></p>
+<p>Its <code>get()</code> implementation returns a <code>Response</code> instance seeded from the
+zend-http response returned, including status, body, and headers.</p>
+<p>zend-http is the default implementation assumed by <code>Zend\Feed\Reader\Reader</code>,
+but <em>is not installed by default</em>. You may install it using composer:</p>
+<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-http</code></pre></p>
+<h2 id="providing-a-client-to-reader">Providing a client to Reader</h2>
+<p>By default, <code>Zend\Feed\Reader\Reader</code> will lazy load a zend-http client. If you
+have not installed zend-http, however, PHP will raise an error indicating the
+class is not found!</p>
+<p>As such, you have two options:</p>
+<ol>
+<li>Install zend-http: <code>composer require zendframework/zend-http</code>.</li>
+<li>Inject the <code>Reader</code> with your own HTTP client.</li>
+</ol>
+<p>To accomplish the second, you will need an implementation of
+<code>Zend\Feed\Reader\Http\ClientInterface</code> or <code>HeaderAwareClientInterface</code>, and an
+instance of that implementation. Once you do, you can use the static method
+<code>setHttpClient()</code> to inject it.</p>
+<p>As an example, let's say you've created a PSR-7-based implementation named
+<code>My\Http\Psr7FeedClient</code>. You could then do the following:</p>
+<p> <pre class=codehilite><code class=language-php>use My\Http\Psr7FeedClient;
+use Zend\Feed\Reader\Reader;
+
+Reader::setHttpClient(new Psr7FeedClient());</code></pre></p>
+<p>Your client will then be used for all <code>import()</code> and <code>findFeedLinks()</code>
+operations.</p>
+
+
+
+
+    <nav>
+    <ul class="page-nav hidden-print">
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="prev" class="page-nav__link page-nav__link--prev" href="../reader/">
+                    <i class="fa fa-chevron-left"></i> Previous
+                </a>
+            
+        </li>
+
+        
+        <li class="page-nav__item">
+            
+                <a rel="next" class="page-nav__link page-nav__link--next" href="../psr7-clients/">
+                    Next <i class="fa fa-chevron-right"></i>
+                </a>
+            
+        </li>
+    </ul>
+</nav>
+
+
+
+
+    <div class="help-wanted">
+        <p>
+            Found a mistake or want to contribute to the documentation?
+            <a href="https://github.com/zendframework/zend-feed/edit/master/docs/book/http-clients.md" target="_blank" class="help-wanted__link">
+                Edit this page on GitHub!
+            </a>
+        </p>
+    </div>
+
+                
+            <!-- content:end -->
+            </div>
+            <div class="col-md-3 col-xs-12 sidebar">
+                
+                    <div class="component-selector">
+    <h4 class="component-selector__title">Components</h4>
+    <h5 class="component-selector__subtitle">Find documentation…</h5>
+    <select class="form-control component-selector__control">
+        <option value="/">Overview</option>
+        <optgroup label="Components"></optgroup>
+    </select>
+</div>
+                    
+    <div class="subnavigation hidden-print">
+        <h4 class="subnavigation__title">
+            <a href="..">zend-feed</a>
+        </h4>
+
+        <h5 class="subnavigation__subtitle">Table of Contents</h5>
+
+        <ul class="subnavigation__list">
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../intro/" class="subnavigation__link">Introduction</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item">
+                                <span class="subnavigation__headline">Reader</span>
+                                <ul class="subnavigation__list">
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../reader/" class="subnavigation__link">Basic Usage</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item subnavigation__list-item--active">
+        <a href="./" class="subnavigation__link">HTTP Clients</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../psr7-clients/" class="subnavigation__link">Using PSR-7 Clients</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../importing/" class="subnavigation__link">Importing Feeds</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../find-feeds/" class="subnavigation__link">Feed Discovery</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../consuming-rss/" class="subnavigation__link">Consuming RSS Feeds</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../consuming-atom/" class="subnavigation__link">Consuming Atom Feeds</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../consuming-atom-entry/" class="subnavigation__link">Consuming Atom Entries</a>
+    </li>
+
+                                    
+                                        
+    <li class="subnavigation__list-item ">
+        <a href="../security/" class="subnavigation__link">Security</a>
+    </li>
+
+                                    
+                                </ul>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../writer/" class="subnavigation__link">Writer</a>
+                            </li>
+                        
+                    
+                
+            
+
+                
+                
+
+                    
+                    
+                        
+                            <li class="subnavigation__list-item ">
+                                <a href="../pubsubhubbub/" class="subnavigation__link">Pubsubhubbub</a>
+                            </li>
+                        
+                    
+                
+            
+        </ul>
+    </div>
+
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h5>Zend Framework</h5>
+                <ul>
+                    <li><a href="https://framework.zend.com/">framework.zend.com</a></li>
+                    <li><a href="https://docs.zendframework.com">docs.zendframework.com</a></li>
+                    <li><a href="https://packages.zendframework.com">packages.zendframework.com</a></li>
+                    <li><a href="https://apigility.org">apigility.org</a></li>
+                    <li><a href="https://getexpressive.org/">getexpressive.org</a></li>
+                </ul>
+            </div>
+        </div>
+
+        
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <a class="footer__button" href="#page-top"><i class="fa fa-chevron-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+
+        <div class="row">
+
+            
+            <div class="col-md-9">
+                <h4 class="footer__headline">Copyright</h4>
+                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+            </div>
+
+            
+            <div class="col-md-3">
+                <h4 class="footer__headline">Support</h4>
+                <ul class="support__list">
+                    <li class="support__list-item">
+                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
+                    </li>
+                    <li class="support__list-item">
+                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script>
+        var base_url = '..',
+            siteName = 'zend-feed';
+    </script>
+    <script src="../js/scripts-8d7ae56abf.js"></script>
+        <script src="../search/main.js"></script>
+
+    
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        From here you can search these documents. Enter your search terms below.
+                    </p>
+                    <form role="form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                        </div>
+                    </form>
+                    <div id="mkdocs-search-results"></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+
+</html>
