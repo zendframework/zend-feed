@@ -2,67 +2,67 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://docs.zendframework.com/zend-feed/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/intro/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/reader/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/http-clients/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/psr7-clients/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/importing/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/find-feeds/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/consuming-rss/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/consuming-atom/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/consuming-atom-entry/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/security/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/writer/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://docs.zendframework.com/zend-feed/pubsubhubbub/</loc>
-     <lastmod>2019-10-25</lastmod>
+     <lastmod>2019-11-04</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
