@@ -2,7 +2,7 @@
 
 > ## Repository abandoned 2019-12-31
 >
-> This repository has moved to laminas/laminas-feed.
+> This repository has moved to [laminas/laminas-feed](https://github.com/laminas/laminas-feed).
 
 [![Build Status](https://secure.travis-ci.org/zendframework/zend-feed.svg?branch=master)](https://secure.travis-ci.org/zendframework/zend-feed)
 [![Coverage Status](https://coveralls.io/repos/github/zendframework/zend-feed/badge.svg?branch=master)](https://coveralls.io/github/zendframework/zend-feed?branch=master)
