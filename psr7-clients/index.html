@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Consume and generate Atom and RSS feeds, and interact with Pubsubhubbub.">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-feed/psr7-clients/">
+    <link rel="canonical" href="https://docs.zendframework.com/psr7-clients/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Using PSR-7 Clients - zend-feed - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -245,9 +245,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-feed/">laminas/laminas-feed.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -337,13 +337,17 @@ In this section, we'll demonstrate doing so in order to use a client that is
 <code>Zend\Feed\Reader\Http\Psr7ResponseDecorator</code>. As such, if you have a
 PSR-7-capable client, you can pass the response to this decorator, and
 immediately return it from your custom client:</p>
-<p> <pre class=codehilite><code class=language-php>return new Psr7ResponseDecorator($psr7Response);</code></pre></p>
+<pre><code class="language-php">return new Psr7ResponseDecorator($psr7Response);
+</code></pre>
+
 <p>We'll do this with our PSR-7 client.</p>
 <h2 id="guzzle">Guzzle</h2>
 <p><a href="http://docs.guzzlephp.org/en/latest/">Guzzle</a> is arguably the most popular HTTP
 client library for PHP, and fully supports PSR-7 since version 5. Let's install
 it:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer require guzzlehttp/guzzle</code></pre></p>
+<pre><code class="language-bash">$ composer require guzzlehttp/guzzle
+</code></pre>
+
 <p>We'll use the <code>GuzzleHttp\Client</code> to make our requests to feeds.</p>
 <h2 id="creating-a-client">Creating a client</h2>
 <p>From here, we'll create our client. To do this, we'll create a class that:</p>
@@ -354,7 +358,7 @@ it:</p>
 <li>returns a zend-feed response decorating the actual PSR-7 response</li>
 </ul>
 <p>The code looks like this:</p>
-<p> <pre class=codehilite><code class=language-php>use GuzzleHttp\Client;
+<pre><code class="language-php">use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface as GuzzleClientInterface;
 use Zend\Feed\Reader\Http\ClientInterface as FeedReaderHttpClientInterface;
 use Zend\Feed\Reader\Http\Psr7ResponseDecorator;
@@ -383,11 +387,15 @@ class GuzzleClient implements FeedReaderHttpClientInterface
             $this-&gt;client-&gt;request('GET', $uri)
         );
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <h2 id="using-the-client">Using the client</h2>
 <p>In order to use our new client, we need to tell <code>Zend\Feed\Reader\Reader</code> about
 it:</p>
-<p> <pre class=codehilite><code class=language-php>Zend\Feed\Reader\Reader::setHttpClient(new GuzzleClient());</code></pre></p>
+<pre><code class="language-php">Zend\Feed\Reader\Reader::setHttpClient(new GuzzleClient());
+</code></pre>
+
 <p>From this point forward, this custom client will be used to retrieve feeds.</p>
 <h2 id="references">References</h2>
 <p>This chapter is based on <a href="https://www.teqneers.de/2016/05/zendfeedreader-guzzle-and-psr-7/">a blog post by Stefan Gehrig</a>.</p>
@@ -602,7 +610,7 @@ it:</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -610,10 +618,10 @@ it:</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -621,27 +629,28 @@ it:</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-feed';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

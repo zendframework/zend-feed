@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Consume and generate Atom and RSS feeds, and interact with Pubsubhubbub.">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-feed/http-clients/">
+    <link rel="canonical" href="https://docs.zendframework.com/http-clients/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>HTTP Clients - zend-feed - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -245,9 +245,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-feed/">laminas/laminas-feed.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -345,7 +345,7 @@ component for implementing this behavior.</p>
 <h2 id="clientinterface-and-headerawareclientinterface">ClientInterface and HeaderAwareClientInterface</h2>
 <p>First, we define two interfaces for clients,
 <code>Zend\Feed\Reader\Http\ClientInterface</code> and <code>HeaderAwareClientInterface</code>:</p>
-<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+<pre><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 interface ClientInterface
 {
@@ -368,28 +368,34 @@ interface HeaderAwareClientInterface extends ClientInterface
      * @return ResponseInterface
      */
     public function get($url, array $headers = []);
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The first is header-agnostic, and assumes that the client will simply perform an
 HTTP GET request. The second allows providing headers to the client; typically,
 these are used for HTTP caching headers. <code>$headers</code> must be in the following
 structure:</p>
-<p> <pre class=codehilite><code class=language-php>$headers = [
+<pre><code class="language-php">$headers = [
     'X-Header-Name' =&gt; [
         'header',
         'values',
     ],
-];</code></pre></p>
+];
+</code></pre>
+
 <p>i.e., each key is a header name, and each value is an array of values for that
 header. If the header represents only a single value, it should be an array with
 that value:</p>
-<p> <pre class=codehilite><code class=language-php>$headers = [
+<pre><code class="language-php">$headers = [
     'Accept' =&gt; [ 'application/rss+xml' ],
-];</code></pre></p>
+];
+</code></pre>
+
 <p>A call to <code>get()</code> should yield a <em>response</em>.</p>
 <h2 id="responseinterface-and-headerawareresponseinterface">ResponseInterface and HeaderAwareResponseInterface</h2>
 <p>Responses are modeled using <code>Zend\Feed\Reader\Http\ResponseInterface</code> and
 <code>HeaderAwareResponseInterface</code>:</p>
-<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+<pre><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 class ResponseInterface
 {
@@ -420,7 +426,9 @@ class HeaderAwareResponseInterface extends ResponseInterface
      * @param null|string $default
      * @return string
     public function getHeaderLine($name, $default = null);
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Internally, <code>Reader</code> will typehint against <code>ClientInterface</code> for the bulk of
 operations. In some cases, however, certain capabilities are only possible if
 the response can provide headers (e.g., for caching); in such cases, it will
@@ -430,7 +438,7 @@ check the instance against <code>HeaderAwareResponseInterface</code>, and only c
 <p>zend-feed ships with a generic <code>ResponseInterface</code> implementation,
 <code>Zend\Feed\Http\Response</code>. It implements <code>HeaderAwareResponseInterface</code>, and
 defines the following constructor:</p>
-<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+<pre><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 class Response implements HeaderAwareResponseInterface
 {
@@ -442,12 +450,14 @@ class Response implements HeaderAwareResponseInterface
      * @param array $headers Response headers, if available
      */
     public function __construct($statusCode, $body, array $headers = []);
-}</code></pre></p>
+}
+</code></pre>
+
 <h2 id="psr-7-response">PSR-7 Response</h2>
 <p><a href="http://www.php-fig.org/psr/psr-7/">PSR-7</a> defines a set of HTTP message
 interfaces, but not a client interface. To facilitate wrapping an HTTP client
 that uses PSR-7 messages, we provide <code>Zend\Feed\Reader\Psr7ResponseDecorator</code>:</p>
-<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+<pre><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
@@ -462,16 +472,20 @@ class Psr7ResponseDecorator implements HeaderAwareResponseInterface
      * @return PsrResponseInterface
      */
     public function getDecoratedResponse();
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Clients can then take the PSR-7 response they receive, pass it to the decorator,
 and return the decorator.</p>
 <p>To use the PSR-7 response, you will need to add the PSR-7 interfaces to your
 application, if they are not already installed by the client of your choice:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer require psr/http-message</code></pre></p>
+<pre><code class="language-bash">$ composer require psr/http-message
+</code></pre>
+
 <h2 id="zend-http">zend-http</h2>
 <p>We also provide a zend-http client decorator,
 <code>Zend\Feed\Reader\Http\ZendHttpClientDecorator</code>:</p>
-<p> <pre class=codehilite><code class=language-php>namespace Zend\Feed\Reader\Http;
+<pre><code class="language-php">namespace Zend\Feed\Reader\Http;
 
 use Zend\Http\Client as HttpClient;
 
@@ -486,12 +500,16 @@ class ZendHttpClientDecorator implements HeaderAwareClientInterface
      * @return HttpClient
      */
     public function getDecoratedClient();
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Its <code>get()</code> implementation returns a <code>Response</code> instance seeded from the
 zend-http response returned, including status, body, and headers.</p>
 <p>zend-http is the default implementation assumed by <code>Zend\Feed\Reader\Reader</code>,
 but <em>is not installed by default</em>. You may install it using composer:</p>
-<p> <pre class=codehilite><code class=language-bash>$ composer require zendframework/zend-http</code></pre></p>
+<pre><code class="language-bash">$ composer require zendframework/zend-http
+</code></pre>
+
 <h2 id="providing-a-client-to-reader">Providing a client to Reader</h2>
 <p>By default, <code>Zend\Feed\Reader\Reader</code> will lazy load a zend-http client. If you
 have not installed zend-http, however, PHP will raise an error indicating the
@@ -507,10 +525,12 @@ instance of that implementation. Once you do, you can use the static method
 <code>setHttpClient()</code> to inject it.</p>
 <p>As an example, let's say you've created a PSR-7-based implementation named
 <code>My\Http\Psr7FeedClient</code>. You could then do the following:</p>
-<p> <pre class=codehilite><code class=language-php>use My\Http\Psr7FeedClient;
+<pre><code class="language-php">use My\Http\Psr7FeedClient;
 use Zend\Feed\Reader\Reader;
 
-Reader::setHttpClient(new Psr7FeedClient());</code></pre></p>
+Reader::setHttpClient(new Psr7FeedClient());
+</code></pre>
+
 <p>Your client will then be used for all <code>import()</code> and <code>findFeedLinks()</code>
 operations.</p>
 
@@ -724,7 +744,7 @@ operations.</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -732,10 +752,10 @@ operations.</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -743,27 +763,28 @@ operations.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-feed';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

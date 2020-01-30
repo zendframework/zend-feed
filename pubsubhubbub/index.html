@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Consume and generate Atom and RSS feeds, and interact with Pubsubhubbub.">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-feed/pubsubhubbub/">
+    <link rel="canonical" href="https://docs.zendframework.com/pubsubhubbub/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Pubsubhubbub - zend-feed - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -245,9 +245,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-feed/">laminas/laminas-feed.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -403,7 +403,7 @@ object. In the event of any errors, it is strongly recommended to attempt the
 operation for failed Hub Endpoints at least once more at a future time. This may
 require the use of either a scheduled task for this purpose or a job queue,
 though such extra steps are optional.</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Publisher;
+<pre><code class="language-php">use Zend\Feed\PubSubHubbub\Publisher;
 
 $publisher = new Publisher;
 $publisher-&gt;addHubUrls([
@@ -425,7 +425,9 @@ if (! $publisher-&gt;isSuccess()) {
     }
 }
 
-// reschedule notifications for the failed Hubs in $failedHubs</code></pre></p>
+// reschedule notifications for the failed Hubs in $failedHubs
+</code></pre>
+
 <p>If you prefer having more concrete control over the Publisher, the methods
 <code>addHubUrls()</code> and <code>addUpdatedTopicUrls()</code> pass each array value to the singular
 <code>addHubUrl()</code> and <code>addUpdatedTopicUrl()</code> public methods. There are also matching
@@ -495,7 +497,7 @@ automatic subscription refreshing, and rules out Hub errors for additional
 redundancy.</p>
 <p>With the relevant information to hand, a subscription can be attempted as
 demonstrated below:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Model\Subscription;
+<pre><code class="language-php">use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Feed\PubSubHubbub\Subscriber;
 
 $storage    = new Subscription;
@@ -504,7 +506,9 @@ $subscriber-&gt;setStorage($storage);
 $subscriber-&gt;addHubUrl('http://hubbub.example.com');
 $subscriber-&gt;setTopicUrl('http://www.example.net/rss.xml');
 $subscriber-&gt;setCallbackUrl('http://www.mydomain.com/hubbub/callback');
-$subscriber-&gt;subscribeAll();</code></pre></p>
+$subscriber-&gt;subscribeAll();
+</code></pre>
+
 <p>In order to store subscriptions and offer access to this data for general use,
 the component requires a database (a schema is provided later in this section).
 By default, it is assumed the table name is "subscription", and it utilises
@@ -520,7 +524,7 @@ as the resulting class implements the interface
 <code>Zend\Feed\PubSubHubbub\Model\SubscriptionInterface</code>.</p>
 <p>An example schema (MySQL) for a subscription table accessible by the provided
 model may look similar to:</p>
-<p> <pre class=codehilite><code class=language-sql>CREATE TABLE IF NOT EXISTS `subscription` (
+<pre><code class="language-sql">CREATE TABLE IF NOT EXISTS `subscription` (
   `id` varchar(32) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `topic_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `hub_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -531,7 +535,9 @@ model may look similar to:</p>
   `expiration_time` datetime DEFAULT NULL,
   `subscription_state` varchar(12) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;</code></pre></p>
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+</code></pre>
+
 <p>Behind the scenes, the Subscriber above will send a request to the Hub endpoint
 containing the following parameters (based on the previous example):</p>
 <div class="table-responsive"><table>
@@ -619,7 +625,7 @@ the callback URL should trigger the execution of an instance of
 <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code> to handle the request.</p>
 <p>The <code>Callback</code> class should be configured to use the same storage medium as the
 <code>Subscriber</code> class. The bulk of the work is handled internal to these classes.</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Model\Subscription;
+<pre><code class="language-php">use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback;
 
 $storage = new Subscription();
@@ -639,7 +645,9 @@ if ($callback-&gt;hasFeedUpdate()) {
     /*
      * Process the feed update asynchronously to avoid a Hub timeout.
      */
-}</code></pre></p>
+}
+</code></pre>
+
 <blockquote>
 <h3>Query and body parameters</h3>
 <p>It should be noted that <code>Zend\Feed\PubSubHubbub\Subscriber\Callback</code> may
@@ -684,7 +692,7 @@ it also requires manually defining a route for this purpose. This is achieved by
 called the method <code>Zend\Feed\PubSubHubbub\Subscriber\Callback::setSubscriptionKey()</code>
 with the parameter being the key value available from the router. The example
 below demonstrates this using a zend-mvc controller.</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Feed\PubSubHubbub\Model\Subscription;
+<pre><code class="language-php">use Zend\Feed\PubSubHubbub\Model\Subscription;
 use Zend\Feed\PubSubHubbub\Subscriber\Callback;
 use Zend\Mvc\Controller\AbstractActionController;
 
@@ -719,10 +727,12 @@ class CallbackController extends AbstractActionController
              */
         }
     }
-}</code></pre></p>
+}
+</code></pre>
+
 <p>The example below illustrates adding a route mapping the path segment to a route
 parameter, using zend-mvc:</p>
-<p> <pre class=codehilite><code class=language-php>use Zend\Mvc\Router\Http\Segment as SegmentRoute;;
+<pre><code class="language-php">use Zend\Mvc\Router\Http\Segment as SegmentRoute;;
 
 // Route defininition for enabling appending of a PuSH Subscription's lookup key
 $route = SegmentRoute::factory([
@@ -734,7 +744,8 @@ $route = SegmentRoute::factory([
       'controller' =&gt; 'application-index',
       'action' =&gt; 'index',
    ]
-]);</code></pre></p>
+]);
+</code></pre>
 
 
 
@@ -942,7 +953,7 @@ $route = SegmentRoute::factory([
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -950,10 +961,10 @@ $route = SegmentRoute::factory([
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -961,27 +972,28 @@ $route = SegmentRoute::factory([
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-feed';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">

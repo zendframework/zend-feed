@@ -7,12 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Consume and generate Atom and RSS feeds, and interact with Pubsubhubbub.">  
-    <link rel="canonical" href="https://docs.zendframework.com/zend-feed/consuming-rss/">
+    <link rel="canonical" href="https://docs.zendframework.com/consuming-rss/">
     <link rel="shortcut icon" href="../img/favicon.ico">
 
     <title>Consuming RSS Feeds - zend-feed - Zend Framework Docs</title>
 
-    <link rel="stylesheet" href="../css/styles-5cfabd53ee.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body id="page-top">
 
@@ -245,9 +245,9 @@
     <div class="laminas-announcement">
     <div class="container">
         <div class="row">
-            <div class="col-xs-12">
-                Zend Framework transitions to the Linux Foundation. <a href="https://getlaminas.org">Learn More.</a>
-            </div>
+            <div class="col-xs-12"><strong>
+                This package has moved. Visit its replacement, <a href="https://docs.laminas.dev/laminas-feed/">laminas/laminas-feed.</a>
+            </strong></div>
         </div>
     </div>
 </div>
@@ -318,7 +318,9 @@
     <h1 id="consuming-rss-feeds">Consuming RSS Feeds</h1>
 <h2 id="reading-a-feed">Reading a feed</h2>
 <p>To read an RSS feed, pass its URL to <code>Zend\Feed\Reader\Reader::import()</code>:</p>
-<p> <pre class=codehilite><code class=language-php>$channel = Zend\Feed\Reader\Reader::import('http://rss.example.com/channelName');</code></pre></p>
+<pre><code class="language-php">$channel = Zend\Feed\Reader\Reader::import('http://rss.example.com/channelName');
+</code></pre>
+
 <blockquote>
 <h3>Importing requires an HTTP client</h3>
 <p>To import a feed, you will need to have an <a href="../http-clients/">HTTP client</a>
@@ -331,22 +333,28 @@ client. See the <a href="../http-clients/#providing-a-client-to-reader">section 
 <h2 id="get-properties">Get properties</h2>
 <p>Once you have a feed object, you can access any of the standard RSS channel
 properties via the various instance getter methods:</p>
-<p> <pre class=codehilite><code class=language-php>echo $channel-&gt;getTitle();
+<pre><code class="language-php">echo $channel-&gt;getTitle();
 echo $channel-&gt;getAuthor();
-// etc.</code></pre></p>
+// etc.
+</code></pre>
+
 <p>If channel properties have attributes, the getter method will return a key/value
 pair, where the key is the attribute name, and the value is the attribute value.</p>
-<p> <pre class=codehilite><code class=language-php>$author = $channel-&gt;getAuthor();
-echo $author['name'];</code></pre></p>
+<pre><code class="language-php">$author = $channel-&gt;getAuthor();
+echo $author['name'];
+</code></pre>
+
 <p>Most commonly, you'll want to loop through the feed and do something with its
 entries.  <code>Zend\Feed\Reader\Feed\Rss</code> internally converts all entries to a
 <code>Zend\Feed\Reader\Entry\Rss</code> instance. Entry properties, similarly to channel
 properties, can be accessed via getter methods, such as <code>getTitle</code>,
 <code>getDescription</code>, etc.</p>
 <p>An example of printing all titles of articles in a channel is:</p>
-<p> <pre class=codehilite><code class=language-php>foreach ($channel as $item) {
+<pre><code class="language-php">foreach ($channel as $item) {
     echo $item-&gt;getTitle() . &quot;\n&quot;;
-}</code></pre></p>
+}
+</code></pre>
+
 <p>If you are not familiar with RSS, here are the standard elements you can expect
 to be available in an RSS channel and in individual RSS items (entries).</p>
 <p>Required channel elements:</p>
@@ -377,9 +385,11 @@ either <code>title</code> or <code>description</code> must be present.</p>
 </ul>
 <p>In your code you can always test to see if an element is non-empty by calling
 the getter:</p>
-<p> <pre class=codehilite><code class=language-php>if ($item-&gt;getPropname()) {
+<pre><code class="language-php">if ($item-&gt;getPropname()) {
     // ... proceed.
-}</code></pre></p>
+}
+</code></pre>
+
 <p>Where relevant, <code>Zend\Feed</code> supports a number of common RSS extensions including
 Dublin Core, Atom (inside RSS); the Content, Slash, Syndication,
 Syndication/Thread extensions; as well as several others.</p>
@@ -596,7 +606,7 @@ for further information.</p>
             
             <div class="col-md-9">
                 <h4 class="footer__headline">Copyright</h4>
-                <p>&copy; 2006-2019 by <a href="https://www.zend.com/">Zend</a>, a <a href="https://www.roguewave.com/">Rogue Wave Company</a>.</p>
+                <p>&copy; 2006-2020 by <a href="https://www.zend.com/">Zend</a> by <a href="https://www.perforce.com/">Perforce</a>.</p>
             </div>
 
             
@@ -604,10 +614,10 @@ for further information.</p>
                 <h4 class="footer__headline">Support</h4>
                 <ul class="support__list">
                     <li class="support__list-item">
-                        <a href="https://discourse.zendframework.com" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
+                        <a href="https://discourse.laminas.dev" class="support__link" title="Forum"><i class="fa fa-comments"></i></a>
                     </li>
                     <li class="support__list-item">
-                        <a href="https://zendframework-slack.herokuapp.com" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
+                        <a href="https://laminas.dev/chat/" class="support__link" title="Chat"><i class="fa fa-slack"></i></a>
                     </li>
                     <li class="support__list-item">
                         <a href="https://github.com/zendframework" class="support__link" title="Github"><i class="fa fa-github"></i></a>
@@ -615,27 +625,28 @@ for further information.</p>
                     <li class="support__list-item">
                         <a href="https://twitter.com/zfdevteam" class="support__link" title="Twitter"><i class="fa fa-twitter"></i></a>
                     </li>
-                    <li class="support__list-item">
-                        <a href="https://tinyletter.com/mwopzend" class="support__link" title="Newsletter"><i class="fa fa-envelope"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/blog/feed-rss.xml" class="support__link" title="Blog feed"><i class="fa fa-rss"></i></a>
-                    </li>
-                    <li class="support__list-item">
-                        <a href="https://framework.zend.com/security/feed" class="support__link" title="Security feed"><i class="fa fa-rss-square"></i></a>
-                    </li>
                 </ul>
             </div>
         </div>
     </div>
 </footer>
 
+<nav class="cookie-bar navbar navbar-fixed-bottom navbar-default hidden">
+    <div class="container">
+        <p class="navbar-text">
+            We use cookies to allow you to dismiss dialogs such as the Laminas
+            Project notification.
+        </p>
+        <button type="button" class="cookie-button btn btn-default navbar-btn">Allow Cookies</button>
+    </div>
+</nav>
+
     <script>
         var base_url = '..',
             siteName = 'zend-feed';
     </script>
-    <script src="../js/scripts-8d7ae56abf.js"></script>
-        <script src="../search/main.js"></script>
+    <script src="/js/scripts.js"></script>
+    <script src="../search/main.js"></script>
 
     
     <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
